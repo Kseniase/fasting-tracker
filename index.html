@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fast Tracker</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0d1117;
+            --surface: #161b22;
+            --surface-2: #1c2128;
+            --border: #30363d;
+            --text: #e6edf3;
+            --text-dim: #7d8590;
+            --blue: #58a6ff;
+            --green: #3fb950;
+            --red: #f85149;
+            --orange: #d29922;
+            --purple: #a371f7;
+            --cyan: #39c5cf;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            min-height: 100vh;
+            padding: 24px;
+        }
+
+        .dashboard {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-left h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .header-left p {
+            color: var(--text-dim);
+            font-size: 14px;
+        }
+
+        .header-right {
+            text-align: right;
+        }
+
+        .day-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--blue);
+            color: var(--bg);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .phase-badge {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            color: var(--text-dim);
+            margin-top: 8px;
+        }
+
+        /* Top Stats Row */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-size: 36px;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .stat-unit {
+            font-size: 16px;
+            font-weight: 400;
+            color: var(--text-dim);
+        }
+
+        .stat-change {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            margin-top: 8px;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .stat-change.positive {
+            background: rgba(63, 185, 80, 0.15);
+            color: var(--green);
+        }
+
+        .stat-change.negative {
+            background: rgba(248, 81, 73, 0.15);
+            color: var(--red);
+        }
+
+        .stat-change.neutral {
+            background: rgba(125, 133, 144, 0.15);
+            color: var(--text-dim);
+        }
+
+        /* Main Content Grid */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .card-badge {
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            background: rgba(88, 166, 255, 0.1);
+            color: var(--blue);
+        }
+
+        /* Weight Chart */
+        .weight-chart {
+            height: 200px;
+            position: relative;
+            margin-bottom: 16px;
+        }
+
+        .chart-container {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .chart-bar-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+            justify-content: flex-end;
+        }
+
+        .chart-bar {
+            width: 40px;
+            background: var(--border);
+            border-radius: 4px 4px 0 0;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .chart-bar.active {
+            background: var(--blue);
+        }
+
+        .chart-bar.projected {
+            background: var(--border);
+            opacity: 0.5;
+            border: 1px dashed var(--text-dim);
+        }
+
+        .chart-bar:hover {
+            filter: brightness(1.2);
+        }
+
+        .chart-value {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            color: var(--text-dim);
+            margin-bottom: 8px;
+        }
+
+        .chart-label {
+            font-size: 11px;
+            color: var(--text-dim);
+            margin-top: 8px;
+        }
+
+        .chart-y-axis {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 20px;
+            width: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            color: var(--text-dim);
+        }
+
+        /* Oura Metrics Chart */
+        .oura-chart {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .oura-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .oura-label {
+            width: 80px;
+            font-size: 12px;
+            color: var(--text-dim);
+        }
+
+        .oura-bar-track {
+            flex: 1;
+            height: 24px;
+            background: var(--surface-2);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .oura-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            padding-left: 8px;
+        }
+
+        .oura-bar-value {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--bg);
+        }
+
+        .oura-day-labels {
+            display: flex;
+            margin-top: 8px;
+            padding-left: 92px;
+        }
+
+        .oura-day-label {
+            flex: 1;
+            text-align: center;
+            font-size: 11px;
+            color: var(--text-dim);
+        }
+
+        /* Body Comp Sidebar */
+        .body-comp {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .body-stat {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .body-stat:last-child {
+            border-bottom: none;
+        }
+
+        .body-stat-label {
+            font-size: 13px;
+            color: var(--text-dim);
+        }
+
+        .body-stat-value {
+            font-family: 'Space Mono', monospace;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .visceral-highlight {
+            background: rgba(248, 81, 73, 0.1);
+            border: 1px solid rgba(248, 81, 73, 0.3);
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 8px;
+        }
+
+        .visceral-highlight .body-stat-value {
+            color: var(--red);
+        }
+
+        .visceral-target {
+            font-size: 11px;
+            color: var(--text-dim);
+            margin-top: 4px;
+        }
+
+        /* Today's Guide */
+        .guide-card {
+            background: linear-gradient(135deg, rgba(88, 166, 255, 0.1) 0%, var(--surface) 100%);
+            border-color: rgba(88, 166, 255, 0.3);
+        }
+
+        .guide-phase {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--blue);
+            margin-bottom: 12px;
+        }
+
+        .guide-section {
+            margin-bottom: 16px;
+        }
+
+        .guide-section-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .guide-section-content {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Log Section */
+        .log-section {
+            margin-top: 24px;
+        }
+
+        .log-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .log-entries {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .log-entry {
+            display: flex;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .log-entry:last-child {
+            border-bottom: none;
+        }
+
+        .log-date {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            color: var(--text-dim);
+            white-space: nowrap;
+        }
+
+        .log-day {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            background: var(--surface-2);
+            padding: 2px 6px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+
+        .log-type {
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .log-type.event {
+            background: rgba(163, 113, 247, 0.15);
+            color: var(--purple);
+        }
+
+        .log-type.observation {
+            background: rgba(57, 197, 207, 0.15);
+            color: var(--cyan);
+        }
+
+        .log-message {
+            font-size: 13px;
+            line-height: 1.4;
+            flex: 1;
+        }
+
+        /* Day Guide Timeline */
+        .day-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .timeline-day {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .timeline-day.current {
+            background: rgba(88, 166, 255, 0.1);
+            border: 1px solid rgba(88, 166, 255, 0.3);
+        }
+
+        .timeline-day.past {
+            opacity: 0.6;
+        }
+
+        .timeline-day.future {
+            opacity: 0.4;
+        }
+
+        .timeline-num {
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            font-weight: 700;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--surface-2);
+            border-radius: 50%;
+        }
+
+        .timeline-day.current .timeline-num {
+            background: var(--blue);
+            color: var(--bg);
+        }
+
+        .timeline-day.past .timeline-num {
+            background: var(--green);
+            color: var(--bg);
+        }
+
+        .timeline-content {
+            flex: 1;
+        }
+
+        .timeline-phase {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .timeline-expect {
+            font-size: 12px;
+            color: var(--text-dim);
+            line-height: 1.4;
+        }
+
+        /* Progress bar */
+        .progress-container {
+            margin-bottom: 24px;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: var(--surface-2);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--blue), var(--cyan));
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .progress-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--text-dim);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--surface);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-dim);
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <header class="header">
+            <div class="header-left">
+                <h1>Fast Tracker</h1>
+                <p>10-Day Protocol • Jan 1–11, 2026</p>
+            </div>
+            <div class="header-right">
+                <div class="day-badge" id="dayBadge">Day 2 of 10</div>
+                <div class="phase-badge" id="phaseBadge">PHASE: TRANSITION</div>
+            </div>
+        </header>
+
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 20%"></div>
+            </div>
+            <div class="progress-labels">
+                <span>Jan 1</span>
+                <span id="elapsedTime">36 hours elapsed</span>
+                <span>Jan 11</span>
+            </div>
+        </div>
+
+        <div class="stats-row" id="statsRow">
+            <!-- Populated by JS -->
+        </div>
+
+        <div class="main-grid">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">Weight (kg)</span>
+                    <span class="card-badge">DAILY AM</span>
+                </div>
+                <div class="weight-chart" id="weightChart">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <div class="card guide-card">
+                <div class="card-header">
+                    <span class="card-title">Today's Guide</span>
+                    <span class="card-badge" id="guideDayBadge">DAY 2</span>
+                </div>
+                <div id="guideContent">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+
+        <div class="main-grid">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">Oura Metrics</span>
+                    <span class="card-badge">SLEEP • READINESS • HRV</span>
+                </div>
+                <div class="oura-chart" id="ouraChart">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">Body Composition</span>
+                    <span class="card-badge">SCAN JAN 3</span>
+                </div>
+                <div class="body-comp" id="bodyComp">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+
+        <div class="log-section">
+            <div class="log-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Activity Log</span>
+                    </div>
+                    <div class="log-entries" id="logEntries">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">10-Day Guide</span>
+                    </div>
+                    <div class="day-timeline" id="dayTimeline">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let data = null;
+
+        async function loadData() {
+            try {
+                const response = await fetch('data.json');
+                data = await response.json();
+                renderDashboard();
+            } catch (error) {
+                console.error('Error loading data:', error);
+            }
+        }
+
+        function getCurrentDay() {
+            if (!data || !data.measurements.length) return 1;
+            return data.measurements[data.measurements.length - 1].day;
+        }
+
+        function renderDashboard() {
+            const currentDay = getCurrentDay();
+            const latestMeasurement = data.measurements[data.measurements.length - 1];
+            const firstMeasurement = data.measurements[0];
+            const guide = data.day_guide[currentDay.toString()];
+
+            // Update header
+            document.getElementById('dayBadge').textContent = `Day ${currentDay} of 10`;
+            document.getElementById('phaseBadge').textContent = `PHASE: ${guide?.phase?.toUpperCase() || 'FASTING'}`;
+            document.getElementById('progressFill').style.width = `${(currentDay / 10) * 100}%`;
+            document.getElementById('guideDayBadge').textContent = `DAY ${currentDay}`;
+
+            // Calculate elapsed time
+            const start = new Date(data.fast.start);
+            const now = new Date(latestMeasurement.date + 'T12:00:00');
+            const hours = Math.floor((now - start) / (1000 * 60 * 60));
+            document.getElementById('elapsedTime').textContent = `~${hours} hours elapsed`;
+
+            // Stats row
+            renderStats(latestMeasurement, firstMeasurement);
+
+            // Weight chart
+            renderWeightChart();
+
+            // Today's guide
+            renderGuide(guide, currentDay);
+
+            // Oura chart
+            renderOuraChart();
+
+            // Body composition
+            renderBodyComp();
+
+            // Log entries
+            renderLog();
+
+            // Day timeline
+            renderTimeline(currentDay);
+        }
+
+        function renderStats(latest, first) {
+            const totalChange = latest.weight_kg - first.weight_kg;
+            const html = `
+                <div class="stat-card">
+                    <div class="stat-label">Current Weight</div>
+                    <div class="stat-value">${latest.weight_kg}<span class="stat-unit"> kg</span></div>
+                    <div class="stat-change positive">↓ ${Math.abs(totalChange).toFixed(1)} kg total</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Sleep Score</div>
+                    <div class="stat-value">${latest.oura.sleep_score || '—'}</div>
+                    <div class="stat-change ${getScoreClass(latest.oura.sleep_score)}">${getScoreLabel(latest.oura.sleep_score)}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Readiness</div>
+                    <div class="stat-value">${latest.oura.readiness_score || '—'}</div>
+                    <div class="stat-change ${getScoreClass(latest.oura.readiness_score)}">${getScoreLabel(latest.oura.readiness_score)}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Calories Burned</div>
+                    <div class="stat-value">${latest.oura.total_calories?.toLocaleString() || '—'}</div>
+                    ${latest.oura.total_calories ? `<div class="stat-change positive">↑ ${((latest.oura.total_calories / data.baseline.avg_total_calories - 1) * 100).toFixed(0)}% vs baseline</div>` : ''}
+                </div>
+            `;
+            document.getElementById('statsRow').innerHTML = html;
+        }
+
+        function getScoreClass(score) {
+            if (!score) return 'neutral';
+            if (score >= 70) return 'positive';
+            if (score >= 50) return 'neutral';
+            return 'negative';
+        }
+
+        function getScoreLabel(score) {
+            if (!score) return 'Pending';
+            if (score >= 85) return 'Excellent';
+            if (score >= 70) return 'Good';
+            if (score >= 50) return 'Fair';
+            return 'Low';
+        }
+
+        function renderWeightChart() {
+            const measurements = data.measurements;
+            const weights = measurements.map(m => m.weight_kg);
+            const maxWeight = Math.max(...weights);
+            const minWeight = Math.min(...weights) - 2;
+            const range = maxWeight - minWeight;
+
+            let barsHtml = '';
+
+            // Actual data
+            measurements.forEach((m, i) => {
+                const height = ((m.weight_kg - minWeight) / range) * 100;
+                const isLatest = i === measurements.length - 1;
+                barsHtml += `
+                    <div class="chart-bar-wrapper">
+                        <div class="chart-value">${m.weight_kg}</div>
+                        <div class="chart-bar ${isLatest ? 'active' : ''}" style="height: ${height}%"></div>
+                        <div class="chart-label">Day ${m.day}</div>
+                    </div>
+                `;
+            });
+
+            // Projected days
+            const lastWeight = weights[weights.length - 1];
+            const avgLoss = measurements.length > 1 ? (weights[0] - lastWeight) / (measurements.length - 1) : 0.5;
+
+            for (let day = getCurrentDay() + 1; day <= 10; day++) {
+                const projectedWeight = lastWeight - (avgLoss * (day - getCurrentDay()));
+                const height = ((projectedWeight - minWeight) / range) * 100;
+                barsHtml += `
+                    <div class="chart-bar-wrapper">
+                        <div class="chart-value" style="opacity: 0.4">~${projectedWeight.toFixed(1)}</div>
+                        <div class="chart-bar projected" style="height: ${Math.max(height, 10)}%"></div>
+                        <div class="chart-label">Day ${day}</div>
+                    </div>
+                `;
+            }
+
+            document.getElementById('weightChart').innerHTML = `
+                <div class="chart-container">${barsHtml}</div>
+            `;
+        }
+
+        function renderGuide(guide, day) {
+            if (!guide) return;
+            document.getElementById('guideContent').innerHTML = `
+                <div class="guide-phase">${guide.phase}</div>
+                <div class="guide-section">
+                    <div class="guide-section-title">What to Expect</div>
+                    <div class="guide-section-content">${guide.expect}</div>
+                </div>
+                <div class="guide-section">
+                    <div class="guide-section-title">Tips</div>
+                    <div class="guide-section-content">${guide.tips}</div>
+                </div>
+            `;
+        }
+
+        function renderOuraChart() {
+            const metrics = ['sleep_score', 'readiness_score', 'hrv_balance'];
+            const labels = ['Sleep', 'Readiness', 'HRV'];
+            const colors = [
+                'linear-gradient(90deg, #58a6ff, #39c5cf)',
+                'linear-gradient(90deg, #3fb950, #58a6ff)',
+                'linear-gradient(90deg, #a371f7, #db61a2)'
+            ];
+
+            let html = '';
+
+            metrics.forEach((metric, idx) => {
+                html += `<div style="margin-bottom: 8px; font-size: 11px; color: var(--text-dim); font-weight: 600;">${labels[idx]}</div>`;
+                html += '<div style="display: flex; gap: 8px; margin-bottom: 16px;">';
+
+                data.measurements.forEach((m, i) => {
+                    const value = m.oura[metric];
+                    const width = value ? value : 0;
+                    const isLatest = i === data.measurements.length - 1;
+
+                    html += `
+                        <div style="flex: 1;">
+                            <div class="oura-bar-track">
+                                <div class="oura-bar-fill" style="width: ${width}%; background: ${isLatest ? colors[idx] : 'var(--border)'};">
+                                    ${value ? `<span class="oura-bar-value" style="color: ${isLatest ? 'var(--bg)' : 'var(--text-dim)'}">${value}</span>` : ''}
+                                </div>
+                            </div>
+                            <div style="text-align: center; font-size: 10px; color: var(--text-dim); margin-top: 4px;">Day ${m.day}</div>
+                        </div>
+                    `;
+                });
+
+                html += '</div>';
+            });
+
+            document.getElementById('ouraChart').innerHTML = html;
+        }
+
+        function renderBodyComp() {
+            const comp = data.body_composition[0];
+            if (!comp) {
+                document.getElementById('bodyComp').innerHTML = '<p style="color: var(--text-dim);">No body scan data yet</p>';
+                return;
+            }
+
+            document.getElementById('bodyComp').innerHTML = `
+                <div class="visceral-highlight">
+                    <div class="body-stat" style="border: none; padding: 0;">
+                        <span class="body-stat-label">Visceral Fat</span>
+                        <span class="body-stat-value">${comp.visceral_fat_lbs} lbs</span>
+                    </div>
+                    <div class="visceral-target">${(comp.visceral_fat_lbs / comp.visceral_fat_target_lbs).toFixed(1)}× over target (${comp.visceral_fat_target_lbs} lb)</div>
+                </div>
+                <div class="body-stat">
+                    <span class="body-stat-label">Body Fat</span>
+                    <span class="body-stat-value">${comp.body_fat_pct}%</span>
+                </div>
+                <div class="body-stat">
+                    <span class="body-stat-label">Lean Mass</span>
+                    <span class="body-stat-value">${comp.lean_mass_lbs} lbs</span>
+                </div>
+                <div class="body-stat">
+                    <span class="body-stat-label">Total Mass</span>
+                    <span class="body-stat-value">${comp.total_mass_lbs} lbs</span>
+                </div>
+                <div class="body-stat">
+                    <span class="body-stat-label">T-Score</span>
+                    <span class="body-stat-value">${comp.t_score}</span>
+                </div>
+                <div style="font-size: 11px; color: var(--text-dim); margin-top: 8px;">
+                    Next scan: Jan 11
+                </div>
+            `;
+        }
+
+        function renderLog() {
+            const logs = [...data.log].reverse();
+            let html = '';
+
+            logs.forEach(entry => {
+                html += `
+                    <div class="log-entry">
+                        <div style="display: flex; flex-direction: column; gap: 4px;">
+                            <span class="log-date">${formatDate(entry.date)}</span>
+                            <span class="log-day">Day ${entry.day}</span>
+                        </div>
+                        <div style="flex: 1;">
+                            <span class="log-type ${entry.type}">${entry.type}</span>
+                            <div class="log-message" style="margin-top: 6px;">${entry.message}</div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            document.getElementById('logEntries').innerHTML = html;
+        }
+
+        function renderTimeline(currentDay) {
+            let html = '';
+
+            for (let day = 1; day <= 10; day++) {
+                const guide = data.day_guide[day.toString()];
+                let statusClass = 'future';
+                if (day < currentDay) statusClass = 'past';
+                if (day === currentDay) statusClass = 'current';
+
+                html += `
+                    <div class="timeline-day ${statusClass}">
+                        <div class="timeline-num">${day}</div>
+                        <div class="timeline-content">
+                            <div class="timeline-phase">${guide?.phase || ''}</div>
+                            <div class="timeline-expect">${guide?.expect || ''}</div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            document.getElementById('dayTimeline').innerHTML = html;
+        }
+
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        }
+
+        // Load data on page load
+        loadData();
+
+        // Auto-refresh every 30 seconds
+        setInterval(loadData, 30000);
+    </script>
+</body>
+</html>
