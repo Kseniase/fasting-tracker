@@ -4,6 +4,13 @@
     "goal_days": 10,
     "end": "2026-01-11T18:00:00"
   },
+  "baseline": {
+    "period": "2025-12-20 to 2025-12-31",
+    "avg_total_calories": 2450,
+    "avg_active_calories": 270,
+    "avg_steps": 4200,
+    "note": "Pre-fast baseline for comparison"
+  },
   "measurements": [
     {
       "date": "2026-01-02",
@@ -15,8 +22,9 @@
         "readiness_score": 83,
         "activity_score": 54,
         "steps": 5317,
+        "total_calories": 2955,
+        "active_calories": 624,
         "hrv_balance": 88,
-        "resting_hr": null,
         "body_temp_deviation": 0.34
       },
       "notes": "First morning of fast. Excellent sleep and readiness."
@@ -31,8 +39,9 @@
         "readiness_score": 64,
         "activity_score": null,
         "steps": null,
+        "total_calories": null,
+        "active_calories": null,
         "hrv_balance": 71,
-        "resting_hr": null,
         "body_temp_deviation": -0.32
       },
       "notes": "Likely entering ketosis. Sleep efficiency lower."
