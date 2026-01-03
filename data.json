@@ -1,0 +1,41 @@
+{
+  "fast": {
+    "start": "2026-01-01T18:00:00",
+    "goal_days": 10,
+    "end": "2026-01-11T18:00:00"
+  },
+  "measurements": [
+    {
+      "date": "2026-01-02",
+      "day": 1,
+      "weight_kg": 98.3,
+      "weight_change_kg": null,
+      "oura": {
+        "sleep_score": 84,
+        "readiness_score": 83,
+        "activity_score": 54,
+        "steps": 5317,
+        "hrv_balance": 88,
+        "resting_hr": null,
+        "body_temp_deviation": 0.34
+      },
+      "notes": "First morning of fast. Excellent sleep and readiness."
+    },
+    {
+      "date": "2026-01-03",
+      "day": 2,
+      "weight_kg": 96.3,
+      "weight_change_kg": -2.0,
+      "oura": {
+        "sleep_score": 63,
+        "readiness_score": 64,
+        "activity_score": null,
+        "steps": null,
+        "hrv_balance": 71,
+        "resting_hr": null,
+        "body_temp_deviation": -0.32
+      },
+      "notes": "Likely entering ketosis. Sleep efficiency lower."
+    }
+  ]
+}
