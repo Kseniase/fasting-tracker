@@ -408,6 +408,260 @@
             margin-top: 4px;
         }
 
+        /* Oura Mini Charts Grid */
+        .oura-charts-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .oura-mini-chart {
+            background: var(--surface-2);
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .oura-mini-chart.primary {
+            border: 1px solid var(--border);
+            background: var(--surface);
+        }
+
+        .mini-chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .mini-chart-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-dim);
+        }
+
+        .mini-chart-value {
+            font-family: 'Space Mono', monospace;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .mini-chart-value.sleep { color: var(--blue); }
+        .mini-chart-value.calories { color: var(--green); }
+        .mini-chart-value.readiness { color: var(--purple); }
+        .mini-chart-value.hrv { color: var(--cyan); }
+        .mini-chart-value.steps { color: var(--orange); }
+
+        .mini-line-chart {
+            width: 100%;
+            height: 80px;
+        }
+
+        .chart-value-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 9px;
+            fill: var(--text);
+            font-weight: 500;
+        }
+
+        .gradient-stop-sleep { stop-color: var(--blue); }
+        .gradient-stop-calories { stop-color: var(--green); }
+        .gradient-stop-readiness { stop-color: var(--purple); }
+        .gradient-stop-hrv { stop-color: var(--cyan); }
+        .gradient-stop-steps { stop-color: var(--orange); }
+
+        /* Today's Oura Stats */
+        .oura-today-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 12px;
+        }
+
+        .oura-today-stat {
+            background: var(--surface-2);
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .oura-today-stat.highlight {
+            background: var(--surface);
+            border: 1px solid var(--border);
+        }
+
+        .oura-today-icon {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .oura-today-label {
+            font-size: 11px;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .oura-today-value {
+            font-family: 'Space Mono', monospace;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .oura-today-value.sleep { color: var(--blue); }
+        .oura-today-value.calories { color: var(--green); }
+        .oura-today-value.readiness { color: var(--purple); }
+        .oura-today-value.hrv { color: var(--cyan); }
+        .oura-today-value.steps { color: var(--orange); }
+        .oura-today-value.activity { color: var(--orange); }
+        .oura-today-value.temp { color: var(--red); }
+
+        .oura-today-sub {
+            font-size: 11px;
+            color: var(--text-dim);
+            margin-top: 4px;
+        }
+
+        .oura-today-change {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            margin-top: 6px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .oura-today-change.positive {
+            background: rgba(63, 185, 80, 0.15);
+            color: var(--green);
+        }
+
+        .oura-today-change.negative {
+            background: rgba(248, 81, 73, 0.15);
+            color: var(--red);
+        }
+
+        .oura-today-change.neutral {
+            background: rgba(125, 133, 144, 0.15);
+            color: var(--text-dim);
+        }
+
+        /* Sleep Details */
+        .sleep-details {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .sleep-detail-section {
+            background: var(--surface-2);
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .sleep-detail-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-dim);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .sleep-detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 0;
+        }
+
+        .sleep-detail-label {
+            font-size: 13px;
+            color: var(--text-dim);
+        }
+
+        .sleep-detail-value {
+            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .sleep-stages-bar {
+            display: flex;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 12px;
+        }
+
+        .sleep-stage {
+            transition: width 0.3s ease;
+        }
+
+        .sleep-stage.deep {
+            background: var(--purple);
+        }
+
+        .sleep-stage.rem {
+            background: var(--blue);
+        }
+
+        .sleep-stage.light {
+            background: var(--cyan);
+            opacity: 0.6;
+        }
+
+        .sleep-stages-legend {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+            font-size: 11px;
+        }
+
+        .sleep-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: var(--text-dim);
+        }
+
+        .sleep-legend-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 2px;
+        }
+
+        .sleep-legend-dot.deep { background: var(--purple); }
+        .sleep-legend-dot.rem { background: var(--blue); }
+        .sleep-legend-dot.light { background: var(--cyan); opacity: 0.6; }
+
+        .stress-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .stress-indicator.normal {
+            background: rgba(63, 185, 80, 0.15);
+            color: var(--green);
+        }
+
+        .stress-indicator.high {
+            background: rgba(248, 81, 73, 0.15);
+            color: var(--red);
+        }
+
         /* Body Comp Sidebar */
         .body-comp {
             display: flex;
@@ -486,6 +740,48 @@
             line-height: 1.5;
         }
 
+        /* Electrolytes */
+        .electrolytes-section {
+            background: var(--surface-2);
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 8px;
+        }
+
+        .electrolytes-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .electrolyte-item {
+            text-align: center;
+        }
+
+        .electrolyte-label {
+            display: block;
+            font-size: 10px;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .electrolyte-value {
+            display: block;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--cyan);
+            margin-top: 4px;
+        }
+
+        .electrolyte-note {
+            font-size: 12px;
+            color: var(--text-dim);
+            font-style: italic;
+            line-height: 1.4;
+        }
+
         /* Log Section */
         .log-section {
             margin-top: 24px;
@@ -498,8 +794,6 @@
         }
 
         .log-entries {
-            max-height: 400px;
-            overflow-y: auto;
         }
 
         .log-entry {
@@ -545,6 +839,11 @@
         .log-type.observation {
             background: rgba(57, 197, 207, 0.15);
             color: var(--cyan);
+        }
+
+        .log-type.sleep {
+            background: rgba(88, 166, 255, 0.15);
+            color: var(--blue);
         }
 
         .log-message {
@@ -618,6 +917,59 @@
         .timeline-expect {
             font-size: 12px;
             color: var(--text-dim);
+            line-height: 1.4;
+        }
+
+        /* Electrolyte Popup */
+        .timeline-day {
+            cursor: pointer;
+        }
+
+        .electrolyte-popup {
+            display: none;
+            position: fixed;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px;
+            min-width: 240px;
+            z-index: 1000;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            pointer-events: none;
+        }
+
+        .popup-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--cyan);
+            margin-bottom: 8px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .popup-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            padding: 6px 0;
+        }
+
+        .popup-row span:first-child {
+            color: var(--text-dim);
+        }
+
+        .popup-row span:last-child {
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .popup-note {
+            font-size: 11px;
+            color: var(--text-dim);
+            font-style: italic;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid var(--border);
             line-height: 1.4;
         }
 
@@ -707,7 +1059,20 @@
 
         <div class="card" style="margin-bottom: 24px;">
             <div class="card-header">
-                <span class="card-title">Oura Metrics</span>
+                <span class="card-title">Today's Oura Stats</span>
+                <span class="card-badge" id="ouraDateBadge">JAN 3</span>
+            </div>
+            <div class="oura-today-grid" id="ouraTodayStats">
+                <!-- Populated by JS -->
+            </div>
+            <div class="sleep-details" id="sleepDetails">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+
+        <div class="card" style="margin-bottom: 24px;">
+            <div class="card-header">
+                <span class="card-title">Oura Trends</span>
                 <span class="card-badge">DAILY TRACKING</span>
             </div>
             <div id="ouraChart">
@@ -804,6 +1169,9 @@
 
             // Today's guide
             renderGuide(guide, currentDay);
+
+            // Today's Oura stats
+            renderOuraTodayStats();
 
             // Oura chart
             renderOuraChart();
@@ -905,6 +1273,32 @@
 
         function renderGuide(guide, day) {
             if (!guide) return;
+
+            let electrolyteHtml = '';
+            if (guide.electrolytes) {
+                const e = guide.electrolytes;
+                electrolyteHtml = `
+                    <div class="guide-section electrolytes-section">
+                        <div class="guide-section-title">Daily Electrolytes</div>
+                        <div class="electrolytes-grid">
+                            <div class="electrolyte-item">
+                                <span class="electrolyte-label">Sodium</span>
+                                <span class="electrolyte-value">${e.sodium}</span>
+                            </div>
+                            <div class="electrolyte-item">
+                                <span class="electrolyte-label">Potassium</span>
+                                <span class="electrolyte-value">${e.potassium}</span>
+                            </div>
+                            <div class="electrolyte-item">
+                                <span class="electrolyte-label">Magnesium</span>
+                                <span class="electrolyte-value">${e.magnesium}</span>
+                            </div>
+                        </div>
+                        <div class="electrolyte-note">${e.note}</div>
+                    </div>
+                `;
+            }
+
             document.getElementById('guideContent').innerHTML = `
                 <div class="guide-phase">${guide.phase}</div>
                 <div class="guide-section">
@@ -915,139 +1309,342 @@
                     <div class="guide-section-title">Tips</div>
                     <div class="guide-section-content">${guide.tips}</div>
                 </div>
+                ${electrolyteHtml}
             `;
+        }
+
+        function renderOuraTodayStats() {
+            const measurements = data.measurements;
+            const latest = measurements[measurements.length - 1];
+            const previous = measurements.length > 1 ? measurements[measurements.length - 2] : null;
+            const baseline = data.baseline;
+
+            // Update date badge
+            const latestDate = new Date(latest.date);
+            document.getElementById('ouraDateBadge').textContent = latestDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }).toUpperCase();
+
+            const stats = [
+                {
+                    label: 'Sleep',
+                    value: latest.oura.sleep_score,
+                    class: 'sleep',
+                    prevValue: previous?.oura.sleep_score,
+                    unit: '',
+                    format: v => v
+                },
+                {
+                    label: 'Readiness',
+                    value: latest.oura.readiness_score,
+                    class: 'readiness',
+                    prevValue: previous?.oura.readiness_score,
+                    unit: '',
+                    format: v => v
+                },
+                {
+                    label: 'Calories',
+                    value: latest.oura.total_calories,
+                    class: 'calories',
+                    baselineValue: baseline.avg_total_calories,
+                    unit: '',
+                    format: v => v?.toLocaleString(),
+                    highlight: true
+                },
+                {
+                    label: 'Steps',
+                    value: latest.oura.steps,
+                    class: 'steps',
+                    baselineValue: baseline.avg_steps,
+                    unit: '',
+                    format: v => v?.toLocaleString()
+                },
+                {
+                    label: 'HRV',
+                    value: latest.oura.hrv_balance,
+                    class: 'hrv',
+                    prevValue: previous?.oura.hrv_balance,
+                    unit: '%',
+                    format: v => v
+                },
+                {
+                    label: 'Body Temp',
+                    value: latest.oura.body_temp_deviation,
+                    class: 'temp',
+                    prevValue: previous?.oura.body_temp_deviation,
+                    unit: '°C',
+                    format: v => v !== null && v !== undefined ? (v >= 0 ? '+' : '') + v.toFixed(2) : null
+                }
+            ];
+
+            let html = '';
+            stats.forEach(stat => {
+                const displayValue = stat.value !== null && stat.value !== undefined ? stat.format(stat.value) : '—';
+                let changeHtml = '';
+
+                if (stat.prevValue !== undefined && stat.value !== null && stat.prevValue !== null) {
+                    const diff = stat.value - stat.prevValue;
+                    if (diff !== 0) {
+                        const sign = diff > 0 ? '↑' : '↓';
+                        const cls = stat.class === 'temp'
+                            ? (diff > 0 ? 'negative' : 'positive')
+                            : (diff > 0 ? 'positive' : 'negative');
+                        changeHtml = `<div class="oura-today-change ${cls}">${sign} ${Math.abs(diff).toFixed(stat.class === 'temp' ? 2 : 0)}</div>`;
+                    }
+                } else if (stat.baselineValue && stat.value !== null) {
+                    const pctDiff = ((stat.value / stat.baselineValue) - 1) * 100;
+                    if (Math.abs(pctDiff) >= 1) {
+                        const sign = pctDiff > 0 ? '↑' : '↓';
+                        const cls = pctDiff > 0 ? 'positive' : 'negative';
+                        changeHtml = `<div class="oura-today-change ${cls}">${sign} ${Math.abs(pctDiff).toFixed(0)}% vs baseline</div>`;
+                    }
+                }
+
+                html += `
+                    <div class="oura-today-stat ${stat.highlight ? 'highlight' : ''}">
+                        <div class="oura-today-label">${stat.label}</div>
+                        <div class="oura-today-value ${stat.class}">${displayValue}${stat.unit && displayValue !== '—' ? stat.unit : ''}</div>
+                        ${changeHtml}
+                    </div>
+                `;
+            });
+
+            document.getElementById('ouraTodayStats').innerHTML = html;
+
+            // Render sleep details
+            renderSleepDetails(latest);
+        }
+
+        function renderSleepDetails(measurement) {
+            const sleep = measurement.oura.sleep;
+            const stress = measurement.oura.stress;
+
+            if (!sleep && !stress) {
+                document.getElementById('sleepDetails').innerHTML = '';
+                return;
+            }
+
+            let html = '';
+
+            // Sleep section
+            if (sleep) {
+                const totalMins = sleep.deep_mins + sleep.rem_mins + sleep.light_mins;
+                const deepPct = (sleep.deep_mins / totalMins * 100).toFixed(0);
+                const remPct = (sleep.rem_mins / totalMins * 100).toFixed(0);
+                const lightPct = (sleep.light_mins / totalMins * 100).toFixed(0);
+
+                const formatTime = (isoStr) => {
+                    if (!isoStr) return '—';
+                    const date = new Date(isoStr);
+                    return date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+                };
+
+                html += `
+                    <div class="sleep-detail-section">
+                        <div class="sleep-detail-title">Sleep Timeline</div>
+                        <div class="sleep-detail-row">
+                            <span class="sleep-detail-label">Bedtime</span>
+                            <span class="sleep-detail-value">${formatTime(sleep.bedtime)}</span>
+                        </div>
+                        <div class="sleep-detail-row">
+                            <span class="sleep-detail-label">Wake time</span>
+                            <span class="sleep-detail-value">${formatTime(sleep.wake_time)}</span>
+                        </div>
+                        <div class="sleep-detail-row">
+                            <span class="sleep-detail-label">Total sleep</span>
+                            <span class="sleep-detail-value">${sleep.total_hours.toFixed(1)} hrs</span>
+                        </div>
+                        <div class="sleep-detail-row">
+                            <span class="sleep-detail-label">Efficiency</span>
+                            <span class="sleep-detail-value">${sleep.efficiency}%</span>
+                        </div>
+                        <div class="sleep-detail-row">
+                            <span class="sleep-detail-label">Lowest HR</span>
+                            <span class="sleep-detail-value">${sleep.lowest_hr || '—'} bpm</span>
+                        </div>
+                        <div class="sleep-detail-row">
+                            <span class="sleep-detail-label">Avg HRV</span>
+                            <span class="sleep-detail-value">${sleep.avg_hrv || '—'} ms</span>
+                        </div>
+                        <div class="sleep-stages-bar">
+                            <div class="sleep-stage deep" style="width: ${deepPct}%"></div>
+                            <div class="sleep-stage rem" style="width: ${remPct}%"></div>
+                            <div class="sleep-stage light" style="width: ${lightPct}%"></div>
+                        </div>
+                        <div class="sleep-stages-legend">
+                            <span class="sleep-legend-item"><span class="sleep-legend-dot deep"></span>Deep ${sleep.deep_mins}m</span>
+                            <span class="sleep-legend-item"><span class="sleep-legend-dot rem"></span>REM ${sleep.rem_mins}m</span>
+                            <span class="sleep-legend-item"><span class="sleep-legend-dot light"></span>Light ${sleep.light_mins}m</span>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Stress section
+            if (stress) {
+                html += `
+                    <div class="sleep-detail-section">
+                        <div class="sleep-detail-title">Stress & Recovery</div>
+                        <div class="sleep-detail-row">
+                            <span class="sleep-detail-label">Day Summary</span>
+                            <span class="stress-indicator ${stress.summary}">${stress.summary}</span>
+                        </div>
+                        <div class="sleep-detail-row">
+                            <span class="sleep-detail-label">High Stress</span>
+                            <span class="sleep-detail-value">${stress.stress_mins} mins</span>
+                        </div>
+                        <div class="sleep-detail-row">
+                            <span class="sleep-detail-label">High Recovery</span>
+                            <span class="sleep-detail-value">${stress.recovery_mins} mins</span>
+                        </div>
+                        <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border);">
+                            <div class="sleep-detail-row">
+                                <span class="sleep-detail-label">Recovery/Stress Ratio</span>
+                                <span class="sleep-detail-value" style="color: ${stress.recovery_mins >= stress.stress_mins ? 'var(--green)' : 'var(--red)'}">
+                                    ${(stress.recovery_mins / Math.max(stress.stress_mins, 1)).toFixed(1)}x
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            document.getElementById('sleepDetails').innerHTML = html;
         }
 
         function renderOuraChart() {
             const measurements = data.measurements;
             const latest = measurements[measurements.length - 1];
-            const first = measurements[0];
 
-            // Highlighted stats at top
-            let html = `
-                <div class="oura-stats-row">
-                    <div class="oura-stat-card highlight">
-                        <div class="oura-stat-label">Sleep Score</div>
-                        <div class="oura-stat-value sleep">${latest.oura.sleep_score || '—'}</div>
-                        ${measurements.length > 1 && latest.oura.sleep_score && first.oura.sleep_score ?
-                            `<div class="oura-stat-change" style="color: ${latest.oura.sleep_score >= first.oura.sleep_score ? 'var(--green)' : 'var(--red)'}">
-                                ${latest.oura.sleep_score >= first.oura.sleep_score ? '↑' : '↓'} ${Math.abs(latest.oura.sleep_score - first.oura.sleep_score)} from day 1
-                            </div>` : ''}
-                    </div>
-                    <div class="oura-stat-card highlight calories">
-                        <div class="oura-stat-label">Calories Burned</div>
-                        <div class="oura-stat-value calories">${latest.oura.total_calories?.toLocaleString() || '—'}</div>
-                        ${latest.oura.total_calories ?
-                            `<div class="oura-stat-change" style="color: var(--green)">
-                                ↑ ${((latest.oura.total_calories / data.baseline.avg_total_calories - 1) * 100).toFixed(0)}% vs baseline
-                            </div>` : ''}
-                    </div>
-                </div>
-            `;
-
-            // SVG Line Chart
-            const chartWidth = 800;
-            const chartHeight = 160;
-            const padding = { top: 20, right: 20, bottom: 30, left: 50 };
-            const innerWidth = chartWidth - padding.left - padding.right;
-            const innerHeight = chartHeight - padding.top - padding.bottom;
-
-            // Prepare data series
-            const series = [
-                { key: 'sleep_score', label: 'Sleep', class: 'sleep', primary: true, min: 0, max: 100 },
-                { key: 'total_calories', label: 'Calories', class: 'calories', primary: true, min: 2000, max: 3500 },
-                { key: 'readiness_score', label: 'Readiness', class: 'readiness', primary: false, min: 0, max: 100 },
-                { key: 'hrv_balance', label: 'HRV', class: 'hrv', primary: false, min: 0, max: 100 },
-                { key: 'steps', label: 'Steps', class: 'steps', primary: false, min: 0, max: 10000 }
+            // Define chart series - each gets its own chart
+            const charts = [
+                { key: 'sleep_score', label: 'Sleep Score', class: 'sleep', min: 0, max: 100, unit: '', primary: true },
+                { key: 'total_calories', label: 'Calories Burned', class: 'calories', min: 1500, max: 3500, unit: '', primary: true },
+                { key: 'readiness_score', label: 'Readiness', class: 'readiness', min: 0, max: 100, unit: '' },
+                { key: 'hrv_balance', label: 'HRV Balance', class: 'hrv', min: 0, max: 100, unit: '%' },
+                { key: 'steps', label: 'Steps', class: 'steps', min: 0, max: 10000, unit: '' }
             ];
 
-            // Build x-axis points for all 10 days
-            const dayWidth = innerWidth / 9;
+            let html = '<div class="oura-charts-grid">';
 
-            html += `
-                <div class="line-chart-container">
-                    <svg class="line-chart" viewBox="0 0 ${chartWidth} ${chartHeight}" preserveAspectRatio="xMidYMid meet">
-                        <defs>
-                            <linearGradient id="sleepGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" style="stop-color:#58a6ff;stop-opacity:0.3" />
-                                <stop offset="100%" style="stop-color:#58a6ff;stop-opacity:0" />
-                            </linearGradient>
-                            <linearGradient id="caloriesGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" style="stop-color:#3fb950;stop-opacity:0.3" />
-                                <stop offset="100%" style="stop-color:#3fb950;stop-opacity:0" />
-                            </linearGradient>
-                        </defs>
-                        <g transform="translate(${padding.left}, ${padding.top})">
-                            <!-- Grid lines -->
-                            ${[0, 25, 50, 75, 100].map(v => {
-                                const y = innerHeight - (v / 100) * innerHeight;
-                                return `<line class="chart-grid-line" x1="0" y1="${y}" x2="${innerWidth}" y2="${y}"/>
-                                        <text class="chart-axis-label" x="-8" y="${y + 3}" text-anchor="end">${v}</text>`;
-                            }).join('')}
+            charts.forEach(chart => {
+                const hasData = measurements.some(m => m.oura[chart.key] !== null && m.oura[chart.key] !== undefined);
+                const latestValue = latest.oura[chart.key];
 
-                            <!-- X-axis labels -->
-                            ${Array.from({length: 10}, (_, i) => {
-                                const x = i * dayWidth;
-                                return `<text class="chart-axis-label" x="${x}" y="${innerHeight + 20}" text-anchor="middle">D${i + 1}</text>`;
-                            }).join('')}
-            `;
-
-            // Draw lines for each series
-            series.forEach(s => {
-                const points = [];
-                measurements.forEach(m => {
-                    const value = m.oura[s.key];
-                    if (value !== null && value !== undefined) {
-                        const x = (m.day - 1) * dayWidth;
-                        const normalizedValue = (value - s.min) / (s.max - s.min);
-                        const y = innerHeight - (normalizedValue * innerHeight);
-                        points.push({ x, y, value, day: m.day });
-                    }
-                });
-
-                if (points.length > 0) {
-                    // Draw area fill for primary metrics
-                    if (s.primary && points.length > 1) {
-                        const areaPath = `M ${points[0].x} ${innerHeight} ` +
-                            points.map(p => `L ${p.x} ${p.y}`).join(' ') +
-                            ` L ${points[points.length - 1].x} ${innerHeight} Z`;
-                        html += `<path class="chart-area ${s.class}" d="${areaPath}" fill="url(#${s.class}Gradient)"/>`;
-                    }
-
-                    // Draw line
-                    if (points.length > 1) {
-                        const linePath = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ');
-                        html += `<path class="chart-line ${s.primary ? 'primary' : ''} ${s.class}" d="${linePath}"/>`;
-                    }
-
-                    // Draw dots
-                    points.forEach(p => {
-                        html += `<circle class="chart-dot ${s.class}" cx="${p.x}" cy="${p.y}" r="${s.primary ? 5 : 4}"/>`;
-                    });
-                }
-            });
-
-            html += `
-                        </g>
-                    </svg>
-                </div>
-            `;
-
-            // Legend
-            html += '<div class="chart-legend">';
-            series.forEach(s => {
-                const latestValue = latest.oura[s.key];
                 html += `
-                    <div class="legend-item ${s.primary ? 'primary' : 'active'}">
-                        <span class="legend-dot ${s.class}"></span>
-                        <span>${s.label}</span>
-                        <span class="legend-value">${latestValue !== null && latestValue !== undefined ? (s.key === 'total_calories' || s.key === 'steps' ? latestValue.toLocaleString() : latestValue) : '—'}</span>
+                    <div class="oura-mini-chart ${chart.primary ? 'primary' : ''}">
+                        <div class="mini-chart-header">
+                            <div class="mini-chart-label">
+                                <span class="legend-dot ${chart.class}"></span>
+                                ${chart.label}
+                            </div>
+                            <div class="mini-chart-value ${chart.class}">${latestValue !== null && latestValue !== undefined ? (chart.key === 'total_calories' || chart.key === 'steps' ? latestValue.toLocaleString() : latestValue) : '—'}${chart.unit}</div>
+                        </div>
+                        ${renderMiniLineChart(chart, measurements)}
                     </div>
                 `;
             });
-            html += '</div>';
 
+            html += '</div>';
             document.getElementById('ouraChart').innerHTML = html;
+        }
+
+        function renderMiniLineChart(chart, measurements) {
+            const chartWidth = 300;
+            const chartHeight = 80;
+            const padding = { top: 10, right: 10, bottom: 25, left: 40 };
+            const innerWidth = chartWidth - padding.left - padding.right;
+            const innerHeight = chartHeight - padding.top - padding.bottom;
+
+            // Get date range for x-axis (Jan 2 to Jan 11)
+            const startDate = new Date('2026-01-02');
+            const endDate = new Date('2026-01-11');
+            const totalDays = 10;
+            const dayWidth = innerWidth / (totalDays - 1);
+
+            // Calculate Y axis ticks based on chart type
+            let yTicks;
+            if (chart.max === 100) {
+                yTicks = [0, 50, 100];
+            } else if (chart.key === 'total_calories') {
+                yTicks = [1500, 2500, 3500];
+            } else if (chart.key === 'steps') {
+                yTicks = [0, 5000, 10000];
+            } else {
+                yTicks = [chart.min, (chart.min + chart.max) / 2, chart.max];
+            }
+
+            // Collect data points
+            const points = [];
+            measurements.forEach(m => {
+                const value = m.oura[chart.key];
+                if (value !== null && value !== undefined) {
+                    const date = new Date(m.date);
+                    const dayIndex = Math.round((date - startDate) / (1000 * 60 * 60 * 24));
+                    const x = dayIndex * dayWidth;
+                    const normalizedValue = Math.max(0, Math.min(1, (value - chart.min) / (chart.max - chart.min)));
+                    const y = innerHeight - (normalizedValue * innerHeight);
+                    points.push({ x, y, value, date: m.date });
+                }
+            });
+
+            let svg = `
+                <svg class="mini-line-chart" viewBox="0 0 ${chartWidth} ${chartHeight}" preserveAspectRatio="xMidYMid meet">
+                    <defs>
+                        <linearGradient id="${chart.class}AreaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" class="gradient-stop-${chart.class}" style="stop-opacity:0.3" />
+                            <stop offset="100%" class="gradient-stop-${chart.class}" style="stop-opacity:0" />
+                        </linearGradient>
+                    </defs>
+                    <g transform="translate(${padding.left}, ${padding.top})">
+                        <!-- Y-axis grid lines and labels -->
+                        ${yTicks.map(v => {
+                            const normalizedV = (v - chart.min) / (chart.max - chart.min);
+                            const y = innerHeight - (normalizedV * innerHeight);
+                            return `
+                                <line class="chart-grid-line" x1="0" y1="${y}" x2="${innerWidth}" y2="${y}"/>
+                                <text class="chart-axis-label" x="-6" y="${y + 3}" text-anchor="end">${chart.key === 'steps' ? (v/1000) + 'k' : v}</text>
+                            `;
+                        }).join('')}
+
+                        <!-- X-axis date labels -->
+                        ${measurements.map(m => {
+                            const date = new Date(m.date);
+                            const dayIndex = Math.round((date - startDate) / (1000 * 60 * 60 * 24));
+                            const x = dayIndex * dayWidth;
+                            const dateLabel = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                            return `<text class="chart-axis-label" x="${x}" y="${innerHeight + 16}" text-anchor="middle">${dateLabel}</text>`;
+                        }).join('')}
+            `;
+
+            if (points.length > 0) {
+                // Area fill for primary charts
+                if (chart.primary && points.length > 1) {
+                    const areaPath = `M ${points[0].x} ${innerHeight} ` +
+                        points.map(p => `L ${p.x} ${p.y}`).join(' ') +
+                        ` L ${points[points.length - 1].x} ${innerHeight} Z`;
+                    svg += `<path class="chart-area ${chart.class}" d="${areaPath}" fill="url(#${chart.class}AreaGradient)"/>`;
+                }
+
+                // Line
+                if (points.length > 1) {
+                    const linePath = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ');
+                    svg += `<path class="chart-line ${chart.primary ? 'primary' : ''} ${chart.class}" d="${linePath}"/>`;
+                }
+
+                // Dots with value labels
+                points.forEach((p, i) => {
+                    svg += `<circle class="chart-dot ${chart.class}" cx="${p.x}" cy="${p.y}" r="${chart.primary ? 5 : 4}"/>`;
+                    // Show value above dot
+                    const displayValue = chart.key === 'total_calories' || chart.key === 'steps' ? Math.round(p.value).toLocaleString() : p.value;
+                    svg += `<text class="chart-value-label" x="${p.x}" y="${p.y - 8}" text-anchor="middle">${displayValue}</text>`;
+                });
+            }
+
+            svg += `
+                    </g>
+                </svg>
+            `;
+
+            return svg;
         }
 
         function renderBodyComp() {
@@ -1118,8 +1715,14 @@
                 if (day < currentDay) statusClass = 'past';
                 if (day === currentDay) statusClass = 'current';
 
+                let electrolyteData = '';
+                if (guide?.electrolytes) {
+                    const e = guide.electrolytes;
+                    electrolyteData = `data-electrolytes="${encodeURIComponent(JSON.stringify({day, ...e}))}"`;
+                }
+
                 html += `
-                    <div class="timeline-day ${statusClass}">
+                    <div class="timeline-day ${statusClass}" ${electrolyteData}>
                         <div class="timeline-num">${day}</div>
                         <div class="timeline-content">
                             <div class="timeline-phase">${guide?.phase || ''}</div>
@@ -1130,6 +1733,42 @@
             }
 
             document.getElementById('dayTimeline').innerHTML = html;
+
+            // Add hover listeners for electrolyte popups
+            document.querySelectorAll('.timeline-day[data-electrolytes]').forEach(el => {
+                el.addEventListener('mouseenter', showElectrolytePopup);
+                el.addEventListener('mouseleave', hideElectrolytePopup);
+            });
+        }
+
+        function showElectrolytePopup(e) {
+            const data = JSON.parse(decodeURIComponent(e.currentTarget.dataset.electrolytes));
+
+            let popup = document.getElementById('electrolytePopup');
+            if (!popup) {
+                popup = document.createElement('div');
+                popup.id = 'electrolytePopup';
+                popup.className = 'electrolyte-popup';
+                document.body.appendChild(popup);
+            }
+
+            popup.innerHTML = `
+                <div class="popup-title">Day ${data.day} Electrolytes</div>
+                <div class="popup-row"><span>Sodium</span><span>${data.sodium}</span></div>
+                <div class="popup-row"><span>Potassium</span><span>${data.potassium}</span></div>
+                <div class="popup-row"><span>Magnesium</span><span>${data.magnesium}</span></div>
+                <div class="popup-note">${data.note}</div>
+            `;
+
+            const rect = e.currentTarget.getBoundingClientRect();
+            popup.style.display = 'block';
+            popup.style.left = (rect.left - popup.offsetWidth - 12) + 'px';
+            popup.style.top = rect.top + 'px';
+        }
+
+        function hideElectrolytePopup() {
+            const popup = document.getElementById('electrolytePopup');
+            if (popup) popup.style.display = 'none';
         }
 
         function formatDate(dateStr) {

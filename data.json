@@ -43,7 +43,23 @@
         "total_calories": 2955,
         "active_calories": 624,
         "hrv_balance": 88,
-        "body_temp_deviation": 0.34
+        "body_temp_deviation": 0.34,
+        "sleep": {
+          "bedtime": "2026-01-01T20:35",
+          "wake_time": "2026-01-02T05:51",
+          "total_hours": 7.1,
+          "deep_mins": 104,
+          "rem_mins": 119,
+          "light_mins": 202,
+          "efficiency": 76,
+          "lowest_hr": 66,
+          "avg_hrv": 29
+        },
+        "stress": {
+          "summary": "normal",
+          "stress_mins": 30,
+          "recovery_mins": 120
+        }
       },
       "notes": "First morning of fast. Excellent sleep and readiness."
     },
@@ -55,14 +71,30 @@
       "oura": {
         "sleep_score": 63,
         "readiness_score": 64,
-        "activity_score": null,
-        "steps": null,
-        "total_calories": null,
-        "active_calories": null,
+        "activity_score": 53,
+        "steps": 5555,
+        "total_calories": 2248,
+        "active_calories": 248,
         "hrv_balance": 71,
-        "body_temp_deviation": -0.32
+        "body_temp_deviation": -0.32,
+        "sleep": {
+          "bedtime": "2026-01-02T21:50",
+          "wake_time": "2026-01-03T04:30",
+          "total_hours": 4.6,
+          "deep_mins": 83,
+          "rem_mins": 86,
+          "light_mins": 108,
+          "efficiency": 69,
+          "lowest_hr": 64,
+          "avg_hrv": 36
+        },
+        "stress": {
+          "summary": "normal",
+          "stress_mins": 75,
+          "recovery_mins": 60
+        }
       },
-      "notes": "Likely entering ketosis. Sleep efficiency lower."
+      "notes": "Likely entering ketosis. Sleep efficiency lower. Shorter sleep duration."
     }
   ],
   "log": [
@@ -73,10 +105,34 @@
       "message": "Fast begins at 6:00 PM"
     },
     {
+      "date": "2026-01-01",
+      "day": 0,
+      "type": "sleep",
+      "message": "Bedtime: 8:35 PM"
+    },
+    {
+      "date": "2026-01-02",
+      "day": 1,
+      "type": "sleep",
+      "message": "Woke up: 5:51 AM (7.1 hrs sleep)"
+    },
+    {
       "date": "2026-01-02",
       "day": 1,
       "type": "observation",
       "message": "Excellent sleep score (84) and readiness (83). Body still running on glycogen."
+    },
+    {
+      "date": "2026-01-02",
+      "day": 1,
+      "type": "sleep",
+      "message": "Bedtime: 9:50 PM"
+    },
+    {
+      "date": "2026-01-03",
+      "day": 2,
+      "type": "sleep",
+      "message": "Woke up: 4:30 AM (4.6 hrs sleep)"
     },
     {
       "date": "2026-01-03",
@@ -95,52 +151,112 @@
     "1": {
       "phase": "Glycogen Depletion",
       "expect": "Hunger peaks, possible headache. Body using stored glucose. Weight drops from water/glycogen.",
-      "tips": "Stay hydrated. Electrolytes help. Keep busy."
+      "tips": "Stay hydrated. Electrolytes help. Keep busy.",
+      "electrolytes": {
+        "sodium": "½-¾ tsp salt",
+        "potassium": "¼-½ tsp NoSalt",
+        "magnesium": "1 pill (400mg)",
+        "note": "Critical day - glycogen loss pulls water and electrolytes. Salt your water."
+      }
     },
     "2": {
       "phase": "Transition",
       "expect": "Hunger subsides. May feel fatigue, brain fog as ketosis begins. Sleep may be disrupted.",
-      "tips": "Rest if needed. Light activity ok. Salt helps."
+      "tips": "Rest if needed. Light activity ok. Salt helps.",
+      "electrolytes": {
+        "sodium": "¾-1 tsp salt",
+        "potassium": "½-¾ tsp NoSalt",
+        "magnesium": "1 pill (400mg)",
+        "note": "Increase sodium - kidneys dumping electrolytes as insulin drops. Magnesium glycinate at night for sleep."
+      }
     },
     "3": {
       "phase": "Early Ketosis",
       "expect": "Body switching to fat. Energy may fluctuate. Mental clarity often improves.",
-      "tips": "Don't overexert. Ketones rising."
+      "tips": "Don't overexert. Ketones rising.",
+      "electrolytes": {
+        "sodium": "¾-1¼ tsp salt",
+        "potassium": "½-¾ tsp NoSalt",
+        "magnesium": "1 pill (400mg)",
+        "note": "Peak electrolyte need. If cramping or headaches, add more salt first."
+      }
     },
     "4": {
       "phase": "Ketosis Established",
       "expect": "Hunger largely gone. Steady energy. Sleep normalizing.",
-      "tips": "Autophagy ramping up. Great time for light walking."
+      "tips": "Autophagy ramping up. Great time for light walking.",
+      "electrolytes": {
+        "sodium": "¾-1 tsp salt",
+        "potassium": "½ tsp NoSalt",
+        "magnesium": "1 pill (400mg)",
+        "note": "Body stabilizing. Maintain consistent electrolyte intake."
+      }
     },
     "5": {
       "phase": "Deep Ketosis",
       "expect": "Halfway point. Mental clarity high. Fat adaptation improving.",
-      "tips": "Body efficient at burning fat now."
+      "tips": "Body efficient at burning fat now.",
+      "electrolytes": {
+        "sodium": "¾-1 tsp salt",
+        "potassium": "½ tsp NoSalt",
+        "magnesium": "1 pill (400mg)",
+        "note": "Halfway there. Body more efficient at retaining electrolytes now."
+      }
     },
     "6": {
       "phase": "Autophagy Active",
       "expect": "Cellular cleanup in full swing. Stable energy and mood.",
-      "tips": "Stay consistent with hydration."
+      "tips": "Stay consistent with hydration.",
+      "electrolytes": {
+        "sodium": "½-¾ tsp salt",
+        "potassium": "⅓-½ tsp NoSalt",
+        "magnesium": "1 pill (300-400mg)",
+        "note": "Can slightly reduce as body adapts. Listen to your body."
+      }
     },
     "7": {
       "phase": "Fat Adapted",
       "expect": "Body running smoothly on ketones. May feel surprisingly good.",
-      "tips": "Don't break fast impulsively - you've come far."
+      "tips": "Don't break fast impulsively - you've come far.",
+      "electrolytes": {
+        "sodium": "½-¾ tsp salt",
+        "potassium": "⅓-½ tsp NoSalt",
+        "magnesium": "1 pill (300-400mg)",
+        "note": "Maintain steady intake. You're fat-adapted now."
+      }
     },
     "8": {
       "phase": "Deep Autophagy",
       "expect": "Continued cellular repair. Weight loss rate may slow.",
-      "tips": "Normal - body conserving."
+      "tips": "Normal - body conserving.",
+      "electrolytes": {
+        "sodium": "½-¾ tsp salt",
+        "potassium": "⅓-½ tsp NoSalt",
+        "magnesium": "1 pill (300-400mg)",
+        "note": "Stay consistent. Almost there."
+      }
     },
     "9": {
       "phase": "Final Stretch",
       "expect": "Almost there. Body very efficient now.",
-      "tips": "Start planning refeed."
+      "tips": "Start planning refeed.",
+      "electrolytes": {
+        "sodium": "½-¾ tsp salt",
+        "potassium": "⅓ tsp NoSalt",
+        "magnesium": "1 pill (300mg)",
+        "note": "Prepare for refeed. Keep electrolytes steady."
+      }
     },
     "10": {
       "phase": "Completion",
       "expect": "Final day. Schedule body scan. Prepare for gentle refeed.",
-      "tips": "Break with bone broth or light soup. No heavy foods."
+      "tips": "Break with bone broth or light soup. No heavy foods.",
+      "electrolytes": {
+        "sodium": "½ tsp salt",
+        "potassium": "¼ tsp NoSalt",
+        "magnesium": "1 pill (300mg)",
+        "note": "Bone broth for refeed provides natural electrolytes. Go slow reintroducing food."
+      }
     }
   }
 }
