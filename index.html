@@ -257,61 +257,155 @@
             color: var(--text-dim);
         }
 
-        /* Oura Metrics Chart */
-        .oura-chart {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .oura-row {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .oura-label {
-            width: 80px;
-            font-size: 12px;
-            color: var(--text-dim);
-        }
-
-        .oura-bar-track {
-            flex: 1;
-            height: 24px;
-            background: var(--surface-2);
-            border-radius: 4px;
-            overflow: hidden;
+        /* Line Chart */
+        .line-chart-container {
             position: relative;
+            height: 180px;
+            margin-bottom: 16px;
         }
 
-        .oura-bar-fill {
+        .line-chart {
+            width: 100%;
             height: 100%;
-            border-radius: 4px;
-            transition: width 0.5s ease;
+        }
+
+        .chart-grid-line {
+            stroke: var(--border);
+            stroke-width: 1;
+            stroke-dasharray: 4 4;
+        }
+
+        .chart-axis-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            fill: var(--text-dim);
+        }
+
+        .chart-line {
+            fill: none;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .chart-line.primary {
+            stroke-width: 3;
+        }
+
+        .chart-line.sleep { stroke: var(--blue); }
+        .chart-line.calories { stroke: var(--green); }
+        .chart-line.readiness { stroke: var(--purple); }
+        .chart-line.hrv { stroke: var(--cyan); }
+        .chart-line.steps { stroke: var(--orange); }
+
+        .chart-dot {
+            stroke-width: 2;
+            stroke: var(--surface);
+        }
+
+        .chart-dot.sleep { fill: var(--blue); }
+        .chart-dot.calories { fill: var(--green); }
+        .chart-dot.readiness { fill: var(--purple); }
+        .chart-dot.hrv { fill: var(--cyan); }
+        .chart-dot.steps { fill: var(--orange); }
+
+        .chart-area {
+            opacity: 0.1;
+        }
+
+        .chart-area.sleep { fill: var(--blue); }
+        .chart-area.calories { fill: var(--green); }
+
+        .chart-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+        }
+
+        .legend-item {
             display: flex;
             align-items: center;
-            padding-left: 8px;
-        }
-
-        .oura-bar-value {
-            font-family: 'Space Mono', monospace;
+            gap: 6px;
             font-size: 12px;
-            font-weight: 700;
-            color: var(--bg);
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.2s;
         }
 
-        .oura-day-labels {
-            display: flex;
-            margin-top: 8px;
-            padding-left: 92px;
+        .legend-item.active {
+            opacity: 1;
         }
 
-        .oura-day-label {
-            flex: 1;
-            text-align: center;
+        .legend-item.primary {
+            opacity: 1;
+            font-weight: 600;
+        }
+
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .legend-dot.sleep { background: var(--blue); }
+        .legend-dot.calories { background: var(--green); }
+        .legend-dot.readiness { background: var(--purple); }
+        .legend-dot.hrv { background: var(--cyan); }
+        .legend-dot.steps { background: var(--orange); }
+
+        .legend-value {
+            font-family: 'Space Mono', monospace;
             font-size: 11px;
             color: var(--text-dim);
+            margin-left: 4px;
+        }
+
+        .oura-stats-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .oura-stat-card {
+            background: var(--surface-2);
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .oura-stat-card.highlight {
+            border: 1px solid var(--blue);
+            background: rgba(88, 166, 255, 0.05);
+        }
+
+        .oura-stat-card.highlight.calories {
+            border-color: var(--green);
+            background: rgba(63, 185, 80, 0.05);
+        }
+
+        .oura-stat-label {
+            font-size: 11px;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .oura-stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            margin-top: 4px;
+        }
+
+        .oura-stat-value.sleep { color: var(--blue); }
+        .oura-stat-value.calories { color: var(--green); }
+
+        .oura-stat-change {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            margin-top: 4px;
         }
 
         /* Body Comp Sidebar */
@@ -601,13 +695,33 @@
             <!-- Populated by JS -->
         </div>
 
+        <div class="card" style="margin-bottom: 24px;">
+            <div class="card-header">
+                <span class="card-title">Weight (kg)</span>
+                <span class="card-badge">DAILY AM</span>
+            </div>
+            <div class="weight-chart" id="weightChart">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+
+        <div class="card" style="margin-bottom: 24px;">
+            <div class="card-header">
+                <span class="card-title">Oura Metrics</span>
+                <span class="card-badge">DAILY TRACKING</span>
+            </div>
+            <div id="ouraChart">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+
         <div class="main-grid">
             <div class="card">
                 <div class="card-header">
-                    <span class="card-title">Weight (kg)</span>
-                    <span class="card-badge">DAILY AM</span>
+                    <span class="card-title">Body Composition</span>
+                    <span class="card-badge">SCAN JAN 3</span>
                 </div>
-                <div class="weight-chart" id="weightChart">
+                <div class="body-comp" id="bodyComp">
                     <!-- Populated by JS -->
                 </div>
             </div>
@@ -618,28 +732,6 @@
                     <span class="card-badge" id="guideDayBadge">DAY 2</span>
                 </div>
                 <div id="guideContent">
-                    <!-- Populated by JS -->
-                </div>
-            </div>
-        </div>
-
-        <div class="main-grid">
-            <div class="card">
-                <div class="card-header">
-                    <span class="card-title">Oura Metrics</span>
-                    <span class="card-badge">SLEEP • READINESS • HRV</span>
-                </div>
-                <div class="oura-chart" id="ouraChart">
-                    <!-- Populated by JS -->
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <span class="card-title">Body Composition</span>
-                    <span class="card-badge">SCAN JAN 3</span>
-                </div>
-                <div class="body-comp" id="bodyComp">
                     <!-- Populated by JS -->
                 </div>
             </div>
@@ -827,39 +919,133 @@
         }
 
         function renderOuraChart() {
-            const metrics = ['sleep_score', 'readiness_score', 'hrv_balance'];
-            const labels = ['Sleep', 'Readiness', 'HRV'];
-            const colors = [
-                'linear-gradient(90deg, #58a6ff, #39c5cf)',
-                'linear-gradient(90deg, #3fb950, #58a6ff)',
-                'linear-gradient(90deg, #a371f7, #db61a2)'
+            const measurements = data.measurements;
+            const latest = measurements[measurements.length - 1];
+            const first = measurements[0];
+
+            // Highlighted stats at top
+            let html = `
+                <div class="oura-stats-row">
+                    <div class="oura-stat-card highlight">
+                        <div class="oura-stat-label">Sleep Score</div>
+                        <div class="oura-stat-value sleep">${latest.oura.sleep_score || '—'}</div>
+                        ${measurements.length > 1 && latest.oura.sleep_score && first.oura.sleep_score ?
+                            `<div class="oura-stat-change" style="color: ${latest.oura.sleep_score >= first.oura.sleep_score ? 'var(--green)' : 'var(--red)'}">
+                                ${latest.oura.sleep_score >= first.oura.sleep_score ? '↑' : '↓'} ${Math.abs(latest.oura.sleep_score - first.oura.sleep_score)} from day 1
+                            </div>` : ''}
+                    </div>
+                    <div class="oura-stat-card highlight calories">
+                        <div class="oura-stat-label">Calories Burned</div>
+                        <div class="oura-stat-value calories">${latest.oura.total_calories?.toLocaleString() || '—'}</div>
+                        ${latest.oura.total_calories ?
+                            `<div class="oura-stat-change" style="color: var(--green)">
+                                ↑ ${((latest.oura.total_calories / data.baseline.avg_total_calories - 1) * 100).toFixed(0)}% vs baseline
+                            </div>` : ''}
+                    </div>
+                </div>
+            `;
+
+            // SVG Line Chart
+            const chartWidth = 800;
+            const chartHeight = 160;
+            const padding = { top: 20, right: 20, bottom: 30, left: 50 };
+            const innerWidth = chartWidth - padding.left - padding.right;
+            const innerHeight = chartHeight - padding.top - padding.bottom;
+
+            // Prepare data series
+            const series = [
+                { key: 'sleep_score', label: 'Sleep', class: 'sleep', primary: true, min: 0, max: 100 },
+                { key: 'total_calories', label: 'Calories', class: 'calories', primary: true, min: 2000, max: 3500 },
+                { key: 'readiness_score', label: 'Readiness', class: 'readiness', primary: false, min: 0, max: 100 },
+                { key: 'hrv_balance', label: 'HRV', class: 'hrv', primary: false, min: 0, max: 100 },
+                { key: 'steps', label: 'Steps', class: 'steps', primary: false, min: 0, max: 10000 }
             ];
 
-            let html = '';
+            // Build x-axis points for all 10 days
+            const dayWidth = innerWidth / 9;
 
-            metrics.forEach((metric, idx) => {
-                html += `<div style="margin-bottom: 8px; font-size: 11px; color: var(--text-dim); font-weight: 600;">${labels[idx]}</div>`;
-                html += '<div style="display: flex; gap: 8px; margin-bottom: 16px;">';
+            html += `
+                <div class="line-chart-container">
+                    <svg class="line-chart" viewBox="0 0 ${chartWidth} ${chartHeight}" preserveAspectRatio="xMidYMid meet">
+                        <defs>
+                            <linearGradient id="sleepGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#58a6ff;stop-opacity:0.3" />
+                                <stop offset="100%" style="stop-color:#58a6ff;stop-opacity:0" />
+                            </linearGradient>
+                            <linearGradient id="caloriesGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#3fb950;stop-opacity:0.3" />
+                                <stop offset="100%" style="stop-color:#3fb950;stop-opacity:0" />
+                            </linearGradient>
+                        </defs>
+                        <g transform="translate(${padding.left}, ${padding.top})">
+                            <!-- Grid lines -->
+                            ${[0, 25, 50, 75, 100].map(v => {
+                                const y = innerHeight - (v / 100) * innerHeight;
+                                return `<line class="chart-grid-line" x1="0" y1="${y}" x2="${innerWidth}" y2="${y}"/>
+                                        <text class="chart-axis-label" x="-8" y="${y + 3}" text-anchor="end">${v}</text>`;
+                            }).join('')}
 
-                data.measurements.forEach((m, i) => {
-                    const value = m.oura[metric];
-                    const width = value ? value : 0;
-                    const isLatest = i === data.measurements.length - 1;
+                            <!-- X-axis labels -->
+                            ${Array.from({length: 10}, (_, i) => {
+                                const x = i * dayWidth;
+                                return `<text class="chart-axis-label" x="${x}" y="${innerHeight + 20}" text-anchor="middle">D${i + 1}</text>`;
+                            }).join('')}
+            `;
 
-                    html += `
-                        <div style="flex: 1;">
-                            <div class="oura-bar-track">
-                                <div class="oura-bar-fill" style="width: ${width}%; background: ${isLatest ? colors[idx] : 'var(--border)'};">
-                                    ${value ? `<span class="oura-bar-value" style="color: ${isLatest ? 'var(--bg)' : 'var(--text-dim)'}">${value}</span>` : ''}
-                                </div>
-                            </div>
-                            <div style="text-align: center; font-size: 10px; color: var(--text-dim); margin-top: 4px;">Day ${m.day}</div>
-                        </div>
-                    `;
+            // Draw lines for each series
+            series.forEach(s => {
+                const points = [];
+                measurements.forEach(m => {
+                    const value = m.oura[s.key];
+                    if (value !== null && value !== undefined) {
+                        const x = (m.day - 1) * dayWidth;
+                        const normalizedValue = (value - s.min) / (s.max - s.min);
+                        const y = innerHeight - (normalizedValue * innerHeight);
+                        points.push({ x, y, value, day: m.day });
+                    }
                 });
 
-                html += '</div>';
+                if (points.length > 0) {
+                    // Draw area fill for primary metrics
+                    if (s.primary && points.length > 1) {
+                        const areaPath = `M ${points[0].x} ${innerHeight} ` +
+                            points.map(p => `L ${p.x} ${p.y}`).join(' ') +
+                            ` L ${points[points.length - 1].x} ${innerHeight} Z`;
+                        html += `<path class="chart-area ${s.class}" d="${areaPath}" fill="url(#${s.class}Gradient)"/>`;
+                    }
+
+                    // Draw line
+                    if (points.length > 1) {
+                        const linePath = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ');
+                        html += `<path class="chart-line ${s.primary ? 'primary' : ''} ${s.class}" d="${linePath}"/>`;
+                    }
+
+                    // Draw dots
+                    points.forEach(p => {
+                        html += `<circle class="chart-dot ${s.class}" cx="${p.x}" cy="${p.y}" r="${s.primary ? 5 : 4}"/>`;
+                    });
+                }
             });
+
+            html += `
+                        </g>
+                    </svg>
+                </div>
+            `;
+
+            // Legend
+            html += '<div class="chart-legend">';
+            series.forEach(s => {
+                const latestValue = latest.oura[s.key];
+                html += `
+                    <div class="legend-item ${s.primary ? 'primary' : 'active'}">
+                        <span class="legend-dot ${s.class}"></span>
+                        <span>${s.label}</span>
+                        <span class="legend-value">${latestValue !== null && latestValue !== undefined ? (s.key === 'total_calories' || s.key === 'steps' ? latestValue.toLocaleString() : latestValue) : '—'}</span>
+                    </div>
+                `;
+            });
+            html += '</div>';
 
             document.getElementById('ouraChart').innerHTML = html;
         }
