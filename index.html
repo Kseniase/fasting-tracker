@@ -277,7 +277,7 @@
 
         .chart-axis-label {
             font-family: 'Space Mono', monospace;
-            font-size: 10px;
+            font-size: 14px;
             fill: var(--text-dim);
         }
 
@@ -412,13 +412,13 @@
         .oura-charts-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
+            gap: 20px;
         }
 
         .oura-mini-chart {
             background: var(--surface-2);
             border-radius: 8px;
-            padding: 16px;
+            padding: 20px;
         }
 
         .oura-mini-chart.primary {
@@ -456,14 +456,14 @@
 
         .mini-line-chart {
             width: 100%;
-            height: 80px;
+            height: 200px;
         }
 
         .chart-value-label {
             font-family: 'Space Mono', monospace;
-            font-size: 9px;
+            font-size: 16px;
             fill: var(--text);
-            font-weight: 500;
+            font-weight: 700;
         }
 
         .gradient-stop-sleep { stop-color: var(--blue); }
@@ -1187,7 +1187,9 @@
         }
 
         function renderStats(latest, first) {
-            const totalChange = latest.weight_kg - first.weight_kg;
+            // Find first measurement with weight data
+            const firstWithWeight = data.measurements.find(m => m.weight_kg !== null);
+            const totalChange = firstWithWeight ? latest.weight_kg - firstWithWeight.weight_kg : 0;
             const html = `
                 <div class="stat-card">
                     <div class="stat-label">Current Weight</div>
@@ -1230,45 +1232,180 @@
 
         function renderWeightChart() {
             const measurements = data.measurements;
-            const weights = measurements.map(m => m.weight_kg);
-            const maxWeight = Math.max(...weights);
-            const minWeight = Math.min(...weights) - 2;
-            const range = maxWeight - minWeight;
+            const currentDay = getCurrentDay();
 
-            let barsHtml = '';
+            // Filter out measurements without weight data
+            const validMeasurements = measurements.filter(m => m.weight_kg !== null && m.weight_kg !== undefined);
 
-            // Actual data
-            measurements.forEach((m, i) => {
-                const height = ((m.weight_kg - minWeight) / range) * 100;
-                const isLatest = i === measurements.length - 1;
-                barsHtml += `
-                    <div class="chart-bar-wrapper">
-                        <div class="chart-value">${m.weight_kg}</div>
-                        <div class="chart-bar ${isLatest ? 'active' : ''}" style="height: ${height}%"></div>
-                        <div class="chart-label">Day ${m.day}</div>
-                    </div>
-                `;
-            });
-
-            // Projected days
-            const lastWeight = weights[weights.length - 1];
-            const avgLoss = measurements.length > 1 ? (weights[0] - lastWeight) / (measurements.length - 1) : 0.5;
-
-            for (let day = getCurrentDay() + 1; day <= 10; day++) {
-                const projectedWeight = lastWeight - (avgLoss * (day - getCurrentDay()));
-                const height = ((projectedWeight - minWeight) / range) * 100;
-                barsHtml += `
-                    <div class="chart-bar-wrapper">
-                        <div class="chart-value" style="opacity: 0.4">~${projectedWeight.toFixed(1)}</div>
-                        <div class="chart-bar projected" style="height: ${Math.max(height, 10)}%"></div>
-                        <div class="chart-label">Day ${day}</div>
-                    </div>
-                `;
+            if (validMeasurements.length === 0) {
+                document.getElementById('weightChart').innerHTML = '<p style="color: var(--text-dim); text-align: center; padding: 40px;">No weight data yet</p>';
+                return;
             }
 
-            document.getElementById('weightChart').innerHTML = `
-                <div class="chart-container">${barsHtml}</div>
+            // Calculate projected weights for remaining days
+            // Using average daily loss rate, but expecting it to slow down as fast progresses
+            const weights = validMeasurements.map(m => m.weight_kg);
+            const lastWeight = weights[weights.length - 1];
+            const lastDay = validMeasurements[validMeasurements.length - 1].day;
+
+            // Calculate average loss rate from actual data
+            let avgDailyLoss = 0.5; // default kg/day
+            if (validMeasurements.length >= 2) {
+                const firstWeight = weights[0];
+                const daysElapsed = lastDay - validMeasurements[0].day;
+                if (daysElapsed > 0) {
+                    avgDailyLoss = (firstWeight - lastWeight) / daysElapsed;
+                }
+            }
+
+            // Project future weights with decreasing loss rate (ketosis stabilizes)
+            const projectedData = [];
+            for (let day = lastDay + 1; day <= 10; day++) {
+                // Loss rate decreases as fast progresses (body adapts)
+                const daysFromLast = day - lastDay;
+                const slowdownFactor = Math.max(0.3, 1 - (daysFromLast * 0.08)); // Gradual slowdown
+                const dailyLoss = avgDailyLoss * slowdownFactor;
+                const projectedWeight = projectedData.length === 0
+                    ? lastWeight - dailyLoss
+                    : projectedData[projectedData.length - 1].weight_kg - dailyLoss;
+                projectedData.push({ day, weight_kg: Math.max(85, projectedWeight), projected: true });
+            }
+
+            // Combine actual and projected data
+            const allData = [
+                ...validMeasurements.map(m => ({ day: m.day, weight_kg: m.weight_kg, projected: false })),
+                ...projectedData
+            ];
+
+            // Chart dimensions
+            const chartWidth = 800;
+            const chartHeight = 200;
+            const padding = { top: 30, right: 30, bottom: 40, left: 50 };
+            const innerWidth = chartWidth - padding.left - padding.right;
+            const innerHeight = chartHeight - padding.top - padding.bottom;
+
+            // Y-axis range - find min/max including projections
+            const allWeights = allData.map(d => d.weight_kg);
+            const maxWeight = Math.ceil(Math.max(...allWeights) / 2) * 2 + 2;
+            const minWeight = Math.floor(Math.min(...allWeights) / 2) * 2 - 2;
+            const weightRange = maxWeight - minWeight;
+
+            // X-axis: Day 1 to Day 10
+            const dayWidth = innerWidth / 9; // 10 days = 9 intervals
+
+            // Calculate points
+            const points = allData.map(d => ({
+                x: (d.day - 1) * dayWidth,
+                y: innerHeight - ((d.weight_kg - minWeight) / weightRange * innerHeight),
+                weight: d.weight_kg,
+                day: d.day,
+                projected: d.projected
+            }));
+
+            // Split into actual and projected points
+            const actualPoints = points.filter(p => !p.projected);
+            const projectedPoints = points.filter(p => p.projected);
+
+            // Y-axis ticks
+            const yTicks = [];
+            for (let w = minWeight; w <= maxWeight; w += 2) {
+                yTicks.push(w);
+            }
+
+            // Build SVG
+            let svg = `
+                <svg class="line-chart" viewBox="0 0 ${chartWidth} ${chartHeight}" preserveAspectRatio="xMidYMid meet" style="width: 100%; height: 200px;">
+                    <defs>
+                        <linearGradient id="weightGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color: var(--blue); stop-opacity: 0.3"/>
+                            <stop offset="100%" style="stop-color: var(--blue); stop-opacity: 0"/>
+                        </linearGradient>
+                        <linearGradient id="weightGradientProjected" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color: var(--text-dim); stop-opacity: 0.15"/>
+                            <stop offset="100%" style="stop-color: var(--text-dim); stop-opacity: 0"/>
+                        </linearGradient>
+                    </defs>
+                    <g transform="translate(${padding.left}, ${padding.top})">
+                        <!-- Grid lines -->
+                        ${yTicks.map(w => {
+                            const y = innerHeight - ((w - minWeight) / weightRange * innerHeight);
+                            return `
+                                <line class="chart-grid-line" x1="0" y1="${y}" x2="${innerWidth}" y2="${y}"/>
+                                <text class="chart-axis-label" x="-8" y="${y + 3}" text-anchor="end">${w}</text>
+                            `;
+                        }).join('')}
+
+                        <!-- X-axis day labels -->
+                        ${[1,2,3,4,5,6,7,8,9,10].map(day => {
+                            const x = (day - 1) * dayWidth;
+                            return `<text class="chart-axis-label" x="${x}" y="${innerHeight + 20}" text-anchor="middle">Day ${day}</text>`;
+                        }).join('')}
             `;
+
+            // Area fill for actual data
+            if (actualPoints.length > 1) {
+                const areaPath = `M ${actualPoints[0].x} ${innerHeight} ` +
+                    actualPoints.map(p => `L ${p.x} ${p.y}`).join(' ') +
+                    ` L ${actualPoints[actualPoints.length - 1].x} ${innerHeight} Z`;
+                svg += `<path d="${areaPath}" fill="url(#weightGradient)"/>`;
+            }
+
+            // Area fill for projected data (including last actual point for continuity)
+            if (projectedPoints.length > 0 && actualPoints.length > 0) {
+                const lastActual = actualPoints[actualPoints.length - 1];
+                const projAreaPoints = [lastActual, ...projectedPoints];
+                const projAreaPath = `M ${projAreaPoints[0].x} ${innerHeight} ` +
+                    projAreaPoints.map(p => `L ${p.x} ${p.y}`).join(' ') +
+                    ` L ${projAreaPoints[projAreaPoints.length - 1].x} ${innerHeight} Z`;
+                svg += `<path d="${projAreaPath}" fill="url(#weightGradientProjected)"/>`;
+            }
+
+            // Line for actual data
+            if (actualPoints.length > 1) {
+                const linePath = actualPoints.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ');
+                svg += `<path d="${linePath}" fill="none" stroke="var(--blue)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>`;
+            }
+
+            // Dashed line for projected data (connect from last actual)
+            if (projectedPoints.length > 0 && actualPoints.length > 0) {
+                const lastActual = actualPoints[actualPoints.length - 1];
+                const projLinePath = `M ${lastActual.x} ${lastActual.y} ` + projectedPoints.map(p => `L ${p.x} ${p.y}`).join(' ');
+                svg += `<path d="${projLinePath}" fill="none" stroke="var(--text-dim)" stroke-width="2" stroke-dasharray="6 4" stroke-linecap="round" stroke-linejoin="round"/>`;
+            }
+
+            // Dots and labels for actual data
+            actualPoints.forEach(p => {
+                svg += `<circle cx="${p.x}" cy="${p.y}" r="6" fill="var(--blue)" stroke="var(--surface)" stroke-width="2"/>`;
+                svg += `<text class="chart-value-label" x="${p.x}" y="${p.y - 12}" text-anchor="middle" style="font-size: 11px; font-weight: 600; fill: var(--text);">${p.weight.toFixed(1)}</text>`;
+            });
+
+            // Dots and labels for projected data
+            projectedPoints.forEach(p => {
+                svg += `<circle cx="${p.x}" cy="${p.y}" r="5" fill="var(--surface-2)" stroke="var(--text-dim)" stroke-width="2" stroke-dasharray="2 2"/>`;
+                svg += `<text class="chart-value-label" x="${p.x}" y="${p.y - 12}" text-anchor="middle" style="font-size: 10px; fill: var(--text-dim); opacity: 0.7;">~${p.weight.toFixed(1)}</text>`;
+            });
+
+            svg += `
+                    </g>
+                </svg>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px; padding: 0 8px;">
+                    <div style="display: flex; gap: 16px; font-size: 12px;">
+                        <span style="display: flex; align-items: center; gap: 6px;">
+                            <span style="width: 20px; height: 3px; background: var(--blue); border-radius: 2px;"></span>
+                            Actual
+                        </span>
+                        <span style="display: flex; align-items: center; gap: 6px;">
+                            <span style="width: 20px; height: 2px; border-top: 2px dashed var(--text-dim);"></span>
+                            <span style="color: var(--text-dim);">Projected</span>
+                        </span>
+                    </div>
+                    <div style="font-size: 11px; color: var(--text-dim); font-style: italic;">
+                        * Projections assume decreasing loss rate as ketosis stabilizes. Update daily with actual weights.
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('weightChart').innerHTML = svg;
         }
 
         function renderGuide(guide, day) {
@@ -1548,17 +1685,16 @@
         }
 
         function renderMiniLineChart(chart, measurements) {
-            const chartWidth = 300;
-            const chartHeight = 80;
-            const padding = { top: 10, right: 10, bottom: 25, left: 40 };
+            const chartWidth = 500;
+            const chartHeight = 200;
+            const padding = { top: 35, right: 30, bottom: 40, left: 60 };
             const innerWidth = chartWidth - padding.left - padding.right;
             const innerHeight = chartHeight - padding.top - padding.bottom;
+            const gradientId = `${chart.class}Gradient${Date.now()}`;
 
-            // Get date range for x-axis (Jan 2 to Jan 11)
-            const startDate = new Date('2026-01-02');
-            const endDate = new Date('2026-01-11');
-            const totalDays = 10;
-            const dayWidth = innerWidth / (totalDays - 1);
+            // Only show days we have data for (with some buffer)
+            const numDataPoints = measurements.length;
+            const dayWidth = innerWidth / Math.max(numDataPoints - 1, 1);
 
             // Calculate Y axis ticks based on chart type
             let yTicks;
@@ -1572,24 +1708,24 @@
                 yTicks = [chart.min, (chart.min + chart.max) / 2, chart.max];
             }
 
-            // Collect data points
+            // Collect data points - use index-based positioning
             const points = [];
-            measurements.forEach(m => {
+            let pointIndex = 0;
+            measurements.forEach((m, idx) => {
                 const value = m.oura[chart.key];
                 if (value !== null && value !== undefined) {
-                    const date = new Date(m.date);
-                    const dayIndex = Math.round((date - startDate) / (1000 * 60 * 60 * 24));
-                    const x = dayIndex * dayWidth;
+                    const x = pointIndex * dayWidth;
                     const normalizedValue = Math.max(0, Math.min(1, (value - chart.min) / (chart.max - chart.min)));
                     const y = innerHeight - (normalizedValue * innerHeight);
-                    points.push({ x, y, value, date: m.date });
+                    points.push({ x, y, value, date: m.date, idx: pointIndex });
+                    pointIndex++;
                 }
             });
 
             let svg = `
                 <svg class="mini-line-chart" viewBox="0 0 ${chartWidth} ${chartHeight}" preserveAspectRatio="xMidYMid meet">
                     <defs>
-                        <linearGradient id="${chart.class}AreaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <linearGradient id="${gradientId}" x1="0%" y1="0%" x2="0%" y2="100%">
                             <stop offset="0%" class="gradient-stop-${chart.class}" style="stop-opacity:0.3" />
                             <stop offset="100%" class="gradient-stop-${chart.class}" style="stop-opacity:0" />
                         </linearGradient>
@@ -1606,12 +1742,10 @@
                         }).join('')}
 
                         <!-- X-axis date labels -->
-                        ${measurements.map(m => {
-                            const date = new Date(m.date);
-                            const dayIndex = Math.round((date - startDate) / (1000 * 60 * 60 * 24));
-                            const x = dayIndex * dayWidth;
-                            const dateLabel = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-                            return `<text class="chart-axis-label" x="${x}" y="${innerHeight + 16}" text-anchor="middle">${dateLabel}</text>`;
+                        ${points.map(p => {
+                            const [year, month, day] = p.date.split('-').map(Number);
+                            const dateLabel = `${month}/${day}`;
+                            return `<text class="chart-axis-label" x="${p.x}" y="${innerHeight + 20}" text-anchor="middle">${dateLabel}</text>`;
                         }).join('')}
             `;
 
@@ -1621,7 +1755,7 @@
                     const areaPath = `M ${points[0].x} ${innerHeight} ` +
                         points.map(p => `L ${p.x} ${p.y}`).join(' ') +
                         ` L ${points[points.length - 1].x} ${innerHeight} Z`;
-                    svg += `<path class="chart-area ${chart.class}" d="${areaPath}" fill="url(#${chart.class}AreaGradient)"/>`;
+                    svg += `<path class="chart-area ${chart.class}" d="${areaPath}" fill="url(#${gradientId})"/>`;
                 }
 
                 // Line
@@ -1632,10 +1766,10 @@
 
                 // Dots with value labels
                 points.forEach((p, i) => {
-                    svg += `<circle class="chart-dot ${chart.class}" cx="${p.x}" cy="${p.y}" r="${chart.primary ? 5 : 4}"/>`;
+                    svg += `<circle class="chart-dot ${chart.class}" cx="${p.x}" cy="${p.y}" r="${chart.primary ? 8 : 7}"/>`;
                     // Show value above dot
                     const displayValue = chart.key === 'total_calories' || chart.key === 'steps' ? Math.round(p.value).toLocaleString() : p.value;
-                    svg += `<text class="chart-value-label" x="${p.x}" y="${p.y - 8}" text-anchor="middle">${displayValue}</text>`;
+                    svg += `<text class="chart-value-label" x="${p.x}" y="${p.y - 16}" text-anchor="middle">${displayValue}</text>`;
                 });
             }
 
@@ -1772,7 +1906,8 @@
         }
 
         function formatDate(dateStr) {
-            const date = new Date(dateStr);
+            const [year, month, day] = dateStr.split('-').map(Number);
+            const date = new Date(year, month - 1, day);
             return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
         }
 

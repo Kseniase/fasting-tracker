@@ -31,6 +31,39 @@
   ],
   "measurements": [
     {
+      "date": "2026-01-01",
+      "day": 0,
+      "weight_kg": null,
+      "weight_change_kg": null,
+      "oura": {
+        "sleep_score": 50,
+        "readiness_score": 48,
+        "activity_score": 51,
+        "steps": 2291,
+        "total_calories": 2260,
+        "active_calories": 105,
+        "hrv_balance": 70,
+        "body_temp_deviation": -0.17,
+        "sleep": {
+          "bedtime": "2026-01-01T02:42:57.000-05:00",
+          "wake_time": "2026-01-01T08:27:57.000-05:00",
+          "total_hours": 4.0,
+          "deep_mins": 49,
+          "rem_mins": 37,
+          "light_mins": 159,
+          "efficiency": 71,
+          "lowest_hr": 82,
+          "avg_hrv": 14
+        },
+        "stress": {
+          "summary": "stressful",
+          "stress_mins": 315,
+          "recovery_mins": 0
+        }
+      },
+      "notes": "Day before fast started. Low sleep, high stress day."
+    },
+    {
       "date": "2026-01-02",
       "day": 1,
       "weight_kg": 98.3,
@@ -45,11 +78,11 @@
         "hrv_balance": 88,
         "body_temp_deviation": 0.34,
         "sleep": {
-          "bedtime": "2026-01-01T20:35",
-          "wake_time": "2026-01-02T05:51",
-          "total_hours": 7.1,
+          "bedtime": "2026-01-01T20:34:59.000-05:00",
+          "wake_time": "2026-01-02T05:50:47.000-05:00",
+          "total_hours": 7.0,
           "deep_mins": 104,
-          "rem_mins": 119,
+          "rem_mins": 118,
           "light_mins": 202,
           "efficiency": 76,
           "lowest_hr": 66,
@@ -72,16 +105,16 @@
         "sleep_score": 63,
         "readiness_score": 64,
         "activity_score": 53,
-        "steps": 5555,
-        "total_calories": 2248,
-        "active_calories": 248,
+        "steps": 6025,
+        "total_calories": 2540,
+        "active_calories": 279,
         "hrv_balance": 71,
         "body_temp_deviation": -0.32,
         "sleep": {
-          "bedtime": "2026-01-02T21:50",
-          "wake_time": "2026-01-03T04:30",
+          "bedtime": "2026-01-02T21:49:59.000-05:00",
+          "wake_time": "2026-01-03T04:29:35.000-05:00",
           "total_hours": 4.6,
-          "deep_mins": 83,
+          "deep_mins": 82,
           "rem_mins": 86,
           "light_mins": 108,
           "efficiency": 69,
@@ -90,11 +123,77 @@
         },
         "stress": {
           "summary": "normal",
-          "stress_mins": 75,
-          "recovery_mins": 60
+          "stress_mins": 90,
+          "recovery_mins": 75
         }
       },
-      "notes": "Likely entering ketosis. Sleep efficiency lower. Shorter sleep duration."
+      "notes": "Ketosis transition. Short sleep but good recovery/stress ratio."
+    },
+    {
+      "date": "2026-01-04",
+      "day": 3,
+      "weight_kg": 94.4,
+      "weight_change_kg": -1.9,
+      "oura": {
+        "sleep_score": 76,
+        "readiness_score": 74,
+        "activity_score": 54,
+        "steps": 3092,
+        "total_calories": 2402,
+        "active_calories": 143,
+        "hrv_balance": 65,
+        "body_temp_deviation": 0.16,
+        "sleep": {
+          "bedtime": "2026-01-03T21:18:32.000-05:00",
+          "wake_time": "2026-01-04T05:31:56.000-05:00",
+          "total_hours": 6.5,
+          "deep_mins": 55,
+          "rem_mins": 86,
+          "light_mins": 249,
+          "efficiency": 79,
+          "lowest_hr": 61,
+          "avg_hrv": 35
+        },
+        "stress": {
+          "summary": "restored",
+          "stress_mins": 30,
+          "recovery_mins": 270
+        }
+      },
+      "notes": "Day 3 - Early ketosis. Sleep improving. Weight down 3.9kg total."
+    },
+    {
+      "date": "2026-01-05",
+      "day": 4,
+      "weight_kg": 94.0,
+      "weight_change_kg": -0.4,
+      "oura": {
+        "sleep_score": 75,
+        "readiness_score": 78,
+        "activity_score": 53,
+        "steps": 122,
+        "total_calories": 1950,
+        "active_calories": 5,
+        "hrv_balance": 73,
+        "body_temp_deviation": 0.26,
+        "sleep": {
+          "bedtime": "2026-01-04T21:47:32.000-05:00",
+          "wake_time": "2026-01-05T05:56:14.000-05:00",
+          "total_hours": 6.1,
+          "deep_mins": 97,
+          "rem_mins": 95,
+          "light_mins": 175,
+          "efficiency": 75,
+          "lowest_hr": 61,
+          "avg_hrv": 38
+        },
+        "stress": {
+          "summary": null,
+          "stress_mins": 0,
+          "recovery_mins": 0
+        }
+      },
+      "notes": ""
     }
   ],
   "log": [
@@ -111,10 +210,10 @@
       "message": "Bedtime: 8:35 PM"
     },
     {
-      "date": "2026-01-02",
-      "day": 1,
+      "date": "2026-01-01",
+      "day": 0,
       "type": "sleep",
-      "message": "Woke up: 5:51 AM (7.1 hrs sleep)"
+      "message": "Woke up: 8:27 AM (4.0 hrs sleep)"
     },
     {
       "date": "2026-01-02",
@@ -126,13 +225,19 @@
       "date": "2026-01-02",
       "day": 1,
       "type": "sleep",
+      "message": "Woke up: 5:51 AM (7.1 hrs sleep)"
+    },
+    {
+      "date": "2026-01-02",
+      "day": 1,
+      "type": "sleep",
       "message": "Bedtime: 9:50 PM"
     },
     {
       "date": "2026-01-03",
       "day": 2,
-      "type": "sleep",
-      "message": "Woke up: 4:30 AM (4.6 hrs sleep)"
+      "type": "event",
+      "message": "Body composition scan completed. Visceral fat at 5.18 lbs (5x target)."
     },
     {
       "date": "2026-01-03",
@@ -143,8 +248,50 @@
     {
       "date": "2026-01-03",
       "day": 2,
+      "type": "sleep",
+      "message": "Woke up: 4:30 AM (4.6 hrs sleep)"
+    },
+    {
+      "date": "2026-01-03",
+      "day": 2,
+      "type": "sleep",
+      "message": "Bedtime: 9:19 PM"
+    },
+    {
+      "date": "2026-01-04",
+      "day": 3,
       "type": "event",
-      "message": "Body composition scan completed. Visceral fat at 5.18 lbs (5x target)."
+      "message": "Bile dump experience - gallbladder releasing stored bile without food to process. Not pleasant but normal during fasting. Extra salt recommended to restore electrolyte balance."
+    },
+    {
+      "date": "2026-01-04",
+      "day": 3,
+      "type": "observation",
+      "message": "Sleep improving (76 vs 63). Weight -1.9kg overnight, -3.9kg total. Entering early ketosis."
+    },
+    {
+      "date": "2026-01-04",
+      "day": 3,
+      "type": "sleep",
+      "message": "Woke up: 5:32 AM (6.0 hrs sleep)"
+    },
+    {
+      "date": "2026-01-04",
+      "day": 3,
+      "type": "sleep",
+      "message": "Bedtime: 9:47 PM"
+    },
+    {
+      "date": "2026-01-05",
+      "day": 4,
+      "type": "observation",
+      "message": "Weight: 94.0 kg (-0.4 kg overnight, -4.3 kg total). Ketosis established - loss rate slowing as expected."
+    },
+    {
+      "date": "2026-01-05",
+      "day": 4,
+      "type": "sleep",
+      "message": "Woke up: 5:56 AM (6.1 hrs sleep)"
     }
   ],
   "day_guide": {
