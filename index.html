@@ -148,7 +148,7 @@
         /* Main Content Grid */
         .main-grid {
             display: grid;
-            grid-template-columns: 2fr 1fr;
+            grid-template-columns: 1fr 2fr;
             gap: 24px;
             margin-bottom: 24px;
         }
@@ -782,6 +782,20 @@
             line-height: 1.4;
         }
 
+        .metabolic-section {
+            background: var(--surface-2);
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 16px;
+            border-left: 3px solid var(--purple);
+        }
+
+        .metabolic-content {
+            font-size: 13px;
+            line-height: 1.6;
+            color: var(--text);
+        }
+
         /* Log Section */
         .log-section {
             margin-top: 24px;
@@ -920,38 +934,60 @@
             line-height: 1.4;
         }
 
-        /* Electrolyte Popup */
+        /* Guide Popup */
         .timeline-day {
             cursor: pointer;
         }
 
-        .electrolyte-popup {
+        .guide-popup {
             display: none;
             position: fixed;
             background: var(--bg);
             border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 12px;
-            min-width: 240px;
+            border-radius: 12px;
+            padding: 16px;
+            width: 400px;
+            max-height: 80vh;
+            overflow-y: auto;
             z-index: 1000;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.6);
             pointer-events: none;
         }
 
-        .popup-title {
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--cyan);
-            margin-bottom: 8px;
-            padding-bottom: 6px;
+        .popup-header {
+            margin-bottom: 12px;
+            padding-bottom: 12px;
             border-bottom: 1px solid var(--border);
+        }
+
+        .popup-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--blue);
+        }
+
+        .popup-section {
+            margin-bottom: 16px;
+        }
+
+        .popup-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .popup-section-title {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-dim);
+            margin-bottom: 8px;
         }
 
         .popup-row {
             display: flex;
             justify-content: space-between;
             font-size: 14px;
-            padding: 6px 0;
+            padding: 4px 0;
         }
 
         .popup-row span:first-child {
@@ -960,17 +996,17 @@
 
         .popup-row span:last-child {
             font-weight: 600;
-            font-size: 15px;
+            color: var(--cyan);
         }
 
-        .popup-note {
-            font-size: 11px;
-            color: var(--text-dim);
-            font-style: italic;
-            margin-top: 8px;
-            padding-top: 8px;
-            border-top: 1px solid var(--border);
-            line-height: 1.4;
+        .popup-metabolic {
+            font-size: 13px;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--surface-2);
+            padding: 12px;
+            border-radius: 6px;
+            border-left: 3px solid var(--purple);
         }
 
         /* Progress bar */
@@ -1436,6 +1472,16 @@
                 `;
             }
 
+            let metabolicHtml = '';
+            if (guide.metabolic) {
+                metabolicHtml = `
+                    <div class="guide-section metabolic-section">
+                        <div class="guide-section-title">What's Happening Metabolically</div>
+                        <div class="guide-section-content metabolic-content">${guide.metabolic}</div>
+                    </div>
+                `;
+            }
+
             document.getElementById('guideContent').innerHTML = `
                 <div class="guide-phase">${guide.phase}</div>
                 <div class="guide-section">
@@ -1446,6 +1492,7 @@
                     <div class="guide-section-title">Tips</div>
                     <div class="guide-section-content">${guide.tips}</div>
                 </div>
+                ${metabolicHtml}
                 ${electrolyteHtml}
             `;
         }
@@ -1654,6 +1701,7 @@
             // Define chart series - each gets its own chart
             const charts = [
                 { key: 'sleep_score', label: 'Sleep Score', class: 'sleep', min: 0, max: 100, unit: '', primary: true },
+                { key: 'sleep_hours', label: 'Hours Slept', class: 'sleep', min: 0, max: 10, unit: 'hrs', nested: 'sleep.total_hours', primary: true },
                 { key: 'total_calories', label: 'Calories Burned', class: 'calories', min: 1500, max: 3500, unit: '', primary: true },
                 { key: 'readiness_score', label: 'Readiness', class: 'readiness', min: 0, max: 100, unit: '' },
                 { key: 'hrv_balance', label: 'HRV Balance', class: 'hrv', min: 0, max: 100, unit: '%' },
@@ -1663,8 +1711,22 @@
             let html = '<div class="oura-charts-grid">';
 
             charts.forEach(chart => {
-                const hasData = measurements.some(m => m.oura[chart.key] !== null && m.oura[chart.key] !== undefined);
-                const latestValue = latest.oura[chart.key];
+                // Helper to get nested or direct value
+                const getValue = (m, chart) => {
+                    if (chart.nested) {
+                        const parts = chart.nested.split('.');
+                        let val = m.oura;
+                        for (const part of parts) {
+                            if (val === null || val === undefined) return null;
+                            val = val[part];
+                        }
+                        return val;
+                    }
+                    return m.oura[chart.key];
+                };
+
+                const hasData = measurements.some(m => getValue(m, chart) !== null && getValue(m, chart) !== undefined);
+                const latestValue = getValue(latest, chart);
 
                 html += `
                     <div class="oura-mini-chart ${chart.primary ? 'primary' : ''}">
@@ -1673,7 +1735,7 @@
                                 <span class="legend-dot ${chart.class}"></span>
                                 ${chart.label}
                             </div>
-                            <div class="mini-chart-value ${chart.class}">${latestValue !== null && latestValue !== undefined ? (chart.key === 'total_calories' || chart.key === 'steps' ? latestValue.toLocaleString() : latestValue) : '—'}${chart.unit}</div>
+                            <div class="mini-chart-value ${chart.class}">${latestValue !== null && latestValue !== undefined ? (chart.key === 'total_calories' || chart.key === 'steps' ? latestValue.toLocaleString() : (chart.key === 'sleep_hours' ? latestValue.toFixed(1) : latestValue)) : '—'}${chart.unit ? ' ' + chart.unit : ''}</div>
                         </div>
                         ${renderMiniLineChart(chart, measurements)}
                     </div>
@@ -1708,11 +1770,25 @@
                 yTicks = [chart.min, (chart.min + chart.max) / 2, chart.max];
             }
 
+            // Helper to get nested or direct value
+            const getValue = (m) => {
+                if (chart.nested) {
+                    const parts = chart.nested.split('.');
+                    let val = m.oura;
+                    for (const part of parts) {
+                        if (val === null || val === undefined) return null;
+                        val = val[part];
+                    }
+                    return val;
+                }
+                return m.oura[chart.key];
+            };
+
             // Collect data points - use index-based positioning
             const points = [];
             let pointIndex = 0;
             measurements.forEach((m, idx) => {
-                const value = m.oura[chart.key];
+                const value = getValue(m);
                 if (value !== null && value !== undefined) {
                     const x = pointIndex * dayWidth;
                     const normalizedValue = Math.max(0, Math.min(1, (value - chart.min) / (chart.max - chart.min)));
@@ -1768,7 +1844,14 @@
                 points.forEach((p, i) => {
                     svg += `<circle class="chart-dot ${chart.class}" cx="${p.x}" cy="${p.y}" r="${chart.primary ? 8 : 7}"/>`;
                     // Show value above dot
-                    const displayValue = chart.key === 'total_calories' || chart.key === 'steps' ? Math.round(p.value).toLocaleString() : p.value;
+                    let displayValue;
+                    if (chart.key === 'total_calories' || chart.key === 'steps') {
+                        displayValue = Math.round(p.value).toLocaleString();
+                    } else if (chart.key === 'sleep_hours') {
+                        displayValue = p.value.toFixed(1);
+                    } else {
+                        displayValue = p.value;
+                    }
                     svg += `<text class="chart-value-label" x="${p.x}" y="${p.y - 16}" text-anchor="middle">${displayValue}</text>`;
                 });
             }
@@ -1849,14 +1932,14 @@
                 if (day < currentDay) statusClass = 'past';
                 if (day === currentDay) statusClass = 'current';
 
-                let electrolyteData = '';
+                let guideData = '';
                 if (guide?.electrolytes) {
                     const e = guide.electrolytes;
-                    electrolyteData = `data-electrolytes="${encodeURIComponent(JSON.stringify({day, ...e}))}"`;
+                    guideData = `data-guide="${encodeURIComponent(JSON.stringify({day, phase: guide.phase, metabolic: guide.metabolic, ...e}))}"`;
                 }
 
                 html += `
-                    <div class="timeline-day ${statusClass}" ${electrolyteData}>
+                    <div class="timeline-day ${statusClass}" ${guideData}>
                         <div class="timeline-num">${day}</div>
                         <div class="timeline-content">
                             <div class="timeline-phase">${guide?.phase || ''}</div>
@@ -1868,40 +1951,54 @@
 
             document.getElementById('dayTimeline').innerHTML = html;
 
-            // Add hover listeners for electrolyte popups
-            document.querySelectorAll('.timeline-day[data-electrolytes]').forEach(el => {
-                el.addEventListener('mouseenter', showElectrolytePopup);
-                el.addEventListener('mouseleave', hideElectrolytePopup);
+            // Add hover listeners for guide popups
+            document.querySelectorAll('.timeline-day[data-guide]').forEach(el => {
+                el.addEventListener('mouseenter', showGuidePopup);
+                el.addEventListener('mouseleave', hideGuidePopup);
             });
         }
 
-        function showElectrolytePopup(e) {
-            const data = JSON.parse(decodeURIComponent(e.currentTarget.dataset.electrolytes));
+        function showGuidePopup(e) {
+            const guideData = JSON.parse(decodeURIComponent(e.currentTarget.dataset.guide));
 
-            let popup = document.getElementById('electrolytePopup');
+            let popup = document.getElementById('guidePopup');
             if (!popup) {
                 popup = document.createElement('div');
-                popup.id = 'electrolytePopup';
-                popup.className = 'electrolyte-popup';
+                popup.id = 'guidePopup';
+                popup.className = 'guide-popup';
                 document.body.appendChild(popup);
             }
 
             popup.innerHTML = `
-                <div class="popup-title">Day ${data.day} Electrolytes</div>
-                <div class="popup-row"><span>Sodium</span><span>${data.sodium}</span></div>
-                <div class="popup-row"><span>Potassium</span><span>${data.potassium}</span></div>
-                <div class="popup-row"><span>Magnesium</span><span>${data.magnesium}</span></div>
-                <div class="popup-note">${data.note}</div>
+                <div class="popup-header">
+                    <div class="popup-title">Day ${guideData.day}: ${guideData.phase}</div>
+                </div>
+                <div class="popup-section">
+                    <div class="popup-section-title">Electrolytes</div>
+                    <div class="popup-row"><span>Sodium</span><span>${guideData.sodium}</span></div>
+                    <div class="popup-row"><span>Potassium</span><span>${guideData.potassium}</span></div>
+                    <div class="popup-row"><span>Magnesium</span><span>${guideData.magnesium}</span></div>
+                </div>
+                ${guideData.metabolic ? `
+                <div class="popup-section">
+                    <div class="popup-section-title">Metabolic State</div>
+                    <div class="popup-metabolic">${guideData.metabolic}</div>
+                </div>
+                ` : ''}
             `;
 
             const rect = e.currentTarget.getBoundingClientRect();
             popup.style.display = 'block';
-            popup.style.left = (rect.left - popup.offsetWidth - 12) + 'px';
-            popup.style.top = rect.top + 'px';
+
+            // Position to the left of the timeline item
+            const popupWidth = 400;
+            popup.style.width = popupWidth + 'px';
+            popup.style.left = Math.max(10, rect.left - popupWidth - 16) + 'px';
+            popup.style.top = Math.max(10, rect.top - 50) + 'px';
         }
 
-        function hideElectrolytePopup() {
-            const popup = document.getElementById('electrolytePopup');
+        function hideGuidePopup() {
+            const popup = document.getElementById('guidePopup');
             if (popup) popup.style.display = 'none';
         }
 

@@ -299,6 +299,7 @@
       "phase": "Glycogen Depletion",
       "expect": "Hunger peaks, possible headache. Body using stored glucose. Weight drops from water/glycogen.",
       "tips": "Stay hydrated. Electrolytes help. Keep busy.",
+      "metabolic": "Your liver is burning through its 100g glycogen reserve (~400 calories). Each gram of glycogen binds 3-4g of water, so you'll lose 1-2kg of water weight rapidly. Insulin levels are dropping, signaling kidneys to excrete sodium (causing electrolyte flush). Ghrelin (hunger hormone) peaks as your body expects food. Blood glucose maintained around 70-80 mg/dL through gluconeogenesis. Cortisol and adrenaline slightly elevated to mobilize energy stores.",
       "electrolytes": {
         "sodium": "½-¾ tsp salt",
         "potassium": "¼-½ tsp NoSalt",
@@ -310,6 +311,7 @@
       "phase": "Transition",
       "expect": "Hunger subsides. May feel fatigue, brain fog as ketosis begins. Sleep may be disrupted.",
       "tips": "Rest if needed. Light activity ok. Salt helps.",
+      "metabolic": "Glycogen depleted. Liver ramping up ketone production (beta-hydroxybutyrate, acetoacetate, acetone). Brain still adapting - it prefers glucose but is learning to use ketones, causing 'brain fog'. Fat cells releasing fatty acids via lipolysis, producing waste products processed by liver. Insulin now very low, glucagon elevated. Growth hormone increases to preserve muscle. Sleep disruption common as norepinephrine rises. Uric acid may temporarily increase as kidneys adjust. Breath may smell fruity (acetone excretion).",
       "electrolytes": {
         "sodium": "¾-1 tsp salt",
         "potassium": "½-¾ tsp NoSalt",
@@ -321,6 +323,7 @@
       "phase": "Early Ketosis",
       "expect": "Body switching to fat. Energy may fluctuate. Mental clarity often improves.",
       "tips": "Don't overexert. Ketones rising.",
+      "metabolic": "Blood ketones rising to 0.5-2.0 mmol/L. Brain now getting 25-30% of energy from ketones. Liver converting fatty acids to ketone bodies at increasing rate. Gallbladder may dump bile (no food to process it). Autophagy beginning - cells starting to recycle damaged proteins and organelles. BDNF (brain-derived neurotrophic factor) increasing, improving mental clarity. Inflammatory markers (CRP, IL-6) starting to decrease. Fat oxidation now primary fuel source, burning 150-200g fat/day.",
       "electrolytes": {
         "sodium": "¾-1¼ tsp salt",
         "potassium": "½-¾ tsp NoSalt",
@@ -332,6 +335,7 @@
       "phase": "Ketosis Established",
       "expect": "Hunger largely gone. Steady energy. Sleep normalizing.",
       "tips": "Autophagy ramping up. Great time for light walking.",
+      "metabolic": "Blood ketones stabilizing at 1.5-3.0 mmol/L. Brain now efficiently using ketones for 60-70% of energy needs. Ghrelin (hunger hormone) suppressed - hunger largely disappears. Autophagy significantly upregulated - damaged mitochondria, misfolded proteins being recycled. mTOR pathway suppressed, promoting cellular repair over growth. HGH elevated 300-500% to preserve lean mass. Metabolic rate stable (no significant slowdown yet). Visceral fat being preferentially burned. Stem cell regeneration beginning in gut lining.",
       "electrolytes": {
         "sodium": "¾-1 tsp salt",
         "potassium": "½ tsp NoSalt",
@@ -343,6 +347,7 @@
       "phase": "Deep Ketosis",
       "expect": "Halfway point. Mental clarity high. Fat adaptation improving.",
       "tips": "Body efficient at burning fat now.",
+      "metabolic": "Peak ketone efficiency - brain fully keto-adapted. Ketones at 2-4 mmol/L. Autophagy in full effect - senescent (zombie) cells being cleared. Immune system resetting - old white blood cells being recycled, triggering stem cell regeneration. Inflammatory markers significantly reduced. Insulin sensitivity improving dramatically. Norepinephrine keeps metabolic rate elevated. Fat cells shrinking, releasing stored toxins (may cause temporary symptoms). Protein sparing maximum - muscle breakdown minimal.",
       "electrolytes": {
         "sodium": "¾-1 tsp salt",
         "potassium": "½ tsp NoSalt",
@@ -354,6 +359,7 @@
       "phase": "Autophagy Active",
       "expect": "Cellular cleanup in full swing. Stable energy and mood.",
       "tips": "Stay consistent with hydration.",
+      "metabolic": "Deep autophagy - cells aggressively recycling damaged components. Mitochondrial biogenesis occurring - new, more efficient mitochondria being created. Gut lining regenerating - stem cells rebuilding intestinal wall. SIRT1 and SIRT3 (longevity genes) highly activated. Ketones providing neuroprotective effects. Adiponectin (anti-inflammatory hormone from fat cells) elevated. Liver efficiently processing fatty acids. Weight loss may slow as body optimizes efficiency.",
       "electrolytes": {
         "sodium": "½-¾ tsp salt",
         "potassium": "⅓-½ tsp NoSalt",
@@ -365,6 +371,7 @@
       "phase": "Fat Adapted",
       "expect": "Body running smoothly on ketones. May feel surprisingly good.",
       "tips": "Don't break fast impulsively - you've come far.",
+      "metabolic": "Full fat adaptation achieved. Muscles preferentially burning fatty acids directly, sparing ketones for brain. Metabolic flexibility maximized. Immune system regeneration continuing - new naive immune cells being produced. Skin cell turnover increasing. Neuroplasticity enhanced via BDNF. Blood pressure often normalizes. Triglycerides dropping significantly. HDL improving. Body in deep repair mode - prioritizing cellular quality over quantity.",
       "electrolytes": {
         "sodium": "½-¾ tsp salt",
         "potassium": "⅓-½ tsp NoSalt",
@@ -376,6 +383,7 @@
       "phase": "Deep Autophagy",
       "expect": "Continued cellular repair. Weight loss rate may slow.",
       "tips": "Normal - body conserving.",
+      "metabolic": "Autophagy reaching maximum depth. Cellular debris being cleared efficiently. Damaged proteins, dysfunctional organelles, even intracellular pathogens being eliminated. Thyroid may downregulate slightly (T3 decreases) as body conserves energy - this is protective, not harmful. Ketones stable at 3-5 mmol/L. Fat oxidation continuing at 150-200g/day. Collagen turnover increased - skin renewal accelerating. Telomere-protective pathways activated.",
       "electrolytes": {
         "sodium": "½-¾ tsp salt",
         "potassium": "⅓-½ tsp NoSalt",
@@ -387,6 +395,7 @@
       "phase": "Final Stretch",
       "expect": "Almost there. Body very efficient now.",
       "tips": "Start planning refeed.",
+      "metabolic": "Body maximally efficient at ketone utilization. Stem cell activation significant - preparing for refeeding phase when new cells will be built. Digestive enzymes reduced (will need gentle restart). Gut microbiome shifted - beneficial bacteria dormant, will bloom with proper refeeding. Insulin sensitivity at peak - be very careful with carbs on refeed. Growth hormone still elevated. Begin mental preparation for refeed protocol.",
       "electrolytes": {
         "sodium": "½-¾ tsp salt",
         "potassium": "⅓ tsp NoSalt",
@@ -398,6 +407,7 @@
       "phase": "Completion",
       "expect": "Final day. Schedule body scan. Prepare for gentle refeed.",
       "tips": "Break with bone broth or light soup. No heavy foods.",
+      "metabolic": "Maximum autophagy benefits achieved. Immune system primed for regeneration upon refeeding. Gut ready for stem cell-driven renewal when food returns. Key refeeding risks: refeeding syndrome (electrolyte shifts), digestive distress (low enzyme production), blood sugar spikes (extreme insulin sensitivity). Break fast with bone broth (minerals, collagen, gentle). Wait 2-3 hours, then small protein/fat meal. Avoid carbs for first 24-48 hours. Probiotics beneficial for microbiome restoration.",
       "electrolytes": {
         "sodium": "½ tsp salt",
         "potassium": "¼ tsp NoSalt",
