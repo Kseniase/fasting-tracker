@@ -138,7 +138,7 @@
         "sleep_score": 76,
         "readiness_score": 74,
         "activity_score": 54,
-        "steps": 3092,
+        "steps": 3095,
         "total_calories": 2402,
         "active_calories": 143,
         "hrv_balance": 65,
@@ -155,9 +155,9 @@
           "avg_hrv": 35
         },
         "stress": {
-          "summary": "restored",
+          "summary": "normal",
           "stress_mins": 30,
-          "recovery_mins": 270
+          "recovery_mins": 210
         }
       },
       "notes": "Day 3 - Early ketosis. Sleep improving. Weight down 3.9kg total."
@@ -170,10 +170,10 @@
       "oura": {
         "sleep_score": 75,
         "readiness_score": 78,
-        "activity_score": 53,
-        "steps": 122,
-        "total_calories": 1950,
-        "active_calories": 5,
+        "activity_score": 54,
+        "steps": 2894,
+        "total_calories": 2429,
+        "active_calories": 160,
         "hrv_balance": 73,
         "body_temp_deviation": 0.26,
         "sleep": {
@@ -186,6 +186,171 @@
           "efficiency": 75,
           "lowest_hr": 61,
           "avg_hrv": 38
+        },
+        "stress": {
+          "summary": "normal",
+          "stress_mins": 30,
+          "recovery_mins": 165
+        }
+      },
+      "notes": ""
+    },
+    {
+      "date": "2026-01-06",
+      "day": 5,
+      "weight_kg": 92.9,
+      "weight_change_kg": -1.1,
+      "oura": {
+        "sleep_score": 84,
+        "readiness_score": 82,
+        "activity_score": 56,
+        "steps": 2147,
+        "total_calories": 2291,
+        "active_calories": 101,
+        "hrv_balance": 78,
+        "body_temp_deviation": 0.31,
+        "sleep": {
+          "bedtime": "2026-01-05T22:13:31.000-05:00",
+          "wake_time": "2026-01-06T06:52:45.000-05:00",
+          "total_hours": 7.0,
+          "deep_mins": 80,
+          "rem_mins": 87,
+          "light_mins": 255,
+          "efficiency": 82,
+          "lowest_hr": 58,
+          "avg_hrv": 41
+        },
+        "stress": {
+          "summary": "restored",
+          "stress_mins": 0,
+          "recovery_mins": 165
+        }
+      },
+      "notes": ""
+    },
+    {
+      "date": "2026-01-07",
+      "day": 6,
+      "weight_kg": 92.1,
+      "weight_change_kg": -0.8,
+      "oura": {
+        "sleep_score": 75,
+        "readiness_score": 81,
+        "activity_score": 72,
+        "steps": 5442,
+        "total_calories": 3154,
+        "active_calories": 854,
+        "hrv_balance": 82,
+        "body_temp_deviation": 0.01,
+        "sleep": {
+          "bedtime": "2026-01-06T22:01:03.000-05:00",
+          "wake_time": "2026-01-07T04:24:52.000-05:00",
+          "total_hours": 5.7,
+          "deep_mins": 47,
+          "rem_mins": 88,
+          "light_mins": 208,
+          "efficiency": 90,
+          "lowest_hr": 56,
+          "avg_hrv": 38
+        },
+        "stress": {
+          "summary": "stressful",
+          "stress_mins": 345,
+          "recovery_mins": 105
+        }
+      },
+      "notes": ""
+    },
+    {
+      "date": "2026-01-08",
+      "day": 7,
+      "weight_kg": null,
+      "weight_change_kg": null,
+      "oura": {
+        "sleep_score": 63,
+        "readiness_score": 59,
+        "activity_score": 76,
+        "steps": 4801,
+        "total_calories": 2794,
+        "active_calories": 500,
+        "hrv_balance": 74,
+        "body_temp_deviation": -0.39,
+        "sleep": {
+          "bedtime": "2026-01-07T23:21:02.000-05:00",
+          "wake_time": "2026-01-08T05:04:33.000-05:00",
+          "total_hours": 4.9,
+          "deep_mins": 44,
+          "rem_mins": 16,
+          "light_mins": 235,
+          "efficiency": 86,
+          "lowest_hr": 63,
+          "avg_hrv": 23
+        },
+        "stress": {
+          "summary": "normal",
+          "stress_mins": 120,
+          "recovery_mins": 75
+        }
+      },
+      "notes": ""
+    },
+    {
+      "date": "2026-01-09",
+      "day": 8,
+      "weight_kg": 90.7,
+      "weight_change_kg": -1.4,
+      "oura": {
+        "sleep_score": 81,
+        "readiness_score": 83,
+        "activity_score": 75,
+        "steps": 7210,
+        "total_calories": 2655,
+        "active_calories": 404,
+        "hrv_balance": 79,
+        "body_temp_deviation": 0.14,
+        "sleep": {
+          "bedtime": "2026-01-08T22:08:02.000-05:00",
+          "wake_time": "2026-01-09T06:09:57.000-05:00",
+          "total_hours": 6.3,
+          "deep_mins": 87,
+          "rem_mins": 81,
+          "light_mins": 211,
+          "efficiency": 79,
+          "lowest_hr": 58,
+          "avg_hrv": 21
+        },
+        "stress": {
+          "summary": "restored",
+          "stress_mins": 75,
+          "recovery_mins": 195
+        }
+      },
+      "notes": ""
+    },
+    {
+      "date": "2026-01-10",
+      "day": 9,
+      "weight_kg": 89.7,
+      "weight_change_kg": -1.0,
+      "oura": {
+        "sleep_score": 87,
+        "readiness_score": 79,
+        "activity_score": 72,
+        "steps": 3,
+        "total_calories": 1930,
+        "active_calories": 0,
+        "hrv_balance": 77,
+        "body_temp_deviation": 0.09,
+        "sleep": {
+          "bedtime": "2026-01-09T21:34:04.000-05:00",
+          "wake_time": "2026-01-10T08:22:44.000-05:00",
+          "total_hours": 7.9,
+          "deep_mins": 118,
+          "rem_mins": 78,
+          "light_mins": 283,
+          "efficiency": 74,
+          "lowest_hr": 60,
+          "avg_hrv": 27
         },
         "stress": {
           "summary": null,
@@ -292,6 +457,108 @@
       "day": 4,
       "type": "sleep",
       "message": "Woke up: 5:56 AM (6.1 hrs sleep)"
+    },
+    {
+      "date": "2026-01-05",
+      "day": 4,
+      "type": "sleep",
+      "message": "Bedtime: 10:13 PM"
+    },
+    {
+      "date": "2026-01-06",
+      "day": 5,
+      "type": "observation",
+      "message": "Weight: 92.9 kg (-1.1 kg overnight, -5.4 kg total). Day 5 Deep Ketosis - excellent sleep score (84), HRV improving (41), lowest HR 58 bpm."
+    },
+    {
+      "date": "2026-01-06",
+      "day": 5,
+      "type": "observation",
+      "message": "12:30 PM - Feeling wired but slightly out of it. Common in deep ketosis - high norepinephrine (alert/wired) while brain adjusts to ketones (foggy)."
+    },
+    {
+      "date": "2026-01-06",
+      "day": 5,
+      "type": "observation",
+      "message": "6:20 PM - Productive earlier but tapped out now. Energy fading in evening."
+    },
+    {
+      "date": "2026-01-06",
+      "day": 5,
+      "type": "sleep",
+      "message": "Woke up: 6:52 AM (7.0 hrs sleep)"
+    },
+    {
+      "date": "2026-01-06",
+      "day": 5,
+      "type": "sleep",
+      "message": "Bedtime: 10:01 PM"
+    },
+    {
+      "date": "2026-01-07",
+      "day": 6,
+      "type": "observation",
+      "message": "Weight: 92.1 kg (-0.8 kg overnight, -6.2 kg total). Day 6 Autophagy Active - yesterday stress status: RESTORED (255 min recovery, 0 stress mins)."
+    },
+    {
+      "date": "2026-01-07",
+      "day": 6,
+      "type": "sleep",
+      "message": "Woke up: 4:24 AM (5.7 hrs sleep)"
+    },
+    {
+      "date": "2026-01-07",
+      "day": 6,
+      "type": "sleep",
+      "message": "Bedtime: 11:21 PM"
+    },
+    {
+      "date": "2026-01-08",
+      "day": 7,
+      "type": "observation",
+      "message": "Day 7 Fat Adapted - Sleep score dropped to 63 (low REM 16 mins). Readiness 59. Very active day with 4801 steps and 500 active calories burned."
+    },
+    {
+      "date": "2026-01-08",
+      "day": 7,
+      "type": "sleep",
+      "message": "Woke up: 5:04 AM (4.9 hrs sleep)"
+    },
+    {
+      "date": "2026-01-08",
+      "day": 7,
+      "type": "sleep",
+      "message": "Bedtime: 10:08 PM"
+    },
+    {
+      "date": "2026-01-09",
+      "day": 8,
+      "type": "observation",
+      "message": "Weight: 90.7 kg (-1.4 kg overnight, -7.6 kg total from Day 1). Day 8 Deep Autophagy - excellent recovery with sleep score 81, readiness 83, lowest HR 58 bpm. HRV balance improving to 79."
+    },
+    {
+      "date": "2026-01-09",
+      "day": 8,
+      "type": "sleep",
+      "message": "Woke up: 6:09 AM (6.3 hrs sleep)"
+    },
+    {
+      "date": "2026-01-09",
+      "day": 8,
+      "type": "sleep",
+      "message": "Bedtime: 9:34 PM"
+    },
+    {
+      "date": "2026-01-10",
+      "day": 9,
+      "type": "observation",
+      "message": "Weight: 89.7 kg (-1.0 kg overnight, -8.6 kg total from Day 1). Day 9 Final Stretch - best sleep of fast with score 87, 118 mins deep sleep, 7.9 hrs total. Readiness 79. Body maximally efficient - start planning refeed."
+    },
+    {
+      "date": "2026-01-10",
+      "day": 9,
+      "type": "sleep",
+      "message": "Woke up: 8:22 AM (7.9 hrs sleep)"
     }
   ],
   "day_guide": {

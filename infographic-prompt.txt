@@ -1,0 +1,53 @@
+Create a minimalist, Edward Tufte-inspired health data infographic. Clean, elegant, high data-ink ratio. NO neon colors, NO glowing effects, NO dark theme. Use cream/off-white background, black text, subtle gray accents, and minimal thin-line charts. Sparse, sophisticated, like a scientific journal figure or a New York Times data visualization.
+
+TITLE: 10-Day Water Fast: Day 6 of 10
+
+=== WEIGHT CHART (show actual values, NOT differences) ===
+Plot these as a simple thin black line chart with small dots:
+Day 1 (Jan 2): 98.3 kg
+Day 2 (Jan 3): 96.3 kg
+Day 3 (Jan 4): 94.4 kg
+Day 4 (Jan 5): 94.0 kg
+Day 5 (Jan 6): 92.9 kg
+Day 6 (Jan 7): 92.1 kg
+Total change: -6.2 kg (-13.7 lbs)
+
+=== BODY COMPOSITION ===
+From DEXA scan Day 2:
+- Body Fat: 37.1%
+- Visceral Fat: 5.18 lbs → estimated now ~3.0 lbs (target: 1.0 lb)
+
+=== OURA BIOMETRICS - Small multiples sparkline style ===
+
+HRV (ms): 14, 29, 36, 35, 38, 41, 38
+Resting HR (bpm): 82, 66, 64, 61, 61, 58, 56
+Sleep Score: 50, 84, 63, 76, 75, 84, 75
+Readiness: 48, 83, 64, 74, 78, 82, 81
+Sleep Hours: 4.0, 7.0, 4.6, 6.5, 6.1, 7.0, 5.7
+
+=== KEY EVENTS (simple timeline) ===
+Day 0: Fast begins
+Day 2: DEXA scan, glycogen depleted
+Day 3: Bile dump, entering ketosis
+Day 5: Deep ketosis, autophagy active
+Day 6: Lowest resting HR yet (56 bpm)
+
+=== CURRENT STATUS ===
+Phase: Autophagy Active
+Weight: 92.1 kg (-6.2 kg from start)
+Sleep: 75 score, 5.7 hrs, 90% efficiency
+HRV: 38 ms (+171% from baseline)
+Resting HR: 56 bpm (-32% from baseline)
+4 days remaining
+
+Style notes:
+- Cream or warm white background
+- Black and dark gray text only
+- Thin hairline rules and axes
+- Small, precise data labels
+- No decorative elements
+- No gradients or shadows
+- Serif font for labels (like Times or Georgia)
+- Let the data speak, minimal chrome
+- Vertical format for mobile/Instagram
+- Think: scientific paper figure, not fitness app

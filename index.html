@@ -1036,6 +1036,34 @@
             color: var(--text-dim);
         }
 
+        /* Infographic Tabs */
+        .infographic-tab {
+            padding: 8px 16px;
+            border: 1px solid var(--border);
+            background: var(--surface-2);
+            color: var(--text-dim);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .infographic-tab:hover {
+            background: var(--surface);
+            color: var(--text);
+        }
+
+        .infographic-tab.active {
+            background: var(--blue);
+            color: var(--bg);
+            border-color: var(--blue);
+        }
+
+        .infographic-container img {
+            transition: opacity 0.3s ease;
+        }
+
         /* Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
@@ -1159,6 +1187,28 @@
                 </div>
             </div>
         </div>
+
+        <!-- Infographics Section -->
+        <div class="infographics-section" style="margin-top: 24px;">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">Reference Guides</span>
+                    <span class="card-badge">INFOGRAPHICS</span>
+                </div>
+                <div class="infographic-tabs" style="display: flex; gap: 8px; margin-bottom: 16px;">
+                    <button class="infographic-tab active" data-tab="mental" onclick="showInfographic('mental')">Mental Journey</button>
+                    <button class="infographic-tab" data-tab="metabolic" onclick="showInfographic('metabolic')">Metabolic Changes</button>
+                    <button class="infographic-tab" data-tab="refeed" onclick="showInfographic('refeed')">Refeed Protocol</button>
+                    <button class="infographic-tab" data-tab="meals" onclick="showInfographic('meals')">7-Day Meal Plan</button>
+                </div>
+                <div class="infographic-container">
+                    <img id="infographic-mental" src="keto-mental-journey-infographic.png" alt="Mental Journey of Ketosis" style="width: 100%; border-radius: 8px; display: block;">
+                    <img id="infographic-metabolic" src="metabolic-changes-infographic.png" alt="Metabolic Changes During Fasting" style="width: 100%; border-radius: 8px; display: none;">
+                    <img id="infographic-refeed" src="fast-refeed-infographic.png" alt="Fast-Refeed-Fast Cycle" style="width: 100%; border-radius: 8px; display: none;">
+                    <img id="infographic-meals" src="refeed-meal-plan-infographic.png" alt="7-Day Refeed Meal Plan" style="width: 100%; border-radius: 8px; display: none;">
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -1233,9 +1283,9 @@
                     <div class="stat-change positive">↓ ${Math.abs(totalChange).toFixed(1)} kg total</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-label">Sleep Score</div>
-                    <div class="stat-value">${latest.oura.sleep_score || '—'}</div>
-                    <div class="stat-change ${getScoreClass(latest.oura.sleep_score)}">${getScoreLabel(latest.oura.sleep_score)}</div>
+                    <div class="stat-label">Total Calories Burned</div>
+                    <div class="stat-value">${getTotalCaloriesBurned().toLocaleString()}</div>
+                    <div class="stat-change positive">Entire fast</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-label">Readiness</div>
@@ -1249,6 +1299,10 @@
                 </div>
             `;
             document.getElementById('statsRow').innerHTML = html;
+        }
+
+        function getTotalCaloriesBurned() {
+            return data.measurements.reduce((sum, m) => sum + (m.oura.total_calories || 0), 0);
         }
 
         function getScoreClass(score) {
@@ -2013,6 +2067,22 @@
 
         // Auto-refresh every 30 seconds
         setInterval(loadData, 30000);
+
+        // Infographic tab switching
+        function showInfographic(tab) {
+            // Hide all infographics
+            document.getElementById('infographic-mental').style.display = 'none';
+            document.getElementById('infographic-metabolic').style.display = 'none';
+            document.getElementById('infographic-refeed').style.display = 'none';
+            document.getElementById('infographic-meals').style.display = 'none';
+
+            // Remove active class from all tabs
+            document.querySelectorAll('.infographic-tab').forEach(t => t.classList.remove('active'));
+
+            // Show selected infographic and activate tab
+            document.getElementById('infographic-' + tab).style.display = 'block';
+            document.querySelector('.infographic-tab[data-tab="' + tab + '"]').classList.add('active');
+        }
     </script>
 </body>
 </html>
