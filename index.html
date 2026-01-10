@@ -84,6 +84,35 @@
             margin-top: 8px;
         }
 
+        /* Navigation */
+        nav {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        nav a {
+            padding: 8px 16px;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        nav a:hover {
+            background: var(--surface);
+            color: var(--text);
+        }
+
+        nav a.active {
+            background: var(--blue);
+            color: var(--bg);
+            border-color: var(--blue);
+        }
+
         /* Top Stats Row */
         .stats-row {
             display: grid;
@@ -1088,13 +1117,18 @@
         <header class="header">
             <div class="header-left">
                 <h1>Fast Tracker</h1>
-                <p>10-Day Protocol • Jan 1–11, 2026</p>
+                <p>11-Day Protocol • Jan 1–12, 2026</p>
             </div>
             <div class="header-right">
                 <div class="day-badge" id="dayBadge">Day 2 of 10</div>
                 <div class="phase-badge" id="phaseBadge">PHASE: TRANSITION</div>
             </div>
         </header>
+
+        <nav>
+            <a href="index.html" class="active">Fasting Tracker</a>
+            <a href="meal-plan.html">Meal Prep Guide</a>
+        </nav>
 
         <div class="progress-container">
             <div class="progress-bar">
@@ -1103,7 +1137,7 @@
             <div class="progress-labels">
                 <span>Jan 1</span>
                 <span id="elapsedTime">36 hours elapsed</span>
-                <span>Jan 11</span>
+                <span>Jan 12</span>
             </div>
         </div>
 
@@ -1179,7 +1213,7 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <span class="card-title">10-Day Guide</span>
+                        <span class="card-title">Day Guide</span>
                     </div>
                     <div class="day-timeline" id="dayTimeline">
                         <!-- Populated by JS -->
@@ -1236,9 +1270,9 @@
             const guide = data.day_guide[currentDay.toString()];
 
             // Update header
-            document.getElementById('dayBadge').textContent = `Day ${currentDay} of 10`;
+            document.getElementById('dayBadge').textContent = `Day ${currentDay} of ${data.fast.goal_days}`;
             document.getElementById('phaseBadge').textContent = `PHASE: ${guide?.phase?.toUpperCase() || 'FASTING'}`;
-            document.getElementById('progressFill').style.width = `${(currentDay / 10) * 100}%`;
+            document.getElementById('progressFill').style.width = `${(currentDay / data.fast.goal_days) * 100}%`;
             document.getElementById('guideDayBadge').textContent = `DAY ${currentDay}`;
 
             // Calculate elapsed time
@@ -1350,7 +1384,7 @@
 
             // Project future weights with decreasing loss rate (ketosis stabilizes)
             const projectedData = [];
-            for (let day = lastDay + 1; day <= 10; day++) {
+            for (let day = lastDay + 1; day <= data.fast.goal_days; day++) {
                 // Loss rate decreases as fast progresses (body adapts)
                 const daysFromLast = day - lastDay;
                 const slowdownFactor = Math.max(0.3, 1 - (daysFromLast * 0.08)); // Gradual slowdown
@@ -1380,8 +1414,9 @@
             const minWeight = Math.floor(Math.min(...allWeights) / 2) * 2 - 2;
             const weightRange = maxWeight - minWeight;
 
-            // X-axis: Day 1 to Day 10
-            const dayWidth = innerWidth / 9; // 10 days = 9 intervals
+            // X-axis: Day 1 to goal days
+            const goalDays = data.fast.goal_days;
+            const dayWidth = innerWidth / (goalDays - 1); // goal_days intervals
 
             // Calculate points
             const points = allData.map(d => ({
@@ -1426,7 +1461,7 @@
                         }).join('')}
 
                         <!-- X-axis day labels -->
-                        ${[1,2,3,4,5,6,7,8,9,10].map(day => {
+                        ${Array.from({length: goalDays}, (_, i) => i + 1).map(day => {
                             const x = (day - 1) * dayWidth;
                             return `<text class="chart-axis-label" x="${x}" y="${innerHeight + 20}" text-anchor="middle">Day ${day}</text>`;
                         }).join('')}
@@ -1950,7 +1985,7 @@
                     <span class="body-stat-value">${comp.t_score}</span>
                 </div>
                 <div style="font-size: 11px; color: var(--text-dim); margin-top: 8px;">
-                    Next scan: Jan 11
+                    Next scan: Jan 12 (Monday)
                 </div>
             `;
         }
@@ -1980,7 +2015,7 @@
         function renderTimeline(currentDay) {
             let html = '';
 
-            for (let day = 1; day <= 10; day++) {
+            for (let day = 1; day <= data.fast.goal_days; day++) {
                 const guide = data.day_guide[day.toString()];
                 let statusClass = 'future';
                 if (day < currentDay) statusClass = 'past';

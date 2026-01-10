@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meal Plan Dashboard</title>
+    <title>Meal Prep Guide</title>
     <style>
         :root {
             --bg: #0d1117;
@@ -13,73 +13,29 @@
             --text: #e6edf3;
             --text-dim: #8b949e;
             --green: #3fb950;
-            --green-dim: #238636;
             --red: #f85149;
             --yellow: #d29922;
             --blue: #58a6ff;
             --purple: #a371f7;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: var(--bg);
             color: var(--text);
-            line-height: 1.5;
-            padding: 20px;
-            max-width: 1400px;
+            line-height: 1.6;
+            padding: 24px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 24px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid var(--border);
-        }
+        header { margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+        h1 { font-size: 28px; font-weight: 600; margin-bottom: 4px; }
+        header p { color: var(--text-dim); font-size: 14px; }
 
-        h1 {
-            font-size: 24px;
-            font-weight: 600;
-        }
-
-        .header-stats {
-            display: flex;
-            gap: 24px;
-            font-size: 14px;
-        }
-
-        .header-stat {
-            text-align: right;
-        }
-
-        .header-stat-label {
-            color: var(--text-dim);
-            font-size: 12px;
-        }
-
-        .header-stat-value {
-            font-weight: 600;
-            font-size: 18px;
-        }
-
-        .header-stat-value.green { color: var(--green); }
-        .header-stat-value.yellow { color: var(--yellow); }
-        .header-stat-value.red { color: var(--red); }
-
-        nav {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 24px;
-        }
-
+        nav { display: flex; gap: 8px; margin-bottom: 24px; }
         nav a {
             padding: 8px 16px;
             background: var(--surface-2);
@@ -90,1362 +46,335 @@
             font-size: 14px;
             transition: all 0.2s;
         }
+        nav a:hover { background: var(--surface); color: var(--text); }
+        nav a.active { background: var(--blue); color: var(--bg); border-color: var(--blue); }
 
-        nav a:hover {
-            background: var(--surface);
-            color: var(--text);
+        .tabs { display: flex; gap: 0; margin-bottom: 24px; border-bottom: 1px solid var(--border); }
+        .tab {
+            padding: 12px 24px;
+            background: transparent;
+            border: none;
+            color: var(--text-dim);
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+            transition: all 0.2s;
         }
+        .tab:hover { color: var(--text); }
+        .tab.active { color: var(--blue); border-bottom-color: var(--blue); }
 
-        nav a.active {
-            background: var(--blue);
-            color: var(--bg);
-            border-color: var(--blue);
-        }
-
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 24px;
-        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
 
         .card {
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 8px;
-            padding: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
         }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-        }
-
-        .card-title {
-            font-weight: 600;
-            font-size: 16px;
-        }
-
-        .card-badge {
-            font-size: 11px;
-            padding: 2px 8px;
-            background: var(--surface-2);
-            border-radius: 12px;
-            color: var(--text-dim);
-        }
-
-        .full-width {
-            grid-column: 1 / -1;
-        }
-
-        /* Progress Section */
-        .progress-section {
-            margin-bottom: 24px;
-        }
-
-        .progress-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-        }
-
-        .progress-bar-container {
-            height: 24px;
-            background: var(--surface-2);
-            border-radius: 12px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--green-dim), var(--green));
-            border-radius: 12px;
-            transition: width 0.3s ease;
-        }
-
-        .progress-marker {
-            position: absolute;
-            top: 0;
-            height: 100%;
-            width: 2px;
-            background: var(--yellow);
-        }
-
-        .progress-labels {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 8px;
-            font-size: 12px;
-            color: var(--text-dim);
-        }
-
-        /* Macro Rings */
-        .macro-rings {
-            display: flex;
-            justify-content: space-around;
-            padding: 16px 0;
-        }
-
-        .macro-ring {
-            text-align: center;
-        }
-
-        .ring-container {
-            position: relative;
-            width: 100px;
-            height: 100px;
-        }
-
-        .ring-svg {
-            transform: rotate(-90deg);
-        }
-
-        .ring-bg {
-            fill: none;
-            stroke: var(--surface-2);
-            stroke-width: 8;
-        }
-
-        .ring-progress {
-            fill: none;
-            stroke-width: 8;
-            stroke-linecap: round;
-            transition: stroke-dashoffset 0.3s ease;
-        }
-
-        .ring-progress.protein { stroke: var(--blue); }
-        .ring-progress.carbs { stroke: var(--yellow); }
-        .ring-progress.fat { stroke: var(--purple); }
-        .ring-progress.calories { stroke: var(--green); }
-
-        .ring-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-        }
-
-        .ring-value {
-            font-size: 18px;
-            font-weight: 600;
-        }
-
-        .ring-label {
-            font-size: 11px;
-            color: var(--text-dim);
-        }
-
-        .macro-name {
-            margin-top: 8px;
-            font-size: 13px;
-            color: var(--text-dim);
-        }
-
-        /* Today's Meals */
-        .meal-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .meal-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px;
-            background: var(--surface-2);
-            border-radius: 6px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .meal-item:hover {
-            background: var(--border);
-        }
-
-        .meal-item.logged {
-            border-left: 3px solid var(--green);
-        }
-
-        .meal-info {
-            flex: 1;
-        }
-
-        .meal-name {
-            font-weight: 500;
-            margin-bottom: 4px;
-        }
-
-        .meal-macros {
-            font-size: 12px;
-            color: var(--text-dim);
-        }
-
-        .meal-macros span {
-            margin-right: 12px;
-        }
-
-        .meal-check {
-            width: 24px;
-            height: 24px;
-            border: 2px solid var(--border);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: transparent;
-            transition: all 0.2s;
-        }
-
-        .meal-item.logged .meal-check {
-            background: var(--green);
-            border-color: var(--green);
-            color: var(--bg);
-        }
-
-        /* Weekly Overview */
-        .week-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 8px;
-        }
-
-        .day-card {
-            background: var(--surface-2);
-            border-radius: 6px;
-            padding: 12px 8px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: 2px solid transparent;
-        }
-
-        .day-card:hover {
-            background: var(--border);
-        }
-
-        .day-card.today {
-            border-color: var(--blue);
-        }
-
-        .day-card.complete {
-            border-color: var(--green);
-        }
-
-        .day-name {
-            font-size: 11px;
-            color: var(--text-dim);
-            margin-bottom: 4px;
-        }
-
-        .day-date {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .day-status {
-            font-size: 18px;
-        }
-
-        /* Weight Chart */
-        .weight-chart {
-            height: 200px;
-            position: relative;
-            margin-top: 16px;
-        }
-
-        .chart-svg {
-            width: 100%;
-            height: 100%;
-        }
-
-        .chart-line {
-            fill: none;
-            stroke: var(--blue);
-            stroke-width: 2;
-        }
-
-        .chart-goal-line {
-            fill: none;
-            stroke: var(--green);
-            stroke-width: 1;
-            stroke-dasharray: 5, 5;
-        }
-
-        .chart-dot {
-            fill: var(--blue);
-        }
-
-        .chart-axis {
-            stroke: var(--border);
-            stroke-width: 1;
-        }
-
-        .chart-label {
-            font-size: 11px;
-            fill: var(--text-dim);
-        }
+        .card h2 { font-size: 18px; margin-bottom: 16px; color: var(--blue); }
+        .card h3 { font-size: 15px; margin: 16px 0 12px 0; color: var(--text); }
 
         /* Shopping List */
-        .shopping-categories {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-        }
-
-        .shopping-category h4 {
-            font-size: 13px;
-            color: var(--text-dim);
-            margin-bottom: 8px;
+        .shopping-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .shopping-category h3 {
+            font-size: 14px;
+            color: var(--yellow);
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
         }
-
         .shopping-item {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 6px 0;
+            gap: 10px;
+            padding: 8px 0;
             font-size: 14px;
             cursor: pointer;
         }
+        .shopping-item input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--green); }
+        .shopping-item.checked label { text-decoration: line-through; color: var(--text-dim); }
 
-        .shopping-item input[type="checkbox"] {
-            width: 16px;
-            height: 16px;
-            accent-color: var(--green);
+        /* Cooking Timeline */
+        .timeline { position: relative; padding-left: 24px; }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
         }
-
-        .shopping-item.checked label {
-            text-decoration: line-through;
-            color: var(--text-dim);
+        .timeline-item { position: relative; margin-bottom: 24px; }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -24px;
+            top: 4px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--surface);
+            border: 2px solid var(--blue);
         }
+        .timeline-time { font-size: 12px; color: var(--blue); font-weight: 600; text-transform: uppercase; margin-bottom: 4px; }
+        .timeline-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+        .timeline-tasks { background: var(--surface-2); border-radius: 6px; padding: 12px 16px; }
+        .timeline-tasks ul { margin: 0; padding-left: 20px; }
+        .timeline-tasks li { margin-bottom: 6px; font-size: 14px; }
+        .timeline-tasks li:last-child { margin-bottom: 0; }
 
-        /* Prep Checklist */
-        .prep-section {
-            margin-bottom: 16px;
-        }
-
-        .prep-section h4 {
-            font-size: 13px;
-            color: var(--text-dim);
-            margin-bottom: 8px;
-            text-transform: uppercase;
-        }
-
-        .prep-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px;
+        /* Recipe Grid */
+        .recipe-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+        .recipe-card {
             background: var(--surface-2);
-            border-radius: 4px;
-            margin-bottom: 4px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
             cursor: pointer;
+            transition: all 0.2s;
         }
+        .recipe-card:hover { border-color: var(--blue); }
+        .recipe-card h4 { font-size: 16px; margin-bottom: 8px; }
+        .recipe-macros { display: flex; gap: 12px; font-size: 12px; margin-bottom: 12px; }
+        .recipe-macros .protein { color: var(--blue); }
+        .recipe-macros .carbs { color: var(--yellow); }
+        .recipe-macros .fat { color: var(--purple); }
+        .recipe-macros .cal { color: var(--green); }
+        .recipe-components { font-size: 13px; color: var(--text-dim); }
 
-        .prep-item input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            accent-color: var(--green);
+        .recipe-tabs { display: flex; gap: 8px; margin-bottom: 20px; }
+        .recipe-tab {
+            padding: 8px 16px;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-dim);
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
         }
+        .recipe-tab:hover { background: var(--surface); color: var(--text); }
+        .recipe-tab.active { background: var(--green); color: var(--bg); border-color: var(--green); }
 
-        .prep-item.checked {
-            opacity: 0.6;
-        }
-
-        .prep-item.checked label {
-            text-decoration: line-through;
-        }
-
-        /* Weigh-in Modal */
+        /* Modal */
         .modal-overlay {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
             z-index: 100;
             align-items: center;
             justify-content: center;
+            padding: 24px;
         }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
+        .modal-overlay.active { display: flex; }
         .modal {
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 12px;
             padding: 24px;
-            width: 400px;
-            max-width: 90vw;
-        }
-
-        .modal h3 {
-            margin-bottom: 16px;
-        }
-
-        .modal-input {
             width: 100%;
-            padding: 12px;
-            background: var(--surface-2);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            color: var(--text);
-            font-size: 16px;
-            margin-bottom: 16px;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
         }
-
-        .modal-input:focus {
-            outline: none;
-            border-color: var(--blue);
-        }
-
-        .modal-buttons {
-            display: flex;
-            gap: 12px;
-            justify-content: flex-end;
-        }
-
-        .btn {
-            padding: 10px 20px;
-            border-radius: 6px;
-            border: none;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            transition: opacity 0.2s;
-        }
-
-        .btn:hover {
-            opacity: 0.9;
-        }
-
-        .btn-primary {
-            background: var(--green);
-            color: var(--bg);
-        }
-
-        .btn-secondary {
-            background: var(--surface-2);
-            color: var(--text);
-            border: 1px solid var(--border);
-        }
-
-        /* Tabs */
-        .tabs {
-            display: flex;
-            gap: 4px;
-            margin-bottom: 16px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .tab {
-            padding: 8px 16px;
-            background: transparent;
+        .modal-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+        .modal-header h3 { font-size: 20px; margin: 0; }
+        .modal-close {
+            background: none;
             border: none;
             color: var(--text-dim);
+            font-size: 24px;
             cursor: pointer;
-            font-size: 14px;
-            border-bottom: 2px solid transparent;
-            margin-bottom: -1px;
-            transition: all 0.2s;
+            padding: 0;
+            line-height: 1;
         }
+        .modal-close:hover { color: var(--text); }
+        .modal h4 { font-size: 14px; color: var(--blue); margin: 16px 0 8px 0; }
+        .modal ul { padding-left: 20px; margin: 0; }
+        .modal li { margin-bottom: 6px; font-size: 14px; }
+        .modal-instructions { white-space: pre-line; font-size: 14px; line-height: 1.8; }
 
-        .tab:hover {
-            color: var(--text);
-        }
-
-        .tab.active {
-            color: var(--blue);
-            border-bottom-color: var(--blue);
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        /* Quick Add */
-        .quick-add-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-        }
-
-        .quick-add-btn {
-            padding: 12px 8px;
+        .prep-badge {
+            display: inline-block;
+            padding: 4px 10px;
             background: var(--surface-2);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            color: var(--text);
-            cursor: pointer;
-            font-size: 12px;
-            text-align: center;
-            transition: all 0.2s;
+            border-radius: 12px;
+            font-size: 11px;
+            color: var(--green);
+            margin-right: 6px;
+            margin-bottom: 6px;
         }
 
-        .quick-add-btn:hover {
-            background: var(--border);
-            border-color: var(--blue);
-        }
-
-        .quick-add-btn .protein {
-            color: var(--blue);
-            font-weight: 600;
-        }
-
-        /* Stats Row */
-        .stats-row {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-
-        .stat-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 16px;
-        }
-
-        .stat-label {
-            font-size: 12px;
-            color: var(--text-dim);
-            margin-bottom: 4px;
-        }
-
-        .stat-value {
-            font-size: 28px;
-            font-weight: 600;
-        }
-
-        .stat-value .unit {
-            font-size: 14px;
-            color: var(--text-dim);
-            font-weight: 400;
-        }
-
-        .stat-change {
-            font-size: 12px;
-            margin-top: 4px;
-        }
-
-        .stat-change.positive { color: var(--green); }
-        .stat-change.negative { color: var(--red); }
-        .stat-change.neutral { color: var(--text-dim); }
-
-        /* Responsive */
-        @media (max-width: 900px) {
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .shopping-categories {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .stats-row {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .quick-add-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
+        .results-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+        .results-grid h3 { margin-bottom: 8px; }
+        .results-grid ul { padding-left: 20px; font-size: 14px; }
 
         @media (max-width: 600px) {
-            .week-grid {
-                grid-template-columns: repeat(7, 1fr);
-                gap: 4px;
-            }
-
-            .day-card {
-                padding: 8px 4px;
-            }
-
-            .day-name {
-                font-size: 10px;
-            }
-
-            .shopping-categories {
-                grid-template-columns: 1fr;
-            }
-
-            .header-stats {
-                display: none;
-            }
+            .shopping-grid, .recipe-grid { grid-template-columns: 1fr; }
+            .tabs { overflow-x: auto; }
+            .tab { padding: 12px 16px; white-space: nowrap; }
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Meal Plan Dashboard</h1>
-        <div class="header-stats">
-            <div class="header-stat">
-                <div class="header-stat-label">Current Weight</div>
-                <div class="header-stat-value" id="currentWeight">89.5 kg</div>
-            </div>
-            <div class="header-stat">
-                <div class="header-stat-label">Goal Weight</div>
-                <div class="header-stat-value">80.0 kg</div>
-            </div>
-            <div class="header-stat">
-                <div class="header-stat-label">Weeks Remaining</div>
-                <div class="header-stat-value" id="weeksRemaining">19</div>
-            </div>
-        </div>
+        <h1>Meal Prep Guide</h1>
+        <p>Weekly prep system: 1,800 cal/day, 150g protein, low-carb</p>
     </header>
 
     <nav>
         <a href="index.html">Fasting Tracker</a>
-        <a href="meal-plan.html" class="active">Meal Plan</a>
+        <a href="meal-plan.html" class="active">Meal Prep Guide</a>
     </nav>
 
-    <!-- Progress to Goal -->
-    <div class="card progress-section">
-        <div class="progress-header">
-            <span>Progress to Goal</span>
-            <span id="progressText">9.5 kg to go</span>
-        </div>
-        <div class="progress-bar-container">
-            <div class="progress-bar" id="progressBar" style="width: 5%;"></div>
-        </div>
-        <div class="progress-labels">
-            <span>Start: 90 kg (Jan 12)</span>
-            <span>Goal: 80 kg (May 31)</span>
+    <div class="tabs">
+        <button class="tab active" onclick="showTab('shopping')">Shopping List</button>
+        <button class="tab" onclick="showTab('cooking')">Sunday Cooking</button>
+        <button class="tab" onclick="showTab('recipes')">Recipes</button>
+    </div>
+
+    <!-- SHOPPING LIST TAB -->
+    <div id="tab-shopping" class="tab-content active">
+        <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h2 style="margin: 0;">Weekly Shopping List</h2>
+                <button onclick="resetShopping()" style="background: var(--surface-2); border: 1px solid var(--border); color: var(--text-dim); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 12px;">Reset All</button>
+            </div>
+            <div id="shopping-grid" class="shopping-grid">
+                <!-- Populated by JS -->
+            </div>
         </div>
     </div>
 
-    <!-- Stats Row -->
-    <div class="stats-row">
-        <div class="stat-card">
-            <div class="stat-label">This Week</div>
-            <div class="stat-value" id="weeklyChange">-0.0<span class="unit"> kg</span></div>
-            <div class="stat-change neutral" id="weeklyStatus">Starting week</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-label">Daily Calories</div>
-            <div class="stat-value">1,800<span class="unit"> target</span></div>
-            <div class="stat-change neutral">500 cal deficit</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-label">Protein Target</div>
-            <div class="stat-value">150<span class="unit">g</span></div>
-            <div class="stat-change neutral">~1.7g per kg</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-label">Streak</div>
-            <div class="stat-value" id="streak">0<span class="unit"> days</span></div>
-            <div class="stat-change neutral" id="streakStatus">Let's start!</div>
-        </div>
-    </div>
-
-    <div class="dashboard-grid">
-        <!-- Today's Macros -->
+    <!-- SUNDAY COOKING TAB -->
+    <div id="tab-cooking" class="tab-content">
         <div class="card">
-            <div class="card-header">
-                <span class="card-title">Today's Macros</span>
-                <span class="card-badge" id="todayDate">Jan 19</span>
-            </div>
-            <div class="macro-rings">
-                <div class="macro-ring">
-                    <div class="ring-container">
-                        <svg class="ring-svg" width="100" height="100">
-                            <circle class="ring-bg" cx="50" cy="50" r="40"></circle>
-                            <circle class="ring-progress protein" cx="50" cy="50" r="40"
-                                stroke-dasharray="251.2" stroke-dashoffset="251.2" id="proteinRing"></circle>
-                        </svg>
-                        <div class="ring-text">
-                            <div class="ring-value" id="proteinValue">0</div>
-                            <div class="ring-label">/ 150g</div>
-                        </div>
-                    </div>
-                    <div class="macro-name">Protein</div>
-                </div>
-                <div class="macro-ring">
-                    <div class="ring-container">
-                        <svg class="ring-svg" width="100" height="100">
-                            <circle class="ring-bg" cx="50" cy="50" r="40"></circle>
-                            <circle class="ring-progress carbs" cx="50" cy="50" r="40"
-                                stroke-dasharray="251.2" stroke-dashoffset="251.2" id="carbsRing"></circle>
-                        </svg>
-                        <div class="ring-text">
-                            <div class="ring-value" id="carbsValue">0</div>
-                            <div class="ring-label">/ 75g</div>
-                        </div>
-                    </div>
-                    <div class="macro-name">Carbs</div>
-                </div>
-                <div class="macro-ring">
-                    <div class="ring-container">
-                        <svg class="ring-svg" width="100" height="100">
-                            <circle class="ring-bg" cx="50" cy="50" r="40"></circle>
-                            <circle class="ring-progress fat" cx="50" cy="50" r="40"
-                                stroke-dasharray="251.2" stroke-dashoffset="251.2" id="fatRing"></circle>
-                        </svg>
-                        <div class="ring-text">
-                            <div class="ring-value" id="fatValue">0</div>
-                            <div class="ring-label">/ 100g</div>
-                        </div>
-                    </div>
-                    <div class="macro-name">Fat</div>
-                </div>
-                <div class="macro-ring">
-                    <div class="ring-container">
-                        <svg class="ring-svg" width="100" height="100">
-                            <circle class="ring-bg" cx="50" cy="50" r="40"></circle>
-                            <circle class="ring-progress calories" cx="50" cy="50" r="40"
-                                stroke-dasharray="251.2" stroke-dashoffset="251.2" id="caloriesRing"></circle>
-                        </svg>
-                        <div class="ring-text">
-                            <div class="ring-value" id="caloriesValue">0</div>
-                            <div class="ring-label">/ 1800</div>
-                        </div>
-                    </div>
-                    <div class="macro-name">Calories</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Today's Meals -->
-        <div class="card">
-            <div class="card-header">
-                <span class="card-title">Today's Meals</span>
-                <span class="card-badge">2 meals + snacks</span>
-            </div>
-            <div class="meal-list" id="mealList">
-                <div class="meal-item" data-meal="meal1" onclick="toggleMeal(this)">
-                    <div class="meal-info">
-                        <div class="meal-name">Meal 1: Big Salad</div>
-                        <div class="meal-macros">
-                            <span>55g protein</span>
-                            <span>13g carbs</span>
-                            <span>56g fat</span>
-                            <span>680 cal</span>
-                        </div>
-                    </div>
-                    <div class="meal-check">✓</div>
-                </div>
-                <div class="meal-item" data-meal="meal2" onclick="toggleMeal(this)">
-                    <div class="meal-info">
-                        <div class="meal-name">Meal 2: Protein + Sides</div>
-                        <div class="meal-macros">
-                            <span>80g protein</span>
-                            <span>20g carbs</span>
-                            <span>57g fat</span>
-                            <span>850 cal</span>
-                        </div>
-                    </div>
-                    <div class="meal-check">✓</div>
-                </div>
-                <div class="meal-item" data-meal="snacks" onclick="toggleMeal(this)">
-                    <div class="meal-info">
-                        <div class="meal-name">Snacks</div>
-                        <div class="meal-macros">
-                            <span>15g protein</span>
-                            <span>12g carbs</span>
-                            <span>19g fat</span>
-                            <span>270 cal</span>
-                        </div>
-                    </div>
-                    <div class="meal-check">✓</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Weekly Overview -->
-        <div class="card">
-            <div class="card-header">
-                <span class="card-title">This Week</span>
-                <button class="btn btn-secondary" onclick="openWeighIn()" style="padding: 6px 12px; font-size: 12px;">
-                    + Log Weight
-                </button>
-            </div>
-            <div class="week-grid" id="weekGrid">
+            <h2>Sunday Batch Prep</h2>
+            <p style="color: var(--text-dim); margin-bottom: 24px;">~3-4 hours total. Start slow cooker first, then work through the rest.</p>
+            <div id="cooking-timeline" class="timeline">
                 <!-- Populated by JS -->
             </div>
         </div>
 
-        <!-- Weight Progress Chart -->
         <div class="card">
-            <div class="card-header">
-                <span class="card-title">Weight Progress</span>
-                <span class="card-badge">Goal: 80 kg by May 31</span>
-            </div>
-            <div class="weight-chart" id="weightChart">
-                <!-- SVG chart rendered by JS -->
-            </div>
-        </div>
-
-        <!-- Quick Add Foods -->
-        <div class="card">
-            <div class="card-header">
-                <span class="card-title">Quick Add</span>
-                <span class="card-badge">Tap to add to today</span>
-            </div>
-            <div class="tabs">
-                <button class="tab active" onclick="showQuickAddTab('proteins')">Proteins</button>
-                <button class="tab" onclick="showQuickAddTab('veggies')">Veggies</button>
-                <button class="tab" onclick="showQuickAddTab('fats')">Fats</button>
-                <button class="tab" onclick="showQuickAddTab('snacks')">Snacks</button>
-            </div>
-            <div class="tab-content active" id="tab-proteins">
-                <div class="quick-add-grid">
-                    <button class="quick-add-btn" onclick="quickAdd('Pulled Pork', 25, 0, 8, 200)">
-                        Pulled Pork (1 cup)<br><span class="protein">25g protein</span>
-                    </button>
-                    <button class="quick-add-btn" onclick="quickAdd('Chicken Thigh', 28, 0, 10, 180)">
-                        Chicken Thigh<br><span class="protein">28g protein</span>
-                    </button>
-                    <button class="quick-add-btn" onclick="quickAdd('Beef Patty', 25, 0, 17, 250)">
-                        Beef Patty (4oz)<br><span class="protein">25g protein</span>
-                    </button>
-                    <button class="quick-add-btn" onclick="quickAdd('Eggs (2)', 12, 0, 10, 140)">
-                        Eggs (2)<br><span class="protein">12g protein</span>
-                    </button>
-                    <button class="quick-add-btn" onclick="quickAdd('Salmon (4oz)', 25, 0, 12, 200)">
-                        Salmon (4oz)<br><span class="protein">25g protein</span>
-                    </button>
-                    <button class="quick-add-btn" onclick="quickAdd('Steak (6oz)', 42, 0, 18, 320)">
-                        Steak (6oz)<br><span class="protein">42g protein</span>
-                    </button>
-                    <button class="quick-add-btn" onclick="quickAdd('Bacon (3)', 10, 0, 12, 150)">
-                        Bacon (3 strips)<br><span class="protein">10g protein</span>
-                    </button>
-                    <button class="quick-add-btn" onclick="quickAdd('Deli Meat (3oz)', 15, 2, 6, 120)">
-                        Deli Meat (3oz)<br><span class="protein">15g protein</span>
-                    </button>
-                </div>
-            </div>
-            <div class="tab-content" id="tab-veggies">
-                <div class="quick-add-grid">
-                    <button class="quick-add-btn" onclick="quickAdd('Broccoli (1 cup)', 3, 6, 0, 55)">
-                        Broccoli (1 cup)<br><span class="protein">6g carbs</span>
-                    </button>
-                    <button class="quick-add-btn" onclick="quickAdd('Brussels (1 cup)', 3, 8, 0, 65)">
-                        Brussels (1 cup)<br><span class="protein">8g carbs</span>
-                    </button>
-                    <button class="quick-add-btn" onclick="quickAdd('Spinach (1 cup)', 1, 1, 0, 10)">
-                        Spinach (1 cup)<br><span class="protein">1g carbs</span>
-                    </button>
-                    <button class="quick-add-btn" onclick="quickAdd('Mixed Greens', 1, 2, 0, 10)">
-                        Mixed Greens<br><span class="protein">2g carbs</span>
-                    </button>
-                    <button class="quick-add-btn" onclick="quickAdd('Zucchini (1 cup)', 1, 4, 0, 30)">
-                        Zucchini (1 cup)<br><span class="protein">4g carbs</span>
-                    </button>
-                    <button class="quick-add-btn" onclick="quickAdd('Bell Pepper', 1, 6, 0, 30)">
-                        Bell Pepper<br><span class="protein">6g carbs</span>
-                    </button>
-                    <button class="quick-add-btn" onclick="quickAdd('Cauliflower', 2, 5, 0, 50)">
-                        Cauliflower (1 cup)<br><span class="protein">5g carbs</span>
-                    </button>
-                    <button class="quick-add-btn" onclick="quickAdd('Asparagus', 2, 4, 0, 30)">
-                        Asparagus (6 spears)<br><span class="protein">4g carbs</span>
-                    </button>
-                </div>
-            </div>
-            <div class="tab-content" id="tab-fats">
-                <div class="quick-add-grid">
-                    <button class="quick-add-btn" onclick="quickAdd('Avocado (½)', 1, 4, 15, 160)">
-                        Avocado (½)<br><span class="protein">15g fat</span>
-                    </button>
-                    <button class="quick-add-btn" onclick="quickAdd('Olive Oil (1 tbsp)', 0, 0, 14, 120)">
-                        Olive Oil (1 tbsp)<br><span class="protein">14g fat</span>
-                    </button>
-                    <button class="quick-add-btn" onclick="quickAdd('Butter (1 tbsp)', 0, 0, 12, 100)">
-                        Butter (1 tbsp)<br><span class="protein">12g fat</span>
-                    </button>
-                    <button class="quick-add-btn" onclick="quickAdd('Cheese (1 oz)', 7, 0, 9, 110)">
-                        Cheese (1 oz)<br><span class="protein">9g fat</span>
-                    </button>
-                    <button class="quick-add-btn" onclick="quickAdd('Almonds (1 oz)', 6, 6, 14, 165)">
-                        Almonds (1 oz)<br><span class="protein">14g fat</span>
-                    </button>
-                    <button class="quick-add-btn" onclick="quickAdd('Guacamole (¼c)', 1, 4, 8, 90)">
-                        Guacamole (¼ cup)<br><span class="protein">8g fat</span>
-                    </button>
-                    <button class="quick-add-btn" onclick="quickAdd('Ranch (2 tbsp)', 0, 2, 14, 140)">
-                        Ranch (2 tbsp)<br><span class="protein">14g fat</span>
-                    </button>
-                    <button class="quick-add-btn" onclick="quickAdd('Heavy Cream', 0, 1, 10, 100)">
-                        Heavy Cream (2 tbsp)<br><span class="protein">10g fat</span>
-                    </button>
-                </div>
-            </div>
-            <div class="tab-content" id="tab-snacks">
-                <div class="quick-add-grid">
-                    <button class="quick-add-btn" onclick="quickAdd('Hard Boiled Eggs (2)', 12, 0, 10, 140)">
-                        Eggs (2)<br><span class="protein">12g protein</span>
-                    </button>
-                    <button class="quick-add-btn" onclick="quickAdd('Beef Jerky (1oz)', 10, 3, 1, 70)">
-                        Beef Jerky (1oz)<br><span class="protein">10g protein</span>
-                    </button>
-                    <button class="quick-add-btn" onclick="quickAdd('Cheese + Veggies', 7, 5, 9, 130)">
-                        Cheese + Veggies<br><span class="protein">7g protein</span>
-                    </button>
-                    <button class="quick-add-btn" onclick="quickAdd('Greek Yogurt', 12, 8, 5, 120)">
-                        Greek Yogurt (½c)<br><span class="protein">12g protein</span>
-                    </button>
-                    <button class="quick-add-btn" onclick="quickAdd('Cottage Cheese', 14, 4, 2, 90)">
-                        Cottage Cheese (½c)<br><span class="protein">14g protein</span>
-                    </button>
-                    <button class="quick-add-btn" onclick="quickAdd('Berries (1 cup)', 1, 12, 0, 60)">
-                        Berries (1 cup)<br><span class="protein">12g carbs</span>
-                    </button>
-                    <button class="quick-add-btn" onclick="quickAdd('Deli Roll-ups', 15, 2, 12, 180)">
-                        Deli Roll-ups (3)<br><span class="protein">15g protein</span>
-                    </button>
-                    <button class="quick-add-btn" onclick="quickAdd('Olives (15)', 0, 2, 7, 70)">
-                        Olives (15)<br><span class="protein">7g fat</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Sunday Prep Checklist -->
-        <div class="card">
-            <div class="card-header">
-                <span class="card-title">Sunday Prep Checklist</span>
-                <span class="card-badge" id="prepProgress">0/12 done</span>
-            </div>
-            <div class="prep-section">
-                <h4>Proteins</h4>
-                <div class="prep-item" onclick="togglePrep(this)">
-                    <input type="checkbox">
-                    <label>Slow cooker: Pulled pork or beef (4-5 lbs)</label>
-                </div>
-                <div class="prep-item" onclick="togglePrep(this)">
-                    <input type="checkbox">
-                    <label>Sheet pan: Chicken thighs (8-10)</label>
-                </div>
-                <div class="prep-item" onclick="togglePrep(this)">
-                    <input type="checkbox">
-                    <label>Instant Pot: Hard boiled eggs (24)</label>
-                </div>
-                <div class="prep-item" onclick="togglePrep(this)">
-                    <input type="checkbox">
-                    <label>Form beef patties (8), refrigerate</label>
-                </div>
-            </div>
-            <div class="prep-section">
-                <h4>Vegetables</h4>
-                <div class="prep-item" onclick="togglePrep(this)">
-                    <input type="checkbox">
-                    <label>Roast broccoli & brussels sprouts</label>
-                </div>
-                <div class="prep-item" onclick="togglePrep(this)">
-                    <input type="checkbox">
-                    <label>Roast zucchini & peppers</label>
-                </div>
-                <div class="prep-item" onclick="togglePrep(this)">
-                    <input type="checkbox">
-                    <label>Sauté spinach/greens</label>
-                </div>
-                <div class="prep-item" onclick="togglePrep(this)">
-                    <input type="checkbox">
-                    <label>Cut raw veggies (cucumber, celery, carrots)</label>
-                </div>
-                <div class="prep-item" onclick="togglePrep(this)">
-                    <input type="checkbox">
-                    <label>Wash & store salad greens</label>
-                </div>
-            </div>
-            <div class="prep-section">
-                <h4>Other</h4>
-                <div class="prep-item" onclick="togglePrep(this)">
-                    <input type="checkbox">
-                    <label>Wash berries, portion into containers</label>
-                </div>
-                <div class="prep-item" onclick="togglePrep(this)">
-                    <input type="checkbox">
-                    <label>Make vinaigrette dressing</label>
-                </div>
-                <div class="prep-item" onclick="togglePrep(this)">
-                    <input type="checkbox">
-                    <label>Make guacamole</label>
-                </div>
-            </div>
-        </div>
-
-        <!-- Shopping List -->
-        <div class="card full-width">
-            <div class="card-header">
-                <span class="card-title">Shopping List</span>
-                <button class="btn btn-secondary" onclick="resetShopping()" style="padding: 6px 12px; font-size: 12px;">
-                    Reset List
-                </button>
-            </div>
-            <div class="shopping-categories">
-                <div class="shopping-category">
-                    <h4>Proteins</h4>
-                    <div class="shopping-item" onclick="toggleShopping(this)">
-                        <input type="checkbox"><label>Pork shoulder (4-5 lbs)</label>
-                    </div>
-                    <div class="shopping-item" onclick="toggleShopping(this)">
-                        <input type="checkbox"><label>Chicken thighs (3-4 lbs)</label>
-                    </div>
-                    <div class="shopping-item" onclick="toggleShopping(this)">
-                        <input type="checkbox"><label>Ground beef 80/20 (2 lbs)</label>
-                    </div>
-                    <div class="shopping-item" onclick="toggleShopping(this)">
-                        <input type="checkbox"><label>Eggs (2.5 dozen)</label>
-                    </div>
-                    <div class="shopping-item" onclick="toggleShopping(this)">
-                        <input type="checkbox"><label>Salmon fillet (1-2 lbs)</label>
-                    </div>
-                    <div class="shopping-item" onclick="toggleShopping(this)">
-                        <input type="checkbox"><label>Steak (1-2 lbs)</label>
-                    </div>
-                    <div class="shopping-item" onclick="toggleShopping(this)">
-                        <input type="checkbox"><label>Bacon (1 lb)</label>
-                    </div>
-                    <div class="shopping-item" onclick="toggleShopping(this)">
-                        <input type="checkbox"><label>Deli meat (1 lb)</label>
-                    </div>
-                </div>
-                <div class="shopping-category">
-                    <h4>Vegetables</h4>
-                    <div class="shopping-item" onclick="toggleShopping(this)">
-                        <input type="checkbox"><label>Broccoli (2 heads)</label>
-                    </div>
-                    <div class="shopping-item" onclick="toggleShopping(this)">
-                        <input type="checkbox"><label>Brussels sprouts (2 lbs)</label>
-                    </div>
-                    <div class="shopping-item" onclick="toggleShopping(this)">
-                        <input type="checkbox"><label>Cauliflower (1-2 heads)</label>
-                    </div>
-                    <div class="shopping-item" onclick="toggleShopping(this)">
-                        <input type="checkbox"><label>Zucchini (4-6)</label>
-                    </div>
-                    <div class="shopping-item" onclick="toggleShopping(this)">
-                        <input type="checkbox"><label>Bell peppers (6)</label>
-                    </div>
-                    <div class="shopping-item" onclick="toggleShopping(this)">
-                        <input type="checkbox"><label>Asparagus (2 bunches)</label>
-                    </div>
-                    <div class="shopping-item" onclick="toggleShopping(this)">
-                        <input type="checkbox"><label>Cucumbers (4)</label>
-                    </div>
-                    <div class="shopping-item" onclick="toggleShopping(this)">
-                        <input type="checkbox"><label>Celery (1 bunch)</label>
-                    </div>
-                    <div class="shopping-item" onclick="toggleShopping(this)">
-                        <input type="checkbox"><label>Carrots (1 bag)</label>
-                    </div>
-                    <div class="shopping-item" onclick="toggleShopping(this)">
-                        <input type="checkbox"><label>Cherry tomatoes (2 pints)</label>
-                    </div>
-                    <div class="shopping-item" onclick="toggleShopping(this)">
-                        <input type="checkbox"><label>Mixed greens (2 containers)</label>
-                    </div>
-                    <div class="shopping-item" onclick="toggleShopping(this)">
-                        <input type="checkbox"><label>Spinach (2 lbs)</label>
-                    </div>
-                </div>
-                <div class="shopping-category">
-                    <h4>Fruit & Dairy</h4>
-                    <div class="shopping-item" onclick="toggleShopping(this)">
-                        <input type="checkbox"><label>Strawberries (1 lb)</label>
-                    </div>
-                    <div class="shopping-item" onclick="toggleShopping(this)">
-                        <input type="checkbox"><label>Blueberries (1 pint)</label>
-                    </div>
-                    <div class="shopping-item" onclick="toggleShopping(this)">
-                        <input type="checkbox"><label>Avocados (6-8)</label>
-                    </div>
-                    <div class="shopping-item" onclick="toggleShopping(this)">
-                        <input type="checkbox"><label>Lemons (4)</label>
-                    </div>
-                    <div class="shopping-item" onclick="toggleShopping(this)">
-                        <input type="checkbox"><label>Butter (1 lb)</label>
-                    </div>
-                    <div class="shopping-item" onclick="toggleShopping(this)">
-                        <input type="checkbox"><label>Cheese, variety (8-12 oz)</label>
-                    </div>
-                    <div class="shopping-item" onclick="toggleShopping(this)">
-                        <input type="checkbox"><label>Greek yogurt (32 oz)</label>
-                    </div>
-                    <div class="shopping-item" onclick="toggleShopping(this)">
-                        <input type="checkbox"><label>Heavy cream (1 pint)</label>
-                    </div>
-                    <div class="shopping-item" onclick="toggleShopping(this)">
-                        <input type="checkbox"><label>Sour cream (8 oz)</label>
-                    </div>
-                    <div class="shopping-item" onclick="toggleShopping(this)">
-                        <input type="checkbox"><label>Almonds (8 oz)</label>
-                    </div>
-                    <div class="shopping-item" onclick="toggleShopping(this)">
-                        <input type="checkbox"><label>Beef jerky</label>
-                    </div>
-                    <div class="shopping-item" onclick="toggleShopping(this)">
-                        <input type="checkbox"><label>Olives (1 jar)</label>
-                    </div>
-                </div>
+            <h2>What You'll Have Ready</h2>
+            <div id="cooking-results" class="results-grid">
+                <!-- Populated by JS -->
             </div>
         </div>
     </div>
 
-    <!-- Weigh-in Modal -->
-    <div class="modal-overlay" id="weighInModal">
-        <div class="modal">
-            <h3>Log Weight</h3>
-            <input type="number" class="modal-input" id="weightInput" placeholder="Weight in kg" step="0.1">
-            <input type="text" class="modal-input" id="notesInput" placeholder="Notes (optional)">
-            <div class="modal-buttons">
-                <button class="btn btn-secondary" onclick="closeWeighIn()">Cancel</button>
-                <button class="btn btn-primary" onclick="saveWeighIn()">Save</button>
+    <!-- RECIPES TAB -->
+    <div id="tab-recipes" class="tab-content">
+        <div class="card">
+            <h2>Recipes</h2>
+            <p style="color: var(--text-dim); margin-bottom: 16px;">All recipes use your Sunday prep components. Assembly takes 5-10 minutes.</p>
+
+            <div class="recipe-tabs">
+                <button class="recipe-tab active" onclick="showRecipeCategory('meal1')">Meal 1: Salads</button>
+                <button class="recipe-tab" onclick="showRecipeCategory('meal2')">Meal 2: Dinners</button>
+                <button class="recipe-tab" onclick="showRecipeCategory('snacks')">Snacks</button>
             </div>
+
+            <div id="recipe-grid" class="recipe-grid">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Recipe Modal -->
+    <div class="modal-overlay" id="recipeModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modal-title"></h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div id="modal-macros" class="recipe-macros" style="margin-bottom: 16px;"></div>
+            <div id="modal-content"></div>
         </div>
     </div>
 
     <script>
-        // Data storage
-        let mealPlanData = JSON.parse(localStorage.getItem('mealPlanData')) || {
-            weighIns: [],
-            dailyLogs: {},
-            prepChecklist: {},
-            shoppingChecklist: {},
-            targets: {
-                startWeight: 90,
-                goalWeight: 80,
-                startDate: '2026-01-12',
-                goalDate: '2026-05-31',
-                dailyCalories: 1800,
-                protein: 150,
-                carbs: 75,
-                fat: 100
-            }
-        };
+        let data = null;
+        let currentCategory = 'meal1';
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            updateTodayDate();
-            renderWeekGrid();
-            renderWeightChart();
-            updateMacroRings();
-            updateProgress();
-            loadDailyState();
-            loadPrepState();
-            updatePrepProgress();
-        });
-
-        // Update today's date display
-        function updateTodayDate() {
-            const today = new Date();
-            const options = { month: 'short', day: 'numeric' };
-            document.getElementById('todayDate').textContent = today.toLocaleDateString('en-US', options);
-        }
-
-        // Week grid
-        function renderWeekGrid() {
-            const grid = document.getElementById('weekGrid');
-            const today = new Date();
-            const startOfWeek = new Date(today);
-            startOfWeek.setDate(today.getDate() - today.getDay()); // Start from Sunday
-
-            const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-            let html = '';
-
-            for (let i = 0; i < 7; i++) {
-                const date = new Date(startOfWeek);
-                date.setDate(startOfWeek.getDate() + i);
-                const dateStr = date.toISOString().split('T')[0];
-                const isToday = date.toDateString() === today.toDateString();
-                const dayLog = mealPlanData.dailyLogs[dateStr];
-                const isComplete = dayLog && dayLog.meal1 && dayLog.meal2;
-                const isPast = date < today && !isToday;
-
-                let status = '';
-                if (isComplete) status = '✓';
-                else if (isPast) status = '—';
-                else if (isToday) status = '○';
-                else status = '';
-
-                html += `
-                    <div class="day-card ${isToday ? 'today' : ''} ${isComplete ? 'complete' : ''}">
-                        <div class="day-name">${days[i]}</div>
-                        <div class="day-date">${date.getDate()}</div>
-                        <div class="day-status">${status}</div>
-                    </div>
-                `;
-            }
-
-            grid.innerHTML = html;
-        }
-
-        // Macro rings
-        function updateMacroRings() {
-            const todayStr = new Date().toISOString().split('T')[0];
-            const todayLog = mealPlanData.dailyLogs[todayStr] || { protein: 0, carbs: 0, fat: 0, calories: 0 };
-
-            const circumference = 251.2; // 2 * PI * 40
-
-            // Update each ring
-            updateRing('protein', todayLog.protein || 0, 150);
-            updateRing('carbs', todayLog.carbs || 0, 75);
-            updateRing('fat', todayLog.fat || 0, 100);
-            updateRing('calories', todayLog.calories || 0, 1800);
-
-            document.getElementById('proteinValue').textContent = todayLog.protein || 0;
-            document.getElementById('carbsValue').textContent = todayLog.carbs || 0;
-            document.getElementById('fatValue').textContent = todayLog.fat || 0;
-            document.getElementById('caloriesValue').textContent = todayLog.calories || 0;
-        }
-
-        function updateRing(name, value, target) {
-            const circumference = 251.2;
-            const progress = Math.min(value / target, 1);
-            const offset = circumference * (1 - progress);
-            document.getElementById(name + 'Ring').style.strokeDashoffset = offset;
-        }
-
-        // Toggle meal completion
-        function toggleMeal(element) {
-            element.classList.toggle('logged');
-            saveDailyState();
-            updateMacroRings();
-            renderWeekGrid();
-        }
-
-        function saveDailyState() {
-            const todayStr = new Date().toISOString().split('T')[0];
-            const meals = document.querySelectorAll('.meal-item');
-
-            let protein = 0, carbs = 0, fat = 0, calories = 0;
-            let meal1 = false, meal2 = false, snacks = false;
-
-            meals.forEach(meal => {
-                if (meal.classList.contains('logged')) {
-                    const mealType = meal.dataset.meal;
-                    if (mealType === 'meal1') {
-                        protein += 55; carbs += 13; fat += 56; calories += 680;
-                        meal1 = true;
-                    } else if (mealType === 'meal2') {
-                        protein += 80; carbs += 20; fat += 57; calories += 850;
-                        meal2 = true;
-                    } else if (mealType === 'snacks') {
-                        protein += 15; carbs += 12; fat += 19; calories += 270;
-                        snacks = true;
-                    }
-                }
-            });
-
-            mealPlanData.dailyLogs[todayStr] = {
-                protein, carbs, fat, calories,
-                meal1, meal2, snacks
-            };
-
-            saveData();
-        }
-
-        function loadDailyState() {
-            const todayStr = new Date().toISOString().split('T')[0];
-            const todayLog = mealPlanData.dailyLogs[todayStr];
-
-            if (todayLog) {
-                const meals = document.querySelectorAll('.meal-item');
-                meals.forEach(meal => {
-                    const mealType = meal.dataset.meal;
-                    if (todayLog[mealType]) {
-                        meal.classList.add('logged');
-                    }
-                });
+        // Load data from JSON
+        async function loadData() {
+            try {
+                const response = await fetch('recipes.json');
+                data = await response.json();
+                renderShopping();
+                renderCooking();
+                renderRecipes();
+                loadShoppingState();
+            } catch (error) {
+                console.error('Error loading recipes.json:', error);
             }
         }
 
-        // Quick add
-        function quickAdd(name, protein, carbs, fat, calories) {
-            const todayStr = new Date().toISOString().split('T')[0];
-            if (!mealPlanData.dailyLogs[todayStr]) {
-                mealPlanData.dailyLogs[todayStr] = { protein: 0, carbs: 0, fat: 0, calories: 0 };
-            }
-
-            mealPlanData.dailyLogs[todayStr].protein += protein;
-            mealPlanData.dailyLogs[todayStr].carbs += carbs;
-            mealPlanData.dailyLogs[todayStr].fat += fat;
-            mealPlanData.dailyLogs[todayStr].calories += calories;
-
-            saveData();
-            updateMacroRings();
-
-            // Visual feedback
-            alert(`Added: ${name}\n+${protein}g protein, +${carbs}g carbs, +${fat}g fat, +${calories} cal`);
-        }
-
-        function showQuickAddTab(tabName) {
+        // Tab switching
+        function showTab(tabName) {
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-
             event.target.classList.add('active');
             document.getElementById('tab-' + tabName).classList.add('active');
         }
 
-        // Prep checklist
-        function togglePrep(element) {
-            const checkbox = element.querySelector('input');
+        // ============================================
+        // SHOPPING LIST
+        // ============================================
+        function renderShopping() {
+            const grid = document.getElementById('shopping-grid');
+            const categories = {
+                proteins: 'Proteins',
+                vegetables: 'Vegetables',
+                fresh: 'Fresh / Snacking',
+                dairy: 'Dairy & Fats'
+            };
+
+            grid.innerHTML = Object.entries(categories).map(([key, label]) => `
+                <div class="shopping-category">
+                    <h3>${label}</h3>
+                    ${data.shopping[key].map((item, i) => `
+                        <div class="shopping-item" data-key="${key}-${i}" onclick="toggleItem(this)">
+                            <input type="checkbox"><label>${item}</label>
+                        </div>
+                    `).join('')}
+                </div>
+            `).join('');
+        }
+
+        function toggleItem(el) {
+            const checkbox = el.querySelector('input');
             checkbox.checked = !checkbox.checked;
-            element.classList.toggle('checked', checkbox.checked);
-            savePrepState();
-            updatePrepProgress();
-        }
-
-        function savePrepState() {
-            const items = document.querySelectorAll('.prep-item');
-            const state = {};
-            items.forEach((item, index) => {
-                state[index] = item.classList.contains('checked');
-            });
-            mealPlanData.prepChecklist = state;
-            saveData();
-        }
-
-        function loadPrepState() {
-            const items = document.querySelectorAll('.prep-item');
-            items.forEach((item, index) => {
-                if (mealPlanData.prepChecklist[index]) {
-                    item.classList.add('checked');
-                    item.querySelector('input').checked = true;
-                }
-            });
-        }
-
-        function updatePrepProgress() {
-            const items = document.querySelectorAll('.prep-item');
-            const checked = document.querySelectorAll('.prep-item.checked').length;
-            document.getElementById('prepProgress').textContent = `${checked}/${items.length} done`;
-        }
-
-        // Shopping list
-        function toggleShopping(element) {
-            const checkbox = element.querySelector('input');
-            checkbox.checked = !checkbox.checked;
-            element.classList.toggle('checked', checkbox.checked);
+            el.classList.toggle('checked', checkbox.checked);
             saveShoppingState();
         }
 
         function saveShoppingState() {
-            const items = document.querySelectorAll('.shopping-item');
             const state = {};
-            items.forEach((item, index) => {
-                state[index] = item.classList.contains('checked');
+            document.querySelectorAll('.shopping-item').forEach(item => {
+                state[item.dataset.key] = item.classList.contains('checked');
             });
-            mealPlanData.shoppingChecklist = state;
-            saveData();
+            localStorage.setItem('shoppingList', JSON.stringify(state));
+        }
+
+        function loadShoppingState() {
+            const state = JSON.parse(localStorage.getItem('shoppingList') || '{}');
+            document.querySelectorAll('.shopping-item').forEach(item => {
+                if (state[item.dataset.key]) {
+                    item.classList.add('checked');
+                    item.querySelector('input').checked = true;
+                }
+            });
         }
 
         function resetShopping() {
@@ -1453,215 +382,117 @@
                 item.classList.remove('checked');
                 item.querySelector('input').checked = false;
             });
-            mealPlanData.shoppingChecklist = {};
-            saveData();
+            localStorage.removeItem('shoppingList');
         }
 
-        // Weight tracking
-        function openWeighIn() {
-            document.getElementById('weighInModal').classList.add('active');
-            document.getElementById('weightInput').focus();
-        }
+        // ============================================
+        // COOKING TIMELINE
+        // ============================================
+        function renderCooking() {
+            // Timeline
+            const timeline = document.getElementById('cooking-timeline');
+            timeline.innerHTML = data.cooking.timeline.map(step => `
+                <div class="timeline-item">
+                    <div class="timeline-time">${step.time}</div>
+                    <div class="timeline-title">${step.title}</div>
+                    <div class="timeline-tasks">
+                        <ul>
+                            ${step.tasks.map(task => `<li>${task}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+            `).join('');
 
-        function closeWeighIn() {
-            document.getElementById('weighInModal').classList.remove('active');
-            document.getElementById('weightInput').value = '';
-            document.getElementById('notesInput').value = '';
-        }
-
-        function saveWeighIn() {
-            const weight = parseFloat(document.getElementById('weightInput').value);
-            const notes = document.getElementById('notesInput').value;
-
-            if (!weight || weight < 50 || weight > 200) {
-                alert('Please enter a valid weight');
-                return;
-            }
-
-            const today = new Date().toISOString().split('T')[0];
-
-            // Remove existing entry for today if exists
-            mealPlanData.weighIns = mealPlanData.weighIns.filter(w => w.date !== today);
-
-            mealPlanData.weighIns.push({
-                date: today,
-                weight: weight,
-                notes: notes
-            });
-
-            // Sort by date
-            mealPlanData.weighIns.sort((a, b) => new Date(a.date) - new Date(b.date));
-
-            saveData();
-            closeWeighIn();
-            updateProgress();
-            renderWeightChart();
-
-            document.getElementById('currentWeight').textContent = weight.toFixed(1) + ' kg';
-        }
-
-        // Progress calculations
-        function updateProgress() {
-            const startWeight = mealPlanData.targets.startWeight;
-            const goalWeight = mealPlanData.targets.goalWeight;
-            const totalToLose = startWeight - goalWeight;
-
-            const latestWeighIn = mealPlanData.weighIns[mealPlanData.weighIns.length - 1];
-            const currentWeight = latestWeighIn ? latestWeighIn.weight : startWeight;
-
-            const lost = startWeight - currentWeight;
-            const progress = (lost / totalToLose) * 100;
-            const remaining = currentWeight - goalWeight;
-
-            document.getElementById('progressBar').style.width = Math.max(0, Math.min(100, progress)) + '%';
-            document.getElementById('progressText').textContent = remaining.toFixed(1) + ' kg to go';
-            document.getElementById('currentWeight').textContent = currentWeight.toFixed(1) + ' kg';
-
-            // Calculate weeks remaining
-            const today = new Date();
-            const goalDate = new Date(mealPlanData.targets.goalDate);
-            const weeksRemaining = Math.ceil((goalDate - today) / (7 * 24 * 60 * 60 * 1000));
-            document.getElementById('weeksRemaining').textContent = weeksRemaining;
-
-            // Weekly change
-            const oneWeekAgo = new Date();
-            oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-            const weekAgoStr = oneWeekAgo.toISOString().split('T')[0];
-            const weekAgoWeighIn = mealPlanData.weighIns.find(w => w.date <= weekAgoStr);
-
-            if (weekAgoWeighIn && latestWeighIn) {
-                const weeklyChange = latestWeighIn.weight - weekAgoWeighIn.weight;
-                document.getElementById('weeklyChange').innerHTML =
-                    (weeklyChange > 0 ? '+' : '') + weeklyChange.toFixed(1) + '<span class="unit"> kg</span>';
-                document.getElementById('weeklyStatus').textContent =
-                    weeklyChange <= 0 ? 'On track!' : 'Above last week';
-                document.getElementById('weeklyStatus').className =
-                    'stat-change ' + (weeklyChange <= 0 ? 'positive' : 'negative');
-            }
-
-            // Streak
-            let streak = 0;
-            const todayStr = new Date().toISOString().split('T')[0];
-            let checkDate = new Date();
-            checkDate.setDate(checkDate.getDate() - 1); // Start from yesterday
-
-            while (true) {
-                const dateStr = checkDate.toISOString().split('T')[0];
-                const dayLog = mealPlanData.dailyLogs[dateStr];
-                if (dayLog && dayLog.meal1 && dayLog.meal2) {
-                    streak++;
-                    checkDate.setDate(checkDate.getDate() - 1);
-                } else {
-                    break;
-                }
-            }
-
-            // Check today
-            const todayLog = mealPlanData.dailyLogs[todayStr];
-            if (todayLog && todayLog.meal1 && todayLog.meal2) {
-                streak++;
-            }
-
-            document.getElementById('streak').innerHTML = streak + '<span class="unit"> days</span>';
-            document.getElementById('streakStatus').textContent =
-                streak === 0 ? "Let's start!" : streak >= 7 ? 'Amazing!' : 'Keep going!';
-        }
-
-        // Weight chart
-        function renderWeightChart() {
-            const container = document.getElementById('weightChart');
-            const width = container.offsetWidth;
-            const height = 200;
-            const padding = { top: 20, right: 40, bottom: 30, left: 50 };
-
-            const startWeight = mealPlanData.targets.startWeight;
-            const goalWeight = mealPlanData.targets.goalWeight;
-            const startDate = new Date(mealPlanData.targets.startDate);
-            const goalDate = new Date(mealPlanData.targets.goalDate);
-
-            // Create data points
-            const weighIns = mealPlanData.weighIns.length > 0
-                ? mealPlanData.weighIns
-                : [{ date: mealPlanData.targets.startDate, weight: startWeight }];
-
-            // Scale functions
-            const xScale = (date) => {
-                const d = new Date(date);
-                const totalDays = (goalDate - startDate) / (24 * 60 * 60 * 1000);
-                const daysPassed = (d - startDate) / (24 * 60 * 60 * 1000);
-                return padding.left + (daysPassed / totalDays) * (width - padding.left - padding.right);
+            // Results
+            const results = document.getElementById('cooking-results');
+            const resultLabels = {
+                proteins: { label: 'Proteins', color: 'var(--blue)' },
+                vegetables: { label: 'Vegetables', color: 'var(--green)' },
+                fresh: { label: 'Fresh (don\'t prep)', color: 'var(--yellow)' }
             };
 
-            const yScale = (weight) => {
-                const minWeight = goalWeight - 2;
-                const maxWeight = startWeight + 2;
-                return padding.top + ((maxWeight - weight) / (maxWeight - minWeight)) * (height - padding.top - padding.bottom);
-            };
-
-            // Build SVG
-            let svg = `<svg class="chart-svg" viewBox="0 0 ${width} ${height}">`;
-
-            // Y-axis
-            svg += `<line class="chart-axis" x1="${padding.left}" y1="${padding.top}" x2="${padding.left}" y2="${height - padding.bottom}"/>`;
-
-            // X-axis
-            svg += `<line class="chart-axis" x1="${padding.left}" y1="${height - padding.bottom}" x2="${width - padding.right}" y2="${height - padding.bottom}"/>`;
-
-            // Y-axis labels
-            for (let w = goalWeight; w <= startWeight; w += 2) {
-                const y = yScale(w);
-                svg += `<text class="chart-label" x="${padding.left - 10}" y="${y + 4}" text-anchor="end">${w}</text>`;
-                svg += `<line class="chart-axis" x1="${padding.left}" y1="${y}" x2="${width - padding.right}" y2="${y}" opacity="0.2"/>`;
-            }
-
-            // Goal line
-            const goalY = yScale(goalWeight);
-            svg += `<line class="chart-goal-line" x1="${padding.left}" y1="${goalY}" x2="${width - padding.right}" y2="${goalY}"/>`;
-            svg += `<text class="chart-label" x="${width - padding.right + 5}" y="${goalY + 4}" fill="#3fb950">Goal</text>`;
-
-            // Ideal progress line
-            const idealPath = `M ${xScale(startDate)} ${yScale(startWeight)} L ${xScale(goalDate)} ${yScale(goalWeight)}`;
-            svg += `<path d="${idealPath}" fill="none" stroke="#30363d" stroke-width="1" stroke-dasharray="3,3"/>`;
-
-            // Actual weight line
-            if (weighIns.length > 1) {
-                let path = `M ${xScale(weighIns[0].date)} ${yScale(weighIns[0].weight)}`;
-                for (let i = 1; i < weighIns.length; i++) {
-                    path += ` L ${xScale(weighIns[i].date)} ${yScale(weighIns[i].weight)}`;
-                }
-                svg += `<path class="chart-line" d="${path}"/>`;
-            }
-
-            // Weight dots
-            weighIns.forEach(w => {
-                const x = xScale(w.date);
-                const y = yScale(w.weight);
-                svg += `<circle class="chart-dot" cx="${x}" cy="${y}" r="4"/>`;
-            });
-
-            // X-axis labels (months)
-            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May'];
-            months.forEach((month, i) => {
-                const date = new Date(2026, i, 15);
-                if (date >= startDate && date <= goalDate) {
-                    const x = xScale(date);
-                    svg += `<text class="chart-label" x="${x}" y="${height - 10}" text-anchor="middle">${month}</text>`;
-                }
-            });
-
-            svg += '</svg>';
-            container.innerHTML = svg;
+            results.innerHTML = Object.entries(resultLabels).map(([key, config]) => `
+                <div>
+                    <h3 style="color: ${config.color};">${config.label}</h3>
+                    <ul>
+                        ${data.cooking.results[key].map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                </div>
+            `).join('');
         }
 
-        // Data persistence
-        function saveData() {
-            localStorage.setItem('mealPlanData', JSON.stringify(mealPlanData));
+        // ============================================
+        // RECIPES
+        // ============================================
+        function showRecipeCategory(category) {
+            currentCategory = category;
+            document.querySelectorAll('.recipe-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            renderRecipes();
         }
 
-        // Handle window resize for chart
-        window.addEventListener('resize', () => {
-            renderWeightChart();
+        function renderRecipes() {
+            const grid = document.getElementById('recipe-grid');
+            const recipes = data.recipes[currentCategory];
+
+            grid.innerHTML = recipes.map((r, i) => `
+                <div class="recipe-card" onclick="showRecipe('${currentCategory}', ${i})">
+                    <h4>${r.name}</h4>
+                    <div class="recipe-macros">
+                        <span class="protein">${r.protein}g P</span>
+                        <span class="carbs">${r.carbs}g C</span>
+                        <span class="fat">${r.fat}g F</span>
+                        <span class="cal">${r.cal} cal</span>
+                    </div>
+                    <div class="recipe-components">
+                        ${r.components.map(c => `<span class="prep-badge">${c}</span>`).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function showRecipe(category, index) {
+            const recipe = data.recipes[category][index];
+
+            document.getElementById('modal-title').textContent = recipe.name;
+            document.getElementById('modal-macros').innerHTML = `
+                <span class="protein">${recipe.protein}g protein</span>
+                <span class="carbs">${recipe.carbs}g carbs</span>
+                <span class="fat">${recipe.fat}g fat</span>
+                <span class="cal">${recipe.cal} cal</span>
+            `;
+
+            document.getElementById('modal-content').innerHTML = `
+                <h4>Ingredients</h4>
+                <ul>
+                    ${recipe.ingredients.map(i => `<li>${i}</li>`).join('')}
+                </ul>
+                <h4>Instructions</h4>
+                <p class="modal-instructions">${recipe.instructions}</p>
+                ${recipe.components.length > 0 ? `
+                    <h4>Uses Sunday Prep</h4>
+                    <div>${recipe.components.map(c => `<span class="prep-badge">${c}</span>`).join('')}</div>
+                ` : ''}
+            `;
+
+            document.getElementById('recipeModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('recipeModal').classList.remove('active');
+        }
+
+        // Close modal on escape or background click
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeModal();
         });
+
+        document.getElementById('recipeModal').addEventListener('click', e => {
+            if (e.target.id === 'recipeModal') closeModal();
+        });
+
+        // Init
+        loadData();
     </script>
 </body>
 </html>

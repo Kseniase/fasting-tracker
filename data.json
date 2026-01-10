@@ -1,8 +1,9 @@
 {
   "fast": {
     "start": "2026-01-01T18:00:00",
-    "goal_days": 10,
-    "end": "2026-01-11T18:00:00"
+    "goal_days": 11,
+    "end": "2026-01-12T18:00:00",
+    "note": "Extended to Day 11 for DEXA scan on Monday Jan 12"
   },
   "baseline": {
     "period": "2025-12-20 to 2025-12-31",
@@ -671,8 +672,20 @@
       }
     },
     "10": {
-      "phase": "Completion",
-      "expect": "Final day. Schedule body scan. Prepare for gentle refeed.",
+      "phase": "Extended Autophagy",
+      "expect": "Bonus day. Body running smoothly. Continue steady.",
+      "tips": "Same protocol as Day 9. Stay consistent.",
+      "metabolic": "Continued deep autophagy. Stem cells highly activated. Ketone efficiency maximized at 3-5 mmol/L. Thyroid may downregulate slightly (protective, not harmful). Fat oxidation steady at 150-200g/day. Immune regeneration ongoing. Body in maintenance mode - all systems adapted to fasting state.",
+      "electrolytes": {
+        "sodium": "½-¾ tsp salt",
+        "potassium": "⅓ tsp NoSalt",
+        "magnesium": "1 pill (300mg)",
+        "note": "Stay consistent. One more day to go."
+      }
+    },
+    "11": {
+      "phase": "Completion & DEXA Scan",
+      "expect": "Final day. DEXA scan to measure results. Prepare for gentle refeed.",
       "tips": "Break with bone broth or light soup. No heavy foods.",
       "metabolic": "Maximum autophagy benefits achieved. Immune system primed for regeneration upon refeeding. Gut ready for stem cell-driven renewal when food returns. Key refeeding risks: refeeding syndrome (electrolyte shifts), digestive distress (low enzyme production), blood sugar spikes (extreme insulin sensitivity). Break fast with bone broth (minerals, collagen, gentle). Wait 2-3 hours, then small protein/fat meal. Avoid carbs for first 24-48 hours. Probiotics beneficial for microbiome restoration.",
       "electrolytes": {

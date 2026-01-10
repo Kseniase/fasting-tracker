@@ -1,0 +1,328 @@
+{
+  "shopping": {
+    "proteins": [
+      "Pork shoulder (4-5 lbs)",
+      "Chicken thighs, bone-in (3-4 lbs)",
+      "Ground beef 80/20 (2 lbs)",
+      "Eggs (2.5 dozen)",
+      "Bacon (1 lb)",
+      "Salmon fillet (1 lb) - fresh cook",
+      "Steak, ribeye or strip (1 lb) - fresh cook"
+    ],
+    "vegetables": [
+      "Broccoli (2 heads)",
+      "Brussels sprouts (2 lbs)",
+      "Cauliflower (2 heads)",
+      "Zucchini (4-6)",
+      "Bell peppers (6)",
+      "Spinach (2 bags)",
+      "Mixed greens (2 containers)",
+      "Asparagus (2 bunches)"
+    ],
+    "fresh": [
+      "Avocados (6)",
+      "Cherry tomatoes (2 pints)",
+      "Cucumber (3)",
+      "Celery (1 bunch)",
+      "Berries, mixed (2 pints)",
+      "Lemons (4)"
+    ],
+    "dairy": [
+      "Butter (1 lb)",
+      "Cheese, variety (12 oz)",
+      "Feta cheese (8 oz)",
+      "Heavy cream (1 pint)",
+      "Greek yogurt, full-fat (32 oz)",
+      "Olive oil (if low)",
+      "Olives (1 jar)"
+    ]
+  },
+  "cooking": {
+    "timeline": [
+      {
+        "time": "Hour 1 - Start Proteins",
+        "title": "Slow Cooker + Prep",
+        "tasks": [
+          "Slow cooker pulled pork: Pat 4-5 lb pork shoulder dry. Rub with salt, pepper, garlic powder, paprika, cumin. Place fat-side up, add 1/2 cup water. LOW 8-10 hours.",
+          "Season chicken thighs: Pat dry (crucial for crispy skin). Toss with olive oil, salt, pepper, garlic powder, paprika.",
+          "Form beef patties: Divide 2 lbs ground beef into 8 patties (4 oz each). Season, refrigerate.",
+          "Start bacon: Lay 1 lb on sheet pan, 400°F for 20 min."
+        ]
+      },
+      {
+        "time": "Hour 2 - Roast Everything",
+        "title": "Sheet Pans + Eggs",
+        "tasks": [
+          "Sheet pan 1 - Chicken: Arrange thighs skin-side up, not touching. 400°F for 40-45 min until skin is golden. Internal temp 175°F.",
+          "Sheet pan 2 - Broccoli & Brussels: Toss with olive oil, salt, garlic powder. 400°F for 25-30 min, toss halfway.",
+          "Sheet pan 3 - Zucchini & Peppers: Cut zucchini into 1/2\" rounds, peppers into strips. Olive oil, salt, Italian herbs. 400°F for 20-25 min.",
+          "Instant Pot eggs: 24 eggs on trivet, 1 cup water. High pressure 5 min, natural release 5 min, ice bath 5 min. Shells slide right off."
+        ]
+      },
+      {
+        "time": "Hour 3 - Fresh Prep",
+        "title": "Cauliflower Mash + Raw Veggies",
+        "tasks": [
+          "Cauliflower mash: Steam 2 heads until very tender (12-15 min). Drain WELL. Blend with 4 tbsp butter, 1/4 cup cream, salt, garlic.",
+          "Wash greens: Wash and dry mixed greens and spinach. Store with paper towel.",
+          "Cut raw veggies: Slice cucumber, celery, peppers for snacking. Store in water.",
+          "Wash berries: Rinse, dry, portion into containers."
+        ]
+      },
+      {
+        "time": "Hour 4 - Store & Portion",
+        "title": "Container Everything",
+        "tasks": [
+          "Shred pulled pork: Remove from slow cooker, shred with forks. Return to liquid. Store in containers with some juice.",
+          "Portion proteins: Chicken thighs individually, eggs in 2s, bacon in portions.",
+          "Portion vegetables: Roasted veggies in meal-sized portions (~1 cup each).",
+          "Make dressing: 3/4 cup olive oil + 1/4 cup vinegar + 1 tsp Dijon + garlic + salt. Shake in jar.",
+          "Stack in fridge: Organize by protein type for easy assembly."
+        ]
+      }
+    ],
+    "results": {
+      "proteins": [
+        "~12 cups pulled pork",
+        "8-10 chicken thighs",
+        "8 beef patties (raw)",
+        "24 hard boiled eggs",
+        "~1 lb cooked bacon"
+      ],
+      "vegetables": [
+        "~4 cups roasted broccoli",
+        "~4 cups roasted brussels",
+        "~4 cups roasted zucchini/peppers",
+        "~4 cups cauliflower mash",
+        "Raw veggies for snacking"
+      ],
+      "fresh": [
+        "Greens - keep bagged",
+        "Avocados - slice day-of",
+        "Salmon - cook Wed/Thu",
+        "Steak - cook Fri/Sat",
+        "Berries - portion but keep fresh"
+      ]
+    }
+  },
+  "recipes": {
+    "meal1": [
+      {
+        "name": "Classic Cobb Salad",
+        "protein": 58, "carbs": 10, "fat": 52, "cal": 680,
+        "components": ["pulled pork or chicken", "hard boiled eggs", "bacon"],
+        "ingredients": [
+          "3 cups mixed greens",
+          "1.5 cups pulled pork or shredded chicken",
+          "2 hard boiled eggs, quartered",
+          "3 strips bacon, crumbled",
+          "1/2 avocado, sliced",
+          "1/4 cup cherry tomatoes",
+          "1 oz blue cheese or feta",
+          "2 tbsp olive oil + vinegar"
+        ],
+        "instructions": "Arrange greens in bowl. Top with rows of protein, eggs, bacon, avocado, tomatoes, cheese. Drizzle dressing."
+      },
+      {
+        "name": "Pulled Pork Power Bowl",
+        "protein": 52, "carbs": 15, "fat": 55, "cal": 700,
+        "components": ["pulled pork", "cauliflower mash", "roasted brussels", "hard boiled eggs"],
+        "ingredients": [
+          "1.5 cups pulled pork",
+          "1 cup cauliflower mash",
+          "1 cup roasted brussels sprouts",
+          "1/2 avocado",
+          "2 hard boiled eggs, halved",
+          "Hot sauce or chimichurri"
+        ],
+        "instructions": "Warm pulled pork and cauliflower mash. Layer mash in bowl, top with pork, brussels, eggs, avocado. Add sauce."
+      },
+      {
+        "name": "Mediterranean Chicken Bowl",
+        "protein": 56, "carbs": 14, "fat": 50, "cal": 670,
+        "components": ["chicken thighs", "hard boiled eggs"],
+        "ingredients": [
+          "2 chicken thighs, sliced",
+          "3 cups mixed greens",
+          "1/2 cup cucumber, diced",
+          "1/4 cup cherry tomatoes",
+          "15 olives",
+          "2 oz feta cheese",
+          "2 tbsp olive oil + lemon juice"
+        ],
+        "instructions": "Slice chicken thighs. Arrange over greens with cucumber, tomatoes, olives, feta. Dress with olive oil and lemon."
+      },
+      {
+        "name": "Asian Pork Bowl",
+        "protein": 54, "carbs": 12, "fat": 52, "cal": 680,
+        "components": ["pulled pork", "roasted broccoli", "hard boiled eggs"],
+        "ingredients": [
+          "1.5 cups pulled pork",
+          "2 cups sauteed bok choy or cabbage",
+          "1 cup roasted broccoli",
+          "2 hard boiled eggs",
+          "1 tbsp sesame oil",
+          "2 tbsp coconut aminos",
+          "Sesame seeds, green onion"
+        ],
+        "instructions": "Warm pork with coconut aminos. Serve over bok choy with broccoli and eggs. Drizzle sesame oil, top with seeds."
+      },
+      {
+        "name": "Bacon & Egg Breakfast Salad",
+        "protein": 48, "carbs": 10, "fat": 58, "cal": 700,
+        "components": ["bacon", "hard boiled eggs"],
+        "ingredients": [
+          "3 cups spinach and arugula",
+          "4 eggs (fry fresh or use hard boiled)",
+          "4 strips bacon, crumbled",
+          "1/2 avocado",
+          "1/4 cup cherry tomatoes",
+          "2 tbsp olive oil",
+          "Hot sauce"
+        ],
+        "instructions": "Warm greens slightly with hot bacon fat. Top with eggs, bacon, avocado, tomatoes. Drizzle oil, add hot sauce."
+      },
+      {
+        "name": "Taco Salad (No Shell)",
+        "protein": 55, "carbs": 14, "fat": 54, "cal": 710,
+        "components": ["ground beef or pulled pork"],
+        "ingredients": [
+          "3 cups romaine, chopped",
+          "8 oz ground beef with taco seasoning (or pulled pork)",
+          "1/2 avocado or 1/4 cup guac",
+          "1/4 cup salsa",
+          "2 tbsp sour cream",
+          "1 oz cheddar, shredded",
+          "Jalapenos, cilantro"
+        ],
+        "instructions": "Cook beef patty, crumble with cumin and chili powder (or use pulled pork). Serve over romaine with toppings."
+      }
+    ],
+    "meal2": [
+      {
+        "name": "Chicken Thigh Plate",
+        "protein": 84, "carbs": 16, "fat": 52, "cal": 830,
+        "components": ["chicken thighs", "roasted brussels", "cauliflower mash"],
+        "ingredients": [
+          "3 chicken thighs",
+          "1 cup roasted brussels sprouts",
+          "1 cup cauliflower mash",
+          "2 tbsp butter",
+          "Fresh herbs (thyme, rosemary)"
+        ],
+        "instructions": "Reheat chicken in 400°F oven 10 min to re-crisp skin. Warm brussels and mash. Plate, add butter to mash."
+      },
+      {
+        "name": "Pulled Pork Dinner",
+        "protein": 75, "carbs": 18, "fat": 52, "cal": 820,
+        "components": ["pulled pork", "roasted brussels", "bacon"],
+        "ingredients": [
+          "2 cups pulled pork",
+          "1 cup coleslaw (cabbage + 2 tbsp mayo + vinegar)",
+          "1 cup roasted brussels sprouts",
+          "3 strips bacon",
+          "Pickles, hot sauce"
+        ],
+        "instructions": "Warm pulled pork. Make quick slaw with shredded cabbage, mayo, splash of vinegar. Plate with brussels, bacon, pickles."
+      },
+      {
+        "name": "Double Burger Plate",
+        "protein": 78, "carbs": 18, "fat": 62, "cal": 900,
+        "components": ["beef patties", "roasted zucchini"],
+        "ingredients": [
+          "2 beef patties",
+          "2 slices cheese",
+          "Lettuce wrap or bed of greens",
+          "Tomato, pickles, onion",
+          "2 tbsp mayo or special sauce",
+          "1 cup roasted zucchini"
+        ],
+        "instructions": "Cook patties 4 min per side in cast iron. Add cheese last minute. Serve on greens with toppings and roasted zucchini."
+      },
+      {
+        "name": "Salmon with Asparagus",
+        "protein": 72, "carbs": 12, "fat": 58, "cal": 850,
+        "components": ["hard boiled eggs"],
+        "ingredients": [
+          "8 oz salmon fillet (fresh cook)",
+          "1 bunch asparagus",
+          "2 tbsp butter",
+          "2 tbsp olive oil",
+          "Lemon, dill, capers",
+          "2 hard boiled eggs"
+        ],
+        "instructions": "Season salmon, pan sear skin-down 4 min, flip 3 min. Roast asparagus with oil. Plate with butter, lemon, capers, eggs."
+      },
+      {
+        "name": "Steak Dinner",
+        "protein": 75, "carbs": 14, "fat": 55, "cal": 840,
+        "components": ["roasted broccoli"],
+        "ingredients": [
+          "10 oz ribeye or strip (fresh cook)",
+          "1 cup roasted broccoli",
+          "1 cup sauteed spinach",
+          "2 tbsp butter",
+          "Salt, pepper, garlic"
+        ],
+        "instructions": "Bring steak to room temp. Sear in cast iron 4 min per side. Rest 5 min, top with butter. Serve with broccoli and spinach."
+      },
+      {
+        "name": "Bacon-Wrapped Chicken",
+        "protein": 82, "carbs": 10, "fat": 55, "cal": 850,
+        "components": ["chicken thighs", "bacon", "roasted broccoli"],
+        "ingredients": [
+          "2 chicken thighs",
+          "4 strips bacon",
+          "1 cup roasted broccoli",
+          "1 cup sauteed spinach",
+          "Ranch for dipping"
+        ],
+        "instructions": "Wrap each thigh with 2 strips raw bacon. Bake 400°F 35-40 min until bacon crispy. Serve with veggies and ranch."
+      }
+    ],
+    "snacks": [
+      {
+        "name": "Deviled Eggs (6 halves)",
+        "protein": 18, "carbs": 2, "fat": 18, "cal": 230,
+        "components": ["hard boiled eggs"],
+        "ingredients": ["3 hard boiled eggs", "2 tbsp mayo", "1 tsp Dijon", "Paprika"],
+        "instructions": "Halve eggs, mash yolks with mayo and mustard. Fill whites, dust with paprika."
+      },
+      {
+        "name": "Cheese & Veggie Plate",
+        "protein": 14, "carbs": 8, "fat": 18, "cal": 240,
+        "components": ["raw veggies"],
+        "ingredients": ["2 oz cheese (cheddar, gouda)", "1 cup raw veggies", "10 olives"],
+        "instructions": "Slice cheese, arrange with veggies and olives."
+      },
+      {
+        "name": "Greek Yogurt + Berries",
+        "protein": 18, "carbs": 18, "fat": 8, "cal": 210,
+        "components": ["berries"],
+        "ingredients": ["3/4 cup full-fat Greek yogurt", "1/2 cup mixed berries", "1 tbsp almonds"],
+        "instructions": "Top yogurt with berries and nuts."
+      },
+      {
+        "name": "Bacon & Avocado",
+        "protein": 12, "carbs": 4, "fat": 24, "cal": 280,
+        "components": ["bacon"],
+        "ingredients": ["4 strips bacon", "1/2 avocado", "Everything bagel seasoning"],
+        "instructions": "Top avocado halves with crumbled bacon and seasoning."
+      },
+      {
+        "name": "Deli Roll-Ups",
+        "protein": 18, "carbs": 4, "fat": 16, "cal": 230,
+        "components": [],
+        "ingredients": ["4 oz deli turkey or roast beef", "2 tbsp cream cheese", "Pickle spears"],
+        "instructions": "Spread cream cheese on deli meat, roll around pickle."
+      },
+      {
+        "name": "Celery + Almond Butter",
+        "protein": 7, "carbs": 8, "fat": 16, "cal": 190,
+        "components": ["raw veggies"],
+        "ingredients": ["4 celery stalks", "2 tbsp almond butter"],
+        "instructions": "Spread almond butter in celery grooves."
+      }
+    ]
+  }
+}
