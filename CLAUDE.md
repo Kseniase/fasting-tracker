@@ -266,3 +266,35 @@ Use nano-banana skill with detailed prompt describing content and style.
 npx live-server
 ```
 This will open the browser automatically. If already running, just refresh the page.
+
+### "Order groceries" or "Add to Instacart"
+Use the `/instacart` command for automated shopping from `recipes.json`. This uses the chrome-driver plugin to:
+1. Navigate to store (Market 32 or Stop & Shop)
+2. Search and add items using aria-label selectors
+3. Manage quantities and cart
+
+See `.claude/commands/instacart.md` for full documentation.
+
+**Quick workflow:**
+```bash
+# Setup
+INTERACT="${CLAUDE_PLUGIN_ROOT}/bin/interact --no-headless --user-data=~/.chrome-instacart"
+NAVIGATE="${CLAUDE_PLUGIN_ROOT}/bin/navigate --no-headless --user-data=~/.chrome-instacart"
+
+# Navigate to store
+$NAVIGATE "https://www.instacart.com/store/stop-shop/storefront"
+
+# Search (3-step: clear, type, submit)
+$INTERACT --eval="var input = document.querySelector('#search-bar-input'); input.select(); document.execCommand('delete');" 2>/dev/null
+$INTERACT --type="#search-bar-input=avocados" 2>/dev/null
+$INTERACT --eval="document.querySelector('#search-bar-input').closest('form').dispatchEvent(new Event('submit', {bubbles: true, cancelable: true}));" 2>/dev/null && sleep 3
+
+# Add product
+$INTERACT --eval="var btn = document.querySelector('button[aria-label*=\"Add\"][aria-label*=\"Avocado\"]'); if(btn) btn.click();" 2>/dev/null
+```
+
+**Key patterns:**
+- Aria-labels: `Add 1 ct [Product]`, `Increment quantity of [Product]`, `Remove [Product]`
+- Always clear search input before new searches
+- Use `2>/dev/null` to suppress noise
+- Sleep 3 seconds after search for results to load
