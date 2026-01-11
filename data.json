@@ -336,10 +336,10 @@
       "oura": {
         "sleep_score": 87,
         "readiness_score": 79,
-        "activity_score": 72,
-        "steps": 3,
-        "total_calories": 1930,
-        "active_calories": 0,
+        "activity_score": 70,
+        "steps": 3409,
+        "total_calories": 2339,
+        "active_calories": 127,
         "hrv_balance": 77,
         "body_temp_deviation": 0.09,
         "sleep": {
@@ -352,6 +352,39 @@
           "efficiency": 74,
           "lowest_hr": 60,
           "avg_hrv": 27
+        },
+        "stress": {
+          "summary": "restored",
+          "stress_mins": 0,
+          "recovery_mins": 330
+        }
+      },
+      "notes": ""
+    },
+    {
+      "date": "2026-01-11",
+      "day": 10,
+      "weight_kg": 89.7,
+      "weight_change_kg": 0.0,
+      "oura": {
+        "sleep_score": 72,
+        "readiness_score": 76,
+        "activity_score": 70,
+        "steps": 62,
+        "total_calories": 1928,
+        "active_calories": 2,
+        "hrv_balance": 66,
+        "body_temp_deviation": 0.04,
+        "sleep": {
+          "bedtime": "2026-01-10T22:10:59.000-05:00",
+          "wake_time": "2026-01-11T05:08:05.000-05:00",
+          "total_hours": 5.2,
+          "deep_mins": 87,
+          "rem_mins": 51,
+          "light_mins": 177,
+          "efficiency": 76,
+          "lowest_hr": 58,
+          "avg_hrv": 28
         },
         "stress": {
           "summary": null,
@@ -560,6 +593,24 @@
       "day": 9,
       "type": "sleep",
       "message": "Woke up: 8:22 AM (7.9 hrs sleep)"
+    },
+    {
+      "date": "2026-01-10",
+      "day": 9,
+      "type": "sleep",
+      "message": "Bedtime: 10:10 PM"
+    },
+    {
+      "date": "2026-01-11",
+      "day": 10,
+      "type": "sleep",
+      "message": "Woke up: 5:08 AM (5.2 hrs sleep)"
+    },
+    {
+      "date": "2026-01-11",
+      "day": 10,
+      "type": "observation",
+      "message": "Weight: 89.7 kg (stable overnight, -8.6 kg total from Day 1). Day 10 Completion - sleep score 72, readiness 76, lowest HR 58 bpm. Deep sleep excellent at 87 mins. Final day of extended autophagy - DEXA scan scheduled for tomorrow to measure results."
     }
   ],
   "day_guide": {

@@ -172,9 +172,12 @@ These are generated DAILY with current data for posting on social media. Use 16:
 - Let the data speak, minimal chrome
 
 **Daily update layout:**
-- TOP: Current Status (prominent) - Phase, Weight (with total change), Sleep score/hours/deep, Readiness, Lowest HR, days remaining
-- MIDDLE LEFT: Weight chart (thin black line with dots, all days)
-- MIDDLE RIGHT: Oura sparklines (Resting HR, Sleep Score, Readiness)
+- TOP: Current Status (prominent) - Phase, Weight (with total change), Sleep score/hours/deep, Readiness, Lowest HR, Progress (Day X/Y)
+- MIDDLE LEFT: Weight chart (main, larger) - thin black line with dots, all days
+- MIDDLE RIGHT: Three sparklines stacked:
+  - Calories Burned (total_calories from each day)
+  - Sleep Hours (total_hours from each day)
+  - Sleep Score (sleep_score from each day)
 - BOTTOM: Three sections explaining:
   - METABOLICALLY: What's happening at cellular level (from day_guide.metabolic)
   - PHYSICALLY: How the body feels, what biometrics show
@@ -190,7 +193,45 @@ Uses nano-banana skill with Google AI Studio key:
 op item get "Google AI Studio Key" --format json | jq -r '.fields[].value' | grep -E '^AIza' | head -1
 
 # Generate infographic
-GEMINI_API_KEY="<key>" npx @the-focus-ai/nano-banana "prompt..." --output filename.png
+GEMINI_API_KEY="<key>" npx @the-focus-ai/nano-banana@latest "prompt..." --output filename.png
+```
+
+**Daily Infographic Prompt Template:**
+```
+Create a 16:9 landscape infographic for Day {N} of an {TOTAL}-day water fast. Use Edward Tufte-inspired design: cream/off-white background, black text, thin hairline rules, serif font (Times/Georgia style), NO neon colors, NO glowing effects, NO gradients. Scientific paper figure aesthetic.
+
+HEADER: 'DAY {N}: {PHASE}' in elegant serif, with '{TOTAL}-Day Water Fast Tracker' subtitle
+
+TOP STATUS BAR (prominent):
+- Phase: {phase from day_guide}
+- Weight: {weight} kg ({change} overnight, {total_change} kg total)
+- Sleep: {sleep_score} score / {sleep_hours} hrs / {deep_mins} min deep
+- Readiness: {readiness_score}
+- Lowest HR: {lowest_hr} bpm
+- Progress: Day {N}/{TOTAL}
+
+MIDDLE LEFT - Weight Chart (main, larger):
+Thin black line with small dots showing daily weights:
+{list all weights by day}
+Y-axis from {min-2} to {max+2} kg. Label: 'Weight (kg)'
+
+MIDDLE RIGHT - Three sparklines stacked:
+1. Calories Burned: {list total_calories for each day} (label: Calories Burned)
+2. Sleep Hours: {list sleep hours for each day} (label: Sleep Hours)
+3. Sleep Score: {list sleep scores for each day} (label: Sleep Score)
+
+BOTTOM - Three columns with thin dividing lines:
+
+METABOLICALLY:
+{content from day_guide.metabolic, summarized}
+
+PHYSICALLY:
+{current physical state based on biometrics}
+
+WHAT TO EXPECT:
+{guidance for the day from day_guide}
+
+FOOTER: Small text 'Generated {date} • Oura Ring Data • @wschenk'
 ```
 
 ## Refeed Protocol (Post-Fast)
