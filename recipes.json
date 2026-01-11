@@ -2,12 +2,12 @@
   "shopping": {
     "proteins": [
       "Pork shoulder (4-5 lbs)",
+      "Beef chuck roast (2 lbs) - for stew",
       "Chicken thighs, bone-in (3-4 lbs)",
-      "Ground beef 80/20 (2 lbs)",
       "Eggs (2.5 dozen)",
       "Bacon (1 lb)",
-      "Salmon fillet (1 lb) - fresh cook",
-      "Steak, ribeye or strip (1 lb) - fresh cook"
+      "Salmon fillet (1 lb) - fresh cook mid-week",
+      "Steak, ribeye or strip (1 lb) - fresh cook end of week"
     ],
     "vegetables": [
       "Broccoli (2 heads)",
@@ -17,15 +17,19 @@
       "Bell peppers (6)",
       "Spinach (2 bags)",
       "Mixed greens (2 containers)",
-      "Asparagus (2 bunches)"
+      "Celery (1 bunch) - some for stew, some for snacking",
+      "Mushrooms (8 oz) - for stew",
+      "Radishes (1 lb) - low-carb potato substitute in stew",
+      "Green cabbage (1 small head) - for slaw"
     ],
     "fresh": [
       "Avocados (6)",
       "Cherry tomatoes (2 pints)",
       "Cucumber (3)",
-      "Celery (1 bunch)",
       "Berries, mixed (2 pints)",
-      "Lemons (4)"
+      "Lemons (4)",
+      "Fresh thyme (1 bunch) - for stew",
+      "Fresh rosemary (1 bunch)"
     ],
     "dairy": [
       "Butter (1 lb)",
@@ -35,293 +39,531 @@
       "Greek yogurt, full-fat (32 oz)",
       "Olive oil (if low)",
       "Olives (1 jar)"
+    ],
+    "pantry": [
+      "Beef broth (32 oz) - for stew",
+      "Tomato paste (1 small can)",
+      "Worcestershire sauce",
+      "Red wine (1 cup) - optional for stew",
+      "Bay leaves",
+      "Dijon mustard",
+      "Red wine vinegar",
+      "Mayonnaise (1 jar) - for slaw and deviled eggs",
+      "Paprika - for deviled eggs, rubs",
+      "Garlic powder",
+      "Cumin - for pork rub",
+      "Italian herb blend",
+      "Capers (1 jar) - for salmon",
+      "Pickles (1 jar)",
+      "Hot sauce",
+      "Everything bagel seasoning",
+      "Ranch dressing",
+      "Almonds or mixed nuts"
+    ],
+    "fresh_additions": [
+      "Garlic (1 head)",
+      "Fresh dill (1 bunch) - for salmon"
     ]
   },
   "cooking": {
-    "timeline": [
+    "overview": {
+      "total_time": "4.75 hours (12:00pm - 4:45pm)",
+      "equipment": {
+        "oven1": "Pork braise at 300°F",
+        "oven2": "Chicken, then vegetables at 400°F",
+        "stovetop": "Eggs, cauliflower mash",
+        "slow_cooker_1": "Beef stew on HIGH",
+        "slow_cooker_2": "Backup / not needed",
+        "air_fryer": "Bacon"
+      },
+      "concept": "Shop Sunday morning, cook 12-4pm, done for the week"
+    },
+    "steps": [
       {
-        "time": "Hour 1 - Start Proteins",
-        "title": "Slow Cooker + Prep",
-        "tasks": [
-          "Slow cooker pulled pork: Pat 4-5 lb pork shoulder dry. Rub with salt, pepper, garlic powder, paprika, cumin. Place fat-side up, add 1/2 cup water. LOW 8-10 hours.",
-          "Season chicken thighs: Pat dry (crucial for crispy skin). Toss with olive oil, salt, pepper, garlic powder, paprika.",
-          "Form beef patties: Divide 2 lbs ground beef into 8 patties (4 oz each). Season, refrigerate.",
-          "Start bacon: Lay 1 lb on sheet pan, 400°F for 20 min."
-        ]
+        "step": 1,
+        "time": "12:00",
+        "title": "START - Big Proteins Go In",
+        "duration": "15 min active",
+        "do": [
+          "Preheat OVEN #1 to 300°F",
+          "Preheat OVEN #2 to 400°F",
+          "PORK: Pat 4-5 lb shoulder dry. Rub with 2 tsp salt, 1 tsp each pepper, garlic powder, paprika, cumin. Place in dutch oven or roasting pan, add 1/2 cup water, cover tightly with foil or lid. Into OVEN #1.",
+          "BEEF STEW: Cut 2 lb chuck into 1.5\" cubes. Season with salt and pepper. Add to SLOW COOKER #1 with: 2 cups beef broth, 2 tbsp tomato paste, 1 tbsp Worcestershire, 2 bay leaves, 4 thyme sprigs. Set to HIGH.",
+          "CHICKEN: Pat 3-4 lbs thighs VERY dry. Toss with 2 tbsp olive oil, 2 tsp salt, 1 tsp each pepper, garlic powder, paprika. Arrange on sheet pan skin-side up."
+        ],
+        "status_after": "Pork braising in Oven #1, Beef stew in slow cooker, Chicken prepped"
       },
       {
-        "time": "Hour 2 - Roast Everything",
-        "title": "Sheet Pans + Eggs",
-        "tasks": [
-          "Sheet pan 1 - Chicken: Arrange thighs skin-side up, not touching. 400°F for 40-45 min until skin is golden. Internal temp 175°F.",
-          "Sheet pan 2 - Broccoli & Brussels: Toss with olive oil, salt, garlic powder. 400°F for 25-30 min, toss halfway.",
-          "Sheet pan 3 - Zucchini & Peppers: Cut zucchini into 1/2\" rounds, peppers into strips. Olive oil, salt, Italian herbs. 400°F for 20-25 min.",
-          "Instant Pot eggs: 24 eggs on trivet, 1 cup water. High pressure 5 min, natural release 5 min, ice bath 5 min. Shells slide right off."
-        ]
+        "step": 2,
+        "time": "12:15",
+        "title": "Chicken In, Eggs On",
+        "duration": "10 min active",
+        "do": [
+          "CHICKEN into OVEN #2 - needs 45 min total",
+          "EGGS: Place 24 eggs in large pot, cover with cold water by 1 inch. Bring to rolling boil on stovetop.",
+          "Set timer for chicken: 45 min"
+        ],
+        "status_after": "Pork braising, Beef stewing, Chicken roasting, Eggs heating"
       },
       {
-        "time": "Hour 3 - Fresh Prep",
-        "title": "Cauliflower Mash + Raw Veggies",
-        "tasks": [
-          "Cauliflower mash: Steam 2 heads until very tender (12-15 min). Drain WELL. Blend with 4 tbsp butter, 1/4 cup cream, salt, garlic.",
-          "Wash greens: Wash and dry mixed greens and spinach. Store with paper towel.",
-          "Cut raw veggies: Slice cucumber, celery, peppers for snacking. Store in water.",
-          "Wash berries: Rinse, dry, portion into containers."
-        ]
+        "step": 3,
+        "time": "12:25",
+        "title": "Eggs Rest, Bacon Starts",
+        "duration": "5 min active",
+        "do": [
+          "EGGS: Once boiling, cover pot, remove from heat. Set timer for 12 min.",
+          "BACON: Load 1 lb into AIR FRYER. 400°F for 10-12 min (check at 10)."
+        ],
+        "status_after": "Pork braising, Beef stewing, Chicken roasting, Eggs resting, Bacon crisping"
       },
       {
-        "time": "Hour 4 - Store & Portion",
-        "title": "Container Everything",
-        "tasks": [
-          "Shred pulled pork: Remove from slow cooker, shred with forks. Return to liquid. Store in containers with some juice.",
-          "Portion proteins: Chicken thighs individually, eggs in 2s, bacon in portions.",
-          "Portion vegetables: Roasted veggies in meal-sized portions (~1 cup each).",
-          "Make dressing: 3/4 cup olive oil + 1/4 cup vinegar + 1 tsp Dijon + garlic + salt. Shake in jar.",
-          "Stack in fridge: Organize by protein type for easy assembly."
-        ]
+        "step": 4,
+        "time": "12:35",
+        "title": "Eggs to Ice Bath, Bacon Done",
+        "duration": "5 min active",
+        "do": [
+          "EGGS: Transfer to ice bath. Let sit 5 min, then peel.",
+          "BACON: Remove from air fryer, set on paper towels to cool.",
+          "Add STEW VEGGIES to slow cooker: 3 stalks celery (chunked), 8 oz mushrooms (halved), 1 lb radishes (halved). Stir."
+        ],
+        "status_after": "Pork braising, Beef stew has veggies now, Chicken roasting, Eggs cooling, Bacon done"
+      },
+      {
+        "step": 5,
+        "time": "12:40",
+        "title": "Prep All Vegetables",
+        "duration": "20 min active",
+        "do": [
+          "While chicken finishes, prep all roasting veggies:",
+          "Cut broccoli into florets",
+          "Halve brussels sprouts",
+          "Slice zucchini into 1/2\" rounds",
+          "Cut bell peppers into strips",
+          "Cut cauliflower into florets (keep separate - this gets boiled)",
+          "Peel eggs as they become cool enough to handle"
+        ],
+        "status_after": "All veggies prepped and ready"
+      },
+      {
+        "step": 6,
+        "time": "1:00",
+        "title": "Chicken Out, First Veggies In",
+        "duration": "10 min active",
+        "do": [
+          "CHICKEN: Remove from OVEN #2. Check internal temp 175°F. Set aside to rest.",
+          "Toss BROCCOLI & BRUSSELS with 2 tbsp olive oil, 1 tsp salt, 1/2 tsp garlic powder.",
+          "BROCCOLI & BRUSSELS into OVEN #2 - needs 30 min. Set timer."
+        ],
+        "status_after": "Pork braising (1 hr in), Beef stewing (1 hr in), Chicken resting, Broccoli/Brussels roasting"
+      },
+      {
+        "step": 7,
+        "time": "1:15",
+        "title": "Start Cauliflower, Toss Veggies",
+        "duration": "10 min active",
+        "do": [
+          "CAULIFLOWER: Add florets to large pot, cover with water. Bring to boil, cook 12-15 min until very tender.",
+          "Toss broccoli & brussels in oven at halfway point.",
+          "Toss ZUCCHINI & PEPPERS with 2 tbsp olive oil, 1 tsp salt, Italian herbs. Ready for next oven round."
+        ],
+        "status_after": "Cauliflower boiling, First veggies almost done"
+      },
+      {
+        "step": 8,
+        "time": "1:30",
+        "title": "Veggie Swap, Make Mash",
+        "duration": "15 min active",
+        "do": [
+          "BROCCOLI & BRUSSELS: Remove from OVEN #2. Set aside.",
+          "ZUCCHINI & PEPPERS into OVEN #2 - needs 25 min.",
+          "CAULIFLOWER: Drain VERY well (squeeze out water!). Add to food processor with 4 tbsp butter, 1/4 cup heavy cream, 1 tsp salt, 1/2 tsp garlic powder. Process until smooth."
+        ],
+        "status_after": "Pork braising (1.5 hr in), Zucchini/Peppers roasting, Mash done"
+      },
+      {
+        "step": 9,
+        "time": "1:55",
+        "title": "Zucchini Out, Fresh Prep",
+        "duration": "20 min active",
+        "do": [
+          "ZUCCHINI & PEPPERS: Remove from OVEN #2.",
+          "FRESH PREP:",
+          "- Wash greens and spinach, spin dry, store with paper towel",
+          "- Slice cucumber for snacking",
+          "- Cut remaining celery into sticks",
+          "- Rinse berries, dry gently",
+          "SLAW: Thinly slice 1/2 cabbage head. Toss with 3 tbsp mayo, 1 tbsp red wine vinegar, salt/pepper. Store in container - improves overnight.",
+          "DRESSING: Shake together 3/4 cup olive oil + 1/4 cup red wine vinegar + 1 tsp Dijon + 1 minced garlic + salt/pepper"
+        ],
+        "status_after": "All veggies done, Fresh items prepped"
+      },
+      {
+        "step": 10,
+        "time": "2:15",
+        "title": "Check Beef Stew",
+        "duration": "5 min",
+        "do": [
+          "BEEF STEW: Check tenderness. Beef should be getting tender but not falling apart yet.",
+          "Taste broth, adjust salt if needed.",
+          "Remove bay leaves and thyme stems.",
+          "Continue cooking - about 45 more min."
+        ],
+        "status_after": "Beef stew finishing up"
+      },
+      {
+        "step": 11,
+        "time": "3:00",
+        "title": "Pork Out, Shred Everything",
+        "duration": "30 min active",
+        "do": [
+          "PORK: Remove from OVEN #1. Should be fork-tender after 3 hours. Shred with two forks. Mix with pan juices.",
+          "BEEF STEW: Should be done - meat tender, vegetables soft. Turn to WARM.",
+          "START PORTIONING:",
+          "- Pulled pork into containers (include some juice)",
+          "- Chicken thighs individually or sliced",
+          "- Eggs in pairs",
+          "- Crumble bacon into container",
+          "- Roasted veggies in ~1 cup portions",
+          "- Cauliflower mash into container"
+        ],
+        "status_after": "All proteins shredded, Starting to portion"
+      },
+      {
+        "step": 12,
+        "time": "3:30",
+        "title": "Assemble Grab-and-Go Meals",
+        "duration": "30 min",
+        "do": [
+          "BEEF STEW: Ladle into 6 meal containers (1.5-2 cups each) - these are complete",
+          "PULLED PORK PLATES (4): Each container gets 1.5 cups pork + 1 cup slaw + 1 cup brussels + bacon crumbles",
+          "CHICKEN PLATES (4): Each container gets 2 thighs + 1 cup mash + 1 cup brussels",
+          "PORK POWER BOWLS (3): Each gets 1.5 cups pork + 1 cup mash + 1 cup brussels + 2 eggs",
+          "Label containers with meal name"
+        ],
+        "status_after": "Grab-and-go meals assembled"
+      },
+      {
+        "step": 13,
+        "time": "4:00",
+        "title": "Prep Fresh Add-On Containers & Snacks",
+        "duration": "20 min",
+        "do": [
+          "DEVILED EGGS (12): Halve 6 eggs, mash yolks with 3 tbsp mayo + 1 tsp Dijon + pinch salt. Fill whites, dust with paprika. Store in container.",
+          "SALAD BASES (4): Each container gets 3 cups mixed greens - keep dressing separate",
+          "MEDITERRANEAN MIX (2): Small containers with cucumber + tomatoes + olives + feta - add to chicken or greens",
+          "COBB TOPPINGS (2): Small containers with bacon + egg + cheese - add to salad base + protein",
+          "AVOCADOS: Keep whole, slice day-of (they brown)"
+        ],
+        "status_after": "Fresh containers and snacks ready"
+      },
+      {
+        "step": 14,
+        "time": "4:20",
+        "title": "Organize Fridge & Clean Up",
+        "duration": "25 min",
+        "do": [
+          "TOP SHELF: Grab-and-go meals (beef stew, pork plates, chicken plates, power bowls)",
+          "MIDDLE SHELF: Fresh add-on containers, salad bases, dressing",
+          "BOTTOM: Raw proteins for fresh cooking (salmon, steak), avocados",
+          "DOOR: Dressing, pickles, hot sauce, condiments",
+          "CLEAN UP: Wash pots, pans, sheet pans"
+        ],
+        "status_after": "DONE! 17 grab-and-go meals + deviled eggs + salad kits + fresh cook options"
       }
     ],
+    "timeline_summary": [
+      "12:00 - Pork in Oven #1, Beef stew in slow cooker, Prep chicken",
+      "12:15 - Chicken in Oven #2, Start eggs on stovetop",
+      "12:25 - Eggs rest off heat, Bacon in air fryer",
+      "12:35 - Eggs to ice bath, Bacon done, Add stew veggies",
+      "12:40 - Prep all vegetables while chicken finishes",
+      "1:00 - Chicken out, Broccoli & Brussels in Oven #2",
+      "1:15 - Cauliflower on stovetop, Toss roasting veggies",
+      "1:30 - First veggies out, Zucchini in, Make cauliflower mash",
+      "1:55 - Zucchini out, Prep fresh items, Make slaw & dressing",
+      "2:15 - Check beef stew",
+      "3:00 - Pork out & shred, Beef stew done, Start portioning",
+      "3:30 - Assemble grab-and-go meal containers",
+      "4:00 - Make deviled eggs, prep fresh add-on containers",
+      "4:20 - Organize fridge, Clean up",
+      "4:45 - DONE!"
+    ],
     "results": {
-      "proteins": [
-        "~12 cups pulled pork",
-        "8-10 chicken thighs",
-        "8 beef patties (raw)",
-        "24 hard boiled eggs",
-        "~1 lb cooked bacon"
+      "grab_and_go": [
+        "6 Beef Stew containers",
+        "4 Pulled Pork Plates (pork + slaw + brussels + bacon)",
+        "4 Chicken Plates (thighs + mash + brussels)",
+        "3 Pork Power Bowls (pork + mash + brussels + eggs)"
       ],
-      "vegetables": [
-        "~4 cups roasted broccoli",
-        "~4 cups roasted brussels",
-        "~4 cups roasted zucchini/peppers",
-        "~4 cups cauliflower mash",
-        "Raw veggies for snacking"
+      "fresh_containers": [
+        "12 Deviled eggs (ready to eat)",
+        "4 Salad bases (greens only)",
+        "2 Mediterranean mix (cucumber + tomato + olives + feta)",
+        "2 Cobb toppings (bacon + egg + cheese)",
+        "Dressing jar"
       ],
-      "fresh": [
-        "Greens - keep bagged",
+      "fresh_cook": [
+        "Salmon (1 lb) - cook Wed/Thu",
+        "Steak (1 lb) - cook Fri/Sat",
+        "Remaining eggs - for fresh breakfast or snacks"
+      ],
+      "extras": [
         "Avocados - slice day-of",
-        "Salmon - cook Wed/Thu",
-        "Steak - cook Fri/Sat",
-        "Berries - portion but keep fresh"
+        "Berries + Greek yogurt - for snacks",
+        "Raw veggies - cucumber, celery sticks"
       ]
     }
   },
   "recipes": {
-    "meal1": [
+    "grab_and_go": [
       {
-        "name": "Classic Cobb Salad",
-        "protein": 58, "carbs": 10, "fat": 52, "cal": 680,
-        "components": ["pulled pork or chicken", "hard boiled eggs", "bacon"],
-        "ingredients": [
-          "3 cups mixed greens",
-          "1.5 cups pulled pork or shredded chicken",
-          "2 hard boiled eggs, quartered",
-          "3 strips bacon, crumbled",
-          "1/2 avocado, sliced",
-          "1/4 cup cherry tomatoes",
-          "1 oz blue cheese or feta",
-          "2 tbsp olive oil + vinegar"
-        ],
-        "instructions": "Arrange greens in bowl. Top with rows of protein, eggs, bacon, avocado, tomatoes, cheese. Drizzle dressing."
+        "name": "Beef Stew",
+        "prep_type": "grab_and_go",
+        "protein": 45, "carbs": 12, "fat": 35, "cal": 550,
+        "container": "Complete meal - just reheat",
+        "instructions": "Microwave 2-3 min or heat on stovetop until hot."
       },
       {
-        "name": "Pulled Pork Power Bowl",
-        "protein": 52, "carbs": 15, "fat": 55, "cal": 700,
-        "components": ["pulled pork", "cauliflower mash", "roasted brussels", "hard boiled eggs"],
-        "ingredients": [
-          "1.5 cups pulled pork",
-          "1 cup cauliflower mash",
-          "1 cup roasted brussels sprouts",
-          "1/2 avocado",
-          "2 hard boiled eggs, halved",
-          "Hot sauce or chimichurri"
-        ],
-        "instructions": "Warm pulled pork and cauliflower mash. Layer mash in bowl, top with pork, brussels, eggs, avocado. Add sauce."
+        "name": "Pulled Pork Plate",
+        "prep_type": "grab_and_go",
+        "protein": 75, "carbs": 18, "fat": 52, "cal": 820,
+        "container": "Pork + slaw + brussels + bacon",
+        "instructions": "Microwave 2-3 min. Slaw is fine cold or warm. Add pickles, hot sauce."
       },
-      {
-        "name": "Mediterranean Chicken Bowl",
-        "protein": 56, "carbs": 14, "fat": 50, "cal": 670,
-        "components": ["chicken thighs", "hard boiled eggs"],
-        "ingredients": [
-          "2 chicken thighs, sliced",
-          "3 cups mixed greens",
-          "1/2 cup cucumber, diced",
-          "1/4 cup cherry tomatoes",
-          "15 olives",
-          "2 oz feta cheese",
-          "2 tbsp olive oil + lemon juice"
-        ],
-        "instructions": "Slice chicken thighs. Arrange over greens with cucumber, tomatoes, olives, feta. Dress with olive oil and lemon."
-      },
-      {
-        "name": "Asian Pork Bowl",
-        "protein": 54, "carbs": 12, "fat": 52, "cal": 680,
-        "components": ["pulled pork", "roasted broccoli", "hard boiled eggs"],
-        "ingredients": [
-          "1.5 cups pulled pork",
-          "2 cups sauteed bok choy or cabbage",
-          "1 cup roasted broccoli",
-          "2 hard boiled eggs",
-          "1 tbsp sesame oil",
-          "2 tbsp coconut aminos",
-          "Sesame seeds, green onion"
-        ],
-        "instructions": "Warm pork with coconut aminos. Serve over bok choy with broccoli and eggs. Drizzle sesame oil, top with seeds."
-      },
-      {
-        "name": "Bacon & Egg Breakfast Salad",
-        "protein": 48, "carbs": 10, "fat": 58, "cal": 700,
-        "components": ["bacon", "hard boiled eggs"],
-        "ingredients": [
-          "3 cups spinach and arugula",
-          "4 eggs (fry fresh or use hard boiled)",
-          "4 strips bacon, crumbled",
-          "1/2 avocado",
-          "1/4 cup cherry tomatoes",
-          "2 tbsp olive oil",
-          "Hot sauce"
-        ],
-        "instructions": "Warm greens slightly with hot bacon fat. Top with eggs, bacon, avocado, tomatoes. Drizzle oil, add hot sauce."
-      },
-      {
-        "name": "Taco Salad (No Shell)",
-        "protein": 55, "carbs": 14, "fat": 54, "cal": 710,
-        "components": ["ground beef or pulled pork"],
-        "ingredients": [
-          "3 cups romaine, chopped",
-          "8 oz ground beef with taco seasoning (or pulled pork)",
-          "1/2 avocado or 1/4 cup guac",
-          "1/4 cup salsa",
-          "2 tbsp sour cream",
-          "1 oz cheddar, shredded",
-          "Jalapenos, cilantro"
-        ],
-        "instructions": "Cook beef patty, crumble with cumin and chili powder (or use pulled pork). Serve over romaine with toppings."
-      }
-    ],
-    "meal2": [
       {
         "name": "Chicken Thigh Plate",
+        "prep_type": "grab_and_go",
         "protein": 84, "carbs": 16, "fat": 52, "cal": 830,
-        "components": ["chicken thighs", "roasted brussels", "cauliflower mash"],
+        "container": "2 thighs + mash + brussels",
+        "instructions": "Microwave 2-3 min, or reheat chicken in 400°F oven 10 min to re-crisp skin. Add butter to mash."
+      },
+      {
+        "name": "Pork Power Bowl",
+        "prep_type": "grab_and_go",
+        "protein": 52, "carbs": 15, "fat": 55, "cal": 700,
+        "container": "Pork + mash + brussels + 2 eggs",
+        "instructions": "Microwave 2-3 min. Slice avocado fresh, add hot sauce."
+      }
+    ],
+    "add_fresh": [
+      {
+        "name": "Cobb Salad",
+        "prep_type": "add_fresh",
+        "protein": 58, "carbs": 10, "fat": 52, "cal": 680,
+        "grab": "Salad base + Cobb toppings container",
+        "add_fresh": ["1/2 avocado", "Leftover protein (pork or chicken)"],
+        "instructions": "Combine salad base with toppings. Add sliced avocado and protein. Drizzle dressing."
+      },
+      {
+        "name": "Mediterranean Chicken Salad",
+        "prep_type": "add_fresh",
+        "protein": 56, "carbs": 14, "fat": 50, "cal": 670,
+        "grab": "Salad base + Mediterranean mix + 1 grab-and-go chicken portion",
+        "add_fresh": ["1/2 avocado (optional)"],
+        "instructions": "Combine greens with Mediterranean mix. Warm chicken or serve cold. Add dressing."
+      },
+      {
+        "name": "Breakfast Salad",
+        "prep_type": "add_fresh",
+        "protein": 48, "carbs": 10, "fat": 58, "cal": 700,
+        "grab": "Salad base + bacon + 2 eggs from fridge",
+        "add_fresh": ["1/2 avocado", "Fry 2 eggs fresh (optional)"],
+        "instructions": "Warm bacon in pan to render fat. Toss greens in warm fat. Top with eggs (fried fresh or hard boiled), avocado. Hot sauce."
+      },
+      {
+        "name": "Beef Stew + Salad",
+        "prep_type": "add_fresh",
+        "protein": 50, "carbs": 16, "fat": 38, "cal": 600,
+        "grab": "Beef stew container + Salad base",
+        "add_fresh": [],
+        "instructions": "Reheat stew. Dress salad. Hearty and satisfying."
+      }
+    ],
+    "cook_fresh": [
+      {
+        "name": "Pan-Seared Salmon",
+        "prep_type": "cook_fresh",
+        "protein": 72, "carbs": 8, "fat": 58, "cal": 850,
+        "cook_time": "15 min",
         "ingredients": [
-          "3 chicken thighs",
-          "1 cup roasted brussels sprouts",
-          "1 cup cauliflower mash",
+          "8 oz salmon fillet",
+          "1 cup roasted broccoli (from fridge)",
+          "2 hard boiled eggs (from fridge)",
           "2 tbsp butter",
-          "Fresh herbs (thyme, rosemary)"
+          "Lemon, dill, capers"
         ],
-        "instructions": "Reheat chicken in 400°F oven 10 min to re-crisp skin. Warm brussels and mash. Plate, add butter to mash."
-      },
-      {
-        "name": "Pulled Pork Dinner",
-        "protein": 75, "carbs": 18, "fat": 52, "cal": 820,
-        "components": ["pulled pork", "roasted brussels", "bacon"],
-        "ingredients": [
-          "2 cups pulled pork",
-          "1 cup coleslaw (cabbage + 2 tbsp mayo + vinegar)",
-          "1 cup roasted brussels sprouts",
-          "3 strips bacon",
-          "Pickles, hot sauce"
-        ],
-        "instructions": "Warm pulled pork. Make quick slaw with shredded cabbage, mayo, splash of vinegar. Plate with brussels, bacon, pickles."
-      },
-      {
-        "name": "Double Burger Plate",
-        "protein": 78, "carbs": 18, "fat": 62, "cal": 900,
-        "components": ["beef patties", "roasted zucchini"],
-        "ingredients": [
-          "2 beef patties",
-          "2 slices cheese",
-          "Lettuce wrap or bed of greens",
-          "Tomato, pickles, onion",
-          "2 tbsp mayo or special sauce",
-          "1 cup roasted zucchini"
-        ],
-        "instructions": "Cook patties 4 min per side in cast iron. Add cheese last minute. Serve on greens with toppings and roasted zucchini."
-      },
-      {
-        "name": "Salmon with Asparagus",
-        "protein": 72, "carbs": 12, "fat": 58, "cal": 850,
-        "components": ["hard boiled eggs"],
-        "ingredients": [
-          "8 oz salmon fillet (fresh cook)",
-          "1 bunch asparagus",
-          "2 tbsp butter",
-          "2 tbsp olive oil",
-          "Lemon, dill, capers",
-          "2 hard boiled eggs"
-        ],
-        "instructions": "Season salmon, pan sear skin-down 4 min, flip 3 min. Roast asparagus with oil. Plate with butter, lemon, capers, eggs."
+        "instructions": "Season salmon with salt/pepper. Heat oil in pan over medium-high. Sear skin-down 4 min, flip, cook 3 min more. Warm broccoli in microwave. Plate salmon with broccoli, eggs, butter, lemon, capers."
       },
       {
         "name": "Steak Dinner",
+        "prep_type": "cook_fresh",
         "protein": 75, "carbs": 14, "fat": 55, "cal": 840,
-        "components": ["roasted broccoli"],
+        "cook_time": "20 min",
         "ingredients": [
-          "10 oz ribeye or strip (fresh cook)",
-          "1 cup roasted broccoli",
-          "1 cup sauteed spinach",
+          "10 oz ribeye or strip steak",
+          "1 cup roasted broccoli (from fridge)",
+          "2 cups fresh spinach",
           "2 tbsp butter",
           "Salt, pepper, garlic"
         ],
-        "instructions": "Bring steak to room temp. Sear in cast iron 4 min per side. Rest 5 min, top with butter. Serve with broccoli and spinach."
+        "instructions": "Let steak come to room temp (15 min). Season heavily with salt/pepper. Heat cast iron until smoking. Sear 4 min per side for medium-rare. Rest 5 min, top with butter. Sautee spinach in steak pan drippings. Warm broccoli. Plate."
       },
       {
         "name": "Bacon-Wrapped Chicken",
+        "prep_type": "cook_fresh",
         "protein": 82, "carbs": 10, "fat": 55, "cal": 850,
-        "components": ["chicken thighs", "bacon", "roasted broccoli"],
+        "cook_time": "40 min",
         "ingredients": [
-          "2 chicken thighs",
-          "4 strips bacon",
-          "1 cup roasted broccoli",
-          "1 cup sauteed spinach",
+          "2 raw chicken thighs (reserve 2 from Sunday)",
+          "4 strips raw bacon",
+          "1 cup roasted broccoli (from fridge)",
           "Ranch for dipping"
         ],
-        "instructions": "Wrap each thigh with 2 strips raw bacon. Bake 400°F 35-40 min until bacon crispy. Serve with veggies and ranch."
+        "instructions": "Wrap each thigh with 2 strips bacon. Bake at 400°F for 35-40 min until bacon is crispy and chicken reaches 175°F. Warm broccoli. Serve with ranch."
       }
     ],
     "snacks": [
       {
-        "name": "Deviled Eggs (6 halves)",
+        "name": "Deviled Eggs",
         "protein": 18, "carbs": 2, "fat": 18, "cal": 230,
-        "components": ["hard boiled eggs"],
         "ingredients": ["3 hard boiled eggs", "2 tbsp mayo", "1 tsp Dijon", "Paprika"],
         "instructions": "Halve eggs, mash yolks with mayo and mustard. Fill whites, dust with paprika."
       },
       {
         "name": "Cheese & Veggie Plate",
         "protein": 14, "carbs": 8, "fat": 18, "cal": 240,
-        "components": ["raw veggies"],
-        "ingredients": ["2 oz cheese (cheddar, gouda)", "1 cup raw veggies", "10 olives"],
+        "ingredients": ["2 oz cheese", "Raw veggies from fridge", "10 olives"],
         "instructions": "Slice cheese, arrange with veggies and olives."
       },
       {
         "name": "Greek Yogurt + Berries",
         "protein": 18, "carbs": 18, "fat": 8, "cal": 210,
-        "components": ["berries"],
-        "ingredients": ["3/4 cup full-fat Greek yogurt", "1/2 cup mixed berries", "1 tbsp almonds"],
+        "ingredients": ["3/4 cup Greek yogurt", "1/2 cup berries", "1 tbsp almonds"],
         "instructions": "Top yogurt with berries and nuts."
       },
       {
         "name": "Bacon & Avocado",
         "protein": 12, "carbs": 4, "fat": 24, "cal": 280,
-        "components": ["bacon"],
-        "ingredients": ["4 strips bacon", "1/2 avocado", "Everything bagel seasoning"],
+        "ingredients": ["Bacon from fridge", "1/2 avocado", "Everything bagel seasoning"],
         "instructions": "Top avocado halves with crumbled bacon and seasoning."
+      }
+    ]
+  },
+  "weekly_menu": {
+    "overview": {
+      "meals_per_day": 2,
+      "target_calories": 1800,
+      "target_protein": 150,
+      "snack_note": "Add 1-2 snacks daily as needed to hit targets"
+    },
+    "days": [
+      {
+        "day": "Monday",
+        "meal1": {
+          "name": "Pork Power Bowl",
+          "type": "grab_and_go",
+          "cal": 700, "protein": 52
+        },
+        "meal2": {
+          "name": "Chicken Thigh Plate",
+          "type": "grab_and_go",
+          "cal": 830, "protein": 84
+        },
+        "snack": "Greek Yogurt + Berries",
+        "totals": { "cal": 1740, "protein": 154 }
       },
       {
-        "name": "Deli Roll-Ups",
-        "protein": 18, "carbs": 4, "fat": 16, "cal": 230,
-        "components": [],
-        "ingredients": ["4 oz deli turkey or roast beef", "2 tbsp cream cheese", "Pickle spears"],
-        "instructions": "Spread cream cheese on deli meat, roll around pickle."
+        "day": "Tuesday",
+        "meal1": {
+          "name": "Cobb Salad",
+          "type": "add_fresh",
+          "cal": 680, "protein": 58
+        },
+        "meal2": {
+          "name": "Pulled Pork Plate",
+          "type": "grab_and_go",
+          "cal": 820, "protein": 75
+        },
+        "snack": "Deviled Eggs",
+        "totals": { "cal": 1730, "protein": 151 }
       },
       {
-        "name": "Celery + Almond Butter",
-        "protein": 7, "carbs": 8, "fat": 16, "cal": 190,
-        "components": ["raw veggies"],
-        "ingredients": ["4 celery stalks", "2 tbsp almond butter"],
-        "instructions": "Spread almond butter in celery grooves."
+        "day": "Wednesday",
+        "meal1": {
+          "name": "Beef Stew",
+          "type": "grab_and_go",
+          "cal": 550, "protein": 45
+        },
+        "meal2": {
+          "name": "Pan-Seared Salmon",
+          "type": "cook_fresh",
+          "cal": 850, "protein": 72
+        },
+        "snack": "Cheese & Veggie Plate",
+        "totals": { "cal": 1640, "protein": 131 },
+        "note": "Cook salmon fresh - 15 min"
+      },
+      {
+        "day": "Thursday",
+        "meal1": {
+          "name": "Mediterranean Chicken Salad",
+          "type": "add_fresh",
+          "cal": 670, "protein": 56
+        },
+        "meal2": {
+          "name": "Pulled Pork Plate",
+          "type": "grab_and_go",
+          "cal": 820, "protein": 75
+        },
+        "snack": "Bacon & Avocado",
+        "totals": { "cal": 1770, "protein": 143 }
+      },
+      {
+        "day": "Friday",
+        "meal1": {
+          "name": "Beef Stew + Salad",
+          "type": "add_fresh",
+          "cal": 600, "protein": 50
+        },
+        "meal2": {
+          "name": "Steak Dinner",
+          "type": "cook_fresh",
+          "cal": 840, "protein": 75
+        },
+        "snack": "Deviled Eggs",
+        "totals": { "cal": 1670, "protein": 143 },
+        "note": "Cook steak fresh - 20 min"
+      },
+      {
+        "day": "Saturday",
+        "meal1": {
+          "name": "Breakfast Salad",
+          "type": "add_fresh",
+          "cal": 700, "protein": 48
+        },
+        "meal2": {
+          "name": "Chicken Thigh Plate",
+          "type": "grab_and_go",
+          "cal": 830, "protein": 84
+        },
+        "snack": "Greek Yogurt + Berries",
+        "totals": { "cal": 1740, "protein": 150 }
+      },
+      {
+        "day": "Sunday",
+        "meal1": {
+          "name": "Beef Stew",
+          "type": "grab_and_go",
+          "cal": 550, "protein": 45
+        },
+        "meal2": {
+          "name": "Bacon-Wrapped Chicken",
+          "type": "cook_fresh",
+          "cal": 850, "protein": 82
+        },
+        "snack": "Cheese & Veggie Plate",
+        "totals": { "cal": 1640, "protein": 141 },
+        "note": "Prep day - cook bacon chicken while prepping next week"
       }
     ]
   }
