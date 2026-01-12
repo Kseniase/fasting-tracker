@@ -1065,32 +1065,193 @@
             color: var(--text-dim);
         }
 
-        /* Infographic Tabs */
-        .infographic-tab {
-            padding: 8px 16px;
-            border: 1px solid var(--border);
-            background: var(--surface-2);
-            color: var(--text-dim);
-            border-radius: 6px;
+        /* Daily Infographic Thumbnails */
+        .log-infographic {
+            margin-top: 10px;
             cursor: pointer;
-            font-size: 13px;
-            font-weight: 500;
             transition: all 0.2s;
         }
 
-        .infographic-tab:hover {
-            background: var(--surface);
+        .log-infographic img {
+            width: 100%;
+            max-width: 280px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+        }
+
+        .log-infographic img:hover {
+            border-color: var(--blue);
+            transform: scale(1.02);
+        }
+
+        .log-infographic-label {
+            font-size: 11px;
+            color: var(--text-dim);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .log-infographic-label::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: var(--cyan);
+            border-radius: 2px;
+        }
+
+        /* Infographic Modal */
+        .infographic-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .infographic-modal.active {
+            display: flex;
+        }
+
+        .infographic-modal img {
+            max-width: 95%;
+            max-height: 95vh;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .infographic-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 36px;
+            color: var(--text);
+            cursor: pointer;
+            background: none;
+            border: none;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        .infographic-modal-close:hover {
+            opacity: 1;
+        }
+
+        /* Research Content Styling */
+        .research-content {
+            background: var(--surface-2);
+            border-radius: 8px;
+            padding: 24px;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        .research-content h1 {
+            font-size: 26px;
+            color: var(--blue);
+            margin-bottom: 8px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .research-content h2 {
+            font-size: 20px;
+            color: var(--text);
+            margin-top: 28px;
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .research-content h3 {
+            font-size: 17px;
+            color: var(--cyan);
+            margin-top: 22px;
+            margin-bottom: 10px;
+        }
+
+        .research-content p {
+            margin-bottom: 12px;
             color: var(--text);
         }
 
-        .infographic-tab.active {
-            background: var(--blue);
-            color: var(--bg);
-            border-color: var(--blue);
+        .research-content ul, .research-content ol {
+            margin-bottom: 12px;
+            padding-left: 24px;
         }
 
-        .infographic-container img {
-            transition: opacity 0.3s ease;
+        .research-content li {
+            margin-bottom: 6px;
+        }
+
+        .research-content a {
+            color: var(--blue);
+            text-decoration: none;
+        }
+
+        .research-content a:hover {
+            text-decoration: underline;
+        }
+
+        .research-content strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .research-content em {
+            color: var(--text-dim);
+        }
+
+        .research-content blockquote {
+            border-left: 3px solid var(--purple);
+            padding-left: 16px;
+            margin: 16px 0;
+            color: var(--text-dim);
+            font-style: italic;
+        }
+
+        .research-content code {
+            background: var(--bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+        }
+
+        .research-content hr {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 24px 0;
+        }
+
+        .research-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+        }
+
+        .research-content th, .research-content td {
+            padding: 8px 12px;
+            border: 1px solid var(--border);
+            text-align: left;
+        }
+
+        .research-content th {
+            background: var(--bg);
+            font-weight: 600;
+        }
+
+        #toggleResearch:hover {
+            background: var(--surface) !important;
         }
 
         /* Scrollbar */
@@ -1127,7 +1288,9 @@
 
         <nav>
             <a href="index.html" class="active">Fasting Tracker</a>
-            <a href="meal-plan.html">Meal Prep Guide</a>
+            <a href="fasting-info.html">Fasting Information</a>
+            <a href="meal-prep.html">Meal Prep</a>
+            <a href="menu.html">Menu</a>
         </nav>
 
         <div class="progress-container">
@@ -1222,27 +1385,12 @@
             </div>
         </div>
 
-        <!-- Infographics Section -->
-        <div class="infographics-section" style="margin-top: 24px;">
-            <div class="card">
-                <div class="card-header">
-                    <span class="card-title">Reference Guides</span>
-                    <span class="card-badge">INFOGRAPHICS</span>
-                </div>
-                <div class="infographic-tabs" style="display: flex; gap: 8px; margin-bottom: 16px;">
-                    <button class="infographic-tab active" data-tab="mental" onclick="showInfographic('mental')">Mental Journey</button>
-                    <button class="infographic-tab" data-tab="metabolic" onclick="showInfographic('metabolic')">Metabolic Changes</button>
-                    <button class="infographic-tab" data-tab="refeed" onclick="showInfographic('refeed')">Refeed Protocol</button>
-                    <button class="infographic-tab" data-tab="meals" onclick="showInfographic('meals')">7-Day Meal Plan</button>
-                </div>
-                <div class="infographic-container">
-                    <img id="infographic-mental" src="keto-mental-journey-infographic.png" alt="Mental Journey of Ketosis" style="width: 100%; border-radius: 8px; display: block;">
-                    <img id="infographic-metabolic" src="metabolic-changes-infographic.png" alt="Metabolic Changes During Fasting" style="width: 100%; border-radius: 8px; display: none;">
-                    <img id="infographic-refeed" src="fast-refeed-infographic.png" alt="Fast-Refeed-Fast Cycle" style="width: 100%; border-radius: 8px; display: none;">
-                    <img id="infographic-meals" src="refeed-meal-plan-infographic.png" alt="7-Day Refeed Meal Plan" style="width: 100%; border-radius: 8px; display: none;">
-                </div>
-            </div>
+        <!-- Infographic Modal -->
+        <div class="infographic-modal" id="infographicModal" onclick="closeInfographicModal(event)">
+            <button class="infographic-modal-close" onclick="closeInfographicModal()">&times;</button>
+            <img id="infographicModalImg" src="" alt="Daily Infographic">
         </div>
+
     </div>
 
     <script>
@@ -1994,7 +2142,23 @@
             const logs = [...data.log].reverse();
             let html = '';
 
+            // Track which days already have infographics shown
+            const daysWithInfographic = new Set();
+
             logs.forEach(entry => {
+                // Check if this is an observation entry and we haven't shown infographic for this day yet
+                let infographicHtml = '';
+                if (entry.type === 'observation' && !daysWithInfographic.has(entry.day)) {
+                    const imgPath = `day${entry.day}-update.png`;
+                    infographicHtml = `
+                        <div class="log-infographic" onclick="openInfographicModal('${imgPath}')">
+                            <div class="log-infographic-label">Daily Infographic (click to expand)</div>
+                            <img src="${imgPath}" alt="Day ${entry.day} Infographic" onerror="this.parentElement.style.display='none'">
+                        </div>
+                    `;
+                    daysWithInfographic.add(entry.day);
+                }
+
                 html += `
                     <div class="log-entry">
                         <div style="display: flex; flex-direction: column; gap: 4px;">
@@ -2004,6 +2168,7 @@
                         <div style="flex: 1;">
                             <span class="log-type ${entry.type}">${entry.type}</span>
                             <div class="log-message" style="margin-top: 6px;">${entry.message}</div>
+                            ${infographicHtml}
                         </div>
                     </div>
                 `;
@@ -2011,6 +2176,29 @@
 
             document.getElementById('logEntries').innerHTML = html;
         }
+
+        function openInfographicModal(imgPath) {
+            const modal = document.getElementById('infographicModal');
+            const img = document.getElementById('infographicModalImg');
+            img.src = imgPath;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeInfographicModal(event) {
+            // Only close if clicking outside the image or on close button
+            if (event && event.target.tagName === 'IMG') return;
+            const modal = document.getElementById('infographicModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeInfographicModal();
+            }
+        });
 
         function renderTimeline(currentDay) {
             let html = '';
@@ -2103,21 +2291,6 @@
         // Auto-refresh every 30 seconds
         setInterval(loadData, 30000);
 
-        // Infographic tab switching
-        function showInfographic(tab) {
-            // Hide all infographics
-            document.getElementById('infographic-mental').style.display = 'none';
-            document.getElementById('infographic-metabolic').style.display = 'none';
-            document.getElementById('infographic-refeed').style.display = 'none';
-            document.getElementById('infographic-meals').style.display = 'none';
-
-            // Remove active class from all tabs
-            document.querySelectorAll('.infographic-tab').forEach(t => t.classList.remove('active'));
-
-            // Show selected infographic and activate tab
-            document.getElementById('infographic-' + tab).style.display = 'block';
-            document.querySelector('.infographic-tab[data-tab="' + tab + '"]').classList.add('active');
-        }
     </script>
 </body>
 </html>

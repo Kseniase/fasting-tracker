@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fasting Information</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0d1117;
+            --surface: #161b22;
+            --surface-2: #1c2128;
+            --border: #30363d;
+            --text: #e6edf3;
+            --text-dim: #7d8590;
+            --blue: #58a6ff;
+            --green: #3fb950;
+            --red: #f85149;
+            --orange: #d29922;
+            --purple: #a371f7;
+            --cyan: #39c5cf;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            min-height: 100vh;
+            padding: 24px;
+        }
+
+        .dashboard {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-left h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .header-left p {
+            color: var(--text-dim);
+            font-size: 14px;
+        }
+
+        nav {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        nav a {
+            padding: 8px 16px;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        nav a:hover {
+            background: var(--surface);
+            color: var(--text);
+        }
+
+        nav a.active {
+            background: var(--blue);
+            color: var(--bg);
+            border-color: var(--blue);
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .card-badge {
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            background: rgba(88, 166, 255, 0.1);
+            color: var(--blue);
+        }
+
+        .infographic-tab {
+            padding: 10px 20px;
+            border: 1px solid var(--border);
+            background: var(--surface-2);
+            color: var(--text-dim);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .infographic-tab:hover {
+            background: var(--surface);
+            color: var(--text);
+        }
+
+        .infographic-tab.active {
+            background: var(--blue);
+            color: var(--bg);
+            border-color: var(--blue);
+        }
+
+        .infographic-container img {
+            transition: opacity 0.3s ease;
+        }
+
+        /* Research Content Styling */
+        .research-content {
+            background: var(--surface-2);
+            border-radius: 8px;
+            padding: 32px;
+            line-height: 1.8;
+            font-size: 16px;
+            margin-top: 24px;
+        }
+
+        .research-content h1 {
+            font-size: 26px;
+            color: var(--blue);
+            margin-bottom: 8px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .research-content h2 {
+            font-size: 20px;
+            color: var(--text);
+            margin-top: 28px;
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .research-content h3 {
+            font-size: 17px;
+            color: var(--cyan);
+            margin-top: 22px;
+            margin-bottom: 10px;
+        }
+
+        .research-content p {
+            margin-bottom: 14px;
+            color: var(--text);
+        }
+
+        .research-content ul, .research-content ol {
+            margin-bottom: 14px;
+            padding-left: 24px;
+        }
+
+        .research-content li {
+            margin-bottom: 8px;
+        }
+
+        .research-content a {
+            color: var(--blue);
+            text-decoration: none;
+        }
+
+        .research-content a:hover {
+            text-decoration: underline;
+        }
+
+        .research-content strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .research-content em {
+            color: var(--text-dim);
+        }
+
+        .research-content blockquote {
+            border-left: 3px solid var(--purple);
+            padding-left: 16px;
+            margin: 16px 0;
+            color: var(--text-dim);
+            font-style: italic;
+        }
+
+        .research-content code {
+            background: var(--bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+        }
+
+        .research-content hr {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 28px 0;
+        }
+
+        .research-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+        }
+
+        .research-content th, .research-content td {
+            padding: 10px 14px;
+            border: 1px solid var(--border);
+            text-align: left;
+        }
+
+        .research-content th {
+            background: var(--bg);
+            font-weight: 600;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--surface);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-dim);
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <header class="header">
+            <div class="header-left">
+                <h1>Fasting Information</h1>
+                <p>Scientific research and guides for extended fasting</p>
+            </div>
+        </header>
+
+        <nav>
+            <a href="index.html">Fasting Tracker</a>
+            <a href="fasting-info.html" class="active">Fasting Information</a>
+            <a href="meal-prep.html">Meal Prep</a>
+            <a href="menu.html">Menu</a>
+        </nav>
+
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">Reference Guides</span>
+                <span class="card-badge">INFOGRAPHICS + RESEARCH</span>
+            </div>
+            <div class="infographic-tabs" style="display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap;">
+                <button class="infographic-tab active" data-tab="mental" onclick="showInfographic('mental')">Mental Journey</button>
+                <button class="infographic-tab" data-tab="metabolic" onclick="showInfographic('metabolic')">Metabolic Changes</button>
+                <button class="infographic-tab" data-tab="refeed" onclick="showInfographic('refeed')">Refeed Protocol</button>
+                <button class="infographic-tab" data-tab="meals" onclick="showInfographic('meals')">7-Day Meal Plan</button>
+            </div>
+            <div class="infographic-container">
+                <img id="infographic-mental" src="keto-mental-journey-infographic.png" alt="Mental Journey of Ketosis" style="width: 100%; border-radius: 8px; display: block;">
+                <img id="infographic-metabolic" src="metabolic-changes-infographic.png" alt="Metabolic Changes During Fasting" style="width: 100%; border-radius: 8px; display: none;">
+                <img id="infographic-refeed" src="fast-refeed-infographic.png" alt="Fast-Refeed-Fast Cycle" style="width: 100%; border-radius: 8px; display: none;">
+                <img id="infographic-meals" src="refeed-meal-plan-infographic.png" alt="7-Day Refeed Meal Plan" style="width: 100%; border-radius: 8px; display: none;">
+            </div>
+
+            <!-- Research Essays Section -->
+            <div id="research-mental" class="research-content" style="display: block;"></div>
+            <div id="research-metabolic" class="research-content" style="display: none;"></div>
+            <div id="research-refeed" class="research-content" style="display: none;"></div>
+            <div id="research-meals" class="research-content" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script>
+        // Research report files mapping
+        const researchFiles = {
+            mental: 'reports/mental-journey-research.md',
+            metabolic: 'reports/metabolic-changes-research.md',
+            refeed: 'reports/fast-refeed-cycle-research.md',
+            meals: 'reports/refeed-meal-plan-research.md'
+        };
+
+        let researchLoaded = {
+            mental: false,
+            metabolic: false,
+            refeed: false,
+            meals: false
+        };
+
+        let currentTab = 'mental';
+
+        // Simple markdown to HTML converter
+        function markdownToHtml(md) {
+            let html = md
+                // Headers
+                .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+                .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+                .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+                // Bold
+                .replace(/\*\*([^*]+)\*\*/gim, '<strong>$1</strong>')
+                // Italic
+                .replace(/\*([^*]+)\*/gim, '<em>$1</em>')
+                // Links
+                .replace(/\[([^\]]+)\]\(([^)]+)\)/gim, '<a href="$2" target="_blank">$1</a>')
+                // Horizontal rules
+                .replace(/^---$/gim, '<hr>')
+                // Line breaks
+                .replace(/\n\n/g, '</p><p>')
+                // Lists (simple)
+                .replace(/^\- (.*$)/gim, '<li>$1</li>')
+                .replace(/^[0-9]+\. (.*$)/gim, '<li>$1</li>');
+
+            // Wrap in paragraphs
+            html = '<p>' + html + '</p>';
+
+            // Clean up list items (wrap consecutive <li> in <ul>)
+            html = html.replace(/(<li>.*<\/li>\n?)+/g, function(match) {
+                return '<ul>' + match + '</ul>';
+            });
+
+            // Clean up empty paragraphs
+            html = html.replace(/<p><\/p>/g, '');
+            html = html.replace(/<p>\s*<h/g, '<h');
+            html = html.replace(/<\/h[1-6]>\s*<\/p>/g, function(match) {
+                return match.replace('</p>', '');
+            });
+            html = html.replace(/<p>\s*<hr>\s*<\/p>/g, '<hr>');
+            html = html.replace(/<p>\s*<ul>/g, '<ul>');
+            html = html.replace(/<\/ul>\s*<\/p>/g, '</ul>');
+
+            return html;
+        }
+
+        // Load research content for a tab
+        async function loadResearch(tab) {
+            if (researchLoaded[tab]) return;
+
+            try {
+                const response = await fetch(researchFiles[tab]);
+                if (response.ok) {
+                    const markdown = await response.text();
+                    const html = markdownToHtml(markdown);
+                    document.getElementById('research-' + tab).innerHTML = html;
+                    researchLoaded[tab] = true;
+                } else {
+                    document.getElementById('research-' + tab).innerHTML = '<p style="color: var(--text-dim);">Research report not available.</p>';
+                }
+            } catch (error) {
+                console.error('Error loading research:', error);
+                document.getElementById('research-' + tab).innerHTML = '<p style="color: var(--text-dim);">Error loading research report.</p>';
+            }
+        }
+
+        // Infographic tab switching
+        function showInfographic(tab) {
+            currentTab = tab;
+
+            // Hide all infographics
+            document.getElementById('infographic-mental').style.display = 'none';
+            document.getElementById('infographic-metabolic').style.display = 'none';
+            document.getElementById('infographic-refeed').style.display = 'none';
+            document.getElementById('infographic-meals').style.display = 'none';
+
+            // Hide all research content
+            document.getElementById('research-mental').style.display = 'none';
+            document.getElementById('research-metabolic').style.display = 'none';
+            document.getElementById('research-refeed').style.display = 'none';
+            document.getElementById('research-meals').style.display = 'none';
+
+            // Remove active class from all tabs
+            document.querySelectorAll('.infographic-tab').forEach(t => t.classList.remove('active'));
+
+            // Show selected infographic and activate tab
+            document.getElementById('infographic-' + tab).style.display = 'block';
+            document.getElementById('research-' + tab).style.display = 'block';
+            document.querySelector('.infographic-tab[data-tab="' + tab + '"]').classList.add('active');
+
+            // Load research
+            loadResearch(tab);
+        }
+
+        // Load initial research
+        loadResearch('mental');
+    </script>
+</body>
+</html>
