@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refeed Plan - Fast Tracker</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0d1117;
+            --surface: #161b22;
+            --surface-2: #1c2128;
+            --border: #30363d;
+            --text: #e6edf3;
+            --text-dim: #7d8590;
+            --blue: #58a6ff;
+            --green: #3fb950;
+            --red: #f85149;
+            --orange: #d29922;
+            --purple: #a371f7;
+            --cyan: #39c5cf;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            min-height: 100vh;
+            padding: 24px;
+        }
+
+        .dashboard {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-left h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .header-left p {
+            color: var(--text-dim);
+            font-size: 14px;
+        }
+
+        .header-right {
+            text-align: right;
+        }
+
+        .day-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--green);
+            color: var(--bg);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .phase-badge {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            color: var(--text-dim);
+            margin-top: 8px;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            padding: 8px 16px;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        nav a:hover {
+            background: var(--surface);
+            color: var(--text);
+        }
+
+        nav a.active {
+            background: var(--green);
+            color: var(--bg);
+            border-color: var(--green);
+        }
+
+        /* Cards */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .card-badge {
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            background: rgba(63, 185, 80, 0.1);
+            color: var(--green);
+        }
+
+        /* Progress Section */
+        .refeed-progress {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .progress-day {
+            background: var(--surface-2);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            padding: 12px 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .progress-day:hover {
+            border-color: var(--green);
+        }
+
+        .progress-day.current {
+            background: rgba(63, 185, 80, 0.15);
+            border-color: var(--green);
+        }
+
+        .progress-day.completed {
+            background: var(--surface);
+            border-color: var(--green);
+        }
+
+        .progress-day.completed::after {
+            content: '';
+            display: block;
+            width: 16px;
+            height: 16px;
+            margin: 4px auto 0;
+            background: var(--green);
+            border-radius: 50%;
+        }
+
+        .progress-day-num {
+            font-family: 'Space Mono', monospace;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .progress-day-date {
+            font-size: 10px;
+            color: var(--text-dim);
+            margin-top: 2px;
+        }
+
+        .progress-day-phase {
+            font-size: 9px;
+            color: var(--cyan);
+            margin-top: 4px;
+            line-height: 1.2;
+        }
+
+        /* Today's Schedule */
+        .today-section {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .meal-schedule {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .meal-card {
+            background: var(--surface-2);
+            border-radius: 8px;
+            padding: 16px;
+            display: grid;
+            grid-template-columns: 80px 1fr auto;
+            gap: 16px;
+            align-items: start;
+            border-left: 4px solid var(--border);
+            transition: all 0.2s;
+        }
+
+        .meal-card.current {
+            border-left-color: var(--green);
+            background: rgba(63, 185, 80, 0.05);
+        }
+
+        .meal-card.completed {
+            opacity: 0.6;
+            border-left-color: var(--green);
+        }
+
+        .meal-time {
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--cyan);
+        }
+
+        .meal-content h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .meal-items {
+            list-style: none;
+            margin-bottom: 8px;
+        }
+
+        .meal-items li {
+            font-size: 13px;
+            color: var(--text);
+            padding: 2px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .meal-items li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--green);
+            border-radius: 50%;
+        }
+
+        .meal-notes {
+            font-size: 12px;
+            color: var(--text-dim);
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+        .meal-macros {
+            text-align: right;
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+        }
+
+        .meal-macros .calories {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--green);
+        }
+
+        .meal-macros .protein {
+            color: var(--blue);
+        }
+
+        /* Sidebar */
+        .sidebar-card {
+            background: var(--surface-2);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .sidebar-title {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-dim);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .target-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .target-row:last-child {
+            border-bottom: none;
+        }
+
+        .target-label {
+            font-size: 13px;
+            color: var(--text-dim);
+        }
+
+        .target-value {
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .target-value.calories { color: var(--green); }
+        .target-value.protein { color: var(--blue); }
+        .target-value.carbs { color: var(--orange); }
+
+        /* Warning Signs */
+        .warning-section {
+            background: rgba(248, 81, 73, 0.1);
+            border: 1px solid rgba(248, 81, 73, 0.3);
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .warning-title {
+            color: var(--red);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .warning-list {
+            list-style: none;
+        }
+
+        .warning-list li {
+            font-size: 12px;
+            color: var(--text);
+            padding: 4px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .warning-list li::before {
+            content: '!';
+            width: 16px;
+            height: 16px;
+            background: var(--red);
+            color: var(--bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        /* Supplements */
+        .supplement-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .supplement-item:last-child {
+            border-bottom: none;
+        }
+
+        .supplement-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--surface);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .supplement-name {
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .supplement-dose {
+            font-size: 11px;
+            color: var(--text-dim);
+        }
+
+        /* Day Details */
+        .day-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .day-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.2s;
+        }
+
+        .day-card:hover {
+            border-color: var(--green);
+        }
+
+        .day-card.today {
+            border-color: var(--green);
+            background: linear-gradient(135deg, rgba(63, 185, 80, 0.1) 0%, var(--surface) 100%);
+        }
+
+        .day-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .day-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .day-num {
+            font-family: 'Space Mono', monospace;
+            font-size: 24px;
+            font-weight: 700;
+            width: 48px;
+            height: 48px;
+            background: var(--surface-2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .day-card.today .day-num {
+            background: var(--green);
+            color: var(--bg);
+        }
+
+        .day-info h3 {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .day-info .date {
+            font-size: 12px;
+            color: var(--text-dim);
+        }
+
+        .day-phase {
+            font-size: 11px;
+            padding: 4px 10px;
+            background: rgba(57, 197, 207, 0.15);
+            color: var(--cyan);
+            border-radius: 12px;
+        }
+
+        .day-targets {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .day-target {
+            background: var(--surface-2);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .day-target-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            letter-spacing: 0.5px;
+        }
+
+        .day-target-value {
+            font-family: 'Space Mono', monospace;
+            font-size: 18px;
+            font-weight: 700;
+            margin-top: 4px;
+        }
+
+        .day-meals {
+            font-size: 13px;
+        }
+
+        .day-meal-time {
+            display: flex;
+            gap: 12px;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .day-meal-time:last-child {
+            border-bottom: none;
+        }
+
+        .day-meal-time .time {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            color: var(--cyan);
+            width: 70px;
+            flex-shrink: 0;
+        }
+
+        .day-meal-time .food {
+            color: var(--text);
+        }
+
+        /* Shopping List */
+        .shopping-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .shopping-category {
+            background: var(--surface-2);
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .shopping-category h4 {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--cyan);
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .shopping-category ul {
+            list-style: none;
+        }
+
+        .shopping-category li {
+            font-size: 13px;
+            padding: 4px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .shopping-category li::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border: 2px solid var(--border);
+            border-radius: 2px;
+        }
+
+        /* Rules section */
+        .rules-list {
+            display: grid;
+            gap: 8px;
+        }
+
+        .rule-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 13px;
+            padding: 8px;
+            background: var(--surface-2);
+            border-radius: 6px;
+        }
+
+        .rule-item::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--green);
+            border-radius: 50%;
+            margin-top: 5px;
+            flex-shrink: 0;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--surface);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-dim);
+        }
+
+        @media (max-width: 1200px) {
+            .refeed-progress {
+                grid-template-columns: repeat(5, 1fr);
+            }
+            .today-section {
+                grid-template-columns: 1fr;
+            }
+            .day-grid {
+                grid-template-columns: 1fr;
+            }
+            .shopping-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .refeed-progress {
+                grid-template-columns: repeat(5, 1fr);
+            }
+            .shopping-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <header class="header">
+            <div class="header-left">
+                <h1>Refeed Plan</h1>
+                <p>10-Day Refeeding Protocol • Jan 12–21, 2026</p>
+            </div>
+            <div class="header-right">
+                <div class="day-badge" id="dayBadge">Refeed Day 1</div>
+                <div class="phase-badge" id="phaseBadge">PHASE: INITIAL REFEEDING</div>
+            </div>
+        </header>
+
+        <nav>
+            <a href="index.html">Fasting Tracker</a>
+            <a href="fasting-info.html">Fasting Information</a>
+            <a href="refeed.html" class="active">Refeed Plan</a>
+            <a href="meal-prep.html">Meal Prep</a>
+            <a href="menu.html">Menu</a>
+            <a href="unplanned-meals.html">Unplanned Meals</a>
+        </nav>
+
+        <!-- Progress Timeline -->
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">Refeed Progress</span>
+                <span class="card-badge">10 DAYS</span>
+            </div>
+            <div class="refeed-progress" id="refeedProgress">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+
+        <!-- Today's Schedule -->
+        <div class="today-section">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title" id="todayTitle">Today's Meals</span>
+                    <span class="card-badge" id="todayDate">JAN 12</span>
+                </div>
+                <div class="meal-schedule" id="mealSchedule">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <div>
+                <!-- Daily Targets -->
+                <div class="card">
+                    <div class="sidebar-card">
+                        <div class="sidebar-title">Daily Targets</div>
+                        <div class="target-row">
+                            <span class="target-label">Calories</span>
+                            <span class="target-value calories" id="targetCalories">500-600</span>
+                        </div>
+                        <div class="target-row">
+                            <span class="target-label">Protein</span>
+                            <span class="target-value protein" id="targetProtein">30g</span>
+                        </div>
+                        <div class="target-row">
+                            <span class="target-label">Carbs</span>
+                            <span class="target-value carbs" id="targetCarbs">&lt;10g</span>
+                        </div>
+                    </div>
+
+                    <!-- Rules -->
+                    <div class="sidebar-card">
+                        <div class="sidebar-title">Today's Rules</div>
+                        <div class="rules-list" id="todayRules">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Supplements -->
+                    <div class="sidebar-card">
+                        <div class="sidebar-title">Supplements</div>
+                        <div id="supplements">
+                            <div class="supplement-item">
+                                <div class="supplement-icon">B1</div>
+                                <div>
+                                    <div class="supplement-name">Thiamine</div>
+                                    <div class="supplement-dose">200mg - 30 min before first meal</div>
+                                </div>
+                            </div>
+                            <div class="supplement-item">
+                                <div class="supplement-icon">Mg</div>
+                                <div>
+                                    <div class="supplement-name">Magnesium Glycinate</div>
+                                    <div class="supplement-dose">400mg - with dinner</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Warning Signs -->
+                    <div class="warning-section">
+                        <div class="warning-title">Warning Signs</div>
+                        <ul class="warning-list" id="warningList">
+                            <li>Rapid heartbeat</li>
+                            <li>Swelling in hands/feet</li>
+                            <li>Confusion or dizziness</li>
+                            <li>Severe stomach pain</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- All Days Overview -->
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">10-Day Plan Overview</span>
+                <span class="card-badge">CLICK TO EXPAND</span>
+            </div>
+            <div class="day-grid" id="dayGrid">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+
+        <!-- Shopping List -->
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">Shopping List (Days 1-5)</span>
+                <span class="card-badge">ESSENTIALS</span>
+            </div>
+            <div class="shopping-grid" id="shoppingGrid">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let refeedData = null;
+
+        async function loadData() {
+            try {
+                const response = await fetch('refeed-plan.json');
+                refeedData = await response.json();
+                renderPage();
+            } catch (error) {
+                console.error('Error loading refeed data:', error);
+            }
+        }
+
+        function getCurrentRefeedDay() {
+            if (!refeedData) return 1;
+            const startDate = new Date(refeedData.refeed_plan.start_date + 'T18:00:00');
+            const now = new Date();
+            const diffTime = now - startDate;
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            return Math.max(1, Math.min(diffDays + 1, 10));
+        }
+
+        function renderPage() {
+            const currentDay = getCurrentRefeedDay();
+            const plan = refeedData.refeed_plan;
+            const dayData = plan.days[currentDay - 1];
+
+            // Update header
+            document.getElementById('dayBadge').textContent = `Refeed Day ${currentDay}`;
+            document.getElementById('phaseBadge').textContent = `PHASE: ${dayData.phase.toUpperCase()}`;
+
+            // Render progress
+            renderProgress(currentDay);
+
+            // Render today's meals
+            renderTodayMeals(dayData, currentDay);
+
+            // Render targets
+            document.getElementById('targetCalories').textContent = dayData.target_calories;
+            document.getElementById('targetProtein').textContent = dayData.target_protein_g + 'g';
+            document.getElementById('targetCarbs').textContent = dayData.target_carbs_g + 'g';
+
+            // Render rules
+            renderRules(dayData.rules);
+
+            // Render all days
+            renderDayGrid(currentDay);
+
+            // Render shopping list
+            renderShoppingList();
+        }
+
+        function renderProgress(currentDay) {
+            const plan = refeedData.refeed_plan;
+            let html = '';
+
+            for (let i = 0; i < 10; i++) {
+                const day = plan.days[i];
+                const dayNum = i + 1;
+                let statusClass = '';
+                if (dayNum < currentDay) statusClass = 'completed';
+                if (dayNum === currentDay) statusClass = 'current';
+
+                // Parse phase to get short version
+                const shortPhase = day.phase.split(' ').slice(0, 2).join(' ');
+
+                html += `
+                    <div class="progress-day ${statusClass}" onclick="scrollToDay(${dayNum})">
+                        <div class="progress-day-num">${dayNum}</div>
+                        <div class="progress-day-date">${formatShortDate(day.date)}</div>
+                        <div class="progress-day-phase">${shortPhase}</div>
+                    </div>
+                `;
+            }
+
+            document.getElementById('refeedProgress').innerHTML = html;
+        }
+
+        function renderTodayMeals(dayData, currentDay) {
+            const now = new Date();
+            const currentHour = now.getHours();
+            const currentMinutes = now.getMinutes();
+
+            document.getElementById('todayTitle').textContent = `Day ${currentDay} Meals - ${dayData.phase}`;
+            document.getElementById('todayDate').textContent = formatShortDate(dayData.date).toUpperCase();
+
+            let html = '';
+            dayData.meals.forEach((meal, idx) => {
+                // Determine if this meal is current or completed
+                let statusClass = '';
+                const mealHour = parseMealHour(meal.time);
+
+                if (mealHour !== null) {
+                    const nextMealHour = idx < dayData.meals.length - 1 ? parseMealHour(dayData.meals[idx + 1].time) : 24;
+                    if (currentHour >= mealHour && currentHour < (nextMealHour || 24)) {
+                        statusClass = 'current';
+                    } else if (currentHour >= (nextMealHour || 24)) {
+                        statusClass = 'completed';
+                    }
+                }
+
+                html += `
+                    <div class="meal-card ${statusClass}">
+                        <div class="meal-time">${meal.time}</div>
+                        <div class="meal-content">
+                            <h4>${meal.meal}</h4>
+                            <ul class="meal-items">
+                                ${meal.items.map(item => `<li>${item}</li>`).join('')}
+                            </ul>
+                            ${meal.notes ? `<div class="meal-notes">${meal.notes}</div>` : ''}
+                        </div>
+                        <div class="meal-macros">
+                            <div class="calories">${meal.calories}</div>
+                            <div>cal</div>
+                            <div class="protein" style="margin-top: 8px;">${meal.protein_g}g</div>
+                            <div>protein</div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Day total
+            html += `
+                <div style="display: flex; justify-content: flex-end; gap: 24px; padding: 16px; background: var(--surface-2); border-radius: 8px; margin-top: 8px;">
+                    <div style="text-align: right;">
+                        <div style="font-size: 11px; color: var(--text-dim); text-transform: uppercase;">Day Total</div>
+                        <div style="font-family: 'Space Mono', monospace; font-size: 18px; font-weight: 700; color: var(--green);">${dayData.day_total.calories}</div>
+                        <div style="font-size: 11px; color: var(--text-dim);">calories</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-size: 11px; color: var(--text-dim); text-transform: uppercase;">Protein</div>
+                        <div style="font-family: 'Space Mono', monospace; font-size: 18px; font-weight: 700; color: var(--blue);">${dayData.day_total.protein_g}</div>
+                        <div style="font-size: 11px; color: var(--text-dim);">grams</div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('mealSchedule').innerHTML = html;
+        }
+
+        function parseMealHour(timeStr) {
+            // Handle various time formats
+            if (timeStr.toLowerCase().includes('before bed')) return 22;
+            if (timeStr.toLowerCase().includes('pre-meal')) return null;
+
+            const match = timeStr.match(/(\d{1,2}):(\d{2})\s*(AM|PM)?/i);
+            if (!match) return null;
+
+            let hour = parseInt(match[1]);
+            const isPM = match[3] && match[3].toUpperCase() === 'PM';
+            const isAM = match[3] && match[3].toUpperCase() === 'AM';
+
+            if (isPM && hour !== 12) hour += 12;
+            if (isAM && hour === 12) hour = 0;
+
+            return hour;
+        }
+
+        function renderRules(rules) {
+            let html = '';
+            rules.forEach(rule => {
+                html += `<div class="rule-item">${rule}</div>`;
+            });
+            document.getElementById('todayRules').innerHTML = html;
+        }
+
+        function renderDayGrid(currentDay) {
+            const plan = refeedData.refeed_plan;
+            let html = '';
+
+            plan.days.forEach((day, idx) => {
+                const dayNum = idx + 1;
+                const isToday = dayNum === currentDay;
+
+                // Summarize meals
+                const mealSummary = day.meals
+                    .filter(m => m.meal !== 'Pre-meal')
+                    .slice(0, 4)
+                    .map(m => `<div class="day-meal-time"><span class="time">${m.time}</span><span class="food">${m.items[0]}</span></div>`)
+                    .join('');
+
+                html += `
+                    <div class="day-card ${isToday ? 'today' : ''}">
+                        <div class="day-header">
+                            <div class="day-title">
+                                <div class="day-num">${dayNum}</div>
+                                <div class="day-info">
+                                    <h3>${day.phase}</h3>
+                                    <div class="date">${formatLongDate(day.date)}</div>
+                                </div>
+                            </div>
+                            <span class="day-phase">${isToday ? 'TODAY' : ''}</span>
+                        </div>
+                        <div class="day-targets">
+                            <div class="day-target">
+                                <div class="day-target-label">Calories</div>
+                                <div class="day-target-value" style="color: var(--green);">${day.target_calories}</div>
+                            </div>
+                            <div class="day-target">
+                                <div class="day-target-label">Protein</div>
+                                <div class="day-target-value" style="color: var(--blue);">${day.target_protein_g}g</div>
+                            </div>
+                            <div class="day-target">
+                                <div class="day-target-label">Carbs</div>
+                                <div class="day-target-value" style="color: var(--orange);">${day.target_carbs_g}g</div>
+                            </div>
+                        </div>
+                        <div class="day-meals">
+                            ${mealSummary}
+                        </div>
+                    </div>
+                `;
+            });
+
+            document.getElementById('dayGrid').innerHTML = html;
+        }
+
+        function renderShoppingList() {
+            const shopping = refeedData.refeed_plan.shopping_list_days_1_5;
+
+            const categories = [
+                { key: 'proteins', title: 'Proteins', items: shopping.proteins },
+                { key: 'vegetables', title: 'Vegetables', items: shopping.vegetables },
+                { key: 'fats', title: 'Fats', items: shopping.fats },
+                { key: 'carbs_day_5_plus', title: 'Carbs (Day 5+)', items: shopping.carbs_day_5_plus }
+            ];
+
+            let html = '';
+            categories.forEach(cat => {
+                html += `
+                    <div class="shopping-category">
+                        <h4>${cat.title}</h4>
+                        <ul>
+                            ${cat.items.map(item => `<li>${item}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            });
+
+            document.getElementById('shoppingGrid').innerHTML = html;
+        }
+
+        function formatShortDate(dateStr) {
+            const [year, month, day] = dateStr.split('-').map(Number);
+            const date = new Date(year, month - 1, day);
+            return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        }
+
+        function formatLongDate(dateStr) {
+            const [year, month, day] = dateStr.split('-').map(Number);
+            const date = new Date(year, month - 1, day);
+            return date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+        }
+
+        function scrollToDay(dayNum) {
+            // Could expand specific day or scroll to it
+            const dayGrid = document.getElementById('dayGrid');
+            dayGrid.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Load data on page load
+        loadData();
+
+        // Auto-refresh every 60 seconds
+        setInterval(loadData, 60000);
+    </script>
+</body>
+</html>

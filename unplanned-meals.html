@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unplanned Meals - Fast Tracker</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0d1117;
+            --surface: #161b22;
+            --surface-2: #1c2128;
+            --border: #30363d;
+            --text: #e6edf3;
+            --text-dim: #7d8590;
+            --blue: #58a6ff;
+            --green: #3fb950;
+            --red: #f85149;
+            --orange: #d29922;
+            --purple: #a371f7;
+            --cyan: #39c5cf;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            min-height: 100vh;
+            padding: 24px;
+        }
+
+        .dashboard {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-left h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .header-left p {
+            color: var(--text-dim);
+            font-size: 14px;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            padding: 8px 16px;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        nav a:hover {
+            background: var(--surface);
+            color: var(--text);
+        }
+
+        nav a.active {
+            background: var(--orange);
+            color: var(--bg);
+            border-color: var(--orange);
+        }
+
+        /* Cards */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .card-badge {
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            background: rgba(210, 153, 34, 0.1);
+            color: var(--orange);
+        }
+
+        /* Restaurant Tabs */
+        .restaurant-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .restaurant-tab {
+            padding: 10px 16px;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-dim);
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .restaurant-tab:hover {
+            background: var(--surface);
+            color: var(--text);
+        }
+
+        .restaurant-tab.active {
+            background: var(--orange);
+            color: var(--bg);
+            border-color: var(--orange);
+        }
+
+        .restaurant-tab .star {
+            color: var(--green);
+            margin-left: 4px;
+        }
+
+        /* Menu Table */
+        .menu-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .menu-table th {
+            text-align: left;
+            padding: 12px 16px;
+            background: var(--surface-2);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-dim);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .menu-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+        }
+
+        .menu-table tr:hover {
+            background: var(--surface-2);
+        }
+
+        .menu-table .item-name {
+            font-weight: 500;
+        }
+
+        .menu-table .how-to-order {
+            font-size: 12px;
+            color: var(--cyan);
+        }
+
+        .menu-table .calories { color: var(--green); font-family: 'Space Mono', monospace; }
+        .menu-table .fat { color: var(--orange); font-family: 'Space Mono', monospace; }
+        .menu-table .protein { color: var(--blue); font-family: 'Space Mono', monospace; }
+        .menu-table .carbs { color: var(--purple); font-family: 'Space Mono', monospace; }
+
+        .low-carb-badge {
+            display: inline-block;
+            padding: 2px 6px;
+            background: rgba(63, 185, 80, 0.15);
+            color: var(--green);
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        /* Restaurant Section */
+        .restaurant-section {
+            display: none;
+        }
+
+        .restaurant-section.active {
+            display: block;
+        }
+
+        .restaurant-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .restaurant-logo {
+            width: 48px;
+            height: 48px;
+            background: var(--surface-2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .restaurant-info h3 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .restaurant-info .tip {
+            font-size: 12px;
+            color: var(--cyan);
+            margin-top: 4px;
+        }
+
+        /* Sauce Guide */
+        .sauce-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .sauce-card {
+            background: var(--surface-2);
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .sauce-card h4 {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sauce-card.good h4 { color: var(--green); }
+        .sauce-card.avoid h4 { color: var(--red); }
+
+        .sauce-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .sauce-item {
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .sauce-card.good .sauce-item {
+            background: rgba(63, 185, 80, 0.1);
+            color: var(--green);
+        }
+
+        .sauce-card.avoid .sauce-item {
+            background: rgba(248, 81, 73, 0.1);
+            color: var(--red);
+        }
+
+        /* Gas Station Grid */
+        .gas-station-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .snack-card {
+            background: var(--surface-2);
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .snack-card h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+
+        .snack-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 13px;
+        }
+
+        .snack-item:last-child {
+            border-bottom: none;
+        }
+
+        .snack-macros {
+            display: flex;
+            gap: 8px;
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+        }
+
+        .snack-macros .p { color: var(--blue); }
+        .snack-macros .c { color: var(--purple); }
+
+        /* Pro Tips */
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .tip-card {
+            background: var(--surface-2);
+            border-radius: 8px;
+            padding: 16px;
+            border-left: 3px solid var(--cyan);
+        }
+
+        .tip-card h4 {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--cyan);
+        }
+
+        .tip-card p {
+            font-size: 13px;
+            line-height: 1.5;
+            color: var(--text);
+        }
+
+        /* Coffee Section */
+        .coffee-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .coffee-shop {
+            background: var(--surface-2);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .coffee-shop h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .coffee-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .coffee-item:last-child {
+            border-bottom: none;
+        }
+
+        .coffee-name {
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .coffee-order {
+            font-size: 11px;
+            color: var(--cyan);
+            margin-top: 2px;
+        }
+
+        .coffee-carbs {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            color: var(--purple);
+        }
+
+        .warning-box {
+            background: rgba(248, 81, 73, 0.1);
+            border: 1px solid rgba(248, 81, 73, 0.3);
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 12px;
+            font-size: 12px;
+            color: var(--red);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--surface);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-dim);
+        }
+
+        @media (max-width: 1000px) {
+            .sauce-grid, .tips-grid, .coffee-grid {
+                grid-template-columns: 1fr;
+            }
+            .gas-station-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .gas-station-grid {
+                grid-template-columns: 1fr;
+            }
+            .menu-table {
+                font-size: 12px;
+            }
+            .menu-table th, .menu-table td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <header class="header">
+            <div class="header-left">
+                <h1>Unplanned Meals</h1>
+                <p>Keto-Friendly Fast Food & Gas Station Guide</p>
+            </div>
+        </header>
+
+        <nav>
+            <a href="index.html">Fasting Tracker</a>
+            <a href="fasting-info.html">Fasting Information</a>
+            <a href="refeed.html">Refeed Plan</a>
+            <a href="meal-prep.html">Meal Prep</a>
+            <a href="menu.html">Menu</a>
+            <a href="unplanned-meals.html" class="active">Unplanned Meals</a>
+        </nav>
+
+        <!-- Pro Tips -->
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">Quick Reference</span>
+                <span class="card-badge">KETO ORDERING</span>
+            </div>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h4>Magic Words</h4>
+                    <p>"No bun" / "Protein style" / "In a bowl" / "Lettuce wrap" - these work at most restaurants</p>
+                </div>
+                <div class="tip-card">
+                    <h4>Always Skip</h4>
+                    <p>Fries, chips, bread, rice, beans, tortillas, breaded items, sugary sauces</p>
+                </div>
+                <div class="tip-card">
+                    <h4>Upgrade Strategy</h4>
+                    <p>Double the meat for more protein without extra carbs. Add cheese/bacon for fat.</p>
+                </div>
+                <div class="tip-card">
+                    <h4>Breakfast = Easy</h4>
+                    <p>Eggs, sausage, and bacon are naturally keto. Skip the hash browns and toast.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Restaurant Selection -->
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">Fast Food Restaurants</span>
+                <span class="card-badge">SELECT A RESTAURANT</span>
+            </div>
+
+            <div class="restaurant-tabs">
+                <div class="restaurant-tab active" data-restaurant="mcdonalds">McDonald's</div>
+                <div class="restaurant-tab" data-restaurant="wendys">Wendy's<span class="star">*</span></div>
+                <div class="restaurant-tab" data-restaurant="burgerking">Burger King</div>
+                <div class="restaurant-tab" data-restaurant="fiveguys">Five Guys<span class="star">*</span></div>
+                <div class="restaurant-tab" data-restaurant="innout">In-N-Out</div>
+                <div class="restaurant-tab" data-restaurant="chickfila">Chick-fil-A</div>
+                <div class="restaurant-tab" data-restaurant="chipotle">Chipotle<span class="star">*</span></div>
+                <div class="restaurant-tab" data-restaurant="tacobell">Taco Bell</div>
+                <div class="restaurant-tab" data-restaurant="subway">Subway</div>
+                <div class="restaurant-tab" data-restaurant="arbys">Arby's</div>
+                <div class="restaurant-tab" data-restaurant="panera">Panera<span class="star">*</span></div>
+            </div>
+
+            <!-- McDonald's -->
+            <div class="restaurant-section active" id="mcdonalds">
+                <div class="restaurant-header">
+                    <div class="restaurant-logo">M</div>
+                    <div class="restaurant-info">
+                        <h3>McDonald's</h3>
+                        <div class="tip">Ask for "no bun" - they'll put it in a container</div>
+                    </div>
+                </div>
+                <table class="menu-table">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>How to Order</th>
+                            <th>Cal</th>
+                            <th>Fat</th>
+                            <th>Protein</th>
+                            <th>Net Carbs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="item-name">Big Mac<span class="low-carb-badge">GOOD</span></td>
+                            <td class="how-to-order">No bun</td>
+                            <td class="calories">330</td>
+                            <td class="fat">26g</td>
+                            <td class="protein">18g</td>
+                            <td class="carbs">5-6g</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Quarter Pounder w/ Cheese</td>
+                            <td class="how-to-order">No bun, no ketchup</td>
+                            <td class="calories">340</td>
+                            <td class="fat">24g</td>
+                            <td class="protein">24g</td>
+                            <td class="carbs">4g</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Double Cheeseburger</td>
+                            <td class="how-to-order">No bun</td>
+                            <td class="calories">270</td>
+                            <td class="fat">20g</td>
+                            <td class="protein">18g</td>
+                            <td class="carbs">4g</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">McDouble<span class="low-carb-badge">LOWEST</span></td>
+                            <td class="how-to-order">No bun, no ketchup</td>
+                            <td class="calories">240</td>
+                            <td class="fat">14g</td>
+                            <td class="protein">17g</td>
+                            <td class="carbs">3g</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Sausage Egg McMuffin</td>
+                            <td class="how-to-order">No English muffin</td>
+                            <td class="calories">340</td>
+                            <td class="fat">26g</td>
+                            <td class="protein">15g</td>
+                            <td class="carbs">4g</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Wendy's -->
+            <div class="restaurant-section" id="wendys">
+                <div class="restaurant-header">
+                    <div class="restaurant-logo">W</div>
+                    <div class="restaurant-info">
+                        <h3>Wendy's</h3>
+                        <div class="tip">Best for keto! They offer lettuce wraps so you can still bite into your burger</div>
+                    </div>
+                </div>
+                <table class="menu-table">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>How to Order</th>
+                            <th>Cal</th>
+                            <th>Fat</th>
+                            <th>Protein</th>
+                            <th>Net Carbs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="item-name">Baconator<span class="low-carb-badge">BEST</span></td>
+                            <td class="how-to-order">No bun, no ketchup (or lettuce wrap)</td>
+                            <td class="calories">780</td>
+                            <td class="fat">63g</td>
+                            <td class="protein">52g</td>
+                            <td class="carbs">3g</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Double Baconator</td>
+                            <td class="how-to-order">No bun</td>
+                            <td class="calories">690</td>
+                            <td class="fat">49g</td>
+                            <td class="protein">50g</td>
+                            <td class="carbs">3g</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Son of Baconator</td>
+                            <td class="how-to-order">No bun, no ketchup</td>
+                            <td class="calories">450</td>
+                            <td class="fat">37g</td>
+                            <td class="protein">29g</td>
+                            <td class="carbs">4g</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Dave's Single</td>
+                            <td class="how-to-order">No bun, no ketchup (or lettuce wrap)</td>
+                            <td class="calories">420</td>
+                            <td class="fat">31g</td>
+                            <td class="protein">24g</td>
+                            <td class="carbs">5g</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Breakfast Baconator</td>
+                            <td class="how-to-order">No bun</td>
+                            <td class="calories">560</td>
+                            <td class="fat">45g</td>
+                            <td class="protein">31g</td>
+                            <td class="carbs">5g</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Burger King -->
+            <div class="restaurant-section" id="burgerking">
+                <div class="restaurant-header">
+                    <div class="restaurant-logo">BK</div>
+                    <div class="restaurant-info">
+                        <h3>Burger King</h3>
+                        <div class="tip">Order "no bun" - they'll serve in a container</div>
+                    </div>
+                </div>
+                <table class="menu-table">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>How to Order</th>
+                            <th>Cal</th>
+                            <th>Fat</th>
+                            <th>Protein</th>
+                            <th>Net Carbs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="item-name">Whopper</td>
+                            <td class="how-to-order">No bun</td>
+                            <td class="calories">430</td>
+                            <td class="fat">35g</td>
+                            <td class="protein">20g</td>
+                            <td class="carbs">8g</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Whopper w/ Cheese<span class="low-carb-badge">GOOD</span></td>
+                            <td class="how-to-order">No bun, no ketchup</td>
+                            <td class="calories">380</td>
+                            <td class="fat">30g</td>
+                            <td class="protein">22g</td>
+                            <td class="carbs">4g</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Double Whopper w/ Cheese</td>
+                            <td class="how-to-order">No bun</td>
+                            <td class="calories">590</td>
+                            <td class="fat">47g</td>
+                            <td class="protein">34g</td>
+                            <td class="carbs">8g</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Whopper (lean)</td>
+                            <td class="how-to-order">No bun, no mayo, no cheese</td>
+                            <td class="calories">270</td>
+                            <td class="fat">18g</td>
+                            <td class="protein">20g</td>
+                            <td class="carbs">7g</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Five Guys -->
+            <div class="restaurant-section" id="fiveguys">
+                <div class="restaurant-header">
+                    <div class="restaurant-logo">5G</div>
+                    <div class="restaurant-info">
+                        <h3>Five Guys</h3>
+                        <div class="tip">Excellent choice! Lettuce wrap is standard option. Only 1g carb bunless!</div>
+                    </div>
+                </div>
+                <table class="menu-table">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>How to Order</th>
+                            <th>Cal</th>
+                            <th>Fat</th>
+                            <th>Protein</th>
+                            <th>Net Carbs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="item-name">Cheeseburger<span class="low-carb-badge">1g CARB!</span></td>
+                            <td class="how-to-order">Bunless / lettuce wrap</td>
+                            <td class="calories">580</td>
+                            <td class="fat">46g</td>
+                            <td class="protein">40g</td>
+                            <td class="carbs">1g</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Bacon Cheeseburger<span class="low-carb-badge">BEST</span></td>
+                            <td class="how-to-order">Bunless / lettuce wrap</td>
+                            <td class="calories">660</td>
+                            <td class="fat">53g</td>
+                            <td class="protein">44g</td>
+                            <td class="carbs">1g</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Little Cheeseburger</td>
+                            <td class="how-to-order">Bunless / lettuce wrap</td>
+                            <td class="calories">290</td>
+                            <td class="fat">23g</td>
+                            <td class="protein">20g</td>
+                            <td class="carbs">1g</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Hamburger Patty</td>
+                            <td class="how-to-order">No bun</td>
+                            <td class="calories">220</td>
+                            <td class="fat">17g</td>
+                            <td class="protein">16g</td>
+                            <td class="carbs">0g</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Hot Dog</td>
+                            <td class="how-to-order">No bun</td>
+                            <td class="calories">240</td>
+                            <td class="fat">26g</td>
+                            <td class="protein">11g</td>
+                            <td class="carbs">1g</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- In-N-Out -->
+            <div class="restaurant-section" id="innout">
+                <div class="restaurant-header">
+                    <div class="restaurant-logo">IO</div>
+                    <div class="restaurant-info">
+                        <h3>In-N-Out (West Coast)</h3>
+                        <div class="tip">Say "Protein Style" for a lettuce wrap. Try the "Flying Dutchman" secret menu!</div>
+                    </div>
+                </div>
+                <table class="menu-table">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>How to Order</th>
+                            <th>Cal</th>
+                            <th>Fat</th>
+                            <th>Protein</th>
+                            <th>Net Carbs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="item-name">Double-Double</td>
+                            <td class="how-to-order">"Protein Style"</td>
+                            <td class="calories">520</td>
+                            <td class="fat">39g</td>
+                            <td class="protein">33g</td>
+                            <td class="carbs">11g</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Double-Double (no spread)<span class="low-carb-badge">BETTER</span></td>
+                            <td class="how-to-order">Protein Style, no spread</td>
+                            <td class="calories">440</td>
+                            <td class="fat">33g</td>
+                            <td class="protein">33g</td>
+                            <td class="carbs">8g</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Hamburger</td>
+                            <td class="how-to-order">Protein Style</td>
+                            <td class="calories">240</td>
+                            <td class="fat">17g</td>
+                            <td class="protein">13g</td>
+                            <td class="carbs">8g</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Flying Dutchman<span class="low-carb-badge">SECRET MENU!</span></td>
+                            <td class="how-to-order">Ask for "Flying Dutchman" (2 patties, 2 cheese, nothing else)</td>
+                            <td class="calories">330</td>
+                            <td class="fat">25g</td>
+                            <td class="protein">22g</td>
+                            <td class="carbs">1g</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Chick-fil-A -->
+            <div class="restaurant-section" id="chickfila">
+                <div class="restaurant-header">
+                    <div class="restaurant-logo">CFA</div>
+                    <div class="restaurant-info">
+                        <h3>Chick-fil-A</h3>
+                        <div class="tip">Stick to GRILLED options. Breaded items are 28g+ carbs!</div>
+                    </div>
+                </div>
+                <table class="menu-table">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>How to Order</th>
+                            <th>Cal</th>
+                            <th>Fat</th>
+                            <th>Protein</th>
+                            <th>Net Carbs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="item-name">Grilled Nuggets (8pc)<span class="low-carb-badge">BEST</span></td>
+                            <td class="how-to-order">As-is</td>
+                            <td class="calories">140</td>
+                            <td class="fat">3.5g</td>
+                            <td class="protein">25g</td>
+                            <td class="carbs">2g</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Grilled Nuggets (12pc)</td>
+                            <td class="how-to-order">As-is</td>
+                            <td class="calories">210</td>
+                            <td class="fat">5g</td>
+                            <td class="protein">38g</td>
+                            <td class="carbs">3g</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Grilled Chicken Sandwich</td>
+                            <td class="how-to-order">No bun</td>
+                            <td class="calories">130</td>
+                            <td class="fat">3.5g</td>
+                            <td class="protein">23g</td>
+                            <td class="carbs">3g</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Cobb Salad</td>
+                            <td class="how-to-order">No corn, no tortilla strips</td>
+                            <td class="calories">430</td>
+                            <td class="fat">27g</td>
+                            <td class="protein">40g</td>
+                            <td class="carbs">7g</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="warning-box">
+                    <strong>AVOID:</strong> Breaded nuggets, chicken strips (28g carbs!), spicy chicken sandwiches
+                </div>
+            </div>
+
+            <!-- Chipotle -->
+            <div class="restaurant-section" id="chipotle">
+                <div class="restaurant-header">
+                    <div class="restaurant-logo">C</div>
+                    <div class="restaurant-info">
+                        <h3>Chipotle</h3>
+                        <div class="tip">Very customizable! Order a bowl with NO rice, NO beans. Carnitas = highest fat.</div>
+                    </div>
+                </div>
+                <table class="menu-table">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>How to Order</th>
+                            <th>Cal</th>
+                            <th>Fat</th>
+                            <th>Protein</th>
+                            <th>Net Carbs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="item-name">Chicken Bowl<span class="low-carb-badge">POPULAR</span></td>
+                            <td class="how-to-order">No rice, no beans + cheese, sour cream, guac, salsa</td>
+                            <td class="calories">~450</td>
+                            <td class="fat">25g</td>
+                            <td class="protein">38g</td>
+                            <td class="carbs">6-8g</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Carnitas Bowl<span class="low-carb-badge">HIGH FAT</span></td>
+                            <td class="how-to-order">No rice, no beans + cheese, sour cream, guac</td>
+                            <td class="calories">~520</td>
+                            <td class="fat">38g</td>
+                            <td class="protein">25g</td>
+                            <td class="carbs">6-8g</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Steak Bowl</td>
+                            <td class="how-to-order">No rice, no beans + cheese, sour cream, guac</td>
+                            <td class="calories">~430</td>
+                            <td class="fat">22g</td>
+                            <td class="protein">27g</td>
+                            <td class="carbs">6-8g</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="warning-box">
+                    <strong>AVOID:</strong> Rice, beans, tortillas, chips, corn salsa
+                </div>
+            </div>
+
+            <!-- Taco Bell -->
+            <div class="restaurant-section" id="tacobell">
+                <div class="restaurant-header">
+                    <div class="restaurant-logo">TB</div>
+                    <div class="restaurant-info">
+                        <h3>Taco Bell</h3>
+                        <div class="tip">Order Power Bowls with NO rice and NO beans for keto</div>
+                    </div>
+                </div>
+                <table class="menu-table">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>How to Order</th>
+                            <th>Cal</th>
+                            <th>Fat</th>
+                            <th>Protein</th>
+                            <th>Net Carbs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="item-name">Power Bowl - Chicken<span class="low-carb-badge">BEST</span></td>
+                            <td class="how-to-order">No rice, no beans</td>
+                            <td class="calories">280</td>
+                            <td class="fat">17g</td>
+                            <td class="protein">20g</td>
+                            <td class="carbs">6-7g</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Power Bowl - Steak</td>
+                            <td class="how-to-order">No rice, no beans</td>
+                            <td class="calories">290</td>
+                            <td class="fat">16g</td>
+                            <td class="protein">20g</td>
+                            <td class="carbs">7g</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Power Bowl - Beef</td>
+                            <td class="how-to-order">No rice, no beans</td>
+                            <td class="calories">280</td>
+                            <td class="fat">15g</td>
+                            <td class="protein">21g</td>
+                            <td class="carbs">6g</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Subway -->
+            <div class="restaurant-section" id="subway">
+                <div class="restaurant-header">
+                    <div class="restaurant-logo">S</div>
+                    <div class="restaurant-info">
+                        <h3>Subway</h3>
+                        <div class="tip">Order any sub as a "Salad" or "Chopped salad" - no bread</div>
+                    </div>
+                </div>
+                <table class="menu-table">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>How to Order</th>
+                            <th>Cal</th>
+                            <th>Fat</th>
+                            <th>Protein</th>
+                            <th>Net Carbs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="item-name">Any Sub</td>
+                            <td class="how-to-order">"As a salad" or "chopped salad" (no bread)</td>
+                            <td class="calories">Varies</td>
+                            <td class="fat">-</td>
+                            <td class="protein">-</td>
+                            <td class="carbs">~5-8g</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Rotisserie Chicken Salad</td>
+                            <td class="how-to-order">No croutons</td>
+                            <td class="calories">350</td>
+                            <td class="fat">25g</td>
+                            <td class="protein">26g</td>
+                            <td class="carbs">6g</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Steak & Cheese Salad</td>
+                            <td class="how-to-order">No croutons</td>
+                            <td class="calories">380</td>
+                            <td class="fat">26g</td>
+                            <td class="protein">28g</td>
+                            <td class="carbs">7g</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Arby's -->
+            <div class="restaurant-section" id="arbys">
+                <div class="restaurant-header">
+                    <div class="restaurant-logo">A</div>
+                    <div class="restaurant-info">
+                        <h3>Arby's</h3>
+                        <div class="tip">Order without the bun. Also remove the red ranch sauce (has sugar).</div>
+                    </div>
+                </div>
+                <table class="menu-table">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>How to Order</th>
+                            <th>Cal</th>
+                            <th>Fat</th>
+                            <th>Protein</th>
+                            <th>Net Carbs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="item-name">Beef 'n Cheddar<span class="low-carb-badge">GOOD</span></td>
+                            <td class="how-to-order">No bun, no red ranch sauce</td>
+                            <td class="calories">~280</td>
+                            <td class="fat">18g</td>
+                            <td class="protein">22g</td>
+                            <td class="carbs">3g</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Roast Turkey Farmhouse Salad</td>
+                            <td class="how-to-order">Ranch dressing</td>
+                            <td class="calories">230</td>
+                            <td class="fat">13g</td>
+                            <td class="protein">23g</td>
+                            <td class="carbs">8g</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Half-Pound Beef</td>
+                            <td class="how-to-order">No bun</td>
+                            <td class="calories">~400</td>
+                            <td class="fat">24g</td>
+                            <td class="protein">42g</td>
+                            <td class="carbs">3g</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Panera -->
+            <div class="restaurant-section" id="panera">
+                <div class="restaurant-header">
+                    <div class="restaurant-logo">P</div>
+                    <div class="restaurant-info">
+                        <h3>Panera Bread</h3>
+                        <div class="tip">Despite "Bread" in the name, they're great for keto! Order sandwiches "no bread".</div>
+                    </div>
+                </div>
+                <table class="menu-table">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>How to Order</th>
+                            <th>Cal</th>
+                            <th>Fat</th>
+                            <th>Protein</th>
+                            <th>Net Carbs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="item-name">Chipotle Chicken Avocado Melt<span class="low-carb-badge">BEST</span></td>
+                            <td class="how-to-order">No bread</td>
+                            <td class="calories">430</td>
+                            <td class="fat">36g</td>
+                            <td class="protein">33g</td>
+                            <td class="carbs">4g</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Roasted Turkey & Avocado BLT<span class="low-carb-badge">LOWEST</span></td>
+                            <td class="how-to-order">No bread</td>
+                            <td class="calories">430</td>
+                            <td class="fat">35g</td>
+                            <td class="protein">38g</td>
+                            <td class="carbs">2g</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Sausage, Egg & Cheese</td>
+                            <td class="how-to-order">No bread</td>
+                            <td class="calories">330</td>
+                            <td class="fat">25g</td>
+                            <td class="protein">21g</td>
+                            <td class="carbs">2g</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Sauce Guide -->
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">Sauce Cheat Sheet</span>
+                <span class="card-badge">CHOOSE WISELY</span>
+            </div>
+            <div class="sauce-grid">
+                <div class="sauce-card good">
+                    <h4><span style="color: var(--green);">&#10003;</span> Good (0-2g carbs)</h4>
+                    <div class="sauce-list">
+                        <span class="sauce-item">Mustard</span>
+                        <span class="sauce-item">Mayo</span>
+                        <span class="sauce-item">Ranch</span>
+                        <span class="sauce-item">Buffalo/Hot Sauce</span>
+                        <span class="sauce-item">Caesar</span>
+                        <span class="sauce-item">Guacamole</span>
+                        <span class="sauce-item">Sour Cream</span>
+                        <span class="sauce-item">Oil & Vinegar</span>
+                    </div>
+                </div>
+                <div class="sauce-card avoid">
+                    <h4><span style="color: var(--red);">&#10007;</span> Avoid (4g+ carbs)</h4>
+                    <div class="sauce-list">
+                        <span class="sauce-item">Ketchup</span>
+                        <span class="sauce-item">BBQ Sauce</span>
+                        <span class="sauce-item">Honey Mustard</span>
+                        <span class="sauce-item">Sweet & Sour</span>
+                        <span class="sauce-item">Teriyaki</span>
+                        <span class="sauce-item">Polynesian</span>
+                        <span class="sauce-item">Thousand Island</span>
+                        <span class="sauce-item">Most "special sauces"</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Coffee Shops -->
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">Coffee Shop Guide</span>
+                <span class="card-badge">STARBUCKS & DUNKIN'</span>
+            </div>
+            <div class="coffee-grid">
+                <div class="coffee-shop">
+                    <h4><span style="font-size: 20px;">&#9749;</span> Starbucks Drinks</h4>
+                    <div class="coffee-item">
+                        <div>
+                            <div class="coffee-name">Black Coffee / Americano</div>
+                            <div class="coffee-order">As-is</div>
+                        </div>
+                        <div class="coffee-carbs">0-2g</div>
+                    </div>
+                    <div class="coffee-item">
+                        <div>
+                            <div class="coffee-name">Cold Brew</div>
+                            <div class="coffee-order">As-is (unsweetened)</div>
+                        </div>
+                        <div class="coffee-carbs">0g</div>
+                    </div>
+                    <div class="coffee-item">
+                        <div>
+                            <div class="coffee-name">Keto Latte</div>
+                            <div class="coffee-order">Americano + heavy cream (3/4 water, 1/4 cream)</div>
+                        </div>
+                        <div class="coffee-carbs">~2g</div>
+                    </div>
+                    <div class="coffee-item">
+                        <div>
+                            <div class="coffee-name">Iced Coffee</div>
+                            <div class="coffee-order">NO classic syrup, add heavy cream</div>
+                        </div>
+                        <div class="coffee-carbs">~1g</div>
+                    </div>
+                    <div class="warning-box">
+                        <strong>Warning:</strong> Default iced coffee/tea has 20g sugar from classic syrup! Only SF syrup available is Vanilla (~1g per pump).
+                    </div>
+                </div>
+                <div class="coffee-shop">
+                    <h4><span style="font-size: 20px;">&#127858;</span> Starbucks Food</h4>
+                    <div class="coffee-item">
+                        <div>
+                            <div class="coffee-name">Bacon & Gruyere Egg Bites<span class="low-carb-badge" style="margin-left: 8px;">BEST</span></div>
+                            <div class="coffee-order">310 cal | 20g fat | 19g protein</div>
+                        </div>
+                        <div class="coffee-carbs">9g</div>
+                    </div>
+                    <div class="coffee-item">
+                        <div>
+                            <div class="coffee-name">Kale & Mushroom Egg Bites</div>
+                            <div class="coffee-order">230 cal | 13g fat | 15g protein</div>
+                        </div>
+                        <div class="coffee-carbs">10g</div>
+                    </div>
+                    <div class="coffee-item">
+                        <div>
+                            <div class="coffee-name">Sopressata & Cheese Snack Tray</div>
+                            <div class="coffee-order">250 cal | 20g fat | 15g protein</div>
+                        </div>
+                        <div class="coffee-carbs">0g</div>
+                    </div>
+                    <div class="coffee-item">
+                        <div>
+                            <div class="coffee-name">Moon Cheese</div>
+                            <div class="coffee-order">Crunchy cheese snack</div>
+                        </div>
+                        <div class="coffee-carbs">1g</div>
+                    </div>
+                    <div class="coffee-item">
+                        <div>
+                            <div class="coffee-name">String Cheese</div>
+                            <div class="coffee-order">80 cal | 6g fat | 7g protein</div>
+                        </div>
+                        <div class="coffee-carbs">1g</div>
+                    </div>
+                    <div class="coffee-item">
+                        <div>
+                            <div class="coffee-name">Country Archer Jerky</div>
+                            <div class="coffee-order">Beef or turkey</div>
+                        </div>
+                        <div class="coffee-carbs">5g</div>
+                    </div>
+                </div>
+                <div class="coffee-shop">
+                    <h4><span style="font-size: 20px;">&#9749;</span> Dunkin' Drinks</h4>
+                    <div class="coffee-item">
+                        <div>
+                            <div class="coffee-name">Hot/Iced Coffee</div>
+                            <div class="coffee-order">Black or with heavy cream</div>
+                        </div>
+                        <div class="coffee-carbs">0-1g</div>
+                    </div>
+                    <div class="coffee-item">
+                        <div>
+                            <div class="coffee-name">Tea (any)</div>
+                            <div class="coffee-order">Unsweetened</div>
+                        </div>
+                        <div class="coffee-carbs">~1g</div>
+                    </div>
+                    <div class="coffee-item">
+                        <div>
+                            <div class="coffee-name">Keto Latte</div>
+                            <div class="coffee-order">Heavy cream + unsweetened flavor SHOT (not swirl!)</div>
+                        </div>
+                        <div class="coffee-carbs">~2g</div>
+                    </div>
+                    <div class="warning-box">
+                        <strong>Warning:</strong> Avoid Refreshers (20-35g sugar), oat milk (16g carbs/cup). Use flavor SHOTS not SWIRLS (swirls have sugar).
+                    </div>
+                </div>
+                <div class="coffee-shop">
+                    <h4><span style="font-size: 20px;">&#127858;</span> Dunkin' Food</h4>
+                    <div class="coffee-item">
+                        <div>
+                            <div class="coffee-name">Sausage Egg & Cheese<span class="low-carb-badge" style="margin-left: 8px;">BEST</span></div>
+                            <div class="coffee-order">No bread | 310 cal | 25g fat | 17g protein</div>
+                        </div>
+                        <div class="coffee-carbs">3g</div>
+                    </div>
+                    <div class="coffee-item">
+                        <div>
+                            <div class="coffee-name">Bacon Egg & Cheese</div>
+                            <div class="coffee-order">No bread | 220 cal | 17g fat | 13g protein</div>
+                        </div>
+                        <div class="coffee-carbs">3g</div>
+                    </div>
+                    <div class="coffee-item">
+                        <div>
+                            <div class="coffee-name">Egg & Cheese</div>
+                            <div class="coffee-order">No bread | 100 cal | 6g fat | 8g protein</div>
+                        </div>
+                        <div class="coffee-carbs">2g</div>
+                    </div>
+                    <div class="coffee-item">
+                        <div>
+                            <div class="coffee-name">Ham Egg & Cheese</div>
+                            <div class="coffee-order">No bread | 180 cal | 13g fat | 13g protein</div>
+                        </div>
+                        <div class="coffee-carbs">3g</div>
+                    </div>
+                    <div class="coffee-item">
+                        <div>
+                            <div class="coffee-name">All You Can Meat</div>
+                            <div class="coffee-order">No croissant | 460 cal | 38g fat | 25g protein</div>
+                        </div>
+                        <div class="coffee-carbs">4g</div>
+                    </div>
+                    <div class="warning-box">
+                        <strong>AVOID:</strong> Snackin' Bacon (10g carbs - it's maple sugar coated!), Omelet Bites (7-9g carbs due to tapioca starch fillers)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gas Station Snacks -->
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">Gas Station Guide</span>
+                <span class="card-badge">7-ELEVEN / WAWA / SHEETZ</span>
+            </div>
+            <div class="gas-station-grid">
+                <div class="snack-card">
+                    <h4>Protein Snacks</h4>
+                    <div class="snack-item">
+                        <span>Beef Jerky (1 oz)</span>
+                        <div class="snack-macros"><span class="p">12g P</span> <span class="c">2-3g C</span></div>
+                    </div>
+                    <div class="snack-item">
+                        <span>Beef/Meat Sticks</span>
+                        <div class="snack-macros"><span class="p">7g P</span> <span class="c">1g C</span></div>
+                    </div>
+                    <div class="snack-item">
+                        <span>Hard-Boiled Eggs (2)</span>
+                        <div class="snack-macros"><span class="p">12g P</span> <span class="c">1g C</span></div>
+                    </div>
+                    <div class="snack-item">
+                        <span>Pepperoni Slices</span>
+                        <div class="snack-macros"><span class="p">6g P</span> <span class="c">0g C</span></div>
+                    </div>
+                </div>
+                <div class="snack-card">
+                    <h4>Fat & Cheese</h4>
+                    <div class="snack-item">
+                        <span>Pork Rinds (1 oz)</span>
+                        <div class="snack-macros"><span class="p">17g P</span> <span class="c">0g C</span></div>
+                    </div>
+                    <div class="snack-item">
+                        <span>Cheese Sticks</span>
+                        <div class="snack-macros"><span class="p">7g P</span> <span class="c">1g C</span></div>
+                    </div>
+                    <div class="snack-item">
+                        <span>Almonds (1 oz)</span>
+                        <div class="snack-macros"><span class="p">6g P</span> <span class="c">2g C</span></div>
+                    </div>
+                    <div class="snack-item">
+                        <span>Macadamia Nuts (1 oz)</span>
+                        <div class="snack-macros"><span class="p">2g P</span> <span class="c">1g C</span></div>
+                    </div>
+                </div>
+                <div class="snack-card">
+                    <h4>Other Options</h4>
+                    <div class="snack-item">
+                        <span>Pickles (dill/sour)</span>
+                        <div class="snack-macros"><span class="p">0g P</span> <span class="c">1g C</span></div>
+                    </div>
+                    <div class="snack-item">
+                        <span>Quest Cookie</span>
+                        <div class="snack-macros"><span class="p">15g P</span> <span class="c">4g C</span></div>
+                    </div>
+                    <div class="snack-item">
+                        <span>Sugar-Free Energy Drinks</span>
+                        <div class="snack-macros"><span class="p">0g P</span> <span class="c">0-2g C</span></div>
+                    </div>
+                    <div class="snack-item">
+                        <span>Sparkling Water</span>
+                        <div class="snack-macros"><span class="p">0g P</span> <span class="c">0g C</span></div>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 16px; padding: 12px; background: var(--surface-2); border-radius: 8px; border-left: 3px solid var(--cyan);">
+                <strong style="color: var(--cyan);">Wawa/Sheetz Hot Food:</strong> Order hoagies/subs "in a bowl" (no bread), breakfast bowls with eggs/bacon/cheese (no potatoes), or bunless burgers.
+            </div>
+            <div style="margin-top: 12px; padding: 12px; background: var(--surface-2); border-radius: 8px; border-left: 3px solid var(--green);">
+                <strong style="color: var(--green);">Pro Tip:</strong> Check jerky labels carefully - some brands have 6-8g sugar per serving. Pickles are great for electrolytes!
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Restaurant tab switching
+        document.querySelectorAll('.restaurant-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active from all tabs
+                document.querySelectorAll('.restaurant-tab').forEach(t => t.classList.remove('active'));
+                // Add active to clicked tab
+                this.classList.add('active');
+
+                // Hide all sections
+                document.querySelectorAll('.restaurant-section').forEach(s => s.classList.remove('active'));
+                // Show selected section
+                const restaurantId = this.dataset.restaurant;
+                document.getElementById(restaurantId).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
