@@ -124,7 +124,8 @@
             color: var(--text-dim);
             margin-bottom: 4px;
         }
-        .menu-meal-name { font-size: 14px; font-weight: 500; }
+        .menu-meal-name { font-size: 14px; font-weight: 500; cursor: pointer; }
+        .menu-meal-name:hover { color: var(--blue); }
         .menu-meal-type {
             display: inline-block;
             font-size: 10px;
@@ -265,7 +266,21 @@
     <div id="tab-menu" class="tab-content active">
         <div class="card">
             <h2>Weekly Menu Plan</h2>
-            <p style="color: var(--text-dim); margin-bottom: 16px;">~1,800 cal/day, ~150g protein. Two meals + snack.</p>
+            <p style="color: var(--text-dim); margin-bottom: 12px;">~1,800 cal/day, ~150g protein. Two meals + snack. Click any meal to see the recipe.</p>
+            <div style="display: flex; gap: 16px; margin-bottom: 16px; flex-wrap: wrap;">
+                <div style="display: flex; align-items: center; gap: 6px; font-size: 12px;">
+                    <span class="menu-meal-type grab_and_go" style="margin: 0;">Reheat</span>
+                    <span style="color: var(--text-dim);">Ready from Sunday prep</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 6px; font-size: 12px;">
+                    <span class="menu-meal-type add_fresh" style="margin: 0;">+ Fresh</span>
+                    <span style="color: var(--text-dim);">Add fresh ingredients</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 6px; font-size: 12px;">
+                    <span class="menu-meal-type cook_fresh" style="margin: 0;">Cook</span>
+                    <span style="color: var(--text-dim);">Cook fresh (15-20 min)</span>
+                </div>
+            </div>
             <div id="menu-grid" class="menu-grid">
                 <!-- Populated by JS -->
             </div>
@@ -343,7 +358,7 @@
                     <h3>${day.day}</h3>
                     <div class="menu-meal">
                         <div class="menu-meal-label">Meal 1</div>
-                        <div class="menu-meal-name">
+                        <div class="menu-meal-name" onclick="openRecipeByName('${day.meal1.name}', '${day.meal1.type}')">
                             ${day.meal1.name}
                             <span class="menu-meal-type ${day.meal1.type}">${typeLabels[day.meal1.type]}</span>
                         </div>
@@ -351,7 +366,7 @@
                     </div>
                     <div class="menu-meal">
                         <div class="menu-meal-label">Meal 2</div>
-                        <div class="menu-meal-name">
+                        <div class="menu-meal-name" onclick="openRecipeByName('${day.meal2.name}', '${day.meal2.type}')">
                             ${day.meal2.name}
                             <span class="menu-meal-type ${day.meal2.type}">${typeLabels[day.meal2.type]}</span>
                         </div>
@@ -359,7 +374,7 @@
                     </div>
                     <div class="menu-meal" style="background: transparent; padding: 0;">
                         <div class="menu-meal-label">Snack</div>
-                        <div style="font-size: 14px;">${day.snack}</div>
+                        <div class="menu-meal-name" onclick="openRecipeByName('${day.snack}', 'snacks')" style="font-size: 14px;">${day.snack}</div>
                     </div>
                     <div class="menu-totals">
                         <span style="color: var(--green);">${day.totals.cal} cal</span>
@@ -470,6 +485,16 @@
 
         function closeModal() {
             document.getElementById('recipeModal').classList.remove('active');
+        }
+
+        // Open recipe by name (for clicking from weekly menu)
+        function openRecipeByName(name, type) {
+            const recipes = data.recipes[type];
+            if (!recipes) return;
+            const index = recipes.findIndex(r => r.name === name);
+            if (index >= 0) {
+                showRecipe(type, index);
+            }
         }
 
         // Close modal on escape or background click

@@ -154,6 +154,55 @@
         .results-grid h3 { margin-bottom: 8px; }
         .results-grid ul { padding-left: 20px; font-size: 14px; }
 
+        /* Gantt Timeline */
+        .gantt-container { overflow-x: auto; margin-bottom: 16px; }
+        .gantt-chart { min-width: 700px; }
+        .gantt-header {
+            display: flex;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 8px;
+            margin-bottom: 8px;
+        }
+        .gantt-label-col { width: 110px; flex-shrink: 0; font-size: 11px; color: var(--text-dim); text-transform: uppercase; }
+        .gantt-timeline-col { flex: 1; display: flex; }
+        .gantt-hour {
+            flex: 1;
+            text-align: center;
+            font-size: 10px;
+            color: var(--text-dim);
+            border-left: 1px solid var(--border);
+            padding: 4px 0;
+        }
+        .gantt-hour:first-child { border-left: none; }
+        .gantt-row { display: flex; align-items: center; height: 32px; margin-bottom: 2px; }
+        .gantt-row-label { width: 110px; flex-shrink: 0; font-size: 12px; font-weight: 500; padding-right: 8px; }
+        .gantt-row-bars { flex: 1; position: relative; height: 24px; }
+        .gantt-bar {
+            position: absolute;
+            height: 20px;
+            border-radius: 3px;
+            font-size: 9px;
+            color: var(--bg);
+            display: flex;
+            align-items: center;
+            padding: 0 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            cursor: default;
+            font-weight: 500;
+        }
+        .gantt-bar.oven1 { background: var(--red); }
+        .gantt-bar.oven2 { background: #f97316; }
+        .gantt-bar.stovetop { background: var(--yellow); }
+        .gantt-bar.slow_cooker { background: var(--purple); }
+        .gantt-bar.air_fryer { background: var(--blue); }
+        .gantt-bar.prep { background: var(--green); }
+        .gantt-bar.assembly { background: #14b8a6; }
+        .gantt-legend { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
+        .gantt-legend-item { display: flex; align-items: center; gap: 4px; font-size: 11px; }
+        .gantt-legend-color { width: 12px; height: 12px; border-radius: 2px; }
+
         @media (max-width: 600px) {
             .shopping-grid { grid-template-columns: 1fr; }
             .tabs { overflow-x: auto; }
@@ -189,6 +238,18 @@
             <div id="cooking-overview" style="margin-bottom: 24px;">
                 <!-- Populated by JS -->
             </div>
+        </div>
+
+        <div class="card">
+            <h2>Equipment Timeline</h2>
+            <p style="color: var(--text-dim); margin-bottom: 12px; font-size: 13px;">What's running when - hover for details</p>
+            <div id="gantt-chart" class="gantt-container">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Step-by-Step Instructions</h2>
             <div id="cooking-timeline" class="timeline">
                 <!-- Populated by JS -->
             </div>
@@ -371,6 +432,92 @@
                     </ul>
                 </div>
             `).join('');
+
+            // Render Gantt chart
+            renderGanttChart();
+        }
+
+        // ============================================
+        // GANTT CHART
+        // ============================================
+        function renderGanttChart() {
+            const container = document.getElementById('gantt-chart');
+            const startHour = 12, endHour = 17;
+            const totalMinutes = (endHour - startHour) * 60;
+
+            function timeToMinutes(t) {
+                const [h, m] = t.split(':').map(Number);
+                return (h - startHour) * 60 + m;
+            }
+            function getLeft(t) { return (timeToMinutes(t) / totalMinutes) * 100; }
+            function getWidth(d) { return (d / totalMinutes) * 100; }
+
+            const tasks = {
+                'Oven #1 (300°F)': [
+                    { start: '12:00', duration: 180, label: 'Pork Braise', type: 'oven1' }
+                ],
+                'Oven #2 (400°F)': [
+                    { start: '12:15', duration: 45, label: 'Chicken', type: 'oven2' },
+                    { start: '13:00', duration: 30, label: 'Broccoli/Brussels', type: 'oven2' },
+                    { start: '13:30', duration: 25, label: 'Zucchini/Peppers', type: 'oven2' }
+                ],
+                'Stovetop': [
+                    { start: '12:15', duration: 10, label: 'Boil Eggs', type: 'stovetop' },
+                    { start: '13:15', duration: 15, label: 'Cauliflower', type: 'stovetop' },
+                    { start: '13:30', duration: 10, label: 'Mash', type: 'stovetop' }
+                ],
+                'Slow Cooker': [
+                    { start: '12:00', duration: 180, label: 'Beef Stew', type: 'slow_cooker' }
+                ],
+                'Air Fryer': [
+                    { start: '12:25', duration: 12, label: 'Bacon', type: 'air_fryer' }
+                ],
+                'Prep (cutting)': [
+                    { start: '12:00', duration: 15, label: 'Season meats', type: 'prep' },
+                    { start: '12:35', duration: 5, label: 'Stew veg', type: 'prep' },
+                    { start: '12:40', duration: 20, label: 'Cut veggies', type: 'prep' },
+                    { start: '13:55', duration: 25, label: 'Fresh prep', type: 'prep' }
+                ],
+                'Assembly': [
+                    { start: '15:00', duration: 30, label: 'Shred', type: 'assembly' },
+                    { start: '15:30', duration: 30, label: 'Pack meals', type: 'assembly' },
+                    { start: '16:00', duration: 20, label: 'Containers', type: 'assembly' },
+                    { start: '16:20', duration: 25, label: 'Clean up', type: 'assembly' }
+                ]
+            };
+
+            const hours = [];
+            for (let h = startHour; h <= endHour; h++) {
+                hours.push(`${h > 12 ? h - 12 : h}${h >= 12 ? 'PM' : 'AM'}`);
+            }
+
+            let html = `<div class="gantt-chart">
+                <div class="gantt-header">
+                    <div class="gantt-label-col"></div>
+                    <div class="gantt-timeline-col">${hours.map(h => `<div class="gantt-hour">${h}</div>`).join('')}</div>
+                </div>`;
+
+            for (const [equip, items] of Object.entries(tasks)) {
+                html += `<div class="gantt-row">
+                    <div class="gantt-row-label">${equip}</div>
+                    <div class="gantt-row-bars">`;
+                for (const t of items) {
+                    html += `<div class="gantt-bar ${t.type}" style="left:${getLeft(t.start)}%;width:${getWidth(t.duration)}%;" title="${t.label} (${t.duration} min)">${t.label}</div>`;
+                }
+                html += `</div></div>`;
+            }
+
+            html += `<div class="gantt-legend">
+                <div class="gantt-legend-item"><div class="gantt-legend-color" style="background:var(--red)"></div>Oven 1</div>
+                <div class="gantt-legend-item"><div class="gantt-legend-color" style="background:#f97316"></div>Oven 2</div>
+                <div class="gantt-legend-item"><div class="gantt-legend-color" style="background:var(--yellow)"></div>Stovetop</div>
+                <div class="gantt-legend-item"><div class="gantt-legend-color" style="background:var(--purple)"></div>Slow Cooker</div>
+                <div class="gantt-legend-item"><div class="gantt-legend-color" style="background:var(--blue)"></div>Air Fryer</div>
+                <div class="gantt-legend-item"><div class="gantt-legend-color" style="background:var(--green)"></div>Prep</div>
+                <div class="gantt-legend-item"><div class="gantt-legend-color" style="background:#14b8a6"></div>Assembly</div>
+            </div></div>`;
+
+            container.innerHTML = html;
         }
 
         // Init
