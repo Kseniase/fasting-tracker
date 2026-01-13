@@ -1,0 +1,478 @@
+{
+  "week": "Week 2 - Seafood Focus",
+  "serves": 2,
+  "daily_targets": {
+    "person1": { "name": "Him", "calories": "1800-2000", "protein": 150 },
+    "person2": { "name": "Her", "calories": "1400", "protein": 115 }
+  },
+  "shopping": {
+    "proteins": [
+      "Salmon fillets (4 lbs) - batch bake",
+      "Cod or tilapia fillets (3 lbs) - batch bake",
+      "Shrimp, peeled & deveined (3 lbs) - sauté",
+      "Sardines in olive oil (8 cans) - no cook",
+      "Smoked salmon (1 lb) - no cook",
+      "Canned salmon (3 cans, 14 oz each) - for patties",
+      "Canned tuna (4 cans) - for wraps",
+      "Eggs (4 dozen)",
+      "Bacon (1 lb) - accent for salads"
+    ],
+    "vegetables": [
+      "Broccoli (3 heads)",
+      "Brussels sprouts (3 lbs)",
+      "Cauliflower (3 heads) - for mash and rice",
+      "Zucchini (6-8)",
+      "Bell peppers (8)",
+      "Spinach (3 bags)",
+      "Mixed greens (3 containers)",
+      "Butter lettuce (3 heads) - for wraps",
+      "Cherry tomatoes (3 pints)",
+      "Cucumber (6)",
+      "Green cabbage (1 head) - for slaw"
+    ],
+    "fresh": [
+      "Avocados (10)",
+      "Lemons (8) - essential for fish",
+      "Fresh dill (2 bunches)",
+      "Fresh parsley (1 bunch)",
+      "Garlic (2 heads)"
+    ],
+    "dairy": [
+      "Butter (1.5 lbs)",
+      "Cream cheese (12 oz) - for smoked salmon",
+      "Cheese, variety (1 lb)",
+      "Feta cheese (12 oz)",
+      "Heavy cream (1 quart)",
+      "Greek yogurt, full-fat (48 oz)",
+      "Olive oil (if low)"
+    ],
+    "pantry": [
+      "Capers (2 jars) - essential for fish",
+      "Olives, kalamata (2 jars)",
+      "Dijon mustard",
+      "Red wine vinegar",
+      "Mayonnaise (1 jar)",
+      "Old Bay seasoning",
+      "Paprika",
+      "Garlic powder",
+      "Italian herb blend",
+      "Blackening seasoning or cajun spice",
+      "Hot sauce",
+      "Everything bagel seasoning"
+    ]
+  },
+  "cooking": {
+    "overview": {
+      "total_time": "2 hours (12:00pm - 2:00pm)",
+      "equipment": {
+        "oven1": "400°F - fish (2 trays, top/bottom rack), then broccoli/brussels",
+        "oven2": "400°F - zucchini/peppers",
+        "stovetop": "Eggs, cauliflower mash, shrimp sauté",
+        "slow_cooker_1": "Mediterranean fish stew",
+        "slow_cooker_2": "Cauliflower rice warming",
+        "air_fryer": "Bacon"
+      },
+      "concept": "Fish cooks fast - 2 hours vs 4.75 for meat week"
+    },
+    "steps": [
+      {
+        "step": 1,
+        "time": "12:00",
+        "title": "START - Prep & Preheat",
+        "duration": "15 min active",
+        "do": [
+          "Preheat OVEN #1 to 400°F",
+          "Preheat OVEN #2 to 400°F",
+          "EGGS: Place 36 eggs in large pot, cover with cold water by 1 inch. Bring to rolling boil on STOVETOP.",
+          "SALMON: Pat 4 lbs fillets dry. Season with salt, pepper, garlic powder, dill. Place on 2 sheet pans.",
+          "COD: Pat 3 lbs fillets dry. Season with salt, pepper, lemon zest, Italian herbs. Place on sheet pan."
+        ],
+        "status_after": "Both ovens preheating, fish prepped on trays, eggs heating"
+      },
+      {
+        "step": 2,
+        "time": "12:15",
+        "title": "Fish In (3 trays), Bacon Starts",
+        "duration": "10 min active",
+        "do": [
+          "OVEN #1: SALMON trays on top and middle racks - 400°F for 15-18 min.",
+          "OVEN #2: COD on middle rack - 400°F for 12-15 min (comes out first).",
+          "BACON: Load 1 lb into AIR FRYER in batches. 400°F for 10-12 min.",
+          "EGGS: Once boiling, cover pot, remove from heat. Set timer for 12 min.",
+          "SLOW COOKER #2: Add riced cauliflower (2 heads) with 3 tbsp butter, set to WARM."
+        ],
+        "status_after": "Salmon in Oven #1, cod in Oven #2, bacon crisping, eggs resting, cauli rice warming"
+      },
+      {
+        "step": 3,
+        "time": "12:27",
+        "title": "Cod Out, Prep Veggies",
+        "duration": "8 min active",
+        "do": [
+          "COD: Remove from OVEN #2 at 145°F. Set aside.",
+          "EGGS: Transfer to ice bath.",
+          "BACON: Remove from AIR FRYER, set on paper towels. Do second batch if needed.",
+          "Start prepping veggies: cut 3 heads broccoli, halve 3 lbs brussels, slice zucchini, cut peppers."
+        ],
+        "status_after": "Cod done, salmon still cooking, eggs cooling, bacon done"
+      },
+      {
+        "step": 4,
+        "time": "12:33",
+        "title": "Salmon Out, Veggies In",
+        "duration": "10 min active",
+        "do": [
+          "SALMON: Remove from OVEN #1 at 145°F. Set aside.",
+          "Toss BROCCOLI & BRUSSELS with olive oil, salt, garlic powder. Put on 2 trays.",
+          "Toss ZUCCHINI & PEPPERS with olive oil, salt, Italian herbs. Put on tray.",
+          "OVEN #1: Broccoli/brussels on both racks (25 min)",
+          "OVEN #2: Zucchini/peppers (20 min)",
+          "Cut remaining cauliflower florets for mash, peel eggs."
+        ],
+        "status_after": "Both fish done, veggies in both ovens"
+      },
+      {
+        "step": 5,
+        "time": "12:45",
+        "title": "Cauliflower Mash, Shrimp",
+        "duration": "15 min active",
+        "do": [
+          "CAULIFLOWER MASH: Add florets (1 head) to pot on STOVETOP, cover with water. Boil 12-15 min until tender.",
+          "SHRIMP: Heat 3 tbsp butter + 3 tbsp olive oil in large pan. Sauté 3 lbs shrimp with garlic in batches, 2-3 min per side until pink. Finish with lemon + dill.",
+          "SLOW COOKER #1: Start Mediterranean stew base - olive oil, garlic, 2 cans tomatoes, 1 cup olives, capers, herbs. Set to HIGH."
+        ],
+        "status_after": "Shrimp done, cauliflower boiling, stew started, veggies roasting"
+      },
+      {
+        "step": 6,
+        "time": "12:55",
+        "title": "Veggies Out, Finish Mash & Stew",
+        "duration": "10 min active",
+        "do": [
+          "ZUCCHINI & PEPPERS: Remove from OVEN #2. Set aside.",
+          "BROCCOLI & BRUSSELS: Remove from OVEN #1. Set aside.",
+          "CAULIFLOWER MASH: Drain well, process with 6 tbsp butter, 1/2 cup cream, salt, garlic powder.",
+          "SLOW COOKER #1: Add 1.5 lbs cod chunks to stew. Let cook 10 min."
+        ],
+        "status_after": "All cooking done, stew finishing"
+      },
+      {
+        "step": 7,
+        "time": "1:05",
+        "title": "Prep Fresh Items",
+        "duration": "15 min active",
+        "do": [
+          "SLAW: Thinly slice 1/2 cabbage. Toss with mayo, vinegar, salt/pepper.",
+          "DRESSING: Shake olive oil + vinegar + Dijon + garlic.",
+          "Wash and prep greens, slice cucumber, rinse berries.",
+          "Peel remaining eggs."
+        ],
+        "status_after": "Fresh items prepped, stew done"
+      },
+      {
+        "step": 8,
+        "time": "1:20",
+        "title": "Portion Grab-and-Go Containers (2-person portions)",
+        "duration": "20 min",
+        "do": [
+          "BAKED SALMON BOWLS (7 containers): Each = HIM 8oz + HER 5oz salmon + cauli mash + mixed veggies + butter",
+          "LEMON HERB COD PLATES (6 containers): Each = HIM 7oz + HER 5oz cod + brussels + zucchini",
+          "SHRIMP & VEGGIE BOWLS (6 containers): Each = HIM 8oz + HER 6oz shrimp + riced cauliflower + peppers/broccoli",
+          "MEDITERRANEAN STEW (5 containers): Ladle from SLOW COOKER #1, HIM gets more fish chunks",
+          "Label containers with H (him) and S (she) portions"
+        ],
+        "status_after": "24 grab-and-go meals assembled (12 per person)"
+      },
+      {
+        "step": 9,
+        "time": "1:40",
+        "title": "Fresh Containers, Snacks, Cleanup",
+        "duration": "20 min",
+        "do": [
+          "DEVILED EGGS: Halve 12 eggs, mash yolks with mayo + Dijon. Fill, dust with paprika.",
+          "SALAD BASES (7): 3 cups mixed greens each",
+          "NIÇOISE TOPPINGS (4): olives + tomatoes + capers",
+          "COBB TOPPINGS (4): bacon + egg + cheese",
+          "Organize fridge, clean up",
+          "DONE at 2:00!"
+        ],
+        "status_after": "DONE! 24 grab-and-go + fresh kits + snacks for 2"
+      }
+    ],
+    "timeline_summary": [
+      "12:00 - Prep fish on trays, start eggs, preheat both ovens",
+      "12:15 - Both fish in Oven #1 (2 racks), bacon in air fryer, cauli rice in Slow Cooker #2",
+      "12:27 - Cod out, eggs to ice bath, bacon done, prep veggies",
+      "12:33 - Salmon out, veggies into both ovens",
+      "12:45 - Shrimp + cauli mash on stovetop, start stew in Slow Cooker #1",
+      "12:55 - Veggies out, finish mash, add cod to stew",
+      "1:05 - Prep slaw, dressing, fresh items",
+      "1:20 - Portion grab-and-go containers",
+      "1:40 - Fresh containers, deviled eggs, cleanup",
+      "2:00 - DONE!"
+    ],
+    "results": {
+      "grab_and_go": [
+        "7 Baked Salmon Bowls (2-person: 8oz + 5oz salmon + mash + veggies)",
+        "6 Lemon Herb Cod Plates (2-person: 7oz + 5oz cod + brussels + zucchini)",
+        "6 Shrimp & Veggie Bowls (2-person: 8oz + 6oz shrimp + cauli rice + peppers)",
+        "5 Mediterranean Fish Stew (2-person portions, more fish for him)"
+      ],
+      "fresh_containers": [
+        "24 Deviled eggs (ready to eat)",
+        "7 Salad bases (greens only)",
+        "4 Niçoise toppings (olives + tomatoes + capers)",
+        "4 Cobb toppings (bacon + egg + cheese)",
+        "Dressing jar"
+      ],
+      "no_cook_proteins": [
+        "Smoked salmon (1 lb) - slice day-of",
+        "Sardines (8 cans) - open and serve",
+        "Canned tuna (4 cans) - mix into salad day-of",
+        "Canned salmon (3 cans) - for fresh patties mid-week"
+      ],
+      "extras": [
+        "10 Avocados - slice day-of",
+        "Berries + Greek yogurt (48 oz) - for snacks",
+        "Raw veggies - cucumber, celery sticks",
+        "Remaining eggs (~12) - for fresh cooking"
+      ]
+    }
+  },
+  "recipes": {
+    "grab_and_go": [
+      {
+        "name": "Baked Salmon Bowl",
+        "prep_type": "grab_and_go",
+        "him": { "protein": 65, "cal": 780, "portion": "8oz salmon" },
+        "her": { "protein": 42, "cal": 520, "portion": "5oz salmon" },
+        "container": "Salmon + cauliflower mash + roasted veggies",
+        "instructions": "Microwave 2 min or enjoy cold. Add fresh lemon, dill, butter."
+      },
+      {
+        "name": "Lemon Herb Cod Plate",
+        "prep_type": "grab_and_go",
+        "him": { "protein": 55, "cal": 680, "portion": "7oz cod" },
+        "her": { "protein": 40, "cal": 500, "portion": "5oz cod" },
+        "container": "Cod + brussels sprouts + zucchini",
+        "instructions": "Microwave 2 min. Squeeze fresh lemon, drizzle olive oil."
+      },
+      {
+        "name": "Shrimp & Veggie Bowl",
+        "prep_type": "grab_and_go",
+        "him": { "protein": 52, "cal": 680, "portion": "8oz shrimp" },
+        "her": { "protein": 42, "cal": 520, "portion": "6oz shrimp" },
+        "container": "Garlic shrimp + cauliflower rice + peppers & broccoli",
+        "instructions": "Microwave 2 min. Add hot sauce if desired."
+      },
+      {
+        "name": "Mediterranean Fish Stew",
+        "prep_type": "grab_and_go",
+        "him": { "protein": 52, "cal": 680, "portion": "8oz cod in stew" },
+        "her": { "protein": 38, "cal": 480, "portion": "5oz cod in stew" },
+        "container": "Cod chunks in tomato-olive-caper broth",
+        "instructions": "Heat on stovetop or microwave 2-3 min. Serve with extra olive oil."
+      }
+    ],
+    "add_fresh": [
+      {
+        "name": "Sardine Niçoise Salad",
+        "prep_type": "add_fresh",
+        "him": { "protein": 58, "cal": 750, "portion": "2 cans sardines + 2 eggs" },
+        "her": { "protein": 42, "cal": 550, "portion": "1.5 cans sardines + 1 egg" },
+        "grab": "Salad base + Niçoise toppings + eggs",
+        "add_fresh": ["Sardines", "1/2 avocado (optional)"],
+        "instructions": "Arrange greens, top with sardines, eggs, olives, tomatoes, capers. Drizzle dressing generously."
+      },
+      {
+        "name": "Tuna Avocado Lettuce Wraps",
+        "prep_type": "add_fresh",
+        "him": { "protein": 55, "cal": 720, "portion": "2 cans tuna + 1 egg" },
+        "her": { "protein": 38, "cal": 520, "portion": "1 can tuna + 1 egg" },
+        "grab": "Butter lettuce + eggs",
+        "add_fresh": ["Tuna cans", "Avocado", "Mayo", "Lemon juice"],
+        "instructions": "Mix tuna with mayo, lemon, diced egg. Spoon into lettuce cups. Top with avocado slices."
+      },
+      {
+        "name": "Smoked Salmon Plate",
+        "prep_type": "add_fresh",
+        "him": { "protein": 48, "cal": 680, "portion": "5oz smoked salmon + 2 eggs" },
+        "her": { "protein": 35, "cal": 480, "portion": "3oz smoked salmon + 1 egg" },
+        "grab": "Cucumber + eggs",
+        "add_fresh": ["Smoked salmon", "Cream cheese", "Capers", "Fresh dill"],
+        "instructions": "Arrange salmon on plate. Slice cucumber. Spread cream cheese on cucumber rounds, top with salmon, capers, dill."
+      },
+      {
+        "name": "Shrimp Cobb Salad",
+        "prep_type": "add_fresh",
+        "him": { "protein": 62, "cal": 780, "portion": "8oz shrimp + bacon + egg" },
+        "her": { "protein": 45, "cal": 580, "portion": "5oz shrimp + bacon + egg" },
+        "grab": "Salad base + Cobb toppings + shrimp from fridge",
+        "add_fresh": ["1/2 avocado", "Extra cheese if desired"],
+        "instructions": "Warm shrimp briefly or serve cold. Arrange on greens with bacon, egg, cheese, avocado in rows. Drizzle dressing."
+      }
+    ],
+    "cook_fresh": [
+      {
+        "name": "Garlic Butter Shrimp",
+        "prep_type": "cook_fresh",
+        "him": { "protein": 62, "cal": 820, "portion": "10oz shrimp" },
+        "her": { "protein": 45, "cal": 600, "portion": "7oz shrimp" },
+        "cook_time": "10 min",
+        "ingredients": [
+          "17 oz raw shrimp total (reserve from Sunday)",
+          "4 tbsp butter",
+          "4 garlic cloves, minced",
+          "2 cups roasted veggies (from fridge)",
+          "Lemon, parsley, red pepper flakes"
+        ],
+        "instructions": "Melt butter in pan over medium-high. Add garlic, cook 30 sec. Add shrimp, cook 2-3 min per side until pink. Finish with lemon juice, parsley, pepper flakes. Serve over warmed veggies. Plate larger portion for him."
+      },
+      {
+        "name": "Blackened Cod Tacos",
+        "prep_type": "cook_fresh",
+        "him": { "protein": 55, "cal": 750, "portion": "8oz cod" },
+        "her": { "protein": 40, "cal": 550, "portion": "5oz cod" },
+        "cook_time": "15 min",
+        "ingredients": [
+          "13 oz cod fillet total",
+          "3 tbsp blackening seasoning",
+          "Slaw from fridge",
+          "1 avocado",
+          "Butter lettuce for wraps",
+          "Lime, hot sauce"
+        ],
+        "instructions": "Coat cod in blackening spice. Heat oiled pan over high heat. Sear 3-4 min per side until blackened and flaky. Break into chunks. Serve in lettuce wraps with slaw, avocado, lime, hot sauce. More fish for him."
+      },
+      {
+        "name": "Salmon Patties",
+        "prep_type": "cook_fresh",
+        "him": { "protein": 65, "cal": 780, "portion": "3 patties" },
+        "her": { "protein": 45, "cal": 520, "portion": "2 patties" },
+        "cook_time": "20 min",
+        "ingredients": [
+          "3 cans salmon (14 oz each), drained - makes 6-8 patties",
+          "3 eggs",
+          "1/3 cup almond flour or crushed pork rinds",
+          "3 tbsp Dijon mustard",
+          "3 tbsp mayo",
+          "Fresh dill, salt, pepper",
+          "Salad greens from fridge"
+        ],
+        "instructions": "Mix salmon, eggs, almond flour, mustard, dill, salt, pepper. Form into 6-8 patties. Pan-fry in butter 4 min per side until golden. Serve with mayo-dill aioli over dressed greens. 3 patties for him, 2 for her."
+      }
+    ],
+    "snacks": [
+      {
+        "name": "Deviled Eggs",
+        "protein": 18, "carbs": 2, "fat": 18, "cal": 280,
+        "portion": "3 eggs (6 halves)",
+        "ingredients": ["3 hard boiled eggs", "2 tbsp mayo", "1 tsp Dijon", "Paprika"],
+        "instructions": "Halve eggs, mash yolks with mayo and mustard. Fill whites, dust with paprika."
+      },
+      {
+        "name": "Sardines on Cucumber",
+        "protein": 20, "carbs": 4, "fat": 14, "cal": 220,
+        "portion": "1 can sardines + cucumber",
+        "ingredients": ["1 can sardines in olive oil", "1/2 cucumber, sliced", "Everything bagel seasoning"],
+        "instructions": "Top cucumber slices with sardines and their oil. Sprinkle with seasoning."
+      },
+      {
+        "name": "Smoked Salmon Roll-ups",
+        "protein": 18, "carbs": 2, "fat": 14, "cal": 200,
+        "portion": "3 oz smoked salmon + cream cheese",
+        "ingredients": ["3 oz smoked salmon", "2 oz cream cheese", "Fresh dill", "Capers"],
+        "instructions": "Spread cream cheese on salmon slices. Add dill and capers. Roll up."
+      },
+      {
+        "name": "Greek Yogurt + Berries + Nuts",
+        "protein": 22, "carbs": 18, "fat": 12, "cal": 280,
+        "portion": "1 cup yogurt + toppings",
+        "ingredients": ["1 cup Greek yogurt", "1/2 cup berries", "2 tbsp almonds or walnuts"],
+        "instructions": "Top yogurt with berries and nuts."
+      },
+      {
+        "name": "Bacon & Avocado",
+        "protein": 12, "carbs": 4, "fat": 24, "cal": 280,
+        "portion": "2 strips bacon + 1/2 avocado",
+        "ingredients": ["Bacon from fridge", "1/2 avocado", "Everything bagel seasoning"],
+        "instructions": "Top avocado halves with crumbled bacon and seasoning."
+      },
+      {
+        "name": "Cheese & Veggie Plate",
+        "protein": 14, "carbs": 8, "fat": 18, "cal": 240,
+        "portion": "2 oz cheese + raw veggies",
+        "ingredients": ["2 oz cheese", "Raw veggies from fridge", "10 olives"],
+        "instructions": "Slice cheese, arrange with veggies and olives."
+      }
+    ]
+  },
+  "weekly_menu": {
+    "overview": {
+      "meals_per_day": 2,
+      "him": { "target_calories": "1800-2000", "target_protein": 150 },
+      "her": { "target_calories": "1400", "target_protein": 115 },
+      "snack_note": "Snacks are shared. He gets extra snacks or larger portions to hit targets."
+    },
+    "days": [
+      {
+        "day": "Monday",
+        "meal1": { "name": "Baked Salmon Bowl", "type": "grab_and_go" },
+        "meal2": { "name": "Lemon Herb Cod Plate", "type": "grab_and_go" },
+        "snacks": ["Deviled Eggs (280, 18g)", "Cheese & Veggie Plate (240, 14g)"],
+        "him": { "cal": 1980, "protein": 152 },
+        "her": { "cal": 1280, "protein": 114 }
+      },
+      {
+        "day": "Tuesday",
+        "meal1": { "name": "Sardine Niçoise Salad", "type": "add_fresh" },
+        "meal2": { "name": "Shrimp Cobb Salad", "type": "add_fresh" },
+        "snacks": ["Greek Yogurt (280, 22g)", "Sardines on Cucumber (220, 20g)"],
+        "him": { "cal": 2030, "protein": 162 },
+        "her": { "cal": 1370, "protein": 119 }
+      },
+      {
+        "day": "Wednesday",
+        "meal1": { "name": "Mediterranean Fish Stew", "type": "grab_and_go" },
+        "meal2": { "name": "Garlic Butter Shrimp", "type": "cook_fresh", "note": "Cook fresh - 10 min" },
+        "snacks": ["Sardines on Cucumber (220, 20g)", "Greek Yogurt (280, 22g)"],
+        "him": { "cal": 2000, "protein": 156 },
+        "her": { "cal": 1380, "protein": 115 }
+      },
+      {
+        "day": "Thursday",
+        "meal1": { "name": "Smoked Salmon Plate", "type": "add_fresh" },
+        "meal2": { "name": "Baked Salmon Bowl", "type": "grab_and_go" },
+        "snacks": ["Deviled Eggs (280, 18g)", "Bacon & Avocado (280, 12g)"],
+        "him": { "cal": 2020, "protein": 143 },
+        "her": { "cal": 1360, "protein": 107 },
+        "note": "She can add extra snack if hungry"
+      },
+      {
+        "day": "Friday",
+        "meal1": { "name": "Shrimp & Veggie Bowl", "type": "grab_and_go" },
+        "meal2": { "name": "Blackened Cod Tacos", "type": "cook_fresh",
+          "note": "Cook fresh - 15 min" },
+        "snacks": ["Greek Yogurt (280, 22g)", "Smoked Salmon Roll-ups (200, 18g)"],
+        "him": { "cal": 1930, "protein": 147 },
+        "her": { "cal": 1350, "protein": 117 }
+      },
+      {
+        "day": "Saturday",
+        "meal1": { "name": "Sardine Niçoise Salad", "type": "add_fresh" },
+        "meal2": { "name": "Lemon Herb Cod Plate", "type": "grab_and_go" },
+        "snacks": ["Deviled Eggs (280, 18g)", "Sardines on Cucumber (220, 20g)"],
+        "him": { "cal": 1930, "protein": 151 },
+        "her": { "cal": 1310, "protein": 112 }
+      },
+      {
+        "day": "Sunday",
+        "meal1": { "name": "Tuna Avocado Lettuce Wraps", "type": "add_fresh" },
+        "meal2": { "name": "Salmon Patties", "type": "cook_fresh", "note": "Cook while prepping next week - 20 min" },
+        "snacks": ["Cheese & Veggie Plate (240, 14g)", "Greek Yogurt (280, 22g)"],
+        "him": { "cal": 2020, "protein": 154 },
+        "her": { "cal": 1300, "protein": 115 }
+      }
+    ]
+  }
+}

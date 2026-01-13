@@ -69,6 +69,20 @@
         nav a:hover { background: var(--surface); color: var(--text); }
         nav a.active { background: var(--blue); color: var(--bg); border-color: var(--blue); }
 
+        .week-selector { display: flex; gap: 8px; }
+        .week-btn {
+            padding: 8px 16px;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-dim);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .week-btn:hover { background: var(--surface); color: var(--text); }
+        .week-btn.active { background: var(--green); color: var(--bg); border-color: var(--green); }
+
         .tabs { display: flex; gap: 0; margin-bottom: 24px; border-bottom: 1px solid var(--border); }
         .tab {
             padding: 12px 24px;
@@ -203,10 +217,67 @@
         .gantt-legend-item { display: flex; align-items: center; gap: 4px; font-size: 11px; }
         .gantt-legend-color { width: 12px; height: 12px; border-radius: 2px; }
 
+        /* Portioning */
+        .portion-section { margin-bottom: 24px; }
+        .portion-section h3 { font-size: 14px; color: var(--yellow); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px; }
+        .portion-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; }
+        .portion-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .portion-card-header {
+            background: var(--surface-2);
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            font-weight: 600;
+            font-size: 15px;
+        }
+        .portion-card-body { padding: 16px; }
+        .portion-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+        .portion-row:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+        .portion-person {
+            flex: 1;
+            background: var(--surface-2);
+            border-radius: 6px;
+            padding: 10px 12px;
+        }
+        .portion-person-name {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+        .portion-person-name.him { color: var(--blue); }
+        .portion-person-name.her { color: var(--purple); }
+        .portion-macros { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+        .portion-detail { font-size: 12px; color: var(--text-dim); line-height: 1.5; }
+        .target-card {
+            background: var(--surface-2);
+            padding: 16px;
+            border-radius: 8px;
+            flex: 1;
+            text-align: center;
+        }
+        .target-card .name { font-size: 13px; text-transform: uppercase; font-weight: 600; margin-bottom: 8px; }
+        .target-card .name.him { color: var(--blue); }
+        .target-card .name.her { color: var(--purple); }
+        .target-card .values { font-size: 14px; }
+
         @media (max-width: 600px) {
             .shopping-grid { grid-template-columns: 1fr; }
             .tabs { overflow-x: auto; }
             .tab { padding: 12px 16px; white-space: nowrap; }
+            .portion-grid { grid-template-columns: 1fr; }
+            .portion-row { flex-direction: column; }
         }
     </style>
 </head>
@@ -215,7 +286,11 @@
         <header class="header">
             <div class="header-left">
                 <h1>Meal Prep</h1>
-                <p>Sunday batch cooking and shopping list</p>
+                <p id="week-subtitle">Sunday batch cooking and shopping list</p>
+            </div>
+            <div class="week-selector">
+                <button class="week-btn active" data-week="recipes.json" onclick="switchWeek(this)">Week 1: Meat</button>
+                <button class="week-btn" data-week="recipes-week2-fish.json" onclick="switchWeek(this)">Week 2: Seafood</button>
             </div>
         </header>
 
@@ -231,6 +306,7 @@
     <div class="tabs">
         <button class="tab active" onclick="showTab('cooking')">Cooking Guide</button>
         <button class="tab" onclick="showTab('shopping')">Shopping List</button>
+        <button class="tab" onclick="showTab('portioning')">Portioning</button>
     </div>
 
     <!-- SUNDAY COOKING TAB -->
@@ -285,20 +361,52 @@
         </div>
     </div>
 
+    <!-- PORTIONING TAB -->
+    <div id="tab-portioning" class="tab-content">
+        <div class="card">
+            <h2>Portion Sizes by Person</h2>
+            <div id="portioning-targets" style="display: flex; gap: 16px; margin-bottom: 24px;">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+        <div id="portioning-content">
+            <!-- Populated by JS -->
+        </div>
+    </div>
+
     <script>
         let data = null;
+        let currentWeek = 'recipes.json';
 
         // Load data from JSON
-        async function loadData() {
+        async function loadData(jsonFile = 'recipes.json') {
             try {
-                const response = await fetch('recipes.json');
+                currentWeek = jsonFile;
+                const response = await fetch(jsonFile);
                 data = await response.json();
+
+                // Update subtitle if week info available
+                const subtitle = document.getElementById('week-subtitle');
+                if (data.week) {
+                    subtitle.textContent = data.week + ' - Sunday batch cooking';
+                } else {
+                    subtitle.textContent = 'Week 1: Meat Focus - Sunday batch cooking';
+                }
+
                 renderShopping();
                 renderCooking();
+                renderPortioning();
                 loadShoppingState();
             } catch (error) {
-                console.error('Error loading recipes.json:', error);
+                console.error('Error loading ' + jsonFile + ':', error);
             }
+        }
+
+        // Switch between weeks
+        function switchWeek(btn) {
+            document.querySelectorAll('.week-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            loadData(btn.dataset.week);
         }
 
         // Tab switching
@@ -320,14 +428,16 @@
                 fresh: 'Fresh / Snacking',
                 dairy: 'Dairy & Fats',
                 pantry: 'Pantry Items',
-                fresh_additions: 'Fresh (buy day-of salmon/steak)'
+                fresh_additions: 'Fresh (buy day-of)'
             };
 
-            grid.innerHTML = Object.entries(categories).map(([key, label]) => `
+            grid.innerHTML = Object.entries(categories)
+                .filter(([key]) => data.shopping[key] && data.shopping[key].length > 0)
+                .map(([key, label]) => `
                 <div class="shopping-category">
                     <h3>${label}</h3>
                     ${data.shopping[key].map((item, i) => `
-                        <div class="shopping-item" data-key="${key}-${i}" onclick="toggleItem(this)">
+                        <div class="shopping-item" data-key="${currentWeek}-${key}-${i}" onclick="toggleItem(this)">
                             <input type="checkbox"><label>${item}</label>
                         </div>
                     `).join('')}
@@ -422,11 +532,14 @@
             const resultLabels = {
                 grab_and_go: { label: 'Grab & Go Meals', color: 'var(--green)' },
                 fresh_containers: { label: 'Fresh Add-On Containers', color: 'var(--yellow)' },
+                no_cook_proteins: { label: 'No-Cook Proteins', color: 'var(--purple)' },
                 fresh_cook: { label: 'Cook Fresh (Mid-Week)', color: 'var(--purple)' },
                 extras: { label: 'Extras', color: 'var(--blue)' }
             };
 
-            results.innerHTML = Object.entries(resultLabels).map(([key, config]) => `
+            results.innerHTML = Object.entries(resultLabels)
+                .filter(([key]) => data.cooking.results[key] && data.cooking.results[key].length > 0)
+                .map(([key, config]) => `
                 <div>
                     <h3 style="color: ${config.color};">${config.label}</h3>
                     <ul>
@@ -444,7 +557,11 @@
         // ============================================
         function renderGanttChart() {
             const container = document.getElementById('gantt-chart');
-            const startHour = 12, endHour = 17;
+
+            // Fish week has shorter prep (12-2pm), meat week is longer (12-5pm)
+            const isFishWeek = currentWeek.includes('fish');
+            const startHour = 12;
+            const endHour = isFishWeek ? 14 : 17;  // 2pm for fish (2 hrs), 5pm for meat (4.75 hrs)
             const totalMinutes = (endHour - startHour) * 60;
 
             function timeToMinutes(t) {
@@ -454,7 +571,36 @@
             function getLeft(t) { return (timeToMinutes(t) / totalMinutes) * 100; }
             function getWidth(d) { return (d / totalMinutes) * 100; }
 
-            const tasks = {
+            // Different task layouts for each week
+            const tasks = isFishWeek ? {
+                'Oven #1 (400°F)': [
+                    { start: '12:15', duration: 18, label: 'Salmon+Cod', type: 'oven1' },
+                    { start: '12:33', duration: 22, label: 'Broc/Brus', type: 'oven1' }
+                ],
+                'Oven #2 (400°F)': [
+                    { start: '12:33', duration: 22, label: 'Zuc/Pep', type: 'oven2' }
+                ],
+                'Stovetop': [
+                    { start: '12:00', duration: 27, label: 'Eggs', type: 'stovetop' },
+                    { start: '12:45', duration: 10, label: 'Shrimp', type: 'stovetop' },
+                    { start: '12:45', duration: 15, label: 'Mash', type: 'stovetop' }
+                ],
+                'Slow Cooker 1': [
+                    { start: '12:45', duration: 25, label: 'Fish Stew', type: 'slow_cooker' }
+                ],
+                'Slow Cooker 2': [
+                    { start: '12:15', duration: 65, label: 'Cauli Rice', type: 'slow_cooker' }
+                ],
+                'Air Fryer': [
+                    { start: '12:15', duration: 12, label: 'Bacon', type: 'air_fryer' }
+                ],
+                'Prep/Assembly': [
+                    { start: '12:00', duration: 15, label: 'Prep fish', type: 'prep' },
+                    { start: '12:27', duration: 6, label: 'Cut veg', type: 'prep' },
+                    { start: '13:05', duration: 15, label: 'Fresh prep', type: 'prep' },
+                    { start: '13:20', duration: 40, label: 'Pack + Clean', type: 'assembly' }
+                ]
+            } : {
                 'Oven #1 (300°F)': [
                     { start: '12:00', duration: 180, label: 'Pork Braise', type: 'oven1' }
                 ],
@@ -520,6 +666,84 @@
             </div></div>`;
 
             container.innerHTML = html;
+        }
+
+        // ============================================
+        // PORTIONING
+        // ============================================
+        function renderPortioning() {
+            const targets = document.getElementById('portioning-targets');
+            const content = document.getElementById('portioning-content');
+
+            // Render daily targets
+            if (data.daily_targets) {
+                const p1 = data.daily_targets.person1;
+                const p2 = data.daily_targets.person2;
+                targets.innerHTML = `
+                    <div class="target-card">
+                        <div class="name him">${p1.name}</div>
+                        <div class="values">${p1.calories} cal / ${p1.protein}g protein</div>
+                    </div>
+                    <div class="target-card">
+                        <div class="name her">${p2.name}</div>
+                        <div class="values">${p2.calories} cal / ${p2.protein}g protein</div>
+                    </div>
+                `;
+            } else {
+                targets.innerHTML = '<p style="color: var(--text-dim);">No daily targets defined</p>';
+            }
+
+            // Render recipe portions
+            const categories = [
+                { key: 'grab_and_go', label: 'Grab & Go Meals' },
+                { key: 'add_fresh', label: 'Add Fresh Meals' },
+                { key: 'cook_fresh', label: 'Cook Fresh Meals' },
+                { key: 'snacks', label: 'Snacks' }
+            ];
+
+            let html = '';
+            for (const cat of categories) {
+                const recipes = data.recipes[cat.key];
+                if (!recipes || recipes.length === 0) continue;
+
+                html += `<div class="card portion-section">
+                    <h3>${cat.label}</h3>
+                    <div class="portion-grid">`;
+
+                for (const recipe of recipes) {
+                    const him = recipe.him;
+                    const her = recipe.her;
+
+                    if (!him && !her) continue; // Skip recipes without portion info
+
+                    html += `<div class="portion-card">
+                        <div class="portion-card-header">${recipe.name}</div>
+                        <div class="portion-card-body">
+                            <div class="portion-row">`;
+
+                    if (him) {
+                        html += `<div class="portion-person">
+                            <div class="portion-person-name him">Him</div>
+                            <div class="portion-macros">${him.cal} cal • ${him.protein}g protein</div>
+                            <div class="portion-detail">${him.portion}</div>
+                        </div>`;
+                    }
+
+                    if (her) {
+                        html += `<div class="portion-person">
+                            <div class="portion-person-name her">Her</div>
+                            <div class="portion-macros">${her.cal} cal • ${her.protein}g protein</div>
+                            <div class="portion-detail">${her.portion}</div>
+                        </div>`;
+                    }
+
+                    html += `</div></div></div>`;
+                }
+
+                html += `</div></div>`;
+            }
+
+            content.innerHTML = html || '<div class="card"><p style="color: var(--text-dim);">No portion data available</p></div>';
         }
 
         // Init
