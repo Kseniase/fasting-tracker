@@ -263,6 +263,160 @@ done
 # Sort log entries by date
 jq '.log |= sort_by(.date, .type)' "$DATA_FILE" > "$DATA_FILE.tmp" && mv "$DATA_FILE.tmp" "$DATA_FILE"
 
+# === REFEED PHASE UPDATES ===
+# Check if we're in refeed phase (after fast end date)
+REFEED_START=$(jq -r '.refeed.start // empty' "$DATA_FILE" | cut -d'T' -f1)
+
+if [ -n "$REFEED_START" ]; then
+  REFEED_START_EPOCH=$(date -j -f "%Y-%m-%d" "$REFEED_START" +%s 2>/dev/null || date -d "$REFEED_START" +%s)
+
+  echo
+  echo "=== Updating Refeed Measurements ==="
+
+  # Process each day from activity that falls in refeed period
+  echo "$ACTIVITY" | jq -r '.data[].day' | while read DAY; do
+    [ -z "$DAY" ] && continue
+
+    DAY_EPOCH=$(date -j -f "%Y-%m-%d" "$DAY" +%s 2>/dev/null || date -d "$DAY" +%s)
+
+    # Skip if before refeed start
+    [ "$DAY_EPOCH" -lt "$REFEED_START_EPOCH" ] && continue
+
+    REFEED_DAY_NUM=$(( (DAY_EPOCH - REFEED_START_EPOCH) / 86400 + 1 ))
+
+    echo "Processing refeed day $REFEED_DAY_NUM ($DAY)..."
+
+    # Extract values for this day (same as above)
+    SLEEP_SCORE=$(echo "$SLEEP_SUMMARY" | jq -r ".data[] | select(.day == \"$DAY\") | .score // null")
+    READINESS_SCORE=$(echo "$READINESS" | jq -r ".data[] | select(.day == \"$DAY\") | .score // null")
+    TEMP_DEV=$(echo "$READINESS" | jq -r ".data[] | select(.day == \"$DAY\") | .temperature_deviation // null")
+    HRV_BALANCE=$(echo "$READINESS" | jq -r ".data[] | select(.day == \"$DAY\") | .contributors.hrv_balance // null")
+    ACTIVITY_SCORE=$(echo "$ACTIVITY" | jq -r ".data[] | select(.day == \"$DAY\") | .score // null")
+    STEPS=$(echo "$ACTIVITY" | jq -r ".data[] | select(.day == \"$DAY\") | .steps // null")
+    TOTAL_CAL=$(echo "$ACTIVITY" | jq -r ".data[] | select(.day == \"$DAY\") | .total_calories // null")
+    ACTIVE_CAL=$(echo "$ACTIVITY" | jq -r ".data[] | select(.day == \"$DAY\") | .active_calories // null")
+
+    # Get sleep data
+    SLEEP_DATA=$(echo "$SLEEP_DETAIL" | jq ".data[] | select(.day == \"$DAY\" and .type == \"long_sleep\")")
+    BEDTIME=$(echo "$SLEEP_DATA" | jq -r '.bedtime_start // null')
+    WAKETIME=$(echo "$SLEEP_DATA" | jq -r '.bedtime_end // null')
+    TOTAL_SLEEP_SEC=$(echo "$SLEEP_DATA" | jq -r '.total_sleep_duration // 0')
+    DEEP_SEC=$(echo "$SLEEP_DATA" | jq -r '.deep_sleep_duration // 0')
+    REM_SEC=$(echo "$SLEEP_DATA" | jq -r '.rem_sleep_duration // 0')
+    LIGHT_SEC=$(echo "$SLEEP_DATA" | jq -r '.light_sleep_duration // 0')
+    EFFICIENCY=$(echo "$SLEEP_DATA" | jq -r '.efficiency // null')
+    LOWEST_HR=$(echo "$SLEEP_DATA" | jq -r '.lowest_heart_rate // null')
+    AVG_HRV=$(echo "$SLEEP_DATA" | jq -r '.average_hrv // null')
+
+    TOTAL_HOURS=$(echo "scale=1; $TOTAL_SLEEP_SEC / 3600" | bc)
+    DEEP_MINS=$(echo "$DEEP_SEC / 60" | bc)
+    REM_MINS=$(echo "$REM_SEC / 60" | bc)
+    LIGHT_MINS=$(echo "$LIGHT_SEC / 60" | bc)
+
+    STRESS_SUMMARY=$(echo "$STRESS" | jq -r ".data[] | select(.day == \"$DAY\") | .day_summary // empty" | head -1)
+    [ -z "$STRESS_SUMMARY" ] && STRESS_SUMMARY="null"
+    STRESS_HIGH=$(echo "$STRESS" | jq -r ".data[] | select(.day == \"$DAY\") | (.stress_high // 0) / 60 | floor" | head -1)
+    [ -z "$STRESS_HIGH" ] && STRESS_HIGH="0"
+    RECOVERY_HIGH=$(echo "$STRESS" | jq -r ".data[] | select(.day == \"$DAY\") | (.recovery_high // 0) / 60 | floor" | head -1)
+    [ -z "$RECOVERY_HIGH" ] && RECOVERY_HIGH="0"
+
+    # Build sleep object
+    if [ "$TOTAL_SLEEP_SEC" != "0" ] && [ -n "$BEDTIME" ] && [ "$BEDTIME" != "null" ]; then
+      SLEEP_OBJ=$(jq -n \
+        --arg bedtime "$BEDTIME" \
+        --arg wake "$WAKETIME" \
+        --argjson hours "$TOTAL_HOURS" \
+        --argjson deep "$DEEP_MINS" \
+        --argjson rem "$REM_MINS" \
+        --argjson light "$LIGHT_MINS" \
+        --argjson eff "$EFFICIENCY" \
+        --argjson hr "$LOWEST_HR" \
+        --argjson hrv "$AVG_HRV" \
+        '{bedtime: $bedtime, wake_time: $wake, total_hours: $hours, deep_mins: $deep, rem_mins: $rem, light_mins: $light, efficiency: $eff, lowest_hr: $hr, avg_hrv: $hrv}')
+    else
+      SLEEP_OBJ="null"
+    fi
+
+    # Build stress object
+    STRESS_OBJ=$(jq -n \
+      --arg summary "$STRESS_SUMMARY" \
+      --argjson stress "$STRESS_HIGH" \
+      --argjson recovery "$RECOVERY_HIGH" \
+      '{summary: (if $summary == "null" or $summary == "" then null else $summary end), stress_mins: $stress, recovery_mins: $recovery}')
+
+    # Check if refeed measurement exists for this day
+    EXISTS=$(jq -r ".refeed_measurements[] | select(.date == \"$DAY\") | .date" "$DATA_FILE")
+
+    if [ -n "$EXISTS" ]; then
+      # Update existing refeed measurement (only oura data, preserve meals/weight)
+      echo "  Updating Oura data for refeed day $REFEED_DAY_NUM"
+
+      jq --arg day "$DAY" \
+         --argjson sleep_score "${SLEEP_SCORE:-null}" \
+         --argjson readiness "${READINESS_SCORE:-null}" \
+         --argjson activity "${ACTIVITY_SCORE:-null}" \
+         --argjson steps "${STEPS:-null}" \
+         --argjson total_cal "${TOTAL_CAL:-null}" \
+         --argjson active_cal "${ACTIVE_CAL:-null}" \
+         --argjson hrv "${HRV_BALANCE:-null}" \
+         --argjson temp "${TEMP_DEV:-null}" \
+         --argjson sleep_obj "$SLEEP_OBJ" \
+         --argjson stress_obj "$STRESS_OBJ" \
+         '(.refeed_measurements[] | select(.date == $day).oura) = {
+           sleep_score: $sleep_score,
+           readiness_score: $readiness,
+           activity_score: $activity,
+           steps: $steps,
+           total_calories: $total_cal,
+           active_calories: $active_cal,
+           hrv_balance: $hrv,
+           body_temp_deviation: $temp,
+           sleep: $sleep_obj,
+           stress: $stress_obj
+         }' "$DATA_FILE" > "$DATA_FILE.tmp" && mv "$DATA_FILE.tmp" "$DATA_FILE"
+    else
+      # Add new refeed measurement
+      echo "  Adding new refeed entry for day $REFEED_DAY_NUM"
+
+      jq --arg day "$DAY" \
+         --argjson refeed_day "$REFEED_DAY_NUM" \
+         --argjson sleep_score "${SLEEP_SCORE:-null}" \
+         --argjson readiness "${READINESS_SCORE:-null}" \
+         --argjson activity "${ACTIVITY_SCORE:-null}" \
+         --argjson steps "${STEPS:-null}" \
+         --argjson total_cal "${TOTAL_CAL:-null}" \
+         --argjson active_cal "${ACTIVE_CAL:-null}" \
+         --argjson hrv "${HRV_BALANCE:-null}" \
+         --argjson temp "${TEMP_DEV:-null}" \
+         --argjson sleep_obj "$SLEEP_OBJ" \
+         --argjson stress_obj "$STRESS_OBJ" \
+         '.refeed_measurements += [{
+           date: $day,
+           refeed_day: $refeed_day,
+           weight_kg: null,
+           weight_change_kg: null,
+           calories_consumed: null,
+           protein_g: null,
+           carbs_g: null,
+           meals: [],
+           oura: {
+             sleep_score: $sleep_score,
+             readiness_score: $readiness,
+             activity_score: $activity,
+             steps: $steps,
+             total_calories: $total_cal,
+             active_calories: $active_cal,
+             hrv_balance: $hrv,
+             body_temp_deviation: $temp,
+             sleep: $sleep_obj,
+             stress: $stress_obj
+           },
+           notes: ""
+         }]' "$DATA_FILE" > "$DATA_FILE.tmp" && mv "$DATA_FILE.tmp" "$DATA_FILE"
+    fi
+  done
+fi
+
 echo
 echo "=== Done! ==="
 echo "Note: Weight must still be entered manually. Run with a date to update specific day:"

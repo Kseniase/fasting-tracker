@@ -27,7 +27,30 @@
       "visceral_fat_kg": 2.35,
       "visceral_fat_target_lbs": 1.0,
       "t_score": 0.80,
+      "image": "body-scan-2026-01-03-baseline.jpeg",
       "notes": "Baseline body scan at start of fast. Visceral fat 5x target."
+    },
+    {
+      "date": "2026-01-12",
+      "day": 11,
+      "source": "body scan",
+      "body_score": 74,
+      "body_fat_pct": 35.0,
+      "body_fat_change_pct": -2.10,
+      "lean_mass_lbs": 124,
+      "lean_mass_kg": 56.2,
+      "lean_mass_change_lbs": -4.40,
+      "total_mass_lbs": 200,
+      "total_mass_kg": 90.7,
+      "total_mass_change_lbs": -14.2,
+      "visceral_fat_lbs": 3.80,
+      "visceral_fat_kg": 1.72,
+      "visceral_fat_change_lbs": -1.38,
+      "visceral_fat_target_lbs": 1.0,
+      "t_score": 0.40,
+      "t_score_change": -0.40,
+      "image": "body-scan-2026-01-12-final.jpeg",
+      "notes": "Final body scan after 11-day fast. Visceral fat reduced 27% (5.18 to 3.80 lbs). Body fat % down 2.1 points. Lost 14.2 lbs total, 4.4 lbs lean mass preserved most muscle."
     }
   ],
   "measurements": [
@@ -402,10 +425,10 @@
       "oura": {
         "sleep_score": 67,
         "readiness_score": 72,
-        "activity_score": 65,
-        "steps": 0,
-        "total_calories": 1923,
-        "active_calories": 0,
+        "activity_score": 60,
+        "steps": 5265,
+        "total_calories": 2512,
+        "active_calories": 225,
         "hrv_balance": 69,
         "body_temp_deviation": -0.05,
         "sleep": {
@@ -418,6 +441,39 @@
           "efficiency": 72,
           "lowest_hr": 54,
           "avg_hrv": 34
+        },
+        "stress": {
+          "summary": "restored",
+          "stress_mins": 120,
+          "recovery_mins": 270
+        }
+      },
+      "notes": ""
+    },
+    {
+      "date": "2026-01-13",
+      "day": 12,
+      "weight_kg": null,
+      "weight_change_kg": null,
+      "oura": {
+        "sleep_score": 61,
+        "readiness_score": 59,
+        "activity_score": 62,
+        "steps": 0,
+        "total_calories": 1915,
+        "active_calories": 0,
+        "hrv_balance": 51,
+        "body_temp_deviation": -0.21,
+        "sleep": {
+          "bedtime": "2026-01-12T21:45:28.000-05:00",
+          "wake_time": "2026-01-13T02:25:28.000-05:00",
+          "total_hours": 4.1,
+          "deep_mins": 32,
+          "rem_mins": 40,
+          "light_mins": 174,
+          "efficiency": 88,
+          "lowest_hr": 62,
+          "avg_hrv": 21
         },
         "stress": {
           "summary": null,
@@ -654,14 +710,133 @@
     {
       "date": "2026-01-12",
       "day": 11,
-      "type": "sleep",
-      "message": "Woke up: 4:29 AM (5.0 hrs sleep)"
+      "type": "event",
+      "message": "DEXA body scan completed. Results: Body score 74 (+1), body fat 35% (-2.1%), visceral fat 3.80 lbs (-1.38 lbs, 27% reduction!), lean mass 124 lbs (-4.4 lbs), total mass 200 lbs (-14.2 lbs). Visceral fat now 3.8x target vs 5x at start. Excellent preservation of lean mass relative to total loss."
+    },
+    {
+      "date": "2026-01-12",
+      "day": 11,
+      "type": "event",
+      "message": "Refeed protocol begins at 6:00 PM. Starting with bone broth, then soft-boiled eggs at 8 PM. 10-day structured refeeding plan to restore gut function and rebuild lean mass."
     },
     {
       "date": "2026-01-12",
       "day": 11,
       "type": "observation",
       "message": "Weight: 88.9 kg (-0.8 kg overnight, -9.4 kg total from Day 1). Day 11 Completion & DEXA Scan - sleep score 67, readiness 72, lowest HR 54 bpm (new low!), HRV 34. Deep sleep strong at 87 mins. Ready for DEXA scan today to measure final results before refeed."
+    },
+    {
+      "date": "2026-01-12",
+      "day": 11,
+      "type": "sleep",
+      "message": "Woke up: 4:29 AM (5.0 hrs sleep)"
+    },
+    {
+      "date": "2026-01-12",
+      "day": 11,
+      "type": "sleep",
+      "message": "Bedtime: 9:45 PM"
+    },
+    {
+      "date": "2026-01-13",
+      "day": 12,
+      "type": "sleep",
+      "message": "Woke up: 2:25 AM (4.1 hrs sleep)"
+    }
+  ],
+  "refeed": {
+    "start": "2026-01-12T18:00:00",
+    "goal_days": 10,
+    "end": "2026-01-22T18:00:00",
+    "note": "10-day structured refeeding protocol"
+  },
+  "refeed_measurements": [
+    {
+      "date": "2026-01-12",
+      "refeed_day": 1,
+      "weight_kg": 88.9,
+      "weight_change_kg": null,
+      "calories_consumed": 150,
+      "protein_g": 12,
+      "carbs_g": 2,
+      "meals": [
+        {
+          "time": "18:00",
+          "description": "1 cup bone broth",
+          "calories": 40,
+          "protein_g": 6
+        },
+        {
+          "time": "20:00",
+          "description": "1 cup bone broth with 1 poached egg",
+          "calories": 110,
+          "protein_g": 6
+        }
+      ],
+      "oura": {
+        "sleep_score": 67,
+        "readiness_score": 72,
+        "activity_score": 60,
+        "steps": 5265,
+        "total_calories": 2512,
+        "active_calories": 225,
+        "hrv_balance": 69,
+        "body_temp_deviation": -0.05,
+        "sleep": {
+          "bedtime": "2026-01-11T21:25:58.000-05:00",
+          "wake_time": "2026-01-12T04:29:18.000-05:00",
+          "total_hours": 5.0,
+          "deep_mins": 87,
+          "rem_mins": 50,
+          "light_mins": 166,
+          "efficiency": 72,
+          "lowest_hr": 54,
+          "avg_hrv": 34
+        },
+        "stress": {
+          "summary": "restored",
+          "stress_mins": 120,
+          "recovery_mins": 270
+        }
+      },
+      "notes": "First refeed day. Started at 6pm with bone broth. Bowel movement ~1hr after first broth (normal gastrocolic reflex). Second meal was broth with one poached egg."
+    },
+    {
+      "date": "2026-01-13",
+      "refeed_day": 2,
+      "weight_kg": 89.7,
+      "weight_change_kg": 0.8,
+      "calories_consumed": null,
+      "protein_g": null,
+      "carbs_g": null,
+      "meals": [],
+      "oura": {
+        "sleep_score": 61,
+        "readiness_score": 59,
+        "activity_score": 62,
+        "steps": 0,
+        "total_calories": 1915,
+        "active_calories": 0,
+        "hrv_balance": 51,
+        "body_temp_deviation": -0.21,
+        "sleep": {
+          "bedtime": "2026-01-12T21:45:28.000-05:00",
+          "wake_time": "2026-01-13T02:25:28.000-05:00",
+          "total_hours": 4.1,
+          "deep_mins": 32,
+          "rem_mins": 40,
+          "light_mins": 174,
+          "efficiency": 88,
+          "lowest_hr": 62,
+          "avg_hrv": 21
+        },
+        "stress": {
+          "summary": null,
+          "stress_mins": 0,
+          "recovery_mins": 15
+        }
+      },
+      "notes": "Day 2 of refeed. Weight up 0.8kg (expected fluid retention from refeeding)."
     }
   ],
   "day_guide": {

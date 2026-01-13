@@ -1457,36 +1457,47 @@
         }
 
         function renderStats(latest, first) {
-            // Find first measurement with weight data
-            const firstWithWeight = data.measurements.find(m => m.weight_kg !== null);
-            const totalChange = firstWithWeight ? latest.weight_kg - firstWithWeight.weight_kg : 0;
+            // Find first and last measurements with weight data during the fast (days 0-11)
+            const fastMeasurements = data.measurements.filter(m => m.day >= 0 && m.day <= 11);
+            const firstWithWeight = fastMeasurements.find(m => m.weight_kg !== null);
+            const lastWithWeight = [...fastMeasurements].reverse().find(m => m.weight_kg !== null);
+            const totalChange = firstWithWeight && lastWithWeight ? lastWithWeight.weight_kg - firstWithWeight.weight_kg : 0;
+
+            // Check if fast is complete
+            const fastComplete = new Date() > new Date(data.fast.end);
+            const weightLabel = fastComplete ? 'Final Weight' : 'Current Weight';
+            const displayWeight = lastWithWeight ? lastWithWeight.weight_kg : latest.weight_kg;
+
             const html = `
                 <div class="stat-card">
-                    <div class="stat-label">Current Weight</div>
-                    <div class="stat-value">${latest.weight_kg}<span class="stat-unit"> kg</span></div>
+                    <div class="stat-label">${weightLabel}</div>
+                    <div class="stat-value">${displayWeight}<span class="stat-unit"> kg</span></div>
                     <div class="stat-change positive">↓ ${Math.abs(totalChange).toFixed(1)} kg total</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-label">Total Calories Burned</div>
                     <div class="stat-value">${getTotalCaloriesBurned().toLocaleString()}</div>
-                    <div class="stat-change positive">Entire fast</div>
+                    <div class="stat-change positive">Entire fast (${data.fast.goal_days} days)</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-label">Readiness</div>
-                    <div class="stat-value">${latest.oura.readiness_score || '—'}</div>
-                    <div class="stat-change ${getScoreClass(latest.oura.readiness_score)}">${getScoreLabel(latest.oura.readiness_score)}</div>
+                    <div class="stat-label">Avg Daily Burn</div>
+                    <div class="stat-value">${Math.round(getTotalCaloriesBurned() / data.fast.goal_days).toLocaleString()}</div>
+                    <div class="stat-change positive">↑ ${Math.round((getTotalCaloriesBurned() / data.fast.goal_days / data.baseline.avg_total_calories - 1) * 100)}% vs baseline</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-label">Calories Burned</div>
-                    <div class="stat-value">${latest.oura.total_calories?.toLocaleString() || '—'}</div>
-                    ${latest.oura.total_calories ? `<div class="stat-change positive">↑ ${((latest.oura.total_calories / data.baseline.avg_total_calories - 1) * 100).toFixed(0)}% vs baseline</div>` : ''}
+                    <div class="stat-label">Est. Fat Burned</div>
+                    <div class="stat-value">${((getTotalCaloriesBurned() - (data.baseline.avg_total_calories * 2)) / 7700).toFixed(1)}<span class="stat-unit"> kg</span></div>
+                    <div class="stat-change positive">~${((getTotalCaloriesBurned() - (data.baseline.avg_total_calories * 2)) / 7700 * 2.2).toFixed(1)} lbs</div>
                 </div>
             `;
             document.getElementById('statsRow').innerHTML = html;
         }
 
         function getTotalCaloriesBurned() {
-            return data.measurements.reduce((sum, m) => sum + (m.oura.total_calories || 0), 0);
+            // Sum calories only for fast days (0-11)
+            return data.measurements
+                .filter(m => m.day >= 0 && m.day <= 11)
+                .reduce((sum, m) => sum + (m.oura.total_calories || 0), 0);
         }
 
         function getScoreClass(score) {
