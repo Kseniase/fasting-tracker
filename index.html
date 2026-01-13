@@ -2115,40 +2115,142 @@
         }
 
         function renderBodyComp() {
-            const comp = data.body_composition[0];
-            if (!comp) {
+            const baseline = data.body_composition[0];
+            const final = data.body_composition.length > 1 ? data.body_composition[1] : null;
+
+            if (!baseline) {
                 document.getElementById('bodyComp').innerHTML = '<p style="color: var(--text-dim);">No body scan data yet</p>';
                 return;
             }
 
-            document.getElementById('bodyComp').innerHTML = `
-                <div class="visceral-highlight">
-                    <div class="body-stat" style="border: none; padding: 0;">
-                        <span class="body-stat-label">Visceral Fat</span>
-                        <span class="body-stat-value">${comp.visceral_fat_lbs} lbs</span>
+            // Update the card badge to reflect we have both scans
+            const cardBadge = document.querySelector('#bodyComp').closest('.card').querySelector('.card-badge');
+            if (cardBadge && final) {
+                cardBadge.textContent = 'BEFORE & AFTER';
+            }
+
+            // Helper to format change values
+            const formatChange = (change, unit = '', invert = false) => {
+                if (change === null || change === undefined) return '';
+                const isPositive = invert ? change < 0 : change > 0;
+                const sign = change > 0 ? '+' : '';
+                const colorClass = isPositive ? 'positive' : 'negative';
+                return `<span class="stat-change ${colorClass}" style="display: inline-block; margin-left: 8px;">${sign}${change.toFixed(change % 1 === 0 ? 0 : 1)}${unit}</span>`;
+            };
+
+            if (final) {
+                // Show before/after comparison
+                document.getElementById('bodyComp').innerHTML = `
+                    <div class="visceral-highlight" style="background: rgba(63, 185, 80, 0.1); border-color: rgba(63, 185, 80, 0.3);">
+                        <div class="body-stat" style="border: none; padding: 0;">
+                            <span class="body-stat-label">Visceral Fat</span>
+                            <span class="body-stat-value" style="color: var(--green);">${final.visceral_fat_lbs} lbs</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
+                            <span style="font-size: 12px; color: var(--text-dim);">was ${baseline.visceral_fat_lbs} lbs</span>
+                            <span class="stat-change positive" style="margin: 0;">↓ ${Math.abs(final.visceral_fat_change_lbs).toFixed(2)} lbs (${Math.abs(final.visceral_fat_change_lbs / baseline.visceral_fat_lbs * 100).toFixed(0)}%)</span>
+                        </div>
+                        <div class="visceral-target" style="margin-top: 8px;">${(final.visceral_fat_lbs / final.visceral_fat_target_lbs).toFixed(1)}× over target (${final.visceral_fat_target_lbs} lb)</div>
                     </div>
-                    <div class="visceral-target">${(comp.visceral_fat_lbs / comp.visceral_fat_target_lbs).toFixed(1)}× over target (${comp.visceral_fat_target_lbs} lb)</div>
-                </div>
-                <div class="body-stat">
-                    <span class="body-stat-label">Body Fat</span>
-                    <span class="body-stat-value">${comp.body_fat_pct}%</span>
-                </div>
-                <div class="body-stat">
-                    <span class="body-stat-label">Lean Mass</span>
-                    <span class="body-stat-value">${comp.lean_mass_lbs} lbs</span>
-                </div>
-                <div class="body-stat">
-                    <span class="body-stat-label">Total Mass</span>
-                    <span class="body-stat-value">${comp.total_mass_lbs} lbs</span>
-                </div>
-                <div class="body-stat">
-                    <span class="body-stat-label">T-Score</span>
-                    <span class="body-stat-value">${comp.t_score}</span>
-                </div>
-                <div style="font-size: 11px; color: var(--text-dim); margin-top: 8px;">
-                    Next scan: Jan 12 (Monday)
-                </div>
-            `;
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin: 16px 0; text-align: center; font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px;">
+                        <span></span>
+                        <span>Before</span>
+                        <span>After</span>
+                    </div>
+
+                    <div class="body-stat" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; text-align: center;">
+                        <span class="body-stat-label" style="text-align: left;">Body Fat</span>
+                        <span style="font-family: 'Space Mono', monospace; color: var(--text-dim);">${baseline.body_fat_pct}%</span>
+                        <span class="body-stat-value" style="font-size: 14px;">${final.body_fat_pct}% ${formatChange(final.body_fat_change_pct, '%', true)}</span>
+                    </div>
+                    <div class="body-stat" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; text-align: center;">
+                        <span class="body-stat-label" style="text-align: left;">Lean Mass</span>
+                        <span style="font-family: 'Space Mono', monospace; color: var(--text-dim);">${baseline.lean_mass_lbs} lbs</span>
+                        <span class="body-stat-value" style="font-size: 14px;">${final.lean_mass_lbs} lbs ${formatChange(final.lean_mass_change_lbs, ' lbs')}</span>
+                    </div>
+                    <div class="body-stat" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; text-align: center;">
+                        <span class="body-stat-label" style="text-align: left;">Total Mass</span>
+                        <span style="font-family: 'Space Mono', monospace; color: var(--text-dim);">${baseline.total_mass_lbs} lbs</span>
+                        <span class="body-stat-value" style="font-size: 14px;">${final.total_mass_lbs} lbs ${formatChange(final.total_mass_change_lbs, ' lbs', true)}</span>
+                    </div>
+                    <div class="body-stat" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; text-align: center;">
+                        <span class="body-stat-label" style="text-align: left;">T-Score</span>
+                        <span style="font-family: 'Space Mono', monospace; color: var(--text-dim);">${baseline.t_score}</span>
+                        <span class="body-stat-value" style="font-size: 14px;">${final.t_score} ${formatChange(final.t_score_change, '', true)}</span>
+                    </div>
+                    <div class="body-stat" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; text-align: center;">
+                        <span class="body-stat-label" style="text-align: left;">Body Score</span>
+                        <span style="font-family: 'Space Mono', monospace; color: var(--text-dim);">${baseline.body_score}</span>
+                        <span class="body-stat-value" style="font-size: 14px;">${final.body_score} ${formatChange(final.body_score - baseline.body_score, '')}</span>
+                    </div>
+
+                    <div style="background: var(--surface-2); border-radius: 8px; padding: 12px; margin-top: 16px;">
+                        <div style="font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Results Summary</div>
+                        <div style="font-size: 13px; line-height: 1.6;">
+                            <span style="color: var(--green);">↓ ${Math.abs(final.total_mass_change_lbs).toFixed(1)} lbs total</span> •
+                            <span style="color: var(--green);">↓ ${Math.abs(final.body_fat_change_pct).toFixed(1)}% body fat</span> •
+                            <span style="color: var(--green);">↓ ${Math.abs(final.visceral_fat_change_lbs).toFixed(2)} lbs visceral</span>
+                        </div>
+                    </div>
+
+                    <div style="background: var(--surface-2); border-radius: 8px; padding: 12px; margin-top: 12px;">
+                        <div style="font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Estimated Breakdown</div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; text-align: center;">
+                            <div>
+                                <div style="font-size: 18px; font-weight: 600; color: var(--cyan);">~${(Math.abs(final.total_mass_change_lbs) * 0.45).toFixed(1)}</div>
+                                <div style="font-size: 10px; color: var(--text-dim);">lbs water</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 18px; font-weight: 600; color: var(--green);">~${(Math.abs(final.total_mass_change_lbs) * 0.50).toFixed(1)}</div>
+                                <div style="font-size: 10px; color: var(--text-dim);">lbs fat</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 18px; font-weight: 600; color: var(--text-dim);">~${(Math.abs(final.total_mass_change_lbs) * 0.05).toFixed(1)}</div>
+                                <div style="font-size: 10px; color: var(--text-dim);">lbs muscle</div>
+                            </div>
+                        </div>
+                        <div style="font-size: 11px; color: var(--text-dim); margin-top: 10px; font-style: italic; text-align: center;">
+                            Water returns with refeeding; true fat loss ~${(Math.abs(final.total_mass_change_lbs) * 0.50).toFixed(1)} lbs
+                        </div>
+                    </div>
+
+                    <div style="font-size: 11px; color: var(--text-dim); margin-top: 12px; display: flex; justify-content: space-between;">
+                        <span>Baseline: ${formatDate(baseline.date)}</span>
+                        <span>Final: ${formatDate(final.date)}</span>
+                    </div>
+                `;
+            } else {
+                // Show baseline only (original behavior)
+                document.getElementById('bodyComp').innerHTML = `
+                    <div class="visceral-highlight">
+                        <div class="body-stat" style="border: none; padding: 0;">
+                            <span class="body-stat-label">Visceral Fat</span>
+                            <span class="body-stat-value">${baseline.visceral_fat_lbs} lbs</span>
+                        </div>
+                        <div class="visceral-target">${(baseline.visceral_fat_lbs / baseline.visceral_fat_target_lbs).toFixed(1)}× over target (${baseline.visceral_fat_target_lbs} lb)</div>
+                    </div>
+                    <div class="body-stat">
+                        <span class="body-stat-label">Body Fat</span>
+                        <span class="body-stat-value">${baseline.body_fat_pct}%</span>
+                    </div>
+                    <div class="body-stat">
+                        <span class="body-stat-label">Lean Mass</span>
+                        <span class="body-stat-value">${baseline.lean_mass_lbs} lbs</span>
+                    </div>
+                    <div class="body-stat">
+                        <span class="body-stat-label">Total Mass</span>
+                        <span class="body-stat-value">${baseline.total_mass_lbs} lbs</span>
+                    </div>
+                    <div class="body-stat">
+                        <span class="body-stat-label">T-Score</span>
+                        <span class="body-stat-value">${baseline.t_score}</span>
+                    </div>
+                    <div style="font-size: 11px; color: var(--text-dim); margin-top: 8px;">
+                        Next scan: Jan 12 (Monday)
+                    </div>
+                `;
+            }
         }
 
         function renderLog() {
