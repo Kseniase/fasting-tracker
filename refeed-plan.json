@@ -149,25 +149,26 @@
       {
         "day": 3,
         "date": "2026-01-14",
-        "phase": "Protein Focus Begins",
-        "target_calories": "1000-1200",
-        "target_protein_g": 90,
-        "target_carbs_g": "<30",
+        "phase": "Protein Focus Begins (Modified)",
+        "target_calories": "900-1100",
+        "target_protein_g": 80,
+        "target_carbs_g": "<25",
         "rules": [
           "Protein becomes priority",
-          "Introduce Greek yogurt (probiotics)",
-          "Add more cooked vegetables",
-          "Start digestive enzymes if desired",
+          "Test Greek yogurt (probiotics) - small portion first",
+          "NO salmon yet - gut still recovering from Day 2 reaction",
+          "Stick with eggs and chicken as main proteins",
           "Begin probiotic supplement"
         ],
+        "adjustment_note": "Modified after Day 2 GI distress from salmon. Pushing fatty fish to Day 4.",
         "meals": [
           {
             "time": "8:00 AM",
             "meal": "Breakfast",
-            "items": ["3/4 cup Greek yogurt (full fat)", "Small handful blueberries", "2 soft boiled eggs"],
-            "calories": 300,
-            "protein_g": 28,
-            "notes": "First dairy. Greek yogurt has natural probiotics. Start probiotic supplement."
+            "items": ["2 soft boiled eggs", "1/2 cup Greek yogurt (full fat)", "1/2 cup bone broth"],
+            "calories": 250,
+            "protein_g": 22,
+            "notes": "First dairy test - start with smaller yogurt portion. Greek yogurt has natural probiotics."
           },
           {
             "time": "11:00 AM",
@@ -180,32 +181,32 @@
           {
             "time": "1:30 PM",
             "meal": "Lunch",
-            "items": ["4 oz chicken breast (poached or baked)", "1 cup steamed broccoli", "1 tbsp butter"],
-            "calories": 280,
-            "protein_g": 35,
-            "notes": "First chicken. Cook until very tender. Broccoli should be soft."
+            "items": ["3 oz chicken breast (poached or baked)", "1 cup steamed spinach", "1 tbsp butter"],
+            "calories": 220,
+            "protein_g": 28,
+            "notes": "First chicken. Cook until very tender. Spinach is gentle on gut."
           },
           {
             "time": "4:30 PM",
             "meal": "Snack",
-            "items": ["1/4 cup cottage cheese", "1/4 avocado"],
-            "calories": 120,
-            "protein_g": 10,
-            "notes": "Cottage cheese is casein (slow-release protein)."
+            "items": ["1/4 avocado", "1 hard boiled egg"],
+            "calories": 130,
+            "protein_g": 8,
+            "notes": "Skip cottage cheese for now - test one dairy at a time. Avocado is gentler fat."
           },
           {
             "time": "7:30 PM",
             "meal": "Dinner",
-            "items": ["4 oz salmon", "1 cup steamed asparagus", "2 tbsp olive oil"],
-            "calories": 380,
-            "protein_g": 30,
-            "notes": "Asparagus is prebiotic. Feeds good gut bacteria."
+            "items": ["3 eggs scrambled", "1 cup steamed broccoli (very soft)", "1 tbsp butter"],
+            "calories": 320,
+            "protein_g": 22,
+            "notes": "Eggs instead of salmon. If yogurt went well today, can try salmon tomorrow."
           }
         ],
         "day_total": {
-          "calories": "~1190",
-          "protein_g": "~115",
-          "carbs_g": "~25"
+          "calories": "~1030",
+          "protein_g": "~92",
+          "carbs_g": "~20"
         }
       },
       {

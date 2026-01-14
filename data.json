@@ -806,10 +806,36 @@
       "refeed_day": 2,
       "weight_kg": 89.7,
       "weight_change_kg": 0.8,
-      "calories_consumed": null,
-      "protein_g": null,
-      "carbs_g": null,
-      "meals": [],
+      "calories_consumed": 530,
+      "protein_g": 51,
+      "carbs_g": 2,
+      "meals": [
+        {
+          "time": "08:00",
+          "description": "2 eggs, bone broth",
+          "calories": 180,
+          "protein_g": 14
+        },
+        {
+          "time": "11:00",
+          "description": "Salmon, 1 egg",
+          "calories": 200,
+          "protein_g": 25,
+          "note": "Triggered GI distress - salmon fat too much for recovering gut"
+        },
+        {
+          "time": "16:30",
+          "description": "Bone broth",
+          "calories": 40,
+          "protein_g": 6
+        },
+        {
+          "time": "18:15",
+          "description": "2 eggs, bone broth",
+          "calories": 110,
+          "protein_g": 6
+        }
+      ],
       "oura": {
         "sleep_score": 61,
         "readiness_score": 59,
@@ -836,7 +862,7 @@
           "recovery_mins": 15
         }
       },
-      "notes": "Day 2 of refeed. Weight up 0.8kg (expected fluid retention from refeeding)."
+      "notes": "Day 2 of refeed. Weight up 0.8kg (expected fluid retention from refeeding). GI issues after salmon - several urgent bathroom trips. Gut still adjusting to reintroducing food, especially protein and fats. Lesson learned: salmon fat too soon."
     }
   ],
   "day_guide": {
