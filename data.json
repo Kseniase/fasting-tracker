@@ -392,7 +392,7 @@
       "oura": {
         "sleep_score": 72,
         "readiness_score": 76,
-        "activity_score": 69,
+        "activity_score": 70,
         "steps": 2487,
         "total_calories": 2369,
         "active_calories": 121,
@@ -412,7 +412,7 @@
         "stress": {
           "summary": "restored",
           "stress_mins": 0,
-          "recovery_mins": 540
+          "recovery_mins": 435
         }
       },
       "notes": ""
@@ -426,9 +426,9 @@
         "sleep_score": 67,
         "readiness_score": 72,
         "activity_score": 60,
-        "steps": 5265,
-        "total_calories": 2512,
-        "active_calories": 225,
+        "steps": 5270,
+        "total_calories": 2521,
+        "active_calories": 226,
         "hrv_balance": 69,
         "body_temp_deviation": -0.05,
         "sleep": {
@@ -444,8 +444,8 @@
         },
         "stress": {
           "summary": "restored",
-          "stress_mins": 120,
-          "recovery_mins": 270
+          "stress_mins": 30,
+          "recovery_mins": 255
         }
       },
       "notes": ""
@@ -458,10 +458,10 @@
       "oura": {
         "sleep_score": 61,
         "readiness_score": 59,
-        "activity_score": 62,
-        "steps": 0,
-        "total_calories": 1915,
-        "active_calories": 0,
+        "activity_score": 74,
+        "steps": 7177,
+        "total_calories": 2690,
+        "active_calories": 394,
         "hrv_balance": 51,
         "body_temp_deviation": -0.21,
         "sleep": {
@@ -473,6 +473,72 @@
           "light_mins": 174,
           "efficiency": 88,
           "lowest_hr": 62,
+          "avg_hrv": 21
+        },
+        "stress": {
+          "summary": "stressful",
+          "stress_mins": 465,
+          "recovery_mins": 60
+        }
+      },
+      "notes": ""
+    },
+    {
+      "date": "2026-01-14",
+      "day": 13,
+      "weight_kg": 89.7,
+      "weight_change_kg": 0.0,
+      "oura": {
+        "sleep_score": 68,
+        "readiness_score": 58,
+        "activity_score": 54,
+        "steps": 2630,
+        "total_calories": 2410,
+        "active_calories": 107,
+        "hrv_balance": 44,
+        "body_temp_deviation": 0.05,
+        "sleep": {
+          "bedtime": "2026-01-13T21:46:33.000-05:00",
+          "wake_time": "2026-01-14T04:16:08.000-05:00",
+          "total_hours": 5.2,
+          "deep_mins": 31,
+          "rem_mins": 74,
+          "light_mins": 212,
+          "efficiency": 81,
+          "lowest_hr": 64,
+          "avg_hrv": 13
+        },
+        "stress": {
+          "summary": "restored",
+          "stress_mins": 75,
+          "recovery_mins": 300
+        }
+      },
+      "notes": ""
+    },
+    {
+      "date": "2026-01-15",
+      "day": 14,
+      "weight_kg": 89.6,
+      "weight_change_kg": -0.1,
+      "oura": {
+        "sleep_score": 65,
+        "readiness_score": 65,
+        "activity_score": 56,
+        "steps": 0,
+        "total_calories": 1923,
+        "active_calories": 0,
+        "hrv_balance": 50,
+        "body_temp_deviation": 0.13,
+        "sleep": {
+          "bedtime": "2026-01-14T23:46:02.000-05:00",
+          "wake_time": "2026-01-15T05:24:20.000-05:00",
+          "total_hours": 4.2,
+          "deep_mins": 67,
+          "rem_mins": 60,
+          "light_mins": 129,
+          "efficiency": 76,
+          "lowest_hr": 63,
           "avg_hrv": 21
         },
         "stress": {
@@ -742,6 +808,42 @@
       "day": 12,
       "type": "sleep",
       "message": "Woke up: 2:25 AM (4.1 hrs sleep)"
+    },
+    {
+      "date": "2026-01-13",
+      "day": 12,
+      "type": "sleep",
+      "message": "Bedtime: 9:46 PM"
+    },
+    {
+      "date": "2026-01-14",
+      "day": 13,
+      "type": "observation",
+      "message": "Weight: 89.7 kg (stable overnight, -8.6 kg total from Day 1). Refeed Day 3 - sleep score 68, readiness 58, lowest HR 64 bpm, HRV 13. Body recovering from yesterday's GI stress (570 stress mins). Deep sleep low at 31 mins but REM improved to 74 mins. Gut likely still resetting after salmon fat reaction."
+    },
+    {
+      "date": "2026-01-14",
+      "day": 13,
+      "type": "sleep",
+      "message": "Woke up: 4:16 AM (5.2 hrs sleep)"
+    },
+    {
+      "date": "2026-01-14",
+      "day": 13,
+      "type": "sleep",
+      "message": "Bedtime: 11:46 PM"
+    },
+    {
+      "date": "2026-01-15",
+      "day": 14,
+      "type": "observation",
+      "message": "Weight: 89.6 kg (-0.1 kg overnight, -8.7 kg total from Day 1). Refeed Day 4 - body stabilizing. Yesterday's variety (chicken, olives, cheese, peanuts) tolerated well. Stress recovered to 45 mins (vs 465 on Day 2). Ready to expand food variety."
+    },
+    {
+      "date": "2026-01-15",
+      "day": 14,
+      "type": "sleep",
+      "message": "Woke up: 5:24 AM (4.2 hrs sleep)"
     }
   ],
   "refeed": {
@@ -777,9 +879,9 @@
         "sleep_score": 67,
         "readiness_score": 72,
         "activity_score": 60,
-        "steps": 5265,
-        "total_calories": 2512,
-        "active_calories": 225,
+        "steps": 5270,
+        "total_calories": 2521,
+        "active_calories": 226,
         "hrv_balance": 69,
         "body_temp_deviation": -0.05,
         "sleep": {
@@ -795,8 +897,8 @@
         },
         "stress": {
           "summary": "restored",
-          "stress_mins": 120,
-          "recovery_mins": 270
+          "stress_mins": 30,
+          "recovery_mins": 255
         }
       },
       "notes": "First refeed day. Started at 6pm with bone broth. Bowel movement ~1hr after first broth (normal gastrocolic reflex). Second meal was broth with one poached egg."
@@ -839,10 +941,10 @@
       "oura": {
         "sleep_score": 61,
         "readiness_score": 59,
-        "activity_score": 62,
-        "steps": 0,
-        "total_calories": 1915,
-        "active_calories": 0,
+        "activity_score": 74,
+        "steps": 7177,
+        "total_calories": 2690,
+        "active_calories": 394,
         "hrv_balance": 51,
         "body_temp_deviation": -0.21,
         "sleep": {
@@ -857,12 +959,119 @@
           "avg_hrv": 21
         },
         "stress": {
+          "summary": "stressful",
+          "stress_mins": 465,
+          "recovery_mins": 60
+        }
+      },
+      "notes": "Day 2 of refeed. Weight up 0.8kg (expected fluid retention from refeeding). GI issues after salmon - several urgent bathroom trips. Gut still adjusting to reintroducing food, especially protein and fats. Lesson learned: salmon fat too soon."
+    },
+    {
+      "date": "2026-01-14",
+      "refeed_day": 3,
+      "weight_kg": 89.7,
+      "weight_change_kg": 0.0,
+      "calories_consumed": 710,
+      "protein_g": 56,
+      "carbs_g": 5,
+      "meals": [
+        {
+          "time": "08:00",
+          "description": "2 eggs in bone broth",
+          "calories": 180,
+          "protein_g": 14
+        },
+        {
+          "time": "12:00",
+          "description": "2 eggs in bone broth",
+          "calories": 180,
+          "protein_g": 14
+        },
+        {
+          "time": "18:00",
+          "description": "Bone broth with chicken",
+          "calories": 150,
+          "protein_g": 20
+        },
+        {
+          "time": "20:00",
+          "description": "Party snacks: olives, cheese, peanuts (small portions)",
+          "calories": 200,
+          "protein_g": 8,
+          "note": "First dairy and nuts since fast"
+        }
+      ],
+      "oura": {
+        "sleep_score": 68,
+        "readiness_score": 58,
+        "activity_score": 54,
+        "steps": 2630,
+        "total_calories": 2410,
+        "active_calories": 107,
+        "hrv_balance": 44,
+        "body_temp_deviation": 0.05,
+        "sleep": {
+          "bedtime": "2026-01-13T21:46:33.000-05:00",
+          "wake_time": "2026-01-14T04:16:08.000-05:00",
+          "total_hours": 5.2,
+          "deep_mins": 31,
+          "rem_mins": 74,
+          "light_mins": 212,
+          "efficiency": 81,
+          "lowest_hr": 64,
+          "avg_hrv": 13
+        },
+        "stress": {
+          "summary": "restored",
+          "stress_mins": 75,
+          "recovery_mins": 300
+        }
+      },
+      "notes": "Day 3 refeed. Tried variety - chicken broth, party snacks (olives, cheese, peanuts). Stress much improved (45 mins vs 465 yesterday)."
+    },
+    {
+      "date": "2026-01-15",
+      "refeed_day": 4,
+      "weight_kg": 89.6,
+      "weight_change_kg": -0.1,
+      "calories_consumed": null,
+      "protein_g": null,
+      "carbs_g": null,
+      "meals": [
+        {
+          "time": "07:00",
+          "description": "3 scrambled eggs",
+          "calories": 230,
+          "protein_g": 18
+        }
+      ],
+      "oura": {
+        "sleep_score": 65,
+        "readiness_score": 65,
+        "activity_score": 56,
+        "steps": 0,
+        "total_calories": 1923,
+        "active_calories": 0,
+        "hrv_balance": 50,
+        "body_temp_deviation": 0.13,
+        "sleep": {
+          "bedtime": "2026-01-14T23:46:02.000-05:00",
+          "wake_time": "2026-01-15T05:24:20.000-05:00",
+          "total_hours": 4.2,
+          "deep_mins": 67,
+          "rem_mins": 60,
+          "light_mins": 129,
+          "efficiency": 76,
+          "lowest_hr": 63,
+          "avg_hrv": 21
+        },
+        "stress": {
           "summary": null,
           "stress_mins": 0,
           "recovery_mins": 15
         }
       },
-      "notes": "Day 2 of refeed. Weight up 0.8kg (expected fluid retention from refeeding). GI issues after salmon - several urgent bathroom trips. Gut still adjusting to reintroducing food, especially protein and fats. Lesson learned: salmon fat too soon."
+      "notes": ""
     }
   ],
   "day_guide": {
