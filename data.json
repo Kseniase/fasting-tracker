@@ -491,10 +491,10 @@
       "oura": {
         "sleep_score": 68,
         "readiness_score": 58,
-        "activity_score": 54,
+        "activity_score": 55,
         "steps": 2630,
-        "total_calories": 2410,
-        "active_calories": 107,
+        "total_calories": 2424,
+        "active_calories": 121,
         "hrv_balance": 44,
         "body_temp_deviation": 0.05,
         "sleep": {
@@ -524,10 +524,10 @@
       "oura": {
         "sleep_score": 65,
         "readiness_score": 65,
-        "activity_score": 56,
-        "steps": 0,
-        "total_calories": 1923,
-        "active_calories": 0,
+        "activity_score": 72,
+        "steps": 3800,
+        "total_calories": 2958,
+        "active_calories": 612,
         "hrv_balance": 50,
         "body_temp_deviation": 0.13,
         "sleep": {
@@ -542,9 +542,32 @@
           "avg_hrv": 21
         },
         "stress": {
+          "summary": "stressful",
+          "stress_mins": 315,
+          "recovery_mins": 45
+        }
+      },
+      "notes": ""
+    },
+    {
+      "date": "2026-01-16",
+      "day": 15,
+      "weight_kg": 89.8,
+      "weight_change_kg": 0.2,
+      "oura": {
+        "sleep_score": null,
+        "readiness_score": null,
+        "activity_score": 72,
+        "steps": 18,
+        "total_calories": 1935,
+        "active_calories": 1,
+        "hrv_balance": null,
+        "body_temp_deviation": null,
+        "sleep": null,
+        "stress": {
           "summary": null,
           "stress_mins": 0,
-          "recovery_mins": 15
+          "recovery_mins": 0
         }
       },
       "notes": ""
@@ -844,6 +867,12 @@
       "day": 14,
       "type": "sleep",
       "message": "Woke up: 5:24 AM (4.2 hrs sleep)"
+    },
+    {
+      "date": "2026-01-16",
+      "day": 15,
+      "type": "observation",
+      "message": "Weight: 89.8 kg (+0.2 kg overnight, -8.5 kg total from Day 1). Refeed Day 5 - slight weight gain as body continues restoring glycogen and fluid. Gut tolerance improving. Ready to continue protein focus (target 100-120g today)."
     }
   ],
   "refeed": {
@@ -1004,10 +1033,10 @@
       "oura": {
         "sleep_score": 68,
         "readiness_score": 58,
-        "activity_score": 54,
+        "activity_score": 55,
         "steps": 2630,
-        "total_calories": 2410,
-        "active_calories": 107,
+        "total_calories": 2424,
+        "active_calories": 121,
         "hrv_balance": 44,
         "body_temp_deviation": 0.05,
         "sleep": {
@@ -1066,10 +1095,10 @@
       "oura": {
         "sleep_score": 65,
         "readiness_score": 65,
-        "activity_score": 56,
-        "steps": 0,
-        "total_calories": 1923,
-        "active_calories": 0,
+        "activity_score": 72,
+        "steps": 3800,
+        "total_calories": 2958,
+        "active_calories": 612,
         "hrv_balance": 50,
         "body_temp_deviation": 0.13,
         "sleep": {
@@ -1084,9 +1113,36 @@
           "avg_hrv": 21
         },
         "stress": {
+          "summary": "stressful",
+          "stress_mins": 315,
+          "recovery_mins": 45
+        }
+      },
+      "notes": ""
+    },
+    {
+      "date": "2026-01-16",
+      "refeed_day": 5,
+      "weight_kg": 89.8,
+      "weight_change_kg": 0.2,
+      "calories_consumed": null,
+      "protein_g": null,
+      "carbs_g": null,
+      "meals": [],
+      "oura": {
+        "sleep_score": null,
+        "readiness_score": null,
+        "activity_score": 72,
+        "steps": 18,
+        "total_calories": 1935,
+        "active_calories": 1,
+        "hrv_balance": null,
+        "body_temp_deviation": null,
+        "sleep": null,
+        "stress": {
           "summary": null,
           "stress_mins": 0,
-          "recovery_mins": 15
+          "recovery_mins": 0
         }
       },
       "notes": ""
