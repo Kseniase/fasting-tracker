@@ -1034,15 +1034,33 @@
       "refeed_day": 4,
       "weight_kg": 89.6,
       "weight_change_kg": -0.1,
-      "calories_consumed": null,
-      "protein_g": null,
-      "carbs_g": null,
+      "calories_consumed": 1150,
+      "protein_g": 88,
+      "carbs_g": 16,
       "meals": [
         {
           "time": "07:00",
-          "description": "3 scrambled eggs",
-          "calories": 230,
+          "description": "3 scrambled eggs, 1 avocado",
+          "calories": 470,
+          "protein_g": 21
+        },
+        {
+          "time": "14:45",
+          "description": "3 boiled eggs",
+          "calories": 210,
           "protein_g": 18
+        },
+        {
+          "time": "17:00",
+          "description": "2 slices roast beef, 2 pieces lettuce",
+          "calories": 120,
+          "protein_g": 14
+        },
+        {
+          "time": "17:45",
+          "description": "3 eggs scrambled with smoked salmon and cottage cheese",
+          "calories": 350,
+          "protein_g": 35
         }
       ],
       "oura": {
