@@ -555,15 +555,58 @@
       "weight_kg": 89.8,
       "weight_change_kg": 0.2,
       "oura": {
-        "sleep_score": null,
-        "readiness_score": null,
+        "sleep_score": 67,
+        "readiness_score": 60,
         "activity_score": 72,
-        "steps": 18,
-        "total_calories": 1935,
-        "active_calories": 1,
-        "hrv_balance": null,
-        "body_temp_deviation": null,
-        "sleep": null,
+        "steps": 5190,
+        "total_calories": 2658,
+        "active_calories": 347,
+        "hrv_balance": 33,
+        "body_temp_deviation": -0.11,
+        "sleep": {
+          "bedtime": "2026-01-15T23:40:59.000-05:00",
+          "wake_time": "2026-01-16T04:01:39.000-05:00",
+          "total_hours": 3.9,
+          "deep_mins": 54,
+          "rem_mins": 62,
+          "light_mins": 120,
+          "efficiency": 91,
+          "lowest_hr": 60,
+          "avg_hrv": 24
+        },
+        "stress": {
+          "summary": "normal",
+          "stress_mins": 75,
+          "recovery_mins": 150
+        }
+      },
+      "notes": ""
+    },
+    {
+      "date": "2026-01-17",
+      "day": 16,
+      "weight_kg": null,
+      "weight_change_kg": null,
+      "oura": {
+        "sleep_score": 76,
+        "readiness_score": 62,
+        "activity_score": 77,
+        "steps": 0,
+        "total_calories": 1916,
+        "active_calories": 0,
+        "hrv_balance": 26,
+        "body_temp_deviation": -0.16,
+        "sleep": {
+          "bedtime": "2026-01-16T23:30:58.000-05:00",
+          "wake_time": "2026-01-17T05:35:22.000-05:00",
+          "total_hours": 5.2,
+          "deep_mins": 52,
+          "rem_mins": 89,
+          "light_mins": 172,
+          "efficiency": 86,
+          "lowest_hr": 62,
+          "avg_hrv": 22
+        },
         "stress": {
           "summary": null,
           "stress_mins": 0,
@@ -869,10 +912,40 @@
       "message": "Woke up: 5:24 AM (4.2 hrs sleep)"
     },
     {
+      "date": "2026-01-15",
+      "day": 14,
+      "type": "sleep",
+      "message": "Bedtime: 11:40 PM"
+    },
+    {
       "date": "2026-01-16",
       "day": 15,
       "type": "observation",
       "message": "Weight: 89.8 kg (+0.2 kg overnight, -8.5 kg total from Day 1). Refeed Day 5 - slight weight gain as body continues restoring glycogen and fluid. Gut tolerance improving. Ready to continue protein focus (target 100-120g today)."
+    },
+    {
+      "date": "2026-01-16",
+      "day": 15,
+      "type": "sleep",
+      "message": "Woke up: 4:01 AM (3.9 hrs sleep)"
+    },
+    {
+      "date": "2026-01-16",
+      "day": 15,
+      "type": "sleep",
+      "message": "Bedtime: 11:30 PM"
+    },
+    {
+      "date": "2026-01-17",
+      "day": 16,
+      "type": "sleep",
+      "message": "Woke up: 5:35 AM (5.2 hrs sleep)"
+    },
+    {
+      "date": "2026-01-17",
+      "day": 16,
+      "type": "observation",
+      "message": "Refeed Day 6 - sleep score improved to 76 (best since refeed started), readiness 62, REM excellent at 89 mins. Solid protein breakfast: eggs, sausage, bacon. HRV balance still low at 26 - body still adapting to food intake."
     }
   ],
   "refeed": {
@@ -1125,20 +1198,94 @@
       "refeed_day": 5,
       "weight_kg": 89.8,
       "weight_change_kg": 0.2,
-      "calories_consumed": null,
-      "protein_g": null,
-      "carbs_g": null,
-      "meals": [],
+      "calories_consumed": 870,
+      "protein_g": 72,
+      "carbs_g": 5,
+      "meals": [
+        {
+          "time": "08:00",
+          "description": "Steak, egg, and cheese",
+          "calories": 450,
+          "protein_g": 40
+        },
+        {
+          "time": "12:30",
+          "description": "Sardines (1 can) + tuna salad (2 oz tuna, lettuce, olives, onions, half egg, green beans)",
+          "calories": 420,
+          "protein_g": 32
+        }
+      ],
       "oura": {
-        "sleep_score": null,
-        "readiness_score": null,
+        "sleep_score": 67,
+        "readiness_score": 60,
         "activity_score": 72,
-        "steps": 18,
-        "total_calories": 1935,
-        "active_calories": 1,
-        "hrv_balance": null,
-        "body_temp_deviation": null,
-        "sleep": null,
+        "steps": 5190,
+        "total_calories": 2658,
+        "active_calories": 347,
+        "hrv_balance": 33,
+        "body_temp_deviation": -0.11,
+        "sleep": {
+          "bedtime": "2026-01-15T23:40:59.000-05:00",
+          "wake_time": "2026-01-16T04:01:39.000-05:00",
+          "total_hours": 3.9,
+          "deep_mins": 54,
+          "rem_mins": 62,
+          "light_mins": 120,
+          "efficiency": 91,
+          "lowest_hr": 60,
+          "avg_hrv": 24
+        },
+        "stress": {
+          "summary": "normal",
+          "stress_mins": 75,
+          "recovery_mins": 150
+        }
+      },
+      "notes": ""
+    },
+    {
+      "date": "2026-01-17",
+      "refeed_day": 6,
+      "weight_kg": null,
+      "weight_change_kg": null,
+      "calories_consumed": 580,
+      "protein_g": 42,
+      "carbs_g": 6,
+      "meals": [
+        {
+          "time": "evening prior",
+          "description": "Small yogurt, half avocado, string cheese",
+          "calories": 280,
+          "protein_g": 12,
+          "note": "Night snack Jan 16"
+        },
+        {
+          "time": "08:00",
+          "description": "3 fried eggs, 2 small breakfast sausages, 1 strip bacon, tomato slices",
+          "calories": 450,
+          "protein_g": 30
+        }
+      ],
+      "oura": {
+        "sleep_score": 76,
+        "readiness_score": 62,
+        "activity_score": 77,
+        "steps": 0,
+        "total_calories": 1916,
+        "active_calories": 0,
+        "hrv_balance": 26,
+        "body_temp_deviation": -0.16,
+        "sleep": {
+          "bedtime": "2026-01-16T23:30:58.000-05:00",
+          "wake_time": "2026-01-17T05:35:22.000-05:00",
+          "total_hours": 5.2,
+          "deep_mins": 52,
+          "rem_mins": 89,
+          "light_mins": 172,
+          "efficiency": 86,
+          "lowest_hr": 62,
+          "avg_hrv": 22
+        },
         "stress": {
           "summary": null,
           "stress_mins": 0,
