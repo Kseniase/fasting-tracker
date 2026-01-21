@@ -163,7 +163,7 @@
         }
         .recipe-card:hover { border-color: var(--blue); }
         .recipe-card h4 { font-size: 16px; margin-bottom: 8px; }
-        .recipe-macros { display: flex; gap: 12px; font-size: 12px; margin-bottom: 12px; }
+        .recipe-macros { display: flex; flex-direction: column; gap: 4px; font-size: 12px; margin-bottom: 12px; }
         .recipe-macros .protein { color: var(--blue); }
         .recipe-macros .carbs { color: var(--yellow); }
         .recipe-macros .fat { color: var(--purple); }
@@ -234,6 +234,20 @@
         .modal li { margin-bottom: 6px; font-size: 14px; }
         .modal-instructions { white-space: pre-line; font-size: 14px; line-height: 1.8; }
 
+        .week-btn {
+            padding: 10px 20px;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-dim);
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .week-btn:hover { background: var(--surface); color: var(--text); }
+        .week-btn.active { background: var(--blue); color: var(--bg); border-color: var(--blue); }
+
         @media (max-width: 600px) {
             .menu-grid, .recipe-grid { grid-template-columns: 1fr; }
             .tabs { overflow-x: auto; }
@@ -263,6 +277,9 @@
         <button class="tab active" onclick="showTab('menu')">Weekly Menu</button>
         <button class="tab" onclick="showTab('recipes')">Recipes</button>
     </div>
+
+    <!-- Week Selector -->
+    <div id="week-selector" style="display: flex; gap: 8px; margin-bottom: 20px;"></div>
 
     <!-- WEEKLY MENU TAB -->
     <div id="tab-menu" class="tab-content active">
@@ -323,17 +340,45 @@
     <script>
         let data = null;
         let currentCategory = 'grab_and_go';
+        let allWeeks = {};
+        let currentWeek = 'week1';
 
-        // Load data from JSON
+        // Load data from both JSON files
         async function loadData() {
             try {
-                const response = await fetch('recipes.json');
-                data = await response.json();
+                const [week1Response, week2Response] = await Promise.all([
+                    fetch('recipes.json'),
+                    fetch('recipes-week2-fish.json')
+                ]);
+                allWeeks.week1 = await week1Response.json();
+                allWeeks.week2 = await week2Response.json();
+                data = allWeeks[currentWeek];
+                renderWeekSelector();
                 renderMenu();
                 renderRecipes();
             } catch (error) {
-                console.error('Error loading recipes.json:', error);
+                console.error('Error loading recipe data:', error);
             }
+        }
+
+        function renderWeekSelector() {
+            const container = document.getElementById('week-selector');
+            container.innerHTML = `
+                <button class="week-btn ${currentWeek === 'week1' ? 'active' : ''}" onclick="switchWeek('week1')">
+                    ${allWeeks.week1.week}
+                </button>
+                <button class="week-btn ${currentWeek === 'week2' ? 'active' : ''}" onclick="switchWeek('week2')">
+                    ${allWeeks.week2.week}
+                </button>
+            `;
+        }
+
+        function switchWeek(week) {
+            currentWeek = week;
+            data = allWeeks[week];
+            renderWeekSelector();
+            renderMenu();
+            renderRecipes();
         }
 
         // Tab switching
@@ -355,16 +400,29 @@
                 'cook_fresh': 'Cook'
             };
 
-            grid.innerHTML = data.weekly_menu.days.map(day => `
+            // Helper to find recipe macros by name and type
+            function getRecipeMacros(name, type) {
+                const recipes = data.recipes[type];
+                if (!recipes) return null;
+                return recipes.find(r => r.name === name);
+            }
+
+            grid.innerHTML = data.weekly_menu.days.map(day => {
+                const meal1Recipe = getRecipeMacros(day.meal1.name, day.meal1.type);
+                const meal2Recipe = getRecipeMacros(day.meal2.name, day.meal2.type);
+                const snackRecipe = getRecipeMacros(day.snacks[0], 'snacks');
+
+                return `
                 <div class="menu-day">
                     <h3>${day.day}</h3>
+                    ${day.morning_prep ? `<div style="font-size: 11px; color: var(--yellow); margin-bottom: 8px;">${day.morning_prep}</div>` : ''}
                     <div class="menu-meal">
                         <div class="menu-meal-label">Meal 1</div>
                         <div class="menu-meal-name" onclick="openRecipeByName('${day.meal1.name}', '${day.meal1.type}')">
                             ${day.meal1.name}
                             <span class="menu-meal-type ${day.meal1.type}">${typeLabels[day.meal1.type]}</span>
                         </div>
-                        <div style="font-size: 12px; color: var(--text-dim);">${day.meal1.cal} cal | ${day.meal1.protein}g protein</div>
+                        ${meal1Recipe ? `<div style="font-size: 12px; color: var(--text-dim);">Him: ${meal1Recipe.him.cal} cal / ${meal1Recipe.him.protein}g P</div>` : ''}
                     </div>
                     <div class="menu-meal">
                         <div class="menu-meal-label">Meal 2</div>
@@ -372,19 +430,30 @@
                             ${day.meal2.name}
                             <span class="menu-meal-type ${day.meal2.type}">${typeLabels[day.meal2.type]}</span>
                         </div>
-                        <div style="font-size: 12px; color: var(--text-dim);">${day.meal2.cal} cal | ${day.meal2.protein}g protein</div>
+                        ${meal2Recipe ? `<div style="font-size: 12px; color: var(--text-dim);">Him: ${meal2Recipe.him.cal} cal / ${meal2Recipe.him.protein}g P</div>` : ''}
                     </div>
                     <div class="menu-meal" style="background: transparent; padding: 0;">
-                        <div class="menu-meal-label">Snack</div>
-                        <div class="menu-meal-name" onclick="openRecipeByName('${day.snack}', 'snacks')" style="font-size: 14px;">${day.snack}</div>
+                        <div class="menu-meal-label">Snacks</div>
+                        <div style="font-size: 14px;">${day.snacks.map(s => {
+                            const snackName = s.replace(/\s*\([^)]*\)$/, '');
+                            return '<span class="menu-meal-name" onclick="openRecipeByName(\'' + snackName + '\', \'snacks\')">' + s + '</span>';
+                        }).join(', ')}</div>
                     </div>
                     <div class="menu-totals">
-                        <span style="color: var(--green);">${day.totals.cal} cal</span>
-                        <span style="color: var(--blue);">${day.totals.protein}g protein</span>
+                        <div>
+                            <div style="font-size: 11px; color: var(--text-dim);">Him</div>
+                            <span style="color: var(--green);">${day.him.cal} cal</span> ·
+                            <span style="color: var(--blue);">${day.him.protein}g P</span>
+                        </div>
+                        <div>
+                            <div style="font-size: 11px; color: var(--text-dim);">Her</div>
+                            <span style="color: var(--green);">${day.her.cal} cal</span> ·
+                            <span style="color: var(--blue);">${day.her.protein}g P</span>
+                        </div>
                     </div>
                     ${day.note ? `<div class="menu-note">${day.note}</div>` : ''}
                 </div>
-            `).join('');
+            `}).join('');
         }
 
         // ============================================
@@ -410,11 +479,12 @@
                 } else if (currentCategory === 'add_fresh') {
                     details = `<div class="recipe-components"><span class="prep-badge" style="background: var(--yellow); color: var(--bg);">Grab + Add</span></div>
                                <div style="font-size: 13px; color: var(--text-dim); margin-top: 8px;"><strong>Grab:</strong> ${r.grab}</div>
-                               ${r.add_fresh.length > 0 ? `<div style="font-size: 13px; color: var(--text-dim);"><strong>Add:</strong> ${r.add_fresh.join(', ')}</div>` : ''}`;
+                               ${r.add_fresh && r.add_fresh.length > 0 ? `<div style="font-size: 13px; color: var(--text-dim);"><strong>Add:</strong> ${r.add_fresh.join(', ')}</div>` : ''}`;
                 } else if (currentCategory === 'cook_fresh') {
                     details = `<div class="recipe-components"><span class="prep-badge" style="background: var(--purple); color: var(--bg);">${r.cook_time}</span></div>
                                <div style="font-size: 13px; color: var(--text-dim); margin-top: 8px;">${r.ingredients.slice(0, 3).join(', ')}...</div>`;
                 } else {
+                    // snacks
                     details = `<div style="font-size: 13px; color: var(--text-dim); margin-top: 8px;">${r.ingredients.slice(0, 2).join(', ')}</div>`;
                 }
 
@@ -422,10 +492,16 @@
                 <div class="recipe-card" onclick="showRecipe('${currentCategory}', ${i})">
                     <h4>${r.name}</h4>
                     <div class="recipe-macros">
-                        <span class="protein">${r.protein}g P</span>
-                        <span class="carbs">${r.carbs}g C</span>
-                        <span class="fat">${r.fat}g F</span>
-                        <span class="cal">${r.cal} cal</span>
+                        <div style="margin-bottom: 4px;">
+                            <span style="color: var(--text-dim); font-size: 10px;">Him:</span>
+                            <span class="protein">${r.him.protein}g P</span> ·
+                            <span class="cal">${r.him.cal} cal</span>
+                        </div>
+                        <div>
+                            <span style="color: var(--text-dim); font-size: 10px;">Her:</span>
+                            <span class="protein">${r.her.protein}g P</span> ·
+                            <span class="cal">${r.her.cal} cal</span>
+                        </div>
                     </div>
                     ${details}
                 </div>
@@ -437,10 +513,18 @@
 
             document.getElementById('modal-title').textContent = recipe.name;
             document.getElementById('modal-macros').innerHTML = `
-                <span class="protein">${recipe.protein}g protein</span>
-                <span class="carbs">${recipe.carbs}g carbs</span>
-                <span class="fat">${recipe.fat}g fat</span>
-                <span class="cal">${recipe.cal} cal</span>
+                <div style="display: flex; gap: 24px;">
+                    <div>
+                        <div style="font-size: 11px; color: var(--text-dim); margin-bottom: 4px;">Him (${recipe.him.portion})</div>
+                        <span class="protein">${recipe.him.protein}g P</span> ·
+                        <span class="cal">${recipe.him.cal} cal</span>
+                    </div>
+                    <div>
+                        <div style="font-size: 11px; color: var(--text-dim); margin-bottom: 4px;">Her (${recipe.her.portion})</div>
+                        <span class="protein">${recipe.her.protein}g P</span> ·
+                        <span class="cal">${recipe.her.cal} cal</span>
+                    </div>
+                </div>
             `;
 
             let content = '';
@@ -456,7 +540,7 @@
                 content = `
                     <h4>Grab from Fridge</h4>
                     <p style="font-size: 15px; margin-bottom: 16px;">${recipe.grab}</p>
-                    ${recipe.add_fresh.length > 0 ? `
+                    ${recipe.add_fresh && recipe.add_fresh.length > 0 ? `
                         <h4>Add Fresh</h4>
                         <ul>${recipe.add_fresh.map(i => `<li>${i}</li>`).join('')}</ul>
                     ` : ''}
@@ -474,6 +558,7 @@
             } else {
                 // snacks
                 content = `
+                    ${recipe.makes ? `<p style="font-size: 13px; color: var(--text-dim); margin-bottom: 12px;">${recipe.makes}</p>` : ''}
                     <h4>Ingredients</h4>
                     <ul>${recipe.ingredients.map(i => `<li>${i}</li>`).join('')}</ul>
                     <h4>Instructions</h4>
