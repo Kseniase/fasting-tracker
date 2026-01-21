@@ -557,10 +557,10 @@
       "oura": {
         "sleep_score": 67,
         "readiness_score": 60,
-        "activity_score": 72,
-        "steps": 5190,
-        "total_calories": 2658,
-        "active_calories": 347,
+        "activity_score": 73,
+        "steps": 5938,
+        "total_calories": 2720,
+        "active_calories": 376,
         "hrv_balance": 33,
         "body_temp_deviation": -0.11,
         "sleep": {
@@ -576,8 +576,8 @@
         },
         "stress": {
           "summary": "normal",
-          "stress_mins": 75,
-          "recovery_mins": 150
+          "stress_mins": 90,
+          "recovery_mins": 165
         }
       },
       "notes": ""
@@ -590,10 +590,10 @@
       "oura": {
         "sleep_score": 76,
         "readiness_score": 62,
-        "activity_score": 77,
-        "steps": 0,
-        "total_calories": 1916,
-        "active_calories": 0,
+        "activity_score": 78,
+        "steps": 5060,
+        "total_calories": 2508,
+        "active_calories": 207,
         "hrv_balance": 26,
         "body_temp_deviation": -0.16,
         "sleep": {
@@ -606,6 +606,138 @@
           "efficiency": 86,
           "lowest_hr": 62,
           "avg_hrv": 22
+        },
+        "stress": {
+          "summary": "restored",
+          "stress_mins": 75,
+          "recovery_mins": 270
+        }
+      },
+      "notes": ""
+    },
+    {
+      "date": "2026-01-18",
+      "day": 17,
+      "weight_kg": null,
+      "weight_change_kg": null,
+      "oura": {
+        "sleep_score": 88,
+        "readiness_score": 76,
+        "activity_score": 78,
+        "steps": 2292,
+        "total_calories": 2332,
+        "active_calories": 120,
+        "hrv_balance": 47,
+        "body_temp_deviation": 0.04,
+        "sleep": {
+          "bedtime": "2026-01-17T22:35:58.000-05:00",
+          "wake_time": "2026-01-18T07:36:47.000-05:00",
+          "total_hours": 7.4,
+          "deep_mins": 145,
+          "rem_mins": 102,
+          "light_mins": 197,
+          "efficiency": 82,
+          "lowest_hr": 59,
+          "avg_hrv": 43
+        },
+        "stress": {
+          "summary": "normal",
+          "stress_mins": 105,
+          "recovery_mins": 180
+        }
+      },
+      "notes": ""
+    },
+    {
+      "date": "2026-01-19",
+      "day": 18,
+      "weight_kg": null,
+      "weight_change_kg": null,
+      "oura": {
+        "sleep_score": 78,
+        "readiness_score": 67,
+        "activity_score": 74,
+        "steps": 3706,
+        "total_calories": 2601,
+        "active_calories": 245,
+        "hrv_balance": 35,
+        "body_temp_deviation": 0.03,
+        "sleep": {
+          "bedtime": "2026-01-18T22:49:00.000-05:00",
+          "wake_time": "2026-01-19T05:17:18.000-05:00",
+          "total_hours": 5.8,
+          "deep_mins": 62,
+          "rem_mins": 60,
+          "light_mins": 229,
+          "efficiency": 91,
+          "lowest_hr": 60,
+          "avg_hrv": 34
+        },
+        "stress": {
+          "summary": "stressful",
+          "stress_mins": 420,
+          "recovery_mins": 75
+        }
+      },
+      "notes": ""
+    },
+    {
+      "date": "2026-01-20",
+      "day": 19,
+      "weight_kg": null,
+      "weight_change_kg": null,
+      "oura": {
+        "sleep_score": 63,
+        "readiness_score": 54,
+        "activity_score": 77,
+        "steps": 5106,
+        "total_calories": 3078,
+        "active_calories": 756,
+        "hrv_balance": 40,
+        "body_temp_deviation": 0.16,
+        "sleep": {
+          "bedtime": "2026-01-19T22:44:59.000-05:00",
+          "wake_time": "2026-01-20T04:20:59.000-05:00",
+          "total_hours": 4.6,
+          "deep_mins": 17,
+          "rem_mins": 52,
+          "light_mins": 212,
+          "efficiency": 84,
+          "lowest_hr": 65,
+          "avg_hrv": 23
+        },
+        "stress": {
+          "summary": "stressful",
+          "stress_mins": 390,
+          "recovery_mins": 60
+        }
+      },
+      "notes": ""
+    },
+    {
+      "date": "2026-01-21",
+      "day": 20,
+      "weight_kg": 89.7,
+      "weight_change_kg": -1.3,
+      "oura": {
+        "sleep_score": 79,
+        "readiness_score": 72,
+        "activity_score": 78,
+        "steps": 8,
+        "total_calories": 1927,
+        "active_calories": 1,
+        "hrv_balance": 59,
+        "body_temp_deviation": 0.21,
+        "sleep": {
+          "bedtime": "2026-01-20T22:10:59.000-05:00",
+          "wake_time": "2026-01-21T04:14:19.000-05:00",
+          "total_hours": 5.4,
+          "deep_mins": 68,
+          "rem_mins": 75,
+          "light_mins": 183,
+          "efficiency": 90,
+          "lowest_hr": 59,
+          "avg_hrv": 28
         },
         "stress": {
           "summary": null,
@@ -938,14 +1070,74 @@
     {
       "date": "2026-01-17",
       "day": 16,
+      "type": "observation",
+      "message": "Refeed Day 6 - sleep score improved to 76 (best since refeed started), readiness 62, REM excellent at 89 mins. Solid protein breakfast: eggs, sausage, bacon. HRV balance still low at 26 - body still adapting to food intake."
+    },
+    {
+      "date": "2026-01-17",
+      "day": 16,
       "type": "sleep",
       "message": "Woke up: 5:35 AM (5.2 hrs sleep)"
     },
     {
       "date": "2026-01-17",
       "day": 16,
+      "type": "sleep",
+      "message": "Bedtime: 10:35 PM"
+    },
+    {
+      "date": "2026-01-18",
+      "day": 17,
+      "type": "sleep",
+      "message": "Woke up: 7:36 AM (7.4 hrs sleep)"
+    },
+    {
+      "date": "2026-01-18",
+      "day": 17,
+      "type": "sleep",
+      "message": "Bedtime: 10:49 PM"
+    },
+    {
+      "date": "2026-01-19",
+      "day": 18,
       "type": "observation",
-      "message": "Refeed Day 6 - sleep score improved to 76 (best since refeed started), readiness 62, REM excellent at 89 mins. Solid protein breakfast: eggs, sausage, bacon. HRV balance still low at 26 - body still adapting to food intake."
+      "message": "Weight: 91.0 kg (stable overnight, -7.3 kg total from Day 1). Refeed Day 8 - excellent sleep recovery with score 88 (best since fast started!), 145 mins deep sleep, 7.4 hrs total, HRV jumped to 43. Readiness 76. Body clearly recovering well with proper nutrition and sleep."
+    },
+    {
+      "date": "2026-01-19",
+      "day": 18,
+      "type": "sleep",
+      "message": "Woke up: 5:17 AM (5.8 hrs sleep)"
+    },
+    {
+      "date": "2026-01-19",
+      "day": 18,
+      "type": "sleep",
+      "message": "Bedtime: 10:44 PM"
+    },
+    {
+      "date": "2026-01-20",
+      "day": 19,
+      "type": "sleep",
+      "message": "Woke up: 4:20 AM (4.6 hrs sleep)"
+    },
+    {
+      "date": "2026-01-20",
+      "day": 19,
+      "type": "sleep",
+      "message": "Bedtime: 10:10 PM"
+    },
+    {
+      "date": "2026-01-21",
+      "day": 20,
+      "type": "sleep",
+      "message": "Woke up: 4:14 AM (5.4 hrs sleep)"
+    },
+    {
+      "date": "2026-01-21",
+      "day": 20,
+      "type": "observation",
+      "message": "Weight: 89.7 kg (-1.3 kg overnight, -8.6 kg total from Day 1). Refeed Day 10 (Final Day) - sleep score improved to 79 with 68 min deep and 75 min REM. HRV balance rebounding to 59 (best since fast started). Readiness 72, lowest HR 59 bpm. Big weight drop likely fluid fluctuation. Refeed protocol complete!"
     }
   ],
   "refeed": {
@@ -1218,10 +1410,10 @@
       "oura": {
         "sleep_score": 67,
         "readiness_score": 60,
-        "activity_score": 72,
-        "steps": 5190,
-        "total_calories": 2658,
-        "active_calories": 347,
+        "activity_score": 73,
+        "steps": 5938,
+        "total_calories": 2720,
+        "active_calories": 376,
         "hrv_balance": 33,
         "body_temp_deviation": -0.11,
         "sleep": {
@@ -1237,8 +1429,8 @@
         },
         "stress": {
           "summary": "normal",
-          "stress_mins": 75,
-          "recovery_mins": 150
+          "stress_mins": 90,
+          "recovery_mins": 165
         }
       },
       "notes": ""
@@ -1269,10 +1461,10 @@
       "oura": {
         "sleep_score": 76,
         "readiness_score": 62,
-        "activity_score": 77,
-        "steps": 0,
-        "total_calories": 1916,
-        "active_calories": 0,
+        "activity_score": 78,
+        "steps": 5060,
+        "total_calories": 2508,
+        "active_calories": 207,
         "hrv_balance": 26,
         "body_temp_deviation": -0.16,
         "sleep": {
@@ -1285,6 +1477,154 @@
           "efficiency": 86,
           "lowest_hr": 62,
           "avg_hrv": 22
+        },
+        "stress": {
+          "summary": "restored",
+          "stress_mins": 75,
+          "recovery_mins": 270
+        }
+      },
+      "notes": ""
+    },
+    {
+      "date": "2026-01-18",
+      "refeed_day": 7,
+      "weight_kg": 91.0,
+      "weight_change_kg": null,
+      "calories_consumed": null,
+      "protein_g": null,
+      "carbs_g": null,
+      "meals": [],
+      "oura": {
+        "sleep_score": 88,
+        "readiness_score": 76,
+        "activity_score": 78,
+        "steps": 2292,
+        "total_calories": 2332,
+        "active_calories": 120,
+        "hrv_balance": 47,
+        "body_temp_deviation": 0.04,
+        "sleep": {
+          "bedtime": "2026-01-17T22:35:58.000-05:00",
+          "wake_time": "2026-01-18T07:36:47.000-05:00",
+          "total_hours": 7.4,
+          "deep_mins": 145,
+          "rem_mins": 102,
+          "light_mins": 197,
+          "efficiency": 82,
+          "lowest_hr": 59,
+          "avg_hrv": 43
+        },
+        "stress": {
+          "summary": "normal",
+          "stress_mins": 105,
+          "recovery_mins": 180
+        }
+      },
+      "notes": ""
+    },
+    {
+      "date": "2026-01-19",
+      "refeed_day": 8,
+      "weight_kg": 91.0,
+      "weight_change_kg": 0.0,
+      "calories_consumed": null,
+      "protein_g": null,
+      "carbs_g": null,
+      "meals": [],
+      "oura": {
+        "sleep_score": 78,
+        "readiness_score": 67,
+        "activity_score": 74,
+        "steps": 3706,
+        "total_calories": 2601,
+        "active_calories": 245,
+        "hrv_balance": 35,
+        "body_temp_deviation": 0.03,
+        "sleep": {
+          "bedtime": "2026-01-18T22:49:00.000-05:00",
+          "wake_time": "2026-01-19T05:17:18.000-05:00",
+          "total_hours": 5.8,
+          "deep_mins": 62,
+          "rem_mins": 60,
+          "light_mins": 229,
+          "efficiency": 91,
+          "lowest_hr": 60,
+          "avg_hrv": 34
+        },
+        "stress": {
+          "summary": "stressful",
+          "stress_mins": 420,
+          "recovery_mins": 75
+        }
+      },
+      "notes": ""
+    },
+    {
+      "date": "2026-01-20",
+      "refeed_day": 9,
+      "weight_kg": null,
+      "weight_change_kg": null,
+      "calories_consumed": null,
+      "protein_g": null,
+      "carbs_g": null,
+      "meals": [],
+      "oura": {
+        "sleep_score": 63,
+        "readiness_score": 54,
+        "activity_score": 77,
+        "steps": 5106,
+        "total_calories": 3078,
+        "active_calories": 756,
+        "hrv_balance": 40,
+        "body_temp_deviation": 0.16,
+        "sleep": {
+          "bedtime": "2026-01-19T22:44:59.000-05:00",
+          "wake_time": "2026-01-20T04:20:59.000-05:00",
+          "total_hours": 4.6,
+          "deep_mins": 17,
+          "rem_mins": 52,
+          "light_mins": 212,
+          "efficiency": 84,
+          "lowest_hr": 65,
+          "avg_hrv": 23
+        },
+        "stress": {
+          "summary": "stressful",
+          "stress_mins": 390,
+          "recovery_mins": 60
+        }
+      },
+      "notes": ""
+    },
+    {
+      "date": "2026-01-21",
+      "refeed_day": 10,
+      "weight_kg": 89.7,
+      "weight_change_kg": -1.3,
+      "calories_consumed": null,
+      "protein_g": null,
+      "carbs_g": null,
+      "meals": [],
+      "oura": {
+        "sleep_score": 79,
+        "readiness_score": 72,
+        "activity_score": 78,
+        "steps": 8,
+        "total_calories": 1927,
+        "active_calories": 1,
+        "hrv_balance": 59,
+        "body_temp_deviation": 0.21,
+        "sleep": {
+          "bedtime": "2026-01-20T22:10:59.000-05:00",
+          "wake_time": "2026-01-21T04:14:19.000-05:00",
+          "total_hours": 5.4,
+          "deep_mins": 68,
+          "rem_mins": 75,
+          "light_mins": 183,
+          "efficiency": 90,
+          "lowest_hr": 59,
+          "avg_hrv": 28
         },
         "stress": {
           "summary": null,

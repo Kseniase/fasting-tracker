@@ -268,33 +268,126 @@ npx live-server
 This will open the browser automatically. If already running, just refresh the page.
 
 ### "Order groceries" or "Add to Instacart"
-Use the `/instacart` command for automated shopping from `recipes.json`. This uses the chrome-driver plugin to:
-1. Navigate to store (Market 32 or Stop & Shop)
-2. Search and add items using aria-label selectors
-3. Manage quantities and cart
 
-See `.claude/commands/instacart.md` for full documentation.
+Automate Instacart shopping using the chrome-driver plugin. Shopping list is in `recipes.json`.
 
-**Quick workflow:**
+**Setup:**
 ```bash
-# Setup
-INTERACT="${CLAUDE_PLUGIN_ROOT}/bin/interact --no-headless --user-data=~/.chrome-instacart"
-NAVIGATE="${CLAUDE_PLUGIN_ROOT}/bin/navigate --no-headless --user-data=~/.chrome-instacart"
-
-# Navigate to store
-$NAVIGATE "https://www.instacart.com/store/stop-shop/storefront"
-
-# Search (3-step: clear, type, submit)
-$INTERACT --eval="var input = document.querySelector('#search-bar-input'); input.select(); document.execCommand('delete');" 2>/dev/null
-$INTERACT --type="#search-bar-input=avocados" 2>/dev/null
-$INTERACT --eval="document.querySelector('#search-bar-input').closest('form').dispatchEvent(new Event('submit', {bubbles: true, cancelable: true}));" 2>/dev/null && sleep 3
-
-# Add product
-$INTERACT --eval="var btn = document.querySelector('button[aria-label*=\"Add\"][aria-label*=\"Avocado\"]'); if(btn) btn.click();" 2>/dev/null
+INTERACT="/Users/wschenk/.claude/plugins/cache/focus-marketplace/chrome-driver/0.1.0/bin/interact --no-headless --user-data=~/.chrome-instacart"
+NAVIGATE="/Users/wschenk/.claude/plugins/cache/focus-marketplace/chrome-driver/0.1.0/bin/navigate --no-headless --user-data=~/.chrome-instacart"
 ```
 
-**Key patterns:**
-- Aria-labels: `Add 1 ct [Product]`, `Increment quantity of [Product]`, `Remove [Product]`
-- Always clear search input before new searches
-- Use `2>/dev/null` to suppress noise
-- Sleep 3 seconds after search for results to load
+**Store URLs:**
+- Stop & Shop: `https://www.instacart.com/store/stop-shop/storefront`
+- Market 32: `https://www.instacart.com/store/market-32/storefront`
+
+#### Step 1: Get Current Cart Contents (IMPORTANT - do this first!)
+
+To compare with shopping list, you need to see what's already in the cart:
+
+```bash
+# 1. Navigate to store
+$NAVIGATE "https://www.instacart.com/store/stop-shop/storefront" 2>/dev/null
+
+# 2. Click the cart button to open cart drawer (find button with item count in header)
+$INTERACT --eval="
+var cartBtn = Array.from(document.querySelectorAll('button')).find(b => b.innerText.match(/\\d+/) && b.getBoundingClientRect().top < 80 && b.getBoundingClientRect().right > 700);
+if (cartBtn) {
+  cartBtn.dispatchEvent(new MouseEvent('click', {view: window, bubbles: true, cancelable: true}));
+  'clicked cart';
+} else { 'cart button not found'; }
+" 2>/dev/null && sleep 2
+
+# 3. Extract cart contents from the dialog
+$INTERACT --eval="
+var dialogs = Array.from(document.querySelectorAll('[role=\"dialog\"]'));
+var cartDialog = dialogs.find(d => d.innerText.includes('Stop & Shop') && d.innerText.includes('\\$'));
+if (cartDialog) {
+  cartDialog.innerText;
+} else {
+  'Cart dialog not found - may need to click cart again';
+}
+" 2>/dev/null
+```
+
+The cart dialog shows:
+- Item names with quantities (e.g., "Quantity: 9.5 lbs")
+- Prices
+- Total at bottom
+- "Likely out of Stock" warnings
+
+#### Step 2: Compare Cart with Shopping List
+
+Read `recipes.json` to get the shopping list, then compare with cart contents.
+Create a table showing: Item | Needed | In Cart | Action
+
+#### Step 3: Add/Adjust Items
+
+**Search for item (one command at a time for reliability):**
+```bash
+# Clear search
+$INTERACT --eval="var input = document.querySelector('#search-bar-input'); if(input) { input.select(); document.execCommand('delete'); }" 2>/dev/null
+
+# Type search term
+$INTERACT --type="#search-bar-input=avocado" 2>/dev/null
+
+# Submit search
+$INTERACT --eval="document.querySelector('#search-bar-input').closest('form').dispatchEvent(new Event('submit', {bubbles: true, cancelable: true}))" 2>/dev/null && sleep 3
+```
+
+**Add item to cart:**
+```bash
+# Add item (use partial match on aria-label)
+$INTERACT --eval="
+var btn = document.querySelector('button[aria-label*=\"Add\"][aria-label*=\"Avocado\"]');
+if (btn) { btn.click(); 'Added'; } else { 'not found'; }
+" 2>/dev/null
+```
+
+**Increment quantity:**
+```bash
+# Increment (click multiple times for multiple items)
+$INTERACT --eval="
+var btn = document.querySelector('button[aria-label*=\"Increment\"][aria-label*=\"Avocado\"]');
+if (btn) { btn.click(); 'Incremented'; } else { 'not found'; }
+" 2>/dev/null
+```
+
+**Check what's available after search:**
+```bash
+$INTERACT --eval="
+var btns = Array.from(document.querySelectorAll('button[aria-label*=\"Add\"], button[aria-label*=\"Increment\"]'));
+JSON.stringify(btns.map(b => b.getAttribute('aria-label')).slice(0, 15));
+" 2>/dev/null
+```
+
+#### Aria-Label Patterns
+
+| Action | Pattern | Example |
+|--------|---------|---------|
+| Add | `Add 1 ct [Product]` or `Add 1 lb [Product]` | `Add 1 ct Hass Avocado` |
+| Increment | `Increment quantity of [Product]` | `Increment quantity of Hass Avocado` |
+| Decrement | `Decrement quantity of [Product]` | `Decrement quantity of Hass Avocado` |
+| Remove | `Remove [Product]` | `Remove Hass Avocado` |
+
+#### Tips
+
+1. **Run commands one at a time** - chaining with `&&` can cause permission issues
+2. **Always clear search** before typing new term (prevents concatenation)
+3. **Use partial matches** in aria-labels (e.g., `aria-label*=\"vocado\"`)
+4. **Wait after search** - sleep 3 seconds for results to load
+5. **Suppress noise** with `2>/dev/null`
+6. **Items in cart show Increment** button, not Add button
+7. **Weight-based items** (meat, produce) may not have increment buttons in search results
+8. **Get cart count** from page: look for number in header near "delivery fee"
+
+#### Quick Cart Check
+
+```bash
+# Get cart item count
+$INTERACT --eval="
+var text = document.body.innerText;
+var match = text.match(/delivery fee\\s*(\\d+)/);
+match ? 'Cart: ' + match[1] + ' items' : 'Could not find count';
+" 2>/dev/null
+```
