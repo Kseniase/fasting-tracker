@@ -291,12 +291,14 @@
                 <button class="infographic-tab" data-tab="metabolic" onclick="showInfographic('metabolic')">Metabolic Changes</button>
                 <button class="infographic-tab" data-tab="refeed" onclick="showInfographic('refeed')">Refeed Protocol</button>
                 <button class="infographic-tab" data-tab="meals" onclick="showInfographic('meals')">7-Day Meal Plan</button>
+                <button class="infographic-tab" data-tab="timing" onclick="showInfographic('timing')">Fasting Cycle Timing</button>
             </div>
             <div class="infographic-container">
                 <img id="infographic-mental" src="keto-mental-journey-infographic.png" alt="Mental Journey of Ketosis" style="width: 100%; border-radius: 8px; display: block;">
                 <img id="infographic-metabolic" src="metabolic-changes-infographic.png" alt="Metabolic Changes During Fasting" style="width: 100%; border-radius: 8px; display: none;">
                 <img id="infographic-refeed" src="fast-refeed-infographic.png" alt="Fast-Refeed-Fast Cycle" style="width: 100%; border-radius: 8px; display: none;">
                 <img id="infographic-meals" src="refeed-meal-plan-infographic.png" alt="7-Day Refeed Meal Plan" style="width: 100%; border-radius: 8px; display: none;">
+                <img id="infographic-timing" src="fasting-cycle-timing-infographic.png" alt="Optimal Timing Between Extended Fasts" style="width: 100%; border-radius: 8px; display: none;">
             </div>
 
             <!-- Research Essays Section -->
@@ -304,6 +306,7 @@
             <div id="research-metabolic" class="research-content" style="display: none;"></div>
             <div id="research-refeed" class="research-content" style="display: none;"></div>
             <div id="research-meals" class="research-content" style="display: none;"></div>
+            <div id="research-timing" class="research-content" style="display: none;"></div>
         </div>
     </div>
 
@@ -313,14 +316,16 @@
             mental: 'reports/mental-journey-research.md',
             metabolic: 'reports/metabolic-changes-research.md',
             refeed: 'reports/fast-refeed-cycle-research.md',
-            meals: 'reports/refeed-meal-plan-research.md'
+            meals: 'reports/refeed-meal-plan-research.md',
+            timing: 'reports/2026-01-21-optimal-timing-between-extended-fasts.md'
         };
 
         let researchLoaded = {
             mental: false,
             metabolic: false,
             refeed: false,
-            meals: false
+            meals: false,
+            timing: false
         };
 
         let currentTab = 'mental';
@@ -396,12 +401,14 @@
             document.getElementById('infographic-metabolic').style.display = 'none';
             document.getElementById('infographic-refeed').style.display = 'none';
             document.getElementById('infographic-meals').style.display = 'none';
+            document.getElementById('infographic-timing').style.display = 'none';
 
             // Hide all research content
             document.getElementById('research-mental').style.display = 'none';
             document.getElementById('research-metabolic').style.display = 'none';
             document.getElementById('research-refeed').style.display = 'none';
             document.getElementById('research-meals').style.display = 'none';
+            document.getElementById('research-timing').style.display = 'none';
 
             // Remove active class from all tabs
             document.querySelectorAll('.infographic-tab').forEach(t => t.classList.remove('active'));
