@@ -60,7 +60,7 @@
       "weight_kg": null,
       "weight_change_kg": null,
       "oura": {
-        "sleep_score": 50,
+        "sleep_score": null,
         "readiness_score": 48,
         "activity_score": 51,
         "steps": 2291,
@@ -93,7 +93,7 @@
       "weight_kg": 98.3,
       "weight_change_kg": null,
       "oura": {
-        "sleep_score": 84,
+        "sleep_score": null,
         "readiness_score": 83,
         "activity_score": 54,
         "steps": 5317,
@@ -126,7 +126,7 @@
       "weight_kg": 96.3,
       "weight_change_kg": -2.0,
       "oura": {
-        "sleep_score": 63,
+        "sleep_score": null,
         "readiness_score": 64,
         "activity_score": 53,
         "steps": 6025,
@@ -159,7 +159,7 @@
       "weight_kg": 94.4,
       "weight_change_kg": -1.9,
       "oura": {
-        "sleep_score": 76,
+        "sleep_score": null,
         "readiness_score": 74,
         "activity_score": 54,
         "steps": 3095,
@@ -192,7 +192,7 @@
       "weight_kg": 94.0,
       "weight_change_kg": -0.4,
       "oura": {
-        "sleep_score": 75,
+        "sleep_score": null,
         "readiness_score": 78,
         "activity_score": 54,
         "steps": 2894,
@@ -225,7 +225,7 @@
       "weight_kg": 92.9,
       "weight_change_kg": -1.1,
       "oura": {
-        "sleep_score": 84,
+        "sleep_score": null,
         "readiness_score": 82,
         "activity_score": 56,
         "steps": 2147,
@@ -258,7 +258,7 @@
       "weight_kg": 92.1,
       "weight_change_kg": -0.8,
       "oura": {
-        "sleep_score": 75,
+        "sleep_score": null,
         "readiness_score": 81,
         "activity_score": 72,
         "steps": 5442,
@@ -291,7 +291,7 @@
       "weight_kg": null,
       "weight_change_kg": null,
       "oura": {
-        "sleep_score": 63,
+        "sleep_score": null,
         "readiness_score": 59,
         "activity_score": 76,
         "steps": 4801,
@@ -324,7 +324,7 @@
       "weight_kg": 90.7,
       "weight_change_kg": -1.4,
       "oura": {
-        "sleep_score": 81,
+        "sleep_score": null,
         "readiness_score": 83,
         "activity_score": 75,
         "steps": 7210,
@@ -357,7 +357,7 @@
       "weight_kg": 89.7,
       "weight_change_kg": -1.0,
       "oura": {
-        "sleep_score": 87,
+        "sleep_score": null,
         "readiness_score": 79,
         "activity_score": 69,
         "steps": 3523,
@@ -390,7 +390,7 @@
       "weight_kg": 89.7,
       "weight_change_kg": 0.0,
       "oura": {
-        "sleep_score": 72,
+        "sleep_score": null,
         "readiness_score": 76,
         "activity_score": 70,
         "steps": 2487,
@@ -423,7 +423,7 @@
       "weight_kg": 88.9,
       "weight_change_kg": -0.8,
       "oura": {
-        "sleep_score": 67,
+        "sleep_score": null,
         "readiness_score": 72,
         "activity_score": 60,
         "steps": 5270,
@@ -456,7 +456,7 @@
       "weight_kg": null,
       "weight_change_kg": null,
       "oura": {
-        "sleep_score": 61,
+        "sleep_score": null,
         "readiness_score": 59,
         "activity_score": 74,
         "steps": 7177,
@@ -489,7 +489,7 @@
       "weight_kg": 89.7,
       "weight_change_kg": 0.0,
       "oura": {
-        "sleep_score": 68,
+        "sleep_score": null,
         "readiness_score": 58,
         "activity_score": 55,
         "steps": 2630,
@@ -522,7 +522,7 @@
       "weight_kg": 89.6,
       "weight_change_kg": -0.1,
       "oura": {
-        "sleep_score": 65,
+        "sleep_score": null,
         "readiness_score": 65,
         "activity_score": 72,
         "steps": 3800,
@@ -555,7 +555,7 @@
       "weight_kg": 89.8,
       "weight_change_kg": 0.2,
       "oura": {
-        "sleep_score": 67,
+        "sleep_score": null,
         "readiness_score": 60,
         "activity_score": 73,
         "steps": 5938,
@@ -588,7 +588,7 @@
       "weight_kg": null,
       "weight_change_kg": null,
       "oura": {
-        "sleep_score": 76,
+        "sleep_score": null,
         "readiness_score": 62,
         "activity_score": 78,
         "steps": 5060,
@@ -621,7 +621,7 @@
       "weight_kg": null,
       "weight_change_kg": null,
       "oura": {
-        "sleep_score": 88,
+        "sleep_score": null,
         "readiness_score": 76,
         "activity_score": 78,
         "steps": 2292,
@@ -654,7 +654,7 @@
       "weight_kg": null,
       "weight_change_kg": null,
       "oura": {
-        "sleep_score": 78,
+        "sleep_score": null,
         "readiness_score": 67,
         "activity_score": 74,
         "steps": 3706,
@@ -687,7 +687,7 @@
       "weight_kg": null,
       "weight_change_kg": null,
       "oura": {
-        "sleep_score": 63,
+        "sleep_score": null,
         "readiness_score": 54,
         "activity_score": 77,
         "steps": 5106,
@@ -720,12 +720,12 @@
       "weight_kg": 89.7,
       "weight_change_kg": -1.3,
       "oura": {
-        "sleep_score": 79,
-        "readiness_score": 72,
-        "activity_score": 78,
-        "steps": 8,
-        "total_calories": 1927,
-        "active_calories": 1,
+        "sleep_score": null,
+        "readiness_score": 73,
+        "activity_score": 75,
+        "steps": 3646,
+        "total_calories": 2453,
+        "active_calories": 181,
         "hrv_balance": 59,
         "body_temp_deviation": 0.21,
         "sleep": {
@@ -739,6 +739,29 @@
           "lowest_hr": 59,
           "avg_hrv": 28
         },
+        "stress": {
+          "summary": "stressful",
+          "stress_mins": 330,
+          "recovery_mins": 105
+        }
+      },
+      "notes": ""
+    },
+    {
+      "date": "2026-01-22",
+      "day": 21,
+      "weight_kg": 90.3,
+      "weight_change_kg": 0.6,
+      "oura": {
+        "sleep_score": null,
+        "readiness_score": null,
+        "activity_score": 68,
+        "steps": 614,
+        "total_calories": 1993,
+        "active_calories": 40,
+        "hrv_balance": null,
+        "body_temp_deviation": null,
+        "sleep": null,
         "stress": {
           "summary": null,
           "stress_mins": 0,
@@ -1130,14 +1153,20 @@
     {
       "date": "2026-01-21",
       "day": 20,
-      "type": "sleep",
-      "message": "Woke up: 4:14 AM (5.4 hrs sleep)"
+      "type": "observation",
+      "message": "Weight: 89.7 kg (-1.3 kg overnight, -8.6 kg total from Day 1). Refeed Day 10 (Final Day) - sleep score improved to 79 with 68 min deep and 75 min REM. HRV balance rebounding to 59 (best since fast started). Readiness 72, lowest HR 59 bpm. Big weight drop likely fluid fluctuation. Refeed protocol complete!"
     },
     {
       "date": "2026-01-21",
       "day": 20,
+      "type": "sleep",
+      "message": "Woke up: 4:14 AM (5.4 hrs sleep)"
+    },
+    {
+      "date": "2026-01-22",
+      "day": 21,
       "type": "observation",
-      "message": "Weight: 89.7 kg (-1.3 kg overnight, -8.6 kg total from Day 1). Refeed Day 10 (Final Day) - sleep score improved to 79 with 68 min deep and 75 min REM. HRV balance rebounding to 59 (best since fast started). Readiness 72, lowest HR 59 bpm. Big weight drop likely fluid fluctuation. Refeed protocol complete!"
+      "message": "Weight: 90.3 kg (+0.6 kg overnight, -8.0 kg total from Day 1). Day 1 Post-Refeed - refeed protocol complete as of yesterday. Weight stabilizing around 90 kg. Total weight loss from fast maintained at 8 kg. Transitioning to normal eating."
     }
   ],
   "refeed": {
@@ -1170,7 +1199,7 @@
         }
       ],
       "oura": {
-        "sleep_score": 67,
+        "sleep_score": null,
         "readiness_score": 72,
         "activity_score": 60,
         "steps": 5270,
@@ -1233,7 +1262,7 @@
         }
       ],
       "oura": {
-        "sleep_score": 61,
+        "sleep_score": null,
         "readiness_score": 59,
         "activity_score": 74,
         "steps": 7177,
@@ -1296,7 +1325,7 @@
         }
       ],
       "oura": {
-        "sleep_score": 68,
+        "sleep_score": null,
         "readiness_score": 58,
         "activity_score": 55,
         "steps": 2630,
@@ -1358,7 +1387,7 @@
         }
       ],
       "oura": {
-        "sleep_score": 65,
+        "sleep_score": null,
         "readiness_score": 65,
         "activity_score": 72,
         "steps": 3800,
@@ -1408,7 +1437,7 @@
         }
       ],
       "oura": {
-        "sleep_score": 67,
+        "sleep_score": null,
         "readiness_score": 60,
         "activity_score": 73,
         "steps": 5938,
@@ -1459,7 +1488,7 @@
         }
       ],
       "oura": {
-        "sleep_score": 76,
+        "sleep_score": null,
         "readiness_score": 62,
         "activity_score": 78,
         "steps": 5060,
@@ -1496,7 +1525,7 @@
       "carbs_g": null,
       "meals": [],
       "oura": {
-        "sleep_score": 88,
+        "sleep_score": null,
         "readiness_score": 76,
         "activity_score": 78,
         "steps": 2292,
@@ -1533,7 +1562,7 @@
       "carbs_g": null,
       "meals": [],
       "oura": {
-        "sleep_score": 78,
+        "sleep_score": null,
         "readiness_score": 67,
         "activity_score": 74,
         "steps": 3706,
@@ -1570,7 +1599,7 @@
       "carbs_g": null,
       "meals": [],
       "oura": {
-        "sleep_score": 63,
+        "sleep_score": null,
         "readiness_score": 54,
         "activity_score": 77,
         "steps": 5106,
@@ -1607,12 +1636,12 @@
       "carbs_g": null,
       "meals": [],
       "oura": {
-        "sleep_score": 79,
-        "readiness_score": 72,
-        "activity_score": 78,
-        "steps": 8,
-        "total_calories": 1927,
-        "active_calories": 1,
+        "sleep_score": null,
+        "readiness_score": 73,
+        "activity_score": 75,
+        "steps": 3646,
+        "total_calories": 2453,
+        "active_calories": 181,
         "hrv_balance": 59,
         "body_temp_deviation": 0.21,
         "sleep": {
@@ -1626,6 +1655,33 @@
           "lowest_hr": 59,
           "avg_hrv": 28
         },
+        "stress": {
+          "summary": "stressful",
+          "stress_mins": 330,
+          "recovery_mins": 105
+        }
+      },
+      "notes": ""
+    },
+    {
+      "date": "2026-01-22",
+      "refeed_day": 11,
+      "weight_kg": 90.3,
+      "weight_change_kg": 0.6,
+      "calories_consumed": null,
+      "protein_g": null,
+      "carbs_g": null,
+      "meals": [],
+      "oura": {
+        "sleep_score": null,
+        "readiness_score": null,
+        "activity_score": 68,
+        "steps": 614,
+        "total_calories": 1993,
+        "active_calories": 40,
+        "hrv_balance": null,
+        "body_temp_deviation": null,
+        "sleep": null,
         "stress": {
           "summary": null,
           "stress_mins": 0,

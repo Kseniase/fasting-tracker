@@ -1087,24 +1087,28 @@
         function renderPage() {
             const currentDay = getCurrentRefeedDay();
             const plan = refeedData.refeed_plan;
-            const dayData = plan.days[currentDay - 1];
+            // Clamp to max 10 days since plan only has 10 days defined
+            const displayDay = Math.min(currentDay, 10);
+            const dayData = plan.days[displayDay - 1];
 
             console.log('Current refeed day:', currentDay);
+            console.log('Display day:', displayDay);
             console.log('Day data:', dayData);
             console.log('Today measurement:', getTodayMeasurement());
 
             // Update header
-            document.getElementById('dayBadge').textContent = `Refeed Day ${currentDay}`;
-            document.getElementById('phaseBadge').textContent = `PHASE: ${dayData.phase.toUpperCase()}`;
+            const headerText = currentDay > 10 ? `Post-Refeed Day ${currentDay - 10}` : `Refeed Day ${currentDay}`;
+            document.getElementById('dayBadge').textContent = headerText;
+            document.getElementById('phaseBadge').textContent = currentDay > 10 ? 'PHASE: MAINTENANCE' : `PHASE: ${dayData.phase.toUpperCase()}`;
 
             // Render stats from Oura
             renderStats();
 
             // Render progress
-            renderProgress(currentDay);
+            renderProgress(displayDay);
 
             // Render today's meals
-            renderTodayMeals(dayData, currentDay);
+            renderTodayMeals(dayData, displayDay);
 
             // Render targets
             document.getElementById('targetCalories').textContent = dayData.target_calories;
@@ -1115,7 +1119,7 @@
             renderRules(dayData.rules);
 
             // Render all days
-            renderDayGrid(currentDay);
+            renderDayGrid(displayDay);
 
             // Render shopping list
             renderShoppingList();

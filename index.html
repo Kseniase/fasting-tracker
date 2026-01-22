@@ -1516,11 +1516,13 @@
         }
 
         function renderWeightChart() {
-            const measurements = data.measurements;
             const currentDay = getCurrentDay();
 
-            // Filter out measurements without weight data
-            const validMeasurements = measurements.filter(m => m.weight_kg !== null && m.weight_kg !== undefined);
+            // Filter to only fast days (0-11) with weight data
+            const validMeasurements = data.measurements.filter(m =>
+                m.day >= 0 && m.day <= 11 &&
+                m.weight_kg !== null && m.weight_kg !== undefined
+            );
 
             if (validMeasurements.length === 0) {
                 document.getElementById('weightChart').innerHTML = '<p style="color: var(--text-dim); text-align: center; padding: 40px;">No weight data yet</p>';

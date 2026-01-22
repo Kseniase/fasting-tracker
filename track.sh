@@ -94,15 +94,27 @@ echo "$ACTIVITY" | jq -r '.data[].day' | while read DAY; do
 
   # Get long_sleep data (primary sleep, not naps)
   SLEEP_DATA=$(echo "$SLEEP_DETAIL" | jq ".data[] | select(.day == \"$DAY\" and .type == \"long_sleep\")")
-  BEDTIME=$(echo "$SLEEP_DATA" | jq -r '.bedtime_start // null')
-  WAKETIME=$(echo "$SLEEP_DATA" | jq -r '.bedtime_end // null')
-  TOTAL_SLEEP_SEC=$(echo "$SLEEP_DATA" | jq -r '.total_sleep_duration // 0')
-  DEEP_SEC=$(echo "$SLEEP_DATA" | jq -r '.deep_sleep_duration // 0')
-  REM_SEC=$(echo "$SLEEP_DATA" | jq -r '.rem_sleep_duration // 0')
-  LIGHT_SEC=$(echo "$SLEEP_DATA" | jq -r '.light_sleep_duration // 0')
-  EFFICIENCY=$(echo "$SLEEP_DATA" | jq -r '.efficiency // null')
-  LOWEST_HR=$(echo "$SLEEP_DATA" | jq -r '.lowest_heart_rate // null')
-  AVG_HRV=$(echo "$SLEEP_DATA" | jq -r '.average_hrv // null')
+  if [ -n "$SLEEP_DATA" ]; then
+    BEDTIME=$(echo "$SLEEP_DATA" | jq -r '.bedtime_start // null')
+    WAKETIME=$(echo "$SLEEP_DATA" | jq -r '.bedtime_end // null')
+    TOTAL_SLEEP_SEC=$(echo "$SLEEP_DATA" | jq -r '.total_sleep_duration // 0')
+    DEEP_SEC=$(echo "$SLEEP_DATA" | jq -r '.deep_sleep_duration // 0')
+    REM_SEC=$(echo "$SLEEP_DATA" | jq -r '.rem_sleep_duration // 0')
+    LIGHT_SEC=$(echo "$SLEEP_DATA" | jq -r '.light_sleep_duration // 0')
+    EFFICIENCY=$(echo "$SLEEP_DATA" | jq -r '.efficiency // null')
+    LOWEST_HR=$(echo "$SLEEP_DATA" | jq -r '.lowest_heart_rate // null')
+    AVG_HRV=$(echo "$SLEEP_DATA" | jq -r '.average_hrv // null')
+  else
+    BEDTIME="null"
+    WAKETIME="null"
+    TOTAL_SLEEP_SEC="0"
+    DEEP_SEC="0"
+    REM_SEC="0"
+    LIGHT_SEC="0"
+    EFFICIENCY="null"
+    LOWEST_HR="null"
+    AVG_HRV="null"
+  fi
 
   # Convert to hours/mins
   TOTAL_HOURS=$(echo "scale=1; $TOTAL_SLEEP_SEC / 3600" | bc)
@@ -298,15 +310,27 @@ if [ -n "$REFEED_START" ]; then
 
     # Get sleep data
     SLEEP_DATA=$(echo "$SLEEP_DETAIL" | jq ".data[] | select(.day == \"$DAY\" and .type == \"long_sleep\")")
-    BEDTIME=$(echo "$SLEEP_DATA" | jq -r '.bedtime_start // null')
-    WAKETIME=$(echo "$SLEEP_DATA" | jq -r '.bedtime_end // null')
-    TOTAL_SLEEP_SEC=$(echo "$SLEEP_DATA" | jq -r '.total_sleep_duration // 0')
-    DEEP_SEC=$(echo "$SLEEP_DATA" | jq -r '.deep_sleep_duration // 0')
-    REM_SEC=$(echo "$SLEEP_DATA" | jq -r '.rem_sleep_duration // 0')
-    LIGHT_SEC=$(echo "$SLEEP_DATA" | jq -r '.light_sleep_duration // 0')
-    EFFICIENCY=$(echo "$SLEEP_DATA" | jq -r '.efficiency // null')
-    LOWEST_HR=$(echo "$SLEEP_DATA" | jq -r '.lowest_heart_rate // null')
-    AVG_HRV=$(echo "$SLEEP_DATA" | jq -r '.average_hrv // null')
+    if [ -n "$SLEEP_DATA" ]; then
+      BEDTIME=$(echo "$SLEEP_DATA" | jq -r '.bedtime_start // null')
+      WAKETIME=$(echo "$SLEEP_DATA" | jq -r '.bedtime_end // null')
+      TOTAL_SLEEP_SEC=$(echo "$SLEEP_DATA" | jq -r '.total_sleep_duration // 0')
+      DEEP_SEC=$(echo "$SLEEP_DATA" | jq -r '.deep_sleep_duration // 0')
+      REM_SEC=$(echo "$SLEEP_DATA" | jq -r '.rem_sleep_duration // 0')
+      LIGHT_SEC=$(echo "$SLEEP_DATA" | jq -r '.light_sleep_duration // 0')
+      EFFICIENCY=$(echo "$SLEEP_DATA" | jq -r '.efficiency // null')
+      LOWEST_HR=$(echo "$SLEEP_DATA" | jq -r '.lowest_heart_rate // null')
+      AVG_HRV=$(echo "$SLEEP_DATA" | jq -r '.average_hrv // null')
+    else
+      BEDTIME="null"
+      WAKETIME="null"
+      TOTAL_SLEEP_SEC="0"
+      DEEP_SEC="0"
+      REM_SEC="0"
+      LIGHT_SEC="0"
+      EFFICIENCY="null"
+      LOWEST_HR="null"
+      AVG_HRV="null"
+    fi
 
     TOTAL_HOURS=$(echo "scale=1; $TOTAL_SLEEP_SEC / 3600" | bc)
     DEEP_MINS=$(echo "$DEEP_SEC / 60" | bc)
