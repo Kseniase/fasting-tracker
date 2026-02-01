@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Checklist</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 16px;
+      background: #f5f5f5;
+    }
+    h1 {
+      font-size: 1.5rem;
+      margin: 0 0 8px 0;
+      text-align: center;
+    }
+    .subtitle {
+      text-align: center;
+      color: #666;
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+    }
+    .section {
+      background: white;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .section h2 {
+      font-size: 1rem;
+      margin: 0 0 12px 0;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #eee;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section h2 .icon { font-size: 1.2rem; }
+    .item {
+      display: flex;
+      align-items: flex-start;
+      padding: 10px 0;
+      border-bottom: 1px solid #f0f0f0;
+      gap: 12px;
+    }
+    .item:last-child { border-bottom: none; }
+    .item input[type="checkbox"] {
+      width: 24px;
+      height: 24px;
+      margin: 0;
+      flex-shrink: 0;
+      accent-color: #22c55e;
+    }
+    .item-details {
+      flex: 1;
+    }
+    .item-name {
+      font-weight: 500;
+      font-size: 1rem;
+    }
+    .item-qty {
+      color: #666;
+      font-size: 0.85rem;
+      margin-top: 2px;
+    }
+    .item.checked .item-name,
+    .item.checked .item-qty {
+      text-decoration: line-through;
+      color: #aaa;
+    }
+    .have-section {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+    }
+    .have-section h2 { color: #16a34a; }
+    .progress-bar {
+      background: #e5e5e5;
+      height: 8px;
+      border-radius: 4px;
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      background: #22c55e;
+      height: 100%;
+      width: 0%;
+      transition: width 0.3s;
+    }
+    .progress-text {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #666;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Week 1 Shopping</h1>
+  <p class="subtitle">Meat, Veggies & Dairy</p>
+
+  <div class="progress-text"><span id="count">0</span> of <span id="total">0</span> items</div>
+  <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+
+  <div class="section have-section">
+    <h2><span class="icon">✓</span> Already Have</h2>
+    <div class="item checked">
+      <input type="checkbox" checked disabled>
+      <div class="item-details">
+        <div class="item-name">Cabbage</div>
+      </div>
+    </div>
+    <div class="item checked">
+      <input type="checkbox" checked disabled>
+      <div class="item-details">
+        <div class="item-name">Cucumbers</div>
+      </div>
+    </div>
+    <div class="item checked">
+      <input type="checkbox" checked disabled>
+      <div class="item-details">
+        <div class="item-name">Eggs</div>
+        <div class="item-qty">Have plenty</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🥩</span> Meats</h2>
+    <div class="item">
+      <input type="checkbox" data-item>
+      <div class="item-details">
+        <div class="item-name">Pork shoulder</div>
+        <div class="item-qty">7-8 lbs — pulled pork</div>
+      </div>
+    </div>
+    <div class="item">
+      <input type="checkbox" data-item>
+      <div class="item-details">
+        <div class="item-name">Beef chuck roast</div>
+        <div class="item-qty">4 lbs — cut for stew</div>
+      </div>
+    </div>
+    <div class="item">
+      <input type="checkbox" data-item>
+      <div class="item-details">
+        <div class="item-name">Chicken breasts, boneless</div>
+        <div class="item-qty">5-6 lbs</div>
+      </div>
+    </div>
+    <div class="item">
+      <input type="checkbox" data-item>
+      <div class="item-details">
+        <div class="item-name">Bacon</div>
+        <div class="item-qty">2 lbs</div>
+      </div>
+    </div>
+    <div class="item">
+      <input type="checkbox" data-item>
+      <div class="item-details">
+        <div class="item-name">Salmon fillet</div>
+        <div class="item-qty">1.5 lb — fresh</div>
+      </div>
+    </div>
+    <div class="item">
+      <input type="checkbox" data-item>
+      <div class="item-details">
+        <div class="item-name">Steak (ribeye or strip)</div>
+        <div class="item-qty">1.5 lb — fresh</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🥦</span> Vegetables</h2>
+    <div class="item">
+      <input type="checkbox" data-item>
+      <div class="item-details">
+        <div class="item-name">Broccoli</div>
+        <div class="item-qty">3 heads</div>
+      </div>
+    </div>
+    <div class="item">
+      <input type="checkbox" data-item>
+      <div class="item-details">
+        <div class="item-name">Brussels sprouts</div>
+        <div class="item-qty">3 lbs</div>
+      </div>
+    </div>
+    <div class="item">
+      <input type="checkbox" data-item>
+      <div class="item-details">
+        <div class="item-name">Cauliflower</div>
+        <div class="item-qty">1 large head — for mash</div>
+      </div>
+    </div>
+    <div class="item">
+      <input type="checkbox" data-item>
+      <div class="item-details">
+        <div class="item-name">Zucchini</div>
+        <div class="item-qty">6-8</div>
+      </div>
+    </div>
+    <div class="item">
+      <input type="checkbox" data-item>
+      <div class="item-details">
+        <div class="item-name">Bell peppers</div>
+        <div class="item-qty">8</div>
+      </div>
+    </div>
+    <div class="item">
+      <input type="checkbox" data-item>
+      <div class="item-details">
+        <div class="item-name">Spinach</div>
+        <div class="item-qty">3 bags</div>
+      </div>
+    </div>
+    <div class="item">
+      <input type="checkbox" data-item>
+      <div class="item-details">
+        <div class="item-name">Mixed greens</div>
+        <div class="item-qty">3 containers</div>
+      </div>
+    </div>
+    <div class="item">
+      <input type="checkbox" data-item>
+      <div class="item-details">
+        <div class="item-name">Celery</div>
+        <div class="item-qty">2 bunches</div>
+      </div>
+    </div>
+    <div class="item">
+      <input type="checkbox" data-item>
+      <div class="item-details">
+        <div class="item-name">Mushrooms</div>
+        <div class="item-qty">12 oz</div>
+      </div>
+    </div>
+    <div class="item">
+      <input type="checkbox" data-item>
+      <div class="item-details">
+        <div class="item-name">Radishes</div>
+        <div class="item-qty">1.5 lbs — potato sub in stew</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🍋</span> Fresh</h2>
+    <div class="item">
+      <input type="checkbox" data-item>
+      <div class="item-details">
+        <div class="item-name">Avocados</div>
+        <div class="item-qty">10</div>
+      </div>
+    </div>
+    <div class="item">
+      <input type="checkbox" data-item>
+      <div class="item-details">
+        <div class="item-name">Cherry tomatoes</div>
+        <div class="item-qty">3 pints</div>
+      </div>
+    </div>
+    <div class="item">
+      <input type="checkbox" data-item>
+      <div class="item-details">
+        <div class="item-name">Berries, mixed</div>
+        <div class="item-qty">3 pints</div>
+      </div>
+    </div>
+    <div class="item">
+      <input type="checkbox" data-item>
+      <div class="item-details">
+        <div class="item-name">Lemons</div>
+        <div class="item-qty">3</div>
+      </div>
+    </div>
+    <div class="item">
+      <input type="checkbox" data-item>
+      <div class="item-details">
+        <div class="item-name">Fresh thyme</div>
+        <div class="item-qty">1 bunch</div>
+      </div>
+    </div>
+    <div class="item">
+      <input type="checkbox" data-item>
+      <div class="item-details">
+        <div class="item-name">Fresh dill</div>
+        <div class="item-qty">1 bunch</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🥛</span> Dairy</h2>
+    <div class="item">
+      <input type="checkbox" data-item>
+      <div class="item-details">
+        <div class="item-name">Greek yogurt, full-fat</div>
+        <div class="item-qty">64 oz (2 large tubs)</div>
+      </div>
+    </div>
+    <div class="item">
+      <input type="checkbox" data-item>
+      <div class="item-details">
+        <div class="item-name">Cottage cheese</div>
+        <div class="item-qty">2 × 16 oz tubs</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const checkboxes = document.querySelectorAll('input[data-item]');
+    const countEl = document.getElementById('count');
+    const totalEl = document.getElementById('total');
+    const progressEl = document.getElementById('progress');
+
+    const STORAGE_KEY = 'shopping-checklist-state';
+
+    function updateProgress() {
+      const checked = document.querySelectorAll('input[data-item]:checked').length;
+      const total = checkboxes.length;
+      countEl.textContent = checked;
+      totalEl.textContent = total;
+      progressEl.style.width = (checked / total * 100) + '%';
+    }
+
+    function saveState() {
+      const state = {};
+      checkboxes.forEach((cb, i) => {
+        state[i] = cb.checked;
+      });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function loadState() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        const state = JSON.parse(saved);
+        checkboxes.forEach((cb, i) => {
+          if (state[i]) {
+            cb.checked = true;
+            cb.closest('.item').classList.add('checked');
+          }
+        });
+      }
+    }
+
+    checkboxes.forEach(cb => {
+      cb.addEventListener('change', () => {
+        cb.closest('.item').classList.toggle('checked', cb.checked);
+        updateProgress();
+        saveState();
+      });
+    });
+
+    loadState();
+    updateProgress();
+  </script>
+</body>
+</html>

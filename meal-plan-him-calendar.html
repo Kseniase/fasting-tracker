@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Weekly Meal Plan - Him</title>
+  <style>
+    @page {
+      size: letter landscape;
+      margin: 0.4in;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+    }
+
+    body {
+      font-family: Georgia, serif;
+      background: #faf9f6;
+      color: #1a1a1a;
+      font-size: 11px;
+      line-height: 1.35;
+      display: flex;
+      flex-direction: column;
+      padding: 15px;
+    }
+
+    h1 {
+      font-size: 22px;
+      font-weight: normal;
+      text-align: center;
+      margin-bottom: 4px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #666;
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+
+    .calendar {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px;
+      flex: 1;
+      margin-bottom: 12px;
+    }
+
+    .day {
+      background: white;
+      border: 1px solid #bbb;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .day-header {
+      font-weight: bold;
+      font-size: 13px;
+      border-bottom: 2px solid #2d5a8a;
+      padding-bottom: 4px;
+      margin-bottom: 6px;
+      color: #2d5a8a;
+      text-align: center;
+    }
+
+    .meal {
+      margin-bottom: 6px;
+      padding-bottom: 5px;
+      border-bottom: 1px dotted #ccc;
+      flex: 1;
+    }
+
+    .meal:last-of-type {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    .meal-label {
+      font-weight: bold;
+      color: #2d5a8a;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .meal-name {
+      font-weight: bold;
+      font-size: 11px;
+      margin: 1px 0;
+    }
+
+    .meal-details {
+      color: #555;
+      font-size: 9px;
+    }
+
+    .totals {
+      margin-top: auto;
+      padding-top: 6px;
+      border-top: 2px solid #2d5a8a;
+      font-size: 10px;
+      font-weight: bold;
+      text-align: center;
+      color: #2d5a8a;
+    }
+
+    .prep-section {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .prep-card {
+      background: white;
+      border: 1px solid #bbb;
+      padding: 10px;
+    }
+
+    .prep-card h3 {
+      font-size: 12px;
+      color: #2d5a8a;
+      margin-bottom: 6px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 4px;
+    }
+
+    .prep-card h4 {
+      font-size: 10px;
+      font-weight: bold;
+      margin: 6px 0 2px 0;
+      color: #333;
+    }
+
+    .prep-card h4:first-of-type {
+      margin-top: 0;
+    }
+
+    .prep-card p, .prep-card li {
+      margin: 2px 0;
+      font-size: 9px;
+    }
+
+    .prep-card ul {
+      margin-left: 12px;
+    }
+
+    .portions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+      font-size: 9px;
+    }
+
+    .portions div {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px dotted #ddd;
+      padding: 2px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Weekly Meal Plan - Him (2x Portions)</h1>
+  <p class="subtitle">Target: 150g protein | 1800-2000 cal | Double portions = double her amounts</p>
+
+  <div class="calendar">
+    <div class="day">
+      <div class="day-header">Monday</div>
+      <div class="meal">
+        <div class="meal-label">Meal 1</div>
+        <div class="meal-name">Pork Power Bowl</div>
+        <div class="meal-details">250g pork, 200g zucchini, 200g brussels, 2 eggs (76g)</div>
+      </div>
+      <div class="meal">
+        <div class="meal-label">Meal 2</div>
+        <div class="meal-name">Chicken Plate</div>
+        <div class="meal-details">350g chicken, 200g mash, 200g broccoli (66g)</div>
+      </div>
+      <div class="meal">
+        <div class="meal-label">Snack</div>
+        <div class="meal-name">Deviled Eggs</div>
+        <div class="meal-details">4 egg halves (14g)</div>
+      </div>
+      <div class="totals">156g · 1880 cal</div>
+    </div>
+
+    <div class="day">
+      <div class="day-header">Tuesday</div>
+      <div class="meal">
+        <div class="meal-label">Meal 1</div>
+        <div class="meal-name">Beef Stew</div>
+        <div class="meal-details">600g stew (60g)</div>
+      </div>
+      <div class="meal">
+        <div class="meal-label">Meal 2</div>
+        <div class="meal-name">Cobb Salad</div>
+        <div class="meal-details">150g greens, 350g chicken, 50g bacon, 2 eggs, 100g avo (80g)</div>
+      </div>
+      <div class="meal">
+        <div class="meal-label">Snack</div>
+        <div class="meal-name">Cheese & Olives</div>
+        <div class="meal-details">80g cheese, olives, veggies (18g)</div>
+      </div>
+      <div class="totals">158g · 1960 cal</div>
+    </div>
+
+    <div class="day">
+      <div class="day-header">Wednesday</div>
+      <div class="meal">
+        <div class="meal-label">Meal 1</div>
+        <div class="meal-name">Pulled Pork Plate</div>
+        <div class="meal-details">250g pork, 150g slaw, 200g peppers, 50g bacon (62g)</div>
+      </div>
+      <div class="meal">
+        <div class="meal-label">Meal 2</div>
+        <div class="meal-name">Med Chicken Salad</div>
+        <div class="meal-details">150g greens, 350g chicken, med mix, 100g avo (66g)</div>
+      </div>
+      <div class="meal">
+        <div class="meal-label">Snack</div>
+        <div class="meal-name">Deviled Eggs</div>
+        <div class="meal-details">4 egg halves (14g)</div>
+      </div>
+      <div class="totals">142g · 1850 cal</div>
+    </div>
+
+    <div class="day">
+      <div class="day-header">Thursday</div>
+      <div class="meal">
+        <div class="meal-label">Meal 1</div>
+        <div class="meal-name">Beef Stew</div>
+        <div class="meal-details">600g stew (60g)</div>
+      </div>
+      <div class="meal">
+        <div class="meal-label">Meal 2</div>
+        <div class="meal-name">Pan-Seared Salmon</div>
+        <div class="meal-details">250g salmon, 200g broccoli, 2 eggs, butter (76g) COOK</div>
+      </div>
+      <div class="meal">
+        <div class="meal-label">Snack</div>
+        <div class="meal-name">Cheese & Olives</div>
+        <div class="meal-details">80g cheese, olives, veggies (18g)</div>
+      </div>
+      <div class="totals">154g · 1920 cal</div>
+    </div>
+
+    <div class="day">
+      <div class="day-header">Friday</div>
+      <div class="meal">
+        <div class="meal-label">Meal 1</div>
+        <div class="meal-name">Pork Power Bowl</div>
+        <div class="meal-details">250g pork, 200g zucchini, 200g brussels, 2 eggs (76g)</div>
+      </div>
+      <div class="meal">
+        <div class="meal-label">Meal 2</div>
+        <div class="meal-name">Chicken Plate</div>
+        <div class="meal-details">350g chicken, 200g mash, 200g broccoli (66g)</div>
+      </div>
+      <div class="meal">
+        <div class="meal-label">Snack</div>
+        <div class="meal-name">Deviled Eggs</div>
+        <div class="meal-details">4 egg halves (14g)</div>
+      </div>
+      <div class="totals">156g · 1880 cal</div>
+    </div>
+
+    <div class="day">
+      <div class="day-header">Saturday</div>
+      <div class="meal">
+        <div class="meal-label">Meal 1</div>
+        <div class="meal-name">Beef Stew + Salad</div>
+        <div class="meal-details">600g stew, 150g greens (60g)</div>
+      </div>
+      <div class="meal">
+        <div class="meal-label">Meal 2</div>
+        <div class="meal-name">Steak Dinner</div>
+        <div class="meal-details">300g steak, 200g broccoli, 100g spinach, butter (78g) COOK</div>
+      </div>
+      <div class="meal">
+        <div class="meal-label">Snack</div>
+        <div class="meal-name">Deviled Eggs</div>
+        <div class="meal-details">4 egg halves (14g)</div>
+      </div>
+      <div class="totals">152g · 1960 cal</div>
+    </div>
+
+    <div class="day">
+      <div class="day-header">Sunday</div>
+      <div class="meal">
+        <div class="meal-label">Meal 1</div>
+        <div class="meal-name">Breakfast Salad</div>
+        <div class="meal-details">150g greens, 50g bacon, 4 eggs, 100g avo (47g)</div>
+      </div>
+      <div class="meal">
+        <div class="meal-label">Meal 2</div>
+        <div class="meal-name">Bacon-Wrapped Chicken</div>
+        <div class="meal-details">350g chicken, 50g bacon, 200g broccoli (85g) COOK</div>
+      </div>
+      <div class="meal">
+        <div class="meal-label">Snack</div>
+        <div class="meal-name">Cheese & Olives</div>
+        <div class="meal-details">80g cheese, olives, veggies (18g)</div>
+      </div>
+      <div class="totals">150g · 1870 cal</div>
+    </div>
+  </div>
+
+  <div class="prep-section">
+    <div class="prep-card">
+      <h3>Reheat Meals</h3>
+      <h4>Beef Stew (600g)</h4>
+      <p>Microwave 3-4 min until hot</p>
+      <h4>Chicken Plate</h4>
+      <p>350g chicken + 200g mash + 200g broccoli</p>
+      <p>Microwave 3-4 min. Add butter to mash.</p>
+      <h4>Pork Power Bowl</h4>
+      <p>250g pork + 200g zuc + 200g brus + 2 eggs</p>
+      <p>Microwave 3 min. Add hot sauce.</p>
+      <h4>Pulled Pork Plate</h4>
+      <p>250g pork + 150g slaw + 200g peppers + 50g bacon</p>
+    </div>
+
+    <div class="prep-card">
+      <h3>Assemble Fresh</h3>
+      <h4>Cobb Salad</h4>
+      <p>150g greens + 350g chicken + 50g bacon + 2 eggs + 100g avocado</p>
+      <p>Warm chicken if desired. Layer, add dressing.</p>
+      <h4>Mediterranean Salad</h4>
+      <p>150g greens + 350g chicken + med mix + 100g avocado</p>
+      <p>Warm chicken if desired. Drizzle dressing.</p>
+      <h4>Breakfast Salad</h4>
+      <p>150g greens + 50g bacon + 4 eggs + 100g avocado</p>
+      <p>Warm bacon in pan, toss greens in fat. Top with eggs, avocado.</p>
+    </div>
+
+    <div class="prep-card">
+      <h3>Cook Fresh</h3>
+      <h4>Salmon (Thursday)</h4>
+      <ul>
+        <li>Season 250g salmon, salt/pepper</li>
+        <li>Sear skin-down 4 min, flip 3 min</li>
+        <li>Warm 200g broccoli, add 2 eggs</li>
+      </ul>
+      <h4>Steak (Saturday)</h4>
+      <ul>
+        <li>Room temp 300g steak 15 min</li>
+        <li>Season, sear 4 min/side</li>
+        <li>Rest 5 min, top butter</li>
+        <li>Sauté 100g spinach in drippings</li>
+      </ul>
+      <h4>Bacon Chicken (Sunday)</h4>
+      <ul>
+        <li>Wrap 350g chicken in 50g bacon</li>
+        <li>Bake 400°F 35-40 min</li>
+        <li>Warm 200g broccoli</li>
+      </ul>
+    </div>
+
+    <div class="prep-card">
+      <h3>2x Portions (Blue Lid)</h3>
+      <div class="portions">
+        <div><span>Stew</span><span>600g</span></div>
+        <div><span>Pork</span><span>250g</span></div>
+        <div><span>Chicken</span><span>350g</span></div>
+        <div><span>Salmon</span><span>250g</span></div>
+        <div><span>Steak</span><span>300g</span></div>
+        <div><span>Veggies</span><span>200g</span></div>
+        <div><span>Mash</span><span>200g</span></div>
+        <div><span>Slaw</span><span>150g</span></div>
+        <div><span>Greens</span><span>150g</span></div>
+        <div><span>Avocado</span><span>100g</span></div>
+        <div><span>Bacon</span><span>50g</span></div>
+        <div><span>Eggs/meal</span><span>2</span></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

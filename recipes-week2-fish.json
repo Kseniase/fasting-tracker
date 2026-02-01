@@ -1,9 +1,25 @@
 {
   "week": "Week 2 - Seafood Focus",
   "serves": 2,
+  "portion_system": "2x",
   "daily_targets": {
-    "person1": { "name": "Him", "calories": "1800-2000", "protein": 150 },
-    "person2": { "name": "Her", "calories": "1400", "protein": 115 }
+    "person1": { "name": "Him", "calories": "1800-2000", "protein": 150, "multiplier": 2 },
+    "person2": { "name": "Her", "calories": "1400-1500", "protein": 120, "multiplier": 1, "supplements": "60g from eggs/yogurt/cottage cheese" }
+  },
+  "standard_portions": {
+    "proteins": {
+      "salmon": { "base": 125, "double": 250, "unit": "g", "protein_per_100g": 25 },
+      "cod": { "base": 150, "double": 300, "unit": "g", "protein_per_100g": 20 },
+      "shrimp": { "base": 125, "double": 250, "unit": "g", "protein_per_100g": 24 },
+      "sardines": { "base": 100, "double": 200, "unit": "g", "protein_per_100g": 25 },
+      "smoked_salmon": { "base": 60, "double": 120, "unit": "g", "protein_per_100g": 25 }
+    },
+    "vegetables": {
+      "roasted": { "base": 100, "double": 200, "unit": "g" },
+      "mash": { "base": 100, "double": 200, "unit": "g" },
+      "cauli_rice": { "base": 100, "double": 200, "unit": "g" },
+      "greens": { "base": 75, "double": 150, "unit": "g" }
+    }
   },
   "shopping": {
     "proteins": [
@@ -172,16 +188,16 @@
       {
         "step": 8,
         "time": "1:20",
-        "title": "Portion Grab-and-Go Containers (2-person portions)",
+        "title": "Portion Grab-and-Go Containers (2x system: Blue=Him, Pink=Her)",
         "duration": "20 min",
         "do": [
-          "BAKED SALMON BOWLS (7 containers): Each = HIM 8oz + HER 5oz salmon + cauli mash + mixed veggies + butter",
-          "LEMON HERB COD PLATES (6 containers): Each = HIM 7oz + HER 5oz cod + brussels + zucchini",
-          "SHRIMP & VEGGIE BOWLS (6 containers): Each = HIM 8oz + HER 6oz shrimp + riced cauliflower + peppers/broccoli",
-          "MEDITERRANEAN STEW (5 containers): Ladle from SLOW COOKER #1, HIM gets more fish chunks",
-          "Label containers with H (him) and S (she) portions"
+          "BAKED SALMON BOWLS: 2x = 250g salmon + 200g mash + 200g veggies | 1x = 125g + 100g + 100g",
+          "LEMON HERB COD PLATES: 2x = 300g cod + 200g brussels + 200g zucchini | 1x = 150g + 100g + 100g",
+          "SHRIMP & VEGGIE BOWLS: 2x = 250g shrimp + 200g cauli rice + 200g peppers | 1x = 125g + 100g + 100g",
+          "MEDITERRANEAN STEW: 2x = 500g (more fish) | 1x = 250g",
+          "Label: Blue lid = 2x (Him), Pink lid = 1x (Her)"
         ],
-        "status_after": "24 grab-and-go meals assembled (12 per person)"
+        "status_after": "Grab-and-go meals assembled"
       },
       {
         "step": 9,
@@ -190,7 +206,7 @@
         "duration": "20 min",
         "do": [
           "DEVILED EGGS: Halve 12 eggs, mash yolks with mayo + Dijon. Fill, dust with paprika.",
-          "SALAD BASES (7): 3 cups mixed greens each",
+          "SALAD BASES: 150g greens (2x/Blue) or 75g (1x/Pink)",
           "NIÇOISE TOPPINGS (4): olives + tomatoes + capers",
           "COBB TOPPINGS (4): bacon + egg + cheese",
           "Organize fridge, clean up",
@@ -212,15 +228,16 @@
       "2:00 - DONE!"
     ],
     "results": {
+      "portion_system": "2x (Him = double Her). Use colored lids: Blue = 2x (Him), Pink = 1x (Her)",
       "grab_and_go": [
-        "7 Baked Salmon Bowls (2-person: 8oz + 5oz salmon + mash + veggies)",
-        "6 Lemon Herb Cod Plates (2-person: 7oz + 5oz cod + brussels + zucchini)",
-        "6 Shrimp & Veggie Bowls (2-person: 8oz + 6oz shrimp + cauli rice + peppers)",
-        "5 Mediterranean Fish Stew (2-person portions, more fish for him)"
+        "Baked Salmon Bowls (2x: 250g salmon + 200g mash + 200g veg | 1x: 125g + 100g + 100g)",
+        "Lemon Herb Cod Plates (2x: 300g cod + 200g brussels + 200g zuc | 1x: 150g + 100g + 100g)",
+        "Shrimp & Veggie Bowls (2x: 250g shrimp + 200g rice + 200g pep | 1x: 125g + 100g + 100g)",
+        "Mediterranean Fish Stew (2x: 500g | 1x: 250g)"
       ],
       "fresh_containers": [
         "24 Deviled eggs (ready to eat)",
-        "7 Salad bases (greens only)",
+        "Salad bases (2x: 150g, 1x: 75g)",
         "4 Niçoise toppings (olives + tomatoes + capers)",
         "4 Cobb toppings (bacon + egg + cheese)",
         "Dressing jar"
@@ -244,32 +261,36 @@
       {
         "name": "Baked Salmon Bowl",
         "prep_type": "grab_and_go",
-        "him": { "protein": 65, "cal": 780, "portion": "8oz salmon" },
-        "her": { "protein": 42, "cal": 520, "portion": "5oz salmon" },
+        "him": { "protein": 62, "cal": 780, "portion": "250g salmon + 200g mash + 200g veggies" },
+        "her": { "protein": 31, "cal": 390, "portion": "125g salmon + 100g mash + 100g veggies" },
+        "portion_rule": "2x",
         "container": "Salmon + cauliflower mash + roasted veggies",
         "instructions": "Microwave 2 min or enjoy cold. Add fresh lemon, dill, butter."
       },
       {
         "name": "Lemon Herb Cod Plate",
         "prep_type": "grab_and_go",
-        "him": { "protein": 55, "cal": 680, "portion": "7oz cod" },
-        "her": { "protein": 40, "cal": 500, "portion": "5oz cod" },
+        "him": { "protein": 60, "cal": 680, "portion": "300g cod + 200g brussels + 200g zucchini" },
+        "her": { "protein": 30, "cal": 340, "portion": "150g cod + 100g brussels + 100g zucchini" },
+        "portion_rule": "2x",
         "container": "Cod + brussels sprouts + zucchini",
         "instructions": "Microwave 2 min. Squeeze fresh lemon, drizzle olive oil."
       },
       {
         "name": "Shrimp & Veggie Bowl",
         "prep_type": "grab_and_go",
-        "him": { "protein": 52, "cal": 680, "portion": "8oz shrimp" },
-        "her": { "protein": 42, "cal": 520, "portion": "6oz shrimp" },
+        "him": { "protein": 60, "cal": 680, "portion": "250g shrimp + 200g cauli rice + 200g peppers" },
+        "her": { "protein": 30, "cal": 340, "portion": "125g shrimp + 100g cauli rice + 100g peppers" },
+        "portion_rule": "2x",
         "container": "Garlic shrimp + cauliflower rice + peppers & broccoli",
         "instructions": "Microwave 2 min. Add hot sauce if desired."
       },
       {
         "name": "Mediterranean Fish Stew",
         "prep_type": "grab_and_go",
-        "him": { "protein": 52, "cal": 680, "portion": "8oz cod in stew" },
-        "her": { "protein": 38, "cal": 480, "portion": "5oz cod in stew" },
+        "him": { "protein": 50, "cal": 680, "portion": "500g stew" },
+        "her": { "protein": 25, "cal": 340, "portion": "250g stew" },
+        "portion_rule": "2x",
         "container": "Cod chunks in tomato-olive-caper broth",
         "instructions": "Heat on stovetop or microwave 2-3 min. Serve with extra olive oil."
       }
@@ -278,17 +299,19 @@
       {
         "name": "Sardine Niçoise Salad",
         "prep_type": "add_fresh",
-        "him": { "protein": 58, "cal": 750, "portion": "2 cans sardines + 2 eggs" },
-        "her": { "protein": 42, "cal": 550, "portion": "1.5 cans sardines + 1 egg" },
+        "him": { "protein": 64, "cal": 800, "portion": "150g greens + 200g sardines + 2 eggs + 100g avo" },
+        "her": { "protein": 32, "cal": 400, "portion": "75g greens + 100g sardines + 1 egg + 50g avo" },
+        "portion_rule": "2x",
         "grab": "Salad base + Niçoise toppings + eggs",
-        "add_fresh": ["Sardines", "1/2 avocado (optional)"],
+        "add_fresh": ["Sardines", "Avocado"],
         "instructions": "Arrange greens, top with sardines, eggs, olives, tomatoes, capers. Drizzle dressing generously."
       },
       {
         "name": "Tuna Avocado Lettuce Wraps",
         "prep_type": "add_fresh",
-        "him": { "protein": 55, "cal": 720, "portion": "2 cans tuna + 1 egg" },
-        "her": { "protein": 38, "cal": 520, "portion": "1 can tuna + 1 egg" },
+        "him": { "protein": 60, "cal": 720, "portion": "200g tuna + 2 eggs + 100g avo" },
+        "her": { "protein": 30, "cal": 360, "portion": "100g tuna + 1 egg + 50g avo" },
+        "portion_rule": "2x",
         "grab": "Butter lettuce + eggs",
         "add_fresh": ["Tuna cans", "Avocado", "Mayo", "Lemon juice"],
         "instructions": "Mix tuna with mayo, lemon, diced egg. Spoon into lettuce cups. Top with avocado slices."
@@ -296,8 +319,9 @@
       {
         "name": "Smoked Salmon Plate",
         "prep_type": "add_fresh",
-        "him": { "protein": 48, "cal": 680, "portion": "5oz smoked salmon + 2 eggs" },
-        "her": { "protein": 35, "cal": 480, "portion": "3oz smoked salmon + 1 egg" },
+        "him": { "protein": 44, "cal": 550, "portion": "120g smoked salmon + 2 eggs + 100g cucumber" },
+        "her": { "protein": 22, "cal": 275, "portion": "60g smoked salmon + 1 egg + 50g cucumber" },
+        "portion_rule": "2x",
         "grab": "Cucumber + eggs",
         "add_fresh": ["Smoked salmon", "Cream cheese", "Capers", "Fresh dill"],
         "instructions": "Arrange salmon on plate. Slice cucumber. Spread cream cheese on cucumber rounds, top with salmon, capers, dill."
@@ -305,10 +329,11 @@
       {
         "name": "Shrimp Cobb Salad",
         "prep_type": "add_fresh",
-        "him": { "protein": 62, "cal": 780, "portion": "8oz shrimp + bacon + egg" },
-        "her": { "protein": 45, "cal": 580, "portion": "5oz shrimp + bacon + egg" },
+        "him": { "protein": 74, "cal": 850, "portion": "150g greens + 250g shrimp + 50g bacon + 2 eggs + 100g avo" },
+        "her": { "protein": 37, "cal": 425, "portion": "75g greens + 125g shrimp + 25g bacon + 1 egg + 50g avo" },
+        "portion_rule": "2x",
         "grab": "Salad base + Cobb toppings + shrimp from fridge",
-        "add_fresh": ["1/2 avocado", "Extra cheese if desired"],
+        "add_fresh": ["Avocado"],
         "instructions": "Warm shrimp briefly or serve cold. Arrange on greens with bacon, egg, cheese, avocado in rows. Drizzle dressing."
       }
     ],
@@ -316,29 +341,31 @@
       {
         "name": "Garlic Butter Shrimp",
         "prep_type": "cook_fresh",
-        "him": { "protein": 62, "cal": 820, "portion": "10oz shrimp" },
-        "her": { "protein": 45, "cal": 600, "portion": "7oz shrimp" },
+        "him": { "protein": 72, "cal": 820, "portion": "300g shrimp + 200g veggies" },
+        "her": { "protein": 36, "cal": 410, "portion": "150g shrimp + 100g veggies" },
+        "portion_rule": "2x",
         "cook_time": "10 min",
         "ingredients": [
-          "17 oz raw shrimp total (reserve from Sunday)",
+          "450g raw shrimp total (2x: 300g, 1x: 150g)",
           "4 tbsp butter",
           "4 garlic cloves, minced",
-          "2 cups roasted veggies (from fridge)",
+          "Roasted veggies (2x: 200g, 1x: 100g)",
           "Lemon, parsley, red pepper flakes"
         ],
-        "instructions": "Melt butter in pan over medium-high. Add garlic, cook 30 sec. Add shrimp, cook 2-3 min per side until pink. Finish with lemon juice, parsley, pepper flakes. Serve over warmed veggies. Plate larger portion for him."
+        "instructions": "Melt butter in pan over medium-high. Add garlic, cook 30 sec. Add shrimp, cook 2-3 min per side until pink. Finish with lemon juice, parsley, pepper flakes. Serve over warmed veggies."
       },
       {
         "name": "Blackened Cod Tacos",
         "prep_type": "cook_fresh",
-        "him": { "protein": 55, "cal": 750, "portion": "8oz cod" },
-        "her": { "protein": 40, "cal": 550, "portion": "5oz cod" },
+        "him": { "protein": 60, "cal": 750, "portion": "300g cod + 150g slaw + 100g avo" },
+        "her": { "protein": 30, "cal": 375, "portion": "150g cod + 75g slaw + 50g avo" },
+        "portion_rule": "2x",
         "cook_time": "15 min",
         "ingredients": [
-          "13 oz cod fillet total",
+          "450g cod fillet total (2x: 300g, 1x: 150g)",
           "3 tbsp blackening seasoning",
-          "Slaw from fridge",
-          "1 avocado",
+          "Slaw (2x: 150g, 1x: 75g)",
+          "Avocado (2x: 100g, 1x: 50g)",
           "Butter lettuce for wraps",
           "Lime, hot sauce"
         ],
@@ -365,54 +392,66 @@
     "snacks": [
       {
         "name": "Deviled Eggs",
-        "protein": 18, "carbs": 2, "fat": 18, "cal": 280,
-        "portion": "3 eggs (6 halves)",
-        "ingredients": ["3 hard boiled eggs", "2 tbsp mayo", "1 tsp Dijon", "Paprika"],
+        "him": { "protein": 14, "cal": 230, "portion": "4 egg halves (2 eggs)" },
+        "her": { "protein": 7, "cal": 115, "portion": "2 egg halves (1 egg)" },
+        "portion_rule": "2x",
+        "ingredients": ["Hard boiled eggs", "Mayo", "Dijon", "Paprika"],
         "instructions": "Halve eggs, mash yolks with mayo and mustard. Fill whites, dust with paprika."
       },
       {
         "name": "Sardines on Cucumber",
-        "protein": 20, "carbs": 4, "fat": 14, "cal": 220,
-        "portion": "1 can sardines + cucumber",
-        "ingredients": ["1 can sardines in olive oil", "1/2 cucumber, sliced", "Everything bagel seasoning"],
+        "him": { "protein": 25, "cal": 280, "portion": "100g sardines + 100g cucumber" },
+        "her": { "protein": 13, "cal": 140, "portion": "50g sardines + 50g cucumber" },
+        "portion_rule": "2x",
+        "ingredients": ["Sardines in olive oil", "Cucumber, sliced", "Everything bagel seasoning"],
         "instructions": "Top cucumber slices with sardines and their oil. Sprinkle with seasoning."
       },
       {
         "name": "Smoked Salmon Roll-ups",
-        "protein": 18, "carbs": 2, "fat": 14, "cal": 200,
-        "portion": "3 oz smoked salmon + cream cheese",
-        "ingredients": ["3 oz smoked salmon", "2 oz cream cheese", "Fresh dill", "Capers"],
+        "him": { "protein": 30, "cal": 320, "portion": "120g smoked salmon + 60g cream cheese" },
+        "her": { "protein": 15, "cal": 160, "portion": "60g smoked salmon + 30g cream cheese" },
+        "portion_rule": "2x",
+        "ingredients": ["Smoked salmon", "Cream cheese", "Fresh dill", "Capers"],
         "instructions": "Spread cream cheese on salmon slices. Add dill and capers. Roll up."
       },
       {
         "name": "Greek Yogurt + Berries + Nuts",
-        "protein": 22, "carbs": 18, "fat": 12, "cal": 280,
-        "portion": "1 cup yogurt + toppings",
-        "ingredients": ["1 cup Greek yogurt", "1/2 cup berries", "2 tbsp almonds or walnuts"],
+        "him": { "protein": 20, "cal": 280, "portion": "200g yogurt + 100g berries + 30g almonds" },
+        "her": { "protein": 10, "cal": 140, "portion": "100g yogurt + 50g berries + 15g almonds" },
+        "portion_rule": "2x",
+        "ingredients": ["Greek yogurt", "Berries", "Almonds or walnuts"],
         "instructions": "Top yogurt with berries and nuts."
       },
       {
         "name": "Bacon & Avocado",
-        "protein": 12, "carbs": 4, "fat": 24, "cal": 280,
-        "portion": "2 strips bacon + 1/2 avocado",
-        "ingredients": ["Bacon from fridge", "1/2 avocado", "Everything bagel seasoning"],
+        "him": { "protein": 19, "cal": 380, "portion": "50g bacon + 100g avocado" },
+        "her": { "protein": 10, "cal": 190, "portion": "25g bacon + 50g avocado" },
+        "portion_rule": "2x",
+        "ingredients": ["Bacon from fridge", "Avocado", "Everything bagel seasoning"],
         "instructions": "Top avocado halves with crumbled bacon and seasoning."
       },
       {
         "name": "Cheese & Veggie Plate",
-        "protein": 14, "carbs": 8, "fat": 18, "cal": 240,
-        "portion": "2 oz cheese + raw veggies",
-        "ingredients": ["2 oz cheese", "Raw veggies from fridge", "10 olives"],
+        "him": { "protein": 20, "cal": 320, "portion": "80g cheese + veggies + olives" },
+        "her": { "protein": 10, "cal": 160, "portion": "40g cheese + veggies + olives" },
+        "portion_rule": "2x",
+        "ingredients": ["Cheese", "Raw veggies from fridge", "Olives"],
         "instructions": "Slice cheese, arrange with veggies and olives."
       }
     ]
   },
   "weekly_menu": {
     "overview": {
+      "portion_system": "2x (Him = double Her)",
       "meals_per_day": 2,
-      "him": { "target_calories": "1800-2000", "target_protein": 150 },
-      "her": { "target_calories": "1400", "target_protein": 115 },
-      "snack_note": "Snacks are shared. He gets extra snacks or larger portions to hit targets."
+      "him": { "target_calories": "1800-2000", "target_protein": 150, "from_meals": "~130g", "from_snacks": "~20g" },
+      "her": { "target_calories": "1400-1500", "target_protein": 120, "from_meals": "~60g", "from_supplements": "~60g" },
+      "her_daily_supplements": {
+        "breakfast": "3 eggs + veggies (21g protein, 280 cal)",
+        "second_breakfast": "150g Greek yogurt + berries (15g protein, 155 cal)",
+        "afternoon_snack": "200g cottage cheese (24g protein, 180 cal)",
+        "total": "60g protein, 615 cal"
+      }
     },
     "days": [
       {

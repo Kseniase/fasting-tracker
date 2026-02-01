@@ -391,3 +391,64 @@ var match = text.match(/delivery fee\\s*(\\d+)/);
 match ? 'Cart: ' + match[1] + ' items' : 'Could not find count';
 " 2>/dev/null
 ```
+
+### "Generate meal plan PDFs" or "Print meal calendars"
+
+Generate one-page landscape PDF calendars with weekly meal plans and prep instructions.
+
+**Files:**
+- `meal-plan-her-calendar.html` / `.pdf` - Her plan (4 meals/day: breakfast, 2nd breakfast, meal 1, meal 2)
+- `meal-plan-him-calendar.html` / `.pdf` - His plan (3 meals/day: meal 1, meal 2, snack)
+- `meal-plan-her.md` / `meal-plan-him.md` - Markdown versions for email
+
+**To regenerate PDFs:**
+```bash
+/Users/wschenk/.claude/plugins/cache/focus-marketplace/chrome-driver/0.1.0/bin/pdf "file:///Users/wschenk/The-Focus-AI/fasting-tracker/meal-plan-her-calendar.html" "/Users/wschenk/The-Focus-AI/fasting-tracker/meal-plan-her-calendar.pdf" --landscape
+
+/Users/wschenk/.claude/plugins/cache/focus-marketplace/chrome-driver/0.1.0/bin/pdf "file:///Users/wschenk/The-Focus-AI/fasting-tracker/meal-plan-him-calendar.html" "/Users/wschenk/The-Focus-AI/fasting-tracker/meal-plan-him-calendar.pdf" --landscape
+```
+
+**To email meal plans:**
+```bash
+# Send markdown versions as styled emails
+npx tsx /Users/wschenk/.claude/plugins/cache/focus-marketplace/google-skill/0.8.0/scripts/gmail.ts send-md --to="email@example.com" --file="meal-plan-him.md" --style=client
+
+npx tsx /Users/wschenk/.claude/plugins/cache/focus-marketplace/google-skill/0.8.0/scripts/gmail.ts send-md --to="email@example.com" --file="meal-plan-her.md" --style=client
+```
+
+**2x Portion System:**
+
+Rule: **Him = 2× Her** for all proteins and vegetables.
+
+| Protein | Her (1x) | Him (2x) |
+|---------|----------|----------|
+| Chicken | 175g | 350g |
+| Pulled Pork | 125g | 250g |
+| Beef Stew | 300g | 600g |
+| Salmon | 125g | 250g |
+| Steak | 150g | 300g |
+
+| Veggie | Her (1x) | Him (2x) |
+|--------|----------|----------|
+| Roasted | 100g | 200g |
+| Mash | 100g | 200g |
+| Slaw | 75g | 150g |
+| Greens | 75g | 150g |
+| Avocado | 50g | 100g |
+
+**Her daily structure:**
+- 7am: 3 eggs + veggies (21g protein)
+- 10am: 150g yogurt + berries (15g protein)
+- 12pm: Meal 1 - 1x portion (~32g protein)
+- 3pm: 200g cottage cheese (24g protein)
+- 6pm: Meal 2 - 1x portion (~32g protein)
+- **Total: ~124g protein, ~1400 cal**
+
+**His daily structure:**
+- 12pm: Meal 1 - 2x portion (~65g protein)
+- 3pm: Snack (~15g protein)
+- 6pm: Meal 2 - 2x portion (~65g protein)
+- Snack: Deviled eggs (~14g protein)
+- **Total: ~150g protein, ~1900 cal**
+
+**Container Labels:** Pink lid = 1x (Her), Blue lid = 2x (Him)

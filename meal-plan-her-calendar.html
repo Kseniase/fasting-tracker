@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Weekly Meal Plan - Her</title>
+  <style>
+    @page {
+      size: letter landscape;
+      margin: 0.4in;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+    }
+
+    body {
+      font-family: Georgia, serif;
+      background: #faf9f6;
+      color: #1a1a1a;
+      font-size: 11px;
+      line-height: 1.35;
+      display: flex;
+      flex-direction: column;
+      padding: 15px;
+    }
+
+    h1 {
+      font-size: 22px;
+      font-weight: normal;
+      text-align: center;
+      margin-bottom: 4px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #666;
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+
+    .calendar {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px;
+      flex: 1;
+      margin-bottom: 12px;
+    }
+
+    .day {
+      background: white;
+      border: 1px solid #bbb;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .day-header {
+      font-weight: bold;
+      font-size: 13px;
+      border-bottom: 2px solid #8b5a8b;
+      padding-bottom: 4px;
+      margin-bottom: 6px;
+      color: #8b5a8b;
+      text-align: center;
+    }
+
+    .meal {
+      margin-bottom: 6px;
+      padding-bottom: 5px;
+      border-bottom: 1px dotted #ccc;
+      flex: 1;
+    }
+
+    .meal:last-of-type {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    .meal-label {
+      font-weight: bold;
+      color: #8b5a8b;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .meal-name {
+      font-weight: bold;
+      font-size: 11px;
+      margin: 1px 0;
+    }
+
+    .meal-details {
+      color: #555;
+      font-size: 9px;
+    }
+
+    .totals {
+      margin-top: auto;
+      padding-top: 6px;
+      border-top: 2px solid #8b5a8b;
+      font-size: 10px;
+      font-weight: bold;
+      text-align: center;
+      color: #8b5a8b;
+    }
+
+    .prep-section {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .prep-card {
+      background: white;
+      border: 1px solid #bbb;
+      padding: 10px;
+    }
+
+    .prep-card h3 {
+      font-size: 12px;
+      color: #8b5a8b;
+      margin-bottom: 6px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 4px;
+    }
+
+    .prep-card h4 {
+      font-size: 10px;
+      font-weight: bold;
+      margin: 6px 0 2px 0;
+      color: #333;
+    }
+
+    .prep-card h4:first-of-type {
+      margin-top: 0;
+    }
+
+    .prep-card p, .prep-card li {
+      margin: 2px 0;
+      font-size: 9px;
+    }
+
+    .prep-card ul {
+      margin-left: 12px;
+    }
+
+    .portions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+      font-size: 9px;
+    }
+
+    .portions div {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px dotted #ddd;
+      padding: 2px 0;
+    }
+
+    .supplement-box {
+      background: #f5f0f5;
+      border: 1px solid #d4a5d4;
+      padding: 6px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Weekly Meal Plan - Her (1x Portions)</h1>
+  <p class="subtitle">Target: 120g protein | ~1400 cal | Meals (~60g) + Supplements (~60g)</p>
+
+  <div class="calendar">
+    <div class="day">
+      <div class="day-header">Monday</div>
+      <div class="supplement-box">
+        <div class="meal-label">Daily Supplements</div>
+        <div class="meal-details">7am: 3 eggs + veggies (21g)</div>
+        <div class="meal-details">10am: Yogurt 150g + berries (15g)</div>
+        <div class="meal-details">3pm: Cottage cheese 200g (24g)</div>
+      </div>
+      <div class="meal">
+        <div class="meal-label">Meal 1</div>
+        <div class="meal-name">Pork Power Bowl</div>
+        <div class="meal-details">125g pork, 100g zucchini, 100g brussels, 1 egg (38g)</div>
+      </div>
+      <div class="meal">
+        <div class="meal-label">Meal 2</div>
+        <div class="meal-name">Chicken Plate</div>
+        <div class="meal-details">175g chicken, 100g mash, 100g broccoli (33g)</div>
+      </div>
+      <div class="totals">131g · 1450 cal</div>
+    </div>
+
+    <div class="day">
+      <div class="day-header">Tuesday</div>
+      <div class="supplement-box">
+        <div class="meal-label">Daily Supplements</div>
+        <div class="meal-details">7am: 3 eggs + veggies (21g)</div>
+        <div class="meal-details">10am: Yogurt 150g + berries (15g)</div>
+        <div class="meal-details">3pm: Cottage cheese 200g (24g)</div>
+      </div>
+      <div class="meal">
+        <div class="meal-label">Meal 1</div>
+        <div class="meal-name">Beef Stew</div>
+        <div class="meal-details">300g stew (30g)</div>
+      </div>
+      <div class="meal">
+        <div class="meal-label">Meal 2</div>
+        <div class="meal-name">Cobb Salad</div>
+        <div class="meal-details">75g greens, 175g chicken, 25g bacon, 1 egg (40g)</div>
+      </div>
+      <div class="totals">130g · 1445 cal</div>
+    </div>
+
+    <div class="day">
+      <div class="day-header">Wednesday</div>
+      <div class="supplement-box">
+        <div class="meal-label">Daily Supplements</div>
+        <div class="meal-details">7am: 3 eggs + veggies (21g)</div>
+        <div class="meal-details">10am: Yogurt 150g + berries (15g)</div>
+        <div class="meal-details">3pm: Cottage cheese 200g (24g)</div>
+      </div>
+      <div class="meal">
+        <div class="meal-label">Meal 1</div>
+        <div class="meal-name">Pulled Pork Plate</div>
+        <div class="meal-details">125g pork, 75g slaw, 100g peppers, 25g bacon (31g)</div>
+      </div>
+      <div class="meal">
+        <div class="meal-label">Meal 2</div>
+        <div class="meal-name">Med Chicken Salad</div>
+        <div class="meal-details">75g greens, 175g chicken, med mix, 50g avo (33g)</div>
+      </div>
+      <div class="totals">124g · 1415 cal</div>
+    </div>
+
+    <div class="day">
+      <div class="day-header">Thursday</div>
+      <div class="supplement-box">
+        <div class="meal-label">Daily Supplements</div>
+        <div class="meal-details">7am: 3 eggs + veggies (21g)</div>
+        <div class="meal-details">10am: Yogurt 150g + berries (15g)</div>
+        <div class="meal-details">3pm: Cottage cheese 200g (24g)</div>
+      </div>
+      <div class="meal">
+        <div class="meal-label">Meal 1</div>
+        <div class="meal-name">Beef Stew</div>
+        <div class="meal-details">300g stew (30g)</div>
+      </div>
+      <div class="meal">
+        <div class="meal-label">Meal 2</div>
+        <div class="meal-name">Pan-Seared Salmon</div>
+        <div class="meal-details">125g salmon, 100g broccoli, 1 egg (38g) COOK</div>
+      </div>
+      <div class="totals">128g · 1430 cal</div>
+    </div>
+
+    <div class="day">
+      <div class="day-header">Friday</div>
+      <div class="supplement-box">
+        <div class="meal-label">Daily Supplements</div>
+        <div class="meal-details">7am: 3 eggs + veggies (21g)</div>
+        <div class="meal-details">10am: Yogurt 150g + berries (15g)</div>
+        <div class="meal-details">3pm: Cottage cheese 200g (24g)</div>
+      </div>
+      <div class="meal">
+        <div class="meal-label">Meal 1</div>
+        <div class="meal-name">Pork Power Bowl</div>
+        <div class="meal-details">125g pork, 100g zucchini, 100g brussels, 1 egg (38g)</div>
+      </div>
+      <div class="meal">
+        <div class="meal-label">Meal 2</div>
+        <div class="meal-name">Chicken Plate</div>
+        <div class="meal-details">175g chicken, 100g mash, 100g broccoli (33g)</div>
+      </div>
+      <div class="totals">131g · 1450 cal</div>
+    </div>
+
+    <div class="day">
+      <div class="day-header">Saturday</div>
+      <div class="supplement-box">
+        <div class="meal-label">Daily Supplements</div>
+        <div class="meal-details">7am: 3 eggs + veggies (21g)</div>
+        <div class="meal-details">10am: Yogurt 150g + berries (15g)</div>
+        <div class="meal-details" style="color: #999; text-decoration: line-through;">3pm: Skip - steak day</div>
+      </div>
+      <div class="meal">
+        <div class="meal-label">Meal 1</div>
+        <div class="meal-name">Beef Stew + Salad</div>
+        <div class="meal-details">300g stew, 75g greens (30g)</div>
+      </div>
+      <div class="meal">
+        <div class="meal-label">Meal 2</div>
+        <div class="meal-name">Steak Dinner</div>
+        <div class="meal-details">150g steak, 100g broccoli, 50g spinach (39g) COOK</div>
+      </div>
+      <div class="totals">125g · 1410 cal</div>
+    </div>
+
+    <div class="day">
+      <div class="day-header">Sunday</div>
+      <div class="supplement-box">
+        <div class="meal-label">Daily Supplements</div>
+        <div class="meal-details" style="color: #999; text-decoration: line-through;">7am: Skip - eggs in salad</div>
+        <div class="meal-details">10am: Yogurt 150g + berries (15g)</div>
+        <div class="meal-details">3pm: Cottage cheese 200g (24g)</div>
+      </div>
+      <div class="meal">
+        <div class="meal-label">Meal 1</div>
+        <div class="meal-name">Breakfast Salad</div>
+        <div class="meal-details">75g greens, 25g bacon, 2 eggs, 50g avo (24g)</div>
+      </div>
+      <div class="meal">
+        <div class="meal-label">Meal 2</div>
+        <div class="meal-name">Bacon-Wrapped Chicken</div>
+        <div class="meal-details">175g chicken, 25g bacon, 100g broccoli (43g) COOK</div>
+      </div>
+      <div class="totals">126g · 1390 cal</div>
+    </div>
+  </div>
+
+  <div class="prep-section">
+    <div class="prep-card">
+      <h3>Daily Supplements (~60g)</h3>
+      <h4>Breakfast (7am)</h4>
+      <p>3 eggs scrambled + 250g veggies = 21g</p>
+      <h4>2nd Breakfast (10am)</h4>
+      <p>150g Greek yogurt + 50g berries = 15g</p>
+      <h4>Afternoon (3pm)</h4>
+      <p>200g cottage cheese = 24g</p>
+      <p style="margin-top: 6px; font-style: italic;">Skip when meal has eggs or high protein (steak day)</p>
+    </div>
+
+    <div class="prep-card">
+      <h3>Reheat Meals</h3>
+      <h4>Beef Stew (300g)</h4>
+      <p>Microwave 2-3 min until hot</p>
+      <h4>Chicken Plate</h4>
+      <p>175g chicken + 100g mash + 100g broccoli</p>
+      <p>Microwave 2-3 min. Add butter to mash.</p>
+      <h4>Pork Power Bowl</h4>
+      <p>125g pork + 100g zuc + 100g brus + 1 egg</p>
+      <h4>Pulled Pork Plate</h4>
+      <p>125g pork + 75g slaw + 100g peppers</p>
+    </div>
+
+    <div class="prep-card">
+      <h3>Cook Fresh</h3>
+      <h4>Salmon (Thursday)</h4>
+      <ul>
+        <li>Season 125g salmon, salt/pepper</li>
+        <li>Sear skin-down 4 min, flip 3 min</li>
+        <li>Warm 100g broccoli, add 1 egg</li>
+      </ul>
+      <h4>Steak (Saturday)</h4>
+      <ul>
+        <li>Room temp 150g steak 15 min</li>
+        <li>Season, sear 3-4 min/side</li>
+        <li>Rest 5 min, top butter</li>
+      </ul>
+      <h4>Bacon Chicken (Sunday)</h4>
+      <ul>
+        <li>Wrap 175g chicken in 25g bacon</li>
+        <li>Bake 400°F 35-40 min</li>
+      </ul>
+    </div>
+
+    <div class="prep-card">
+      <h3>1x Portions (Pink Lid)</h3>
+      <div class="portions">
+        <div><span>Stew</span><span>300g</span></div>
+        <div><span>Pork</span><span>125g</span></div>
+        <div><span>Chicken</span><span>175g</span></div>
+        <div><span>Salmon</span><span>125g</span></div>
+        <div><span>Steak</span><span>150g</span></div>
+        <div><span>Veggies</span><span>100g</span></div>
+        <div><span>Mash</span><span>100g</span></div>
+        <div><span>Slaw</span><span>75g</span></div>
+        <div><span>Greens</span><span>75g</span></div>
+        <div><span>Avocado</span><span>50g</span></div>
+        <div><span>Bacon</span><span>25g</span></div>
+        <div><span>Eggs/meal</span><span>1</span></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

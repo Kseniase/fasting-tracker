@@ -1,19 +1,35 @@
 {
   "week": "Week 1 - Meat Focus",
   "serves": 2,
+  "portion_system": "2x",
   "daily_targets": {
-    "person1": { "name": "Him", "calories": "1800-2000", "protein": 150 },
-    "person2": { "name": "Her", "calories": "1400", "protein": 115 }
+    "person1": { "name": "Him", "calories": "1800-2000", "protein": 150, "multiplier": 2 },
+    "person2": { "name": "Her", "calories": "1400-1500", "protein": 120, "multiplier": 1, "supplements": "60g from eggs/yogurt/cottage cheese" }
+  },
+  "standard_portions": {
+    "proteins": {
+      "chicken_thighs": { "base": 175, "double": 350, "unit": "g", "protein_per_100g": 19 },
+      "pulled_pork": { "base": 125, "double": 250, "unit": "g", "protein_per_100g": 25 },
+      "beef_stew": { "base": 300, "double": 600, "unit": "g", "protein_per_100g": 10 },
+      "salmon": { "base": 125, "double": 250, "unit": "g", "protein_per_100g": 25 },
+      "steak": { "base": 150, "double": 300, "unit": "g", "protein_per_100g": 26 }
+    },
+    "vegetables": {
+      "roasted": { "base": 100, "double": 200, "unit": "g" },
+      "mash": { "base": 100, "double": 200, "unit": "g" },
+      "slaw": { "base": 75, "double": 150, "unit": "g" },
+      "greens": { "base": 75, "double": 150, "unit": "g" }
+    }
   },
   "shopping": {
     "proteins": [
       "Pork shoulder (7-8 lbs) - for pulled pork",
       "Beef chuck roast (4 lbs) - for stew, cut into 1.5\" cubes",
       "Chicken thighs, bone-in (5-6 lbs) - for roasting",
-      "Eggs (4 dozen) - 36 hard boiled + extras for fresh cooking",
+      "Eggs (5 dozen) - 36 hard boiled + 24 for her daily breakfast (3/day)",
       "Bacon (2 lbs) - 1.5 lbs pre-cooked in air fryer + 0.5 lb raw for bacon-wrapped chicken",
-      "Salmon fillet (1 lb) - fresh cook mid-week (him 8oz, her 5oz)",
-      "Steak, ribeye or strip (1 lb) - fresh cook end of week (him 10oz, her 6oz)"
+      "Salmon fillet (1.5 lb) - fresh cook mid-week (him 250g, her 125g = 375g × 2 days)",
+      "Steak, ribeye or strip (1.5 lb) - fresh cook end of week (him 300g, her 150g)"
     ],
     "vegetables": [
       "Broccoli (3 heads) - roasted, served with multiple meals",
@@ -42,7 +58,8 @@
       "Cheese, variety (1 lb) - Cobb toppings, snack plates",
       "Feta cheese (6 oz) - Mediterranean mix",
       "Heavy cream (8 oz / 1 cup) - 1/4 cup for mash + extra",
-      "Greek yogurt, full-fat (48 oz) - snacks",
+      "Greek yogurt, full-fat (64 oz) - her daily 150g + snacks",
+      "Cottage cheese (2 × 16oz tubs) - her daily 200g supplement",
       "Olive oil (if low)",
       "Olives (2 jars) - Mediterranean mix, snacks"
     ],
@@ -227,13 +244,13 @@
         "do": [
           "PORK: Remove from OVEN #1. Should be fork-tender after 3 hours. Shred with two forks. Mix with pan juices.",
           "BEEF STEW: Should be done - meat tender, vegetables soft. Turn to WARM.",
-          "START PORTIONING:",
-          "- Pulled pork into containers (include some juice)",
-          "- Chicken thighs individually or sliced",
-          "- Eggs in pairs",
-          "- Crumble bacon into container",
-          "- Roasted veggies in ~1 cup portions",
-          "- Cauliflower mash into container"
+          "START PORTIONING (2x system: Blue lid = Him 2x, Pink lid = Her 1x):",
+          "- Pulled pork: 250g (2x) or 125g (1x) per container",
+          "- Chicken: 350g (2x) or 175g (1x) per container",
+          "- Eggs: keep in carton, portion when assembling",
+          "- Crumble bacon: 50g (2x) or 25g (1x) portions",
+          "- Roasted veggies: 200g (2x) or 100g (1x) portions",
+          "- Cauliflower mash: 200g (2x) or 100g (1x) portions"
         ],
         "status_after": "All proteins shredded, Starting to portion"
       },
@@ -243,11 +260,11 @@
         "title": "Assemble Grab-and-Go Meals",
         "duration": "30 min",
         "do": [
-          "BEEF STEW: Ladle into 6 meal containers (1.5-2 cups each) - these are complete",
-          "PULLED PORK PLATES (4): Each container gets 1.5 cups pork + 1 cup slaw + 1 cup roasted peppers + bacon crumbles",
-          "CHICKEN PLATES (4): Each container gets 2 thighs + 1 cup mash + 1 cup broccoli",
-          "PORK POWER BOWLS (3): Each gets 1.5 cups pork + 1 cup zucchini + 1 cup brussels + 2 eggs",
-          "Label containers with meal name"
+          "BEEF STEW: Ladle into containers - 600g (2x/Blue) or 300g (1x/Pink)",
+          "PULLED PORK PLATES: 2x = 250g pork + 150g slaw + 200g peppers + 50g bacon | 1x = 125g + 75g + 100g + 25g",
+          "CHICKEN PLATES: 2x = 350g chicken + 200g mash + 200g broccoli | 1x = 175g + 100g + 100g",
+          "PORK POWER BOWLS: 2x = 250g pork + 200g zuc + 200g brus + 2 eggs | 1x = 125g + 100g + 100g + 1 egg",
+          "Label containers: Blue = 2x (Him), Pink = 1x (Her)"
         ],
         "status_after": "Grab-and-go meals assembled"
       },
@@ -258,10 +275,10 @@
         "duration": "20 min",
         "do": [
           "DEVILED EGGS (24): Halve 12 eggs, mash yolks with 6 tbsp mayo + 2 tsp Dijon + pinch salt. Fill whites, dust with paprika. Store in container.",
-          "SALAD BASES (4): Each container gets 3 cups mixed greens - keep dressing separate",
+          "SALAD BASES: 150g greens (2x/Blue) or 75g (1x/Pink) - keep dressing separate",
           "MEDITERRANEAN MIX (2): Small containers with cucumber + tomatoes + olives + feta - add to chicken or greens",
           "COBB TOPPINGS (2): Small containers with bacon + egg + cheese - add to salad base + protein",
-          "AVOCADOS: Keep whole, slice day-of (they brown)"
+          "AVOCADOS: Keep whole, slice day-of: 100g (2x) or 50g (1x)"
         ],
         "status_after": "Fresh containers and snacks ready"
       },
@@ -298,29 +315,48 @@
       "4:45 - DONE!"
     ],
     "results": {
-      "grab_and_go": [
-        "6 Beef Stew containers (him: 2 cups, her: 1.5 cups)",
-        "4 Pulled Pork Plates (pork + slaw + roasted peppers + bacon)",
-        "4 Chicken Plates (thighs + mash + brussels)",
-        "3 Pork Power Bowls (pork + zucchini + brussels + eggs)"
-      ],
-      "fresh_containers": [
-        "24 Deviled egg halves (from 12 eggs, ready to eat)",
-        "8 Salad bases (greens only)",
-        "4 Mediterranean mix (cucumber + tomato + olives + feta)",
-        "4 Cobb toppings (bacon + egg + cheese)",
-        "Dressing jar"
-      ],
-      "fresh_cook": [
-        "Salmon (1.5 lb) - cook Wed/Thu (him: 8oz, her: 5oz)",
-        "Steak (1.5 lb) - cook Fri/Sat (him: 10oz, her: 6oz)",
-        "Remaining eggs - for fresh breakfast or snacks"
-      ],
-      "extras": [
-        "Avocados - slice day-of",
-        "Berries + Greek yogurt - for snacks",
-        "Raw veggies - cucumber, celery sticks"
-      ]
+      "portion_system": "Standard containers - Him grabs 2, She grabs 1",
+      "container_counts": {
+        "proteins": {
+          "pork_125g": { "count": 9, "total": "1,125g", "usage": "Power Bowls (6) + Pork Plates (3)" },
+          "chicken_175g": { "count": 12, "total": "2,100g", "usage": "Chicken Plates (6) + Salads (6)" },
+          "stew_300g": { "count": 9, "total": "2,700g", "usage": "Stew meals (6) + Stew+Salad (3)" }
+        },
+        "vegetables": {
+          "brussels_100g": { "count": 12, "total": "1,200g", "usage": "Power Bowls (6) + Chicken Plates (6)" },
+          "broccoli_100g": { "count": 14, "total": "1,400g", "usage": "Chicken Plates (6) + Pork Plates (3) + Salmon (3) + Bacon Chicken (3)" },
+          "zucchini_100g": { "count": 6, "total": "600g", "usage": "Power Bowls (6)" },
+          "peppers_100g": { "count": 3, "total": "300g", "usage": "Pork Plates (3)" },
+          "mash_100g": { "count": 6, "total": "600g", "usage": "Chicken Plates (6)" },
+          "slaw_75g": { "count": 3, "total": "225g", "usage": "Pork Plates (3)" },
+          "greens_75g": { "count": 12, "total": "900g", "usage": "Cobb (3) + Med (3) + Stew+Salad (3) + Breakfast (3)" }
+        },
+        "extras": {
+          "bacon_25g": { "count": 12, "total": "300g", "usage": "Pork Plates (3) + Cobb (3) + Breakfast (3) + Bacon Chicken (3)" },
+          "eggs_whole": { "count": 36, "usage": "Deviled (12) + Power Bowls (6) + Cobb (3) + Breakfast (6) + Salmon (3) + Her breakfast (21)" },
+          "avocado_50g": { "count": 9, "total": "450g", "usage": "Cobb (3) + Med (3) + Breakfast (3)" }
+        }
+      },
+      "assembly_guide": {
+        "pork_power_bowl": "1-2 pork + 1-2 zucchini + 1-2 brussels + 1-2 eggs",
+        "chicken_plate": "1-2 chicken + 1-2 mash + 1-2 broccoli",
+        "pulled_pork_plate": "1-2 pork + 1 slaw + 1-2 peppers + 1-2 bacon",
+        "beef_stew": "1-2 stew containers",
+        "cobb_salad": "1-2 greens + 1-2 chicken + 1-2 bacon + 1-2 eggs + 1-2 avocado",
+        "med_salad": "1-2 greens + 1-2 chicken + med mix + 1-2 avocado",
+        "breakfast_salad": "1-2 greens + 1-2 bacon + 2-4 eggs + 1-2 avocado"
+      },
+      "fresh_cook": {
+        "salmon": { "total": "375g", "him": "250g (2 portions)", "her": "125g (1 portion)" },
+        "steak": { "total": "450g", "him": "300g (2 portions)", "her": "150g (1 portion)" },
+        "bacon_chicken": { "total": "525g chicken + 75g bacon", "him": "350g + 50g", "her": "175g + 25g" }
+      },
+      "her_supplements_weekly": {
+        "eggs": "21 (3/day × 7 days)",
+        "yogurt": "1,050g (150g/day × 7 days)",
+        "cottage_cheese": "1,200g (200g/day × 6 days)",
+        "berries": "350g (50g/day × 7 days)"
+      }
     }
   },
   "recipes": {
@@ -328,32 +364,36 @@
       {
         "name": "Beef Stew",
         "prep_type": "grab_and_go",
-        "him": { "protein": 62, "cal": 810, "portion": "2.5 cups stew" },
-        "her": { "protein": 38, "cal": 490, "portion": "1.5 cups stew" },
+        "him": { "protein": 60, "cal": 810, "portion": "600g stew" },
+        "her": { "protein": 30, "cal": 405, "portion": "300g stew" },
+        "portion_rule": "2x",
         "container": "Complete meal - just reheat",
         "instructions": "Microwave 2-3 min or heat on stovetop until hot."
       },
       {
         "name": "Pulled Pork Plate",
         "prep_type": "grab_and_go",
-        "him": { "protein": 70, "cal": 850, "portion": "2 cups pork + 1 cup slaw + 1 cup roasted peppers + bacon" },
-        "her": { "protein": 50, "cal": 620, "portion": "1.25 cups pork + 3/4 cup slaw + 3/4 cup roasted peppers + bacon" },
+        "him": { "protein": 62, "cal": 850, "portion": "250g pork + 150g slaw + 200g peppers + 50g bacon" },
+        "her": { "protein": 31, "cal": 425, "portion": "125g pork + 75g slaw + 100g peppers + 25g bacon" },
+        "portion_rule": "2x",
         "container": "Pork + slaw + roasted peppers + bacon",
         "instructions": "Microwave 2-3 min. Slaw is fine cold or warm. Add pickles, hot sauce."
       },
       {
         "name": "Chicken Thigh Plate",
         "prep_type": "grab_and_go",
-        "him": { "protein": 78, "cal": 820, "portion": "3 thighs + 1 cup mash + 1 cup broccoli" },
-        "her": { "protein": 52, "cal": 600, "portion": "2 thighs + 3/4 cup mash + 3/4 cup broccoli" },
+        "him": { "protein": 66, "cal": 820, "portion": "350g chicken + 200g mash + 200g broccoli" },
+        "her": { "protein": 33, "cal": 410, "portion": "175g chicken + 100g mash + 100g broccoli" },
+        "portion_rule": "2x",
         "container": "Thighs + mash + broccoli",
         "instructions": "Microwave 2-3 min, or reheat chicken in 400°F oven 10 min to re-crisp skin. Add butter to mash."
       },
       {
         "name": "Pork Power Bowl",
         "prep_type": "grab_and_go",
-        "him": { "protein": 71, "cal": 780, "portion": "2 cups pork + 1 cup zucchini + 1 cup brussels + 2 eggs" },
-        "her": { "protein": 53, "cal": 560, "portion": "1.25 cups pork + 3/4 cup zucchini + 3/4 cup brussels + 2 eggs" },
+        "him": { "protein": 76, "cal": 850, "portion": "250g pork + 200g zucchini + 200g brussels + 2 eggs" },
+        "her": { "protein": 38, "cal": 425, "portion": "125g pork + 100g zucchini + 100g brussels + 1 egg" },
+        "portion_rule": "2x",
         "container": "Pork + zucchini + brussels + eggs",
         "instructions": "Microwave 2-3 min. Slice avocado fresh, add hot sauce."
       }
@@ -362,26 +402,29 @@
       {
         "name": "Cobb Salad",
         "prep_type": "add_fresh",
-        "him": { "protein": 65, "cal": 780, "portion": "4 cups greens + full toppings + 1 cup protein + 1/2 avocado" },
-        "her": { "protein": 48, "cal": 580, "portion": "3 cups greens + 3/4 toppings + 3/4 cup protein + 1/4 avocado" },
+        "him": { "protein": 80, "cal": 850, "portion": "150g greens + 350g chicken + 50g bacon + 2 eggs + 100g avocado" },
+        "her": { "protein": 40, "cal": 425, "portion": "75g greens + 175g chicken + 25g bacon + 1 egg + 50g avocado" },
+        "portion_rule": "2x",
         "grab": "Salad base + Cobb toppings container",
-        "add_fresh": ["Avocado", "Leftover protein (pork or chicken)"],
+        "add_fresh": ["Avocado", "Chicken from fridge"],
         "instructions": "Combine salad base with toppings. Add sliced avocado and protein. Drizzle dressing."
       },
       {
         "name": "Mediterranean Chicken Salad",
         "prep_type": "add_fresh",
-        "him": { "protein": 62, "cal": 750, "portion": "4 cups greens + full med mix + 1.5 thighs + 1/2 avocado" },
-        "her": { "protein": 45, "cal": 560, "portion": "3 cups greens + 3/4 med mix + 1 thigh" },
+        "him": { "protein": 66, "cal": 750, "portion": "150g greens + 350g chicken + med mix + 100g avocado" },
+        "her": { "protein": 33, "cal": 375, "portion": "75g greens + 175g chicken + med mix + 50g avocado" },
+        "portion_rule": "2x",
         "grab": "Salad base + Mediterranean mix + chicken from fridge",
-        "add_fresh": ["Avocado (optional)"],
+        "add_fresh": ["Avocado"],
         "instructions": "Combine greens with Mediterranean mix. Warm chicken or serve cold. Add dressing."
       },
       {
         "name": "Breakfast Salad",
         "prep_type": "add_fresh",
-        "him": { "protein": 58, "cal": 780, "portion": "4 cups greens + 4 strips bacon + 3 eggs + 1/2 avocado" },
-        "her": { "protein": 42, "cal": 580, "portion": "3 cups greens + 2 strips bacon + 2 eggs + 1/4 avocado" },
+        "him": { "protein": 47, "cal": 680, "portion": "150g greens + 50g bacon + 4 eggs + 100g avocado" },
+        "her": { "protein": 24, "cal": 340, "portion": "75g greens + 25g bacon + 2 eggs + 50g avocado" },
+        "portion_rule": "2x",
         "grab": "Salad base + bacon + eggs from fridge",
         "add_fresh": ["Avocado", "Fry eggs fresh (optional)"],
         "instructions": "Warm bacon in pan to render fat. Toss greens in warm fat. Top with eggs (fried fresh or hard boiled), avocado. Hot sauce."
@@ -389,8 +432,9 @@
       {
         "name": "Beef Stew + Salad",
         "prep_type": "add_fresh",
-        "him": { "protein": 65, "cal": 820, "portion": "2 cups stew + 3 cups greens + dressing" },
-        "her": { "protein": 48, "cal": 620, "portion": "1.5 cups stew + 3 cups greens + dressing" },
+        "him": { "protein": 60, "cal": 820, "portion": "600g stew + 150g greens + dressing" },
+        "her": { "protein": 30, "cal": 410, "portion": "300g stew + 75g greens + dressing" },
+        "portion_rule": "2x",
         "grab": "Beef stew container + Salad base",
         "add_fresh": [],
         "instructions": "Reheat stew. Dress salad. Hearty and satisfying."
@@ -400,11 +444,12 @@
       {
         "name": "Pan-Seared Salmon",
         "prep_type": "cook_fresh",
-        "him": { "protein": 72, "cal": 850, "portion": "8oz salmon + 1 cup broccoli + 2 eggs + butter" },
-        "her": { "protein": 48, "cal": 580, "portion": "5oz salmon + 3/4 cup broccoli + 1 egg + butter" },
+        "him": { "protein": 76, "cal": 850, "portion": "250g salmon + 200g broccoli + 2 eggs + butter" },
+        "her": { "protein": 38, "cal": 425, "portion": "125g salmon + 100g broccoli + 1 egg + butter" },
+        "portion_rule": "2x",
         "cook_time": "15 min",
         "ingredients": [
-          "Salmon fillets (him: 8oz, her: 5oz)",
+          "Salmon fillets (him: 250g, her: 125g)",
           "Roasted broccoli from fridge",
           "Hard boiled eggs from fridge",
           "2 tbsp butter",
@@ -415,11 +460,12 @@
       {
         "name": "Steak Dinner",
         "prep_type": "cook_fresh",
-        "him": { "protein": 75, "cal": 840, "portion": "10oz steak + 1 cup broccoli + 2 cups spinach + butter" },
-        "her": { "protein": 50, "cal": 580, "portion": "6oz steak + 3/4 cup broccoli + 1.5 cups spinach + butter" },
+        "him": { "protein": 78, "cal": 920, "portion": "300g steak + 200g broccoli + 100g spinach + butter" },
+        "her": { "protein": 39, "cal": 460, "portion": "150g steak + 100g broccoli + 50g spinach + butter" },
+        "portion_rule": "2x",
         "cook_time": "20 min",
         "ingredients": [
-          "Steak (him: 10oz, her: 6oz)",
+          "Steak (him: 300g, her: 150g)",
           "Roasted broccoli from fridge",
           "Fresh spinach",
           "2 tbsp butter",
@@ -430,11 +476,12 @@
       {
         "name": "Bacon-Wrapped Chicken",
         "prep_type": "cook_fresh",
-        "him": { "protein": 82, "cal": 850, "portion": "2 thighs + 4 strips bacon + 1 cup broccoli + ranch" },
-        "her": { "protein": 55, "cal": 580, "portion": "1.5 thighs + 2 strips bacon + 3/4 cup broccoli + ranch" },
+        "him": { "protein": 85, "cal": 900, "portion": "350g chicken + 50g bacon + 200g broccoli + ranch" },
+        "her": { "protein": 43, "cal": 450, "portion": "175g chicken + 25g bacon + 100g broccoli + ranch" },
+        "portion_rule": "2x",
         "cook_time": "40 min",
         "ingredients": [
-          "Chicken thighs (him: 2, her: 1-2)",
+          "Chicken thighs (him: 350g, her: 175g)",
           "Raw bacon strips",
           "Roasted broccoli from fridge",
           "Ranch for dipping"
@@ -445,30 +492,34 @@
     "snacks": [
       {
         "name": "Deviled Eggs",
-        "him": { "protein": 12, "cal": 200, "portion": "4 egg halves (2 eggs)" },
-        "her": { "protein": 9, "cal": 150, "portion": "3 egg halves" },
-        "makes": "24 halves from 12 eggs - about 6 servings",
+        "him": { "protein": 14, "cal": 230, "portion": "4 egg halves (2 eggs)" },
+        "her": { "protein": 7, "cal": 115, "portion": "2 egg halves (1 egg)" },
+        "portion_rule": "2x",
+        "makes": "24 halves from 12 eggs - about 12 servings",
         "ingredients": ["12 hard boiled eggs from fridge", "6 tbsp Mayo", "2 tsp Dijon", "Paprika"],
         "instructions": "Halve eggs, mash yolks with mayo and mustard. Fill whites, dust with paprika."
       },
       {
         "name": "Cheese & Veggie Plate",
-        "him": { "protein": 18, "cal": 300, "portion": "2.5 oz cheese + veggies + 12 olives" },
-        "her": { "protein": 14, "cal": 240, "portion": "2 oz cheese + veggies + 8 olives" },
+        "him": { "protein": 20, "cal": 320, "portion": "80g cheese + veggies + olives" },
+        "her": { "protein": 10, "cal": 160, "portion": "40g cheese + veggies + olives" },
+        "portion_rule": "2x",
         "ingredients": ["Cheese", "Raw veggies from fridge", "Olives"],
         "instructions": "Slice cheese, arrange with veggies and olives."
       },
       {
         "name": "Greek Yogurt + Berries",
-        "him": { "protein": 20, "cal": 260, "portion": "1 cup yogurt + 1/2 cup berries + 2 tbsp almonds" },
-        "her": { "protein": 15, "cal": 195, "portion": "3/4 cup yogurt + 1/3 cup berries + 1 tbsp almonds" },
+        "him": { "protein": 20, "cal": 280, "portion": "200g yogurt + 100g berries + 30g almonds" },
+        "her": { "protein": 10, "cal": 140, "portion": "100g yogurt + 50g berries + 15g almonds" },
+        "portion_rule": "2x",
         "ingredients": ["Greek yogurt", "Berries", "Almonds"],
         "instructions": "Top yogurt with berries and nuts."
       },
       {
         "name": "Bacon & Avocado",
-        "him": { "protein": 16, "cal": 340, "portion": "4 strips bacon + 1/2 avocado" },
-        "her": { "protein": 10, "cal": 220, "portion": "2 strips bacon + 1/3 avocado" },
+        "him": { "protein": 19, "cal": 380, "portion": "50g bacon + 100g avocado" },
+        "her": { "protein": 10, "cal": 190, "portion": "25g bacon + 50g avocado" },
+        "portion_rule": "2x",
         "ingredients": ["Bacon from fridge", "Avocado", "Everything bagel seasoning"],
         "instructions": "Top avocado halves with crumbled bacon and seasoning."
       }
@@ -476,77 +527,88 @@
   },
   "weekly_menu": {
     "overview": {
+      "portion_system": "2x (Him = double Her)",
       "meals_per_day": 2,
-      "him": { "target_calories": "1800-2000", "target_protein": 150 },
-      "her": { "target_calories": "1400", "target_protein": 115 },
-      "snack_note": "Add 1-2 snacks daily as needed to hit targets"
+      "him": { "target_calories": "1800-2000", "target_protein": 150, "from_meals": "~130g", "from_snacks": "~20g" },
+      "her": { "target_calories": "1400-1500", "target_protein": 120, "from_meals": "~60g", "from_supplements": "~60g" },
+      "her_daily_supplements": {
+        "breakfast": "3 eggs + veggies (21g protein, 280 cal)",
+        "second_breakfast": "150g Greek yogurt + berries (15g protein, 155 cal)",
+        "afternoon_snack": "200g cottage cheese (24g protein, 180 cal)",
+        "total": "60g protein, 615 cal"
+      }
     },
     "days": [
       {
-        "day": "Tuesday",
-        "morning_prep": "Portion beef stew into 6 containers (Him: 600g x3, Her: 360g x3)",
+        "day": "Monday",
         "meal1": { "name": "Pork Power Bowl", "type": "grab_and_go" },
         "meal2": { "name": "Chicken Thigh Plate", "type": "grab_and_go" },
-        "snacks": ["Greek Yogurt + Berries"],
-        "him": { "cal": 1860, "protein": 169 },
-        "her": { "cal": 1355, "protein": 120 }
+        "him_snacks": ["Deviled Eggs (14g)"],
+        "her_supplements": ["3 eggs + veggies (21g)", "Yogurt + berries (15g)", "Cottage cheese (24g)"],
+        "him": { "cal": 1880, "protein": 156 },
+        "her": { "cal": 1450, "protein": 131 }
+      },
+      {
+        "day": "Tuesday",
+        "meal1": { "name": "Beef Stew", "type": "grab_and_go" },
+        "meal2": { "name": "Cobb Salad", "type": "add_fresh" },
+        "him_snacks": ["Cheese & Veggie Plate (18g)"],
+        "her_supplements": ["3 eggs + veggies (21g)", "Yogurt + berries (15g)", "Cottage cheese (24g)"],
+        "him": { "cal": 1960, "protein": 158 },
+        "her": { "cal": 1445, "protein": 130 }
       },
       {
         "day": "Wednesday",
-        "morning_prep": "Assemble Cobb salad toppings container if not done",
-        "meal1": { "name": "Cobb Salad", "type": "add_fresh" },
-        "meal2": { "name": "Pulled Pork Plate", "type": "grab_and_go" },
-        "snacks": ["Deviled Eggs", "Cheese & Veggie Plate"],
-        "him": { "cal": 1850, "protein": 155 },
-        "her": { "cal": 1410, "protein": 130 }
+        "meal1": { "name": "Pulled Pork Plate", "type": "grab_and_go" },
+        "meal2": { "name": "Mediterranean Chicken Salad", "type": "add_fresh" },
+        "him_snacks": ["Deviled Eggs (14g)"],
+        "her_supplements": ["3 eggs + veggies (21g)", "Yogurt + berries (15g)", "Cottage cheese (24g)"],
+        "him": { "cal": 1850, "protein": 142 },
+        "her": { "cal": 1415, "protein": 124 }
       },
       {
         "day": "Thursday",
-        "morning_prep": "Take salmon out of fridge 15 min before cooking",
+        "morning_prep": "Take salmon out 15 min before cooking",
         "meal1": { "name": "Beef Stew", "type": "grab_and_go" },
         "meal2": { "name": "Pan-Seared Salmon", "type": "cook_fresh" },
-        "snacks": ["Cheese & Veggie Plate", "Deviled Eggs"],
-        "him": { "cal": 1910, "protein": 160 },
-        "her": { "cal": 1320, "protein": 117 },
+        "him_snacks": ["Cheese & Veggie Plate (18g)"],
+        "her_supplements": ["3 eggs + veggies (21g)", "Yogurt + berries (15g)", "Cottage cheese (24g)"],
+        "him": { "cal": 1920, "protein": 154 },
+        "her": { "cal": 1430, "protein": 128 },
         "note": "Cook salmon fresh - 15 min"
       },
       {
         "day": "Friday",
-        "morning_prep": "Assemble Mediterranean mix if not done",
-        "meal1": { "name": "Mediterranean Chicken Salad", "type": "add_fresh" },
-        "meal2": { "name": "Pulled Pork Plate", "type": "grab_and_go" },
-        "snacks": ["Greek Yogurt + Berries", "Deviled Eggs"],
-        "him": { "cal": 1870, "protein": 156 },
-        "her": { "cal": 1435, "protein": 129 }
+        "meal1": { "name": "Pork Power Bowl", "type": "grab_and_go" },
+        "meal2": { "name": "Chicken Thigh Plate", "type": "grab_and_go" },
+        "him_snacks": ["Deviled Eggs (14g)"],
+        "her_supplements": ["3 eggs + veggies (21g)", "Yogurt + berries (15g)", "Cottage cheese (24g)"],
+        "him": { "cal": 1880, "protein": 156 },
+        "her": { "cal": 1450, "protein": 131 }
       },
       {
         "day": "Saturday",
-        "morning_prep": "Take steak out 15 min before cooking to come to room temp",
+        "morning_prep": "Take steak out 15 min before cooking",
         "meal1": { "name": "Beef Stew + Salad", "type": "add_fresh" },
         "meal2": { "name": "Steak Dinner", "type": "cook_fresh" },
-        "snacks": ["Deviled Eggs", "Greek Yogurt + Berries"],
-        "him": { "cal": 1970, "protein": 161 },
-        "her": { "cal": 1380, "protein": 117 },
+        "him_snacks": ["Deviled Eggs (14g)"],
+        "her_supplements": ["3 eggs + veggies (21g)", "Yogurt + berries (15g)"],
+        "her_note": "Steak day - skip cottage cheese, steak has plenty of protein",
+        "him": { "cal": 1960, "protein": 152 },
+        "her": { "cal": 1410, "protein": 125 },
         "note": "Cook steak fresh - 20 min"
       },
       {
         "day": "Sunday",
-        "morning_prep": "None - grab and go",
+        "morning_prep": "Wrap chicken in bacon for evening cook",
         "meal1": { "name": "Breakfast Salad", "type": "add_fresh" },
-        "meal2": { "name": "Chicken Thigh Plate", "type": "grab_and_go" },
-        "snacks": ["Greek Yogurt + Berries", "Deviled Eggs"],
-        "him": { "cal": 1840, "protein": 162 },
-        "her": { "cal": 1350, "protein": 128 }
-      },
-      {
-        "day": "Monday",
-        "morning_prep": "Wrap chicken thighs in bacon, prep for evening cook",
-        "meal1": { "name": "Beef Stew", "type": "grab_and_go" },
         "meal2": { "name": "Bacon-Wrapped Chicken", "type": "cook_fresh" },
-        "snacks": ["Cheese & Veggie Plate", "Greek Yogurt + Berries"],
-        "him": { "cal": 1950, "protein": 170 },
-        "her": { "cal": 1390, "protein": 121 },
-        "note": "Prep day - cook bacon chicken while prepping next week"
+        "him_snacks": ["Cheese & Veggie Plate (18g)"],
+        "her_supplements": ["Yogurt + berries (15g)", "Cottage cheese (24g)"],
+        "her_note": "Breakfast salad has eggs - skip breakfast eggs",
+        "him": { "cal": 1870, "protein": 150 },
+        "her": { "cal": 1390, "protein": 126 },
+        "note": "Prep next week while bacon chicken bakes"
       }
     ]
   }

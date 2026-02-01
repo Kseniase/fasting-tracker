@@ -1,0 +1,452 @@
+{
+  "system": {
+    "name": "2x Portion System",
+    "description": "Him gets 2x of base portion. She supplements with protein-rich add-ons.",
+    "targets": {
+      "him": { "protein": 150, "calories": "1800-2000" },
+      "her": { "protein": 120, "calories": "1400-1500" }
+    }
+  },
+
+  "standard_portions": {
+    "proteins": {
+      "chicken_thighs": {
+        "unit": "g cooked",
+        "protein_per_100g": 19,
+        "cal_per_100g": 210,
+        "base": 175,
+        "double": 350,
+        "base_protein": 33,
+        "double_protein": 66,
+        "notes": "Bone-in thighs, weigh meat only"
+      },
+      "pulled_pork": {
+        "unit": "g",
+        "protein_per_100g": 25,
+        "cal_per_100g": 270,
+        "base": 125,
+        "double": 250,
+        "base_protein": 31,
+        "double_protein": 62,
+        "notes": "Shredded, drained of excess fat"
+      },
+      "beef_stew": {
+        "unit": "g (with broth/veg)",
+        "protein_per_100g": 10,
+        "cal_per_100g": 135,
+        "base": 300,
+        "double": 600,
+        "base_protein": 30,
+        "double_protein": 60,
+        "notes": "Includes broth and vegetables"
+      },
+      "salmon": {
+        "unit": "g",
+        "protein_per_100g": 25,
+        "cal_per_100g": 210,
+        "base": 125,
+        "double": 250,
+        "base_protein": 31,
+        "double_protein": 62,
+        "notes": "Skin-on fillet, weigh raw"
+      },
+      "steak": {
+        "unit": "g cooked",
+        "protein_per_100g": 26,
+        "cal_per_100g": 270,
+        "base": 150,
+        "double": 300,
+        "base_protein": 39,
+        "double_protein": 78,
+        "notes": "Ribeye or strip, weigh after cooking"
+      },
+      "shrimp": {
+        "unit": "g cooked",
+        "protein_per_100g": 24,
+        "cal_per_100g": 100,
+        "base": 125,
+        "double": 250,
+        "base_protein": 30,
+        "double_protein": 60,
+        "notes": "Peeled, tail-off weight"
+      },
+      "cod": {
+        "unit": "g",
+        "protein_per_100g": 20,
+        "cal_per_100g": 85,
+        "base": 150,
+        "double": 300,
+        "base_protein": 30,
+        "double_protein": 60,
+        "notes": "White fish, weigh raw"
+      },
+      "eggs": {
+        "unit": "whole eggs",
+        "protein_per_egg": 7,
+        "cal_per_egg": 78,
+        "base": 2,
+        "double": 4,
+        "base_protein": 14,
+        "double_protein": 28,
+        "notes": "Large eggs"
+      }
+    },
+
+    "vegetables": {
+      "roasted_veggies": {
+        "includes": ["broccoli", "brussels sprouts", "zucchini", "bell peppers"],
+        "unit": "g",
+        "base": 100,
+        "double": 200,
+        "cal_per_100g": 45,
+        "notes": "Mix and match, tossed in olive oil"
+      },
+      "cauliflower_mash": {
+        "unit": "g",
+        "base": 100,
+        "double": 200,
+        "cal_per_100g": 60,
+        "notes": "Made with butter and cream"
+      },
+      "slaw": {
+        "unit": "g",
+        "base": 75,
+        "double": 150,
+        "cal_per_100g": 90,
+        "notes": "Cabbage with mayo dressing"
+      },
+      "salad_greens": {
+        "unit": "g",
+        "base": 75,
+        "double": 150,
+        "cal_per_100g": 15,
+        "notes": "Mixed greens or spinach"
+      }
+    },
+
+    "extras": {
+      "avocado": {
+        "unit": "g",
+        "base": 50,
+        "double": 100,
+        "protein_per_100g": 2,
+        "cal_per_100g": 160,
+        "notes": "About 1/4 for base, 1/2 for double"
+      },
+      "bacon": {
+        "unit": "g cooked",
+        "base": 25,
+        "double": 50,
+        "protein_per_100g": 37,
+        "cal_per_100g": 540,
+        "notes": "2-3 strips base, 4-5 double"
+      },
+      "cheese": {
+        "unit": "g",
+        "base": 40,
+        "double": 80,
+        "protein_per_100g": 25,
+        "cal_per_100g": 400,
+        "notes": "Cheddar, feta, or mixed"
+      }
+    }
+  },
+
+  "her_supplements": {
+    "description": "She adds these throughout the day to hit 120g protein. Pick 2-3 daily.",
+    "options": {
+      "breakfast_eggs": {
+        "what": "3 eggs scrambled or fried",
+        "protein": 21,
+        "calories": 235,
+        "when": "breakfast",
+        "with": "Sautéed veggies (250g) +45 cal"
+      },
+      "protein_yogurt": {
+        "what": "Greek yogurt or Skyr (150g)",
+        "protein": 15,
+        "calories": 130,
+        "when": "2nd breakfast or snack",
+        "with": "Berries 50g +25 cal"
+      },
+      "cottage_cheese": {
+        "what": "Cottage cheese (200g)",
+        "protein": 24,
+        "calories": 180,
+        "when": "snack or with meal",
+        "with": "Everything bagel seasoning"
+      },
+      "hard_boiled_eggs": {
+        "what": "2 hard boiled eggs",
+        "protein": 14,
+        "calories": 156,
+        "when": "snack",
+        "with": "Salt, everything seasoning"
+      },
+      "smoked_salmon": {
+        "what": "Smoked salmon (60g)",
+        "protein": 15,
+        "calories": 120,
+        "when": "on eggs or with cream cheese",
+        "with": "Capers, dill"
+      },
+      "deli_turkey": {
+        "what": "Turkey breast (100g)",
+        "protein": 22,
+        "calories": 105,
+        "when": "rolled with cheese/avocado",
+        "with": "Mustard"
+      }
+    },
+    "daily_combos": {
+      "standard": {
+        "breakfast_eggs": 21,
+        "protein_yogurt": 15,
+        "cottage_cheese": 24,
+        "total": 60,
+        "notes": "Most days - eggs AM, yogurt mid-morning, cottage cheese afternoon"
+      },
+      "fish_day": {
+        "breakfast_eggs": 21,
+        "smoked_salmon": 15,
+        "protein_yogurt": 15,
+        "total": 51,
+        "notes": "When meals are lighter fish portions"
+      },
+      "big_meal_day": {
+        "breakfast_eggs": 21,
+        "protein_yogurt": 15,
+        "total": 36,
+        "notes": "When having steak or heavy protein meal"
+      }
+    }
+  },
+
+  "meal_templates": {
+    "power_bowl": {
+      "description": "Protein + 2 roasted veggies + eggs",
+      "components": {
+        "protein": "1x or 2x any protein",
+        "veggie1": "1x or 2x roasted veg",
+        "veggie2": "1x or 2x roasted veg",
+        "eggs": "base 1, double 2"
+      },
+      "example_her": "125g pork + 100g zucchini + 100g brussels + 1 egg = 38g protein",
+      "example_him": "250g pork + 200g zucchini + 200g brussels + 2 eggs = 76g protein"
+    },
+    "protein_plate": {
+      "description": "Protein + mash + roasted veg",
+      "components": {
+        "protein": "1x or 2x any protein",
+        "mash": "1x or 2x cauliflower mash",
+        "veggie": "1x or 2x roasted veg"
+      },
+      "example_her": "175g chicken + 100g mash + 100g broccoli = 35g protein",
+      "example_him": "350g chicken + 200g mash + 200g broccoli = 70g protein"
+    },
+    "salad_bowl": {
+      "description": "Greens + protein + toppings + dressing",
+      "components": {
+        "greens": "1x or 2x salad greens",
+        "protein": "1x or 2x any protein",
+        "toppings": "bacon, egg, cheese, avocado",
+        "dressing": "2 tbsp"
+      },
+      "example_her": "75g greens + 175g chicken + 25g bacon + 1 egg + 50g avocado = 45g protein",
+      "example_him": "150g greens + 350g chicken + 50g bacon + 2 eggs + 100g avocado = 90g protein"
+    },
+    "stew_bowl": {
+      "description": "Hearty stew, complete meal",
+      "components": {
+        "stew": "1x or 2x portion"
+      },
+      "example_her": "300g beef stew = 30g protein",
+      "example_him": "600g beef stew = 60g protein"
+    }
+  },
+
+  "weekly_menu": {
+    "cook_day": "Sunday",
+    "prep_time": "4-5 hours",
+    "containers_needed": {
+      "protein": "14 (7 days × 2 meals, some combined)",
+      "veggies": "14",
+      "salad_bases": "4-6"
+    },
+    "days": [
+      {
+        "day": "Monday",
+        "meal1": {
+          "template": "power_bowl",
+          "protein": "pulled_pork",
+          "veggies": ["zucchini", "brussels"]
+        },
+        "meal2": {
+          "template": "protein_plate",
+          "protein": "chicken_thighs",
+          "mash": true,
+          "veggie": "broccoli"
+        },
+        "her_supplements": ["breakfast_eggs", "protein_yogurt", "cottage_cheese"],
+        "totals": {
+          "him": { "protein": 148, "cal": 1850 },
+          "her": { "protein": 123, "cal": 1420 }
+        }
+      },
+      {
+        "day": "Tuesday",
+        "meal1": {
+          "template": "stew_bowl",
+          "protein": "beef_stew"
+        },
+        "meal2": {
+          "template": "salad_bowl",
+          "protein": "chicken_thighs",
+          "style": "cobb"
+        },
+        "her_supplements": ["breakfast_eggs", "protein_yogurt", "cottage_cheese"],
+        "totals": {
+          "him": { "protein": 155, "cal": 1900 },
+          "her": { "protein": 120, "cal": 1380 }
+        }
+      },
+      {
+        "day": "Wednesday",
+        "meal1": {
+          "template": "protein_plate",
+          "protein": "pulled_pork",
+          "mash": false,
+          "veggie": "peppers",
+          "slaw": true
+        },
+        "meal2": {
+          "template": "salad_bowl",
+          "protein": "chicken_thighs",
+          "style": "mediterranean"
+        },
+        "her_supplements": ["breakfast_eggs", "protein_yogurt", "cottage_cheese"],
+        "totals": {
+          "him": { "protein": 152, "cal": 1880 },
+          "her": { "protein": 122, "cal": 1400 }
+        }
+      },
+      {
+        "day": "Thursday",
+        "meal1": {
+          "template": "stew_bowl",
+          "protein": "beef_stew"
+        },
+        "meal2": {
+          "template": "protein_plate",
+          "protein": "salmon",
+          "cook_fresh": true,
+          "veggie": "broccoli"
+        },
+        "her_supplements": ["breakfast_eggs", "protein_yogurt", "hard_boiled_eggs"],
+        "totals": {
+          "him": { "protein": 156, "cal": 1920 },
+          "her": { "protein": 121, "cal": 1350 }
+        }
+      },
+      {
+        "day": "Friday",
+        "meal1": {
+          "template": "power_bowl",
+          "protein": "pulled_pork",
+          "veggies": ["zucchini", "brussels"]
+        },
+        "meal2": {
+          "template": "protein_plate",
+          "protein": "chicken_thighs",
+          "mash": true,
+          "veggie": "broccoli"
+        },
+        "her_supplements": ["breakfast_eggs", "protein_yogurt", "cottage_cheese"],
+        "totals": {
+          "him": { "protein": 148, "cal": 1850 },
+          "her": { "protein": 123, "cal": 1420 }
+        }
+      },
+      {
+        "day": "Saturday",
+        "meal1": {
+          "template": "stew_bowl",
+          "protein": "beef_stew",
+          "with_salad": true
+        },
+        "meal2": {
+          "template": "protein_plate",
+          "protein": "steak",
+          "cook_fresh": true,
+          "veggie": "broccoli",
+          "spinach": true
+        },
+        "her_supplements": ["breakfast_eggs", "protein_yogurt"],
+        "notes": "Big steak day - she needs fewer supplements",
+        "totals": {
+          "him": { "protein": 168, "cal": 2000 },
+          "her": { "protein": 118, "cal": 1380 }
+        }
+      },
+      {
+        "day": "Sunday",
+        "meal1": {
+          "template": "salad_bowl",
+          "protein": "eggs",
+          "style": "breakfast",
+          "bacon": true
+        },
+        "meal2": {
+          "template": "protein_plate",
+          "protein": "chicken_thighs",
+          "mash": true,
+          "veggie": "brussels"
+        },
+        "her_supplements": ["protein_yogurt", "cottage_cheese"],
+        "notes": "Breakfast salad has eggs - adjust supplements",
+        "totals": {
+          "him": { "protein": 142, "cal": 1780 },
+          "her": { "protein": 119, "cal": 1350 }
+        }
+      }
+    ]
+  },
+
+  "quick_reference": {
+    "him_per_meal_target": "60-75g protein",
+    "her_per_meal_target": "30-40g protein",
+    "her_supplement_target": "50-60g protein from add-ons",
+    "portion_rule": "Him = 2× Her for everything",
+    "container_labels": {
+      "1x": "Her portion (base)",
+      "2x": "Him portion (double)"
+    },
+    "daily_rhythm": {
+      "her": [
+        "7am: 3 eggs + veggies (21g)",
+        "10am: Protein yogurt + berries (15g)",
+        "12pm: Meal 1 - 1x portion (~32g)",
+        "3pm: Cottage cheese (24g)",
+        "6pm: Meal 2 - 1x portion (~32g)",
+        "Total: ~124g protein"
+      ],
+      "him": [
+        "12pm: Meal 1 - 2x portion (~65g)",
+        "3pm: Snack - yogurt or cheese (~15g)",
+        "6pm: Meal 2 - 2x portion (~65g)",
+        "Snack: Deviled eggs or nuts (~12g)",
+        "Total: ~157g protein"
+      ]
+    }
+  },
+
+  "shopping_additions_for_her": {
+    "weekly": [
+      "Eggs (extra dozen beyond meal prep) - for daily breakfast",
+      "Greek yogurt or Skyr (32oz) - 150g/day × 7 days",
+      "Cottage cheese (2 × 16oz tubs) - 200g × 5 days",
+      "Smoked salmon (8oz) - optional variety",
+      "Berries (2 pints) - for yogurt"
+    ]
+  }
+}

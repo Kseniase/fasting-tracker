@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Morning Workout - Kettlebell</title>
+  <style>
+    @page {
+      size: letter landscape;
+      margin: 0.4in;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+    }
+
+    body {
+      font-family: Georgia, serif;
+      background: #faf9f6;
+      color: #1a1a1a;
+      font-size: 11px;
+      line-height: 1.35;
+      display: flex;
+      flex-direction: column;
+      padding: 15px;
+    }
+
+    h1 {
+      font-size: 22px;
+      font-weight: normal;
+      text-align: center;
+      margin-bottom: 4px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #666;
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+
+    .calendar {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px;
+      flex: 1;
+      margin-bottom: 12px;
+    }
+
+    .day {
+      background: white;
+      border: 1px solid #bbb;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .day-header {
+      font-weight: bold;
+      font-size: 13px;
+      border-bottom: 2px solid #8b4513;
+      padding-bottom: 4px;
+      margin-bottom: 6px;
+      color: #8b4513;
+      text-align: center;
+    }
+
+    .day-type {
+      text-align: center;
+      font-size: 10px;
+      color: #666;
+      margin-bottom: 6px;
+      font-style: italic;
+    }
+
+    .section {
+      margin-bottom: 6px;
+      padding-bottom: 5px;
+      border-bottom: 1px dotted #ccc;
+    }
+
+    .section:last-of-type {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    .section-label {
+      font-weight: bold;
+      color: #8b4513;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .exercise {
+      font-size: 10px;
+      margin: 2px 0;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .exercise-name {
+      flex: 1;
+    }
+
+    .exercise-reps {
+      color: #555;
+      font-weight: bold;
+      text-align: right;
+      min-width: 50px;
+    }
+
+    .kb {
+      color: #8b4513;
+      font-weight: bold;
+    }
+
+    .duration {
+      margin-top: auto;
+      padding-top: 6px;
+      border-top: 2px solid #8b4513;
+      font-size: 10px;
+      font-weight: bold;
+      text-align: center;
+      color: #8b4513;
+    }
+
+    .info-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 10px;
+    }
+
+    .info-card {
+      background: white;
+      border: 1px solid #bbb;
+      padding: 10px;
+    }
+
+    .info-card h3 {
+      font-size: 12px;
+      color: #8b4513;
+      margin-bottom: 6px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 4px;
+    }
+
+    .info-card p, .info-card li {
+      margin: 2px 0;
+      font-size: 9px;
+    }
+
+    .info-card ul {
+      margin-left: 12px;
+    }
+
+    .start-ritual {
+      background: #fdf5e6;
+    }
+
+    .start-ritual ol {
+      margin-left: 14px;
+    }
+
+    .kb-guide {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      font-size: 9px;
+    }
+
+    .kb-guide div {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px dotted #ddd;
+      padding: 2px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Morning Workout - Kettlebell</h1>
+  <p class="subtitle">Wake + Water + Move | 20-30 min daily | <span class="kb">20 kg KB</span></p>
+
+  <div class="calendar">
+    <div class="day">
+      <div class="day-header">Monday</div>
+      <div class="day-type">KB Strength: Push/Squat</div>
+      <div class="section">
+        <div class="section-label">Circuit x3</div>
+        <div class="exercise"><span class="exercise-name"><span class="kb">KB</span> Goblet squats</span><span class="exercise-reps">12</span></div>
+        <div class="exercise"><span class="exercise-name">Push-ups</span><span class="exercise-reps">10-15</span></div>
+        <div class="exercise"><span class="exercise-name"><span class="kb">KB</span> Press (single arm)</span><span class="exercise-reps">8 ea</span></div>
+        <div class="exercise"><span class="exercise-name"><span class="kb">KB</span> Front rack lunge</span><span class="exercise-reps">8 ea</span></div>
+        <div class="exercise"><span class="exercise-name">Pike push-ups</span><span class="exercise-reps">8-10</span></div>
+        <div class="exercise"><span class="exercise-name"><span class="kb">KB</span> Goblet squat hold</span><span class="exercise-reps">30 sec</span></div>
+      </div>
+      <div class="section">
+        <div class="section-label">Finisher</div>
+        <div class="exercise"><span class="exercise-name"><span class="kb">KB</span> Swings</span><span class="exercise-reps">20</span></div>
+        <div class="exercise"><span class="exercise-name">Plank</span><span class="exercise-reps">45 sec</span></div>
+      </div>
+      <div class="duration">25-30 min</div>
+    </div>
+
+    <div class="day">
+      <div class="day-header">Tuesday</div>
+      <div class="day-type">Mobility/Yoga Flow</div>
+      <div class="section">
+        <div class="section-label">Flow</div>
+        <div class="exercise"><span class="exercise-name">Sun Salutation A</span><span class="exercise-reps">5 rounds</span></div>
+      </div>
+      <div class="section">
+        <div class="section-label">Hold 60-90 sec each</div>
+        <div class="exercise"><span class="exercise-name">Downward dog</span><span class="exercise-reps"></span></div>
+        <div class="exercise"><span class="exercise-name">Low lunge</span><span class="exercise-reps">ea side</span></div>
+        <div class="exercise"><span class="exercise-name">Pigeon pose</span><span class="exercise-reps">ea side</span></div>
+        <div class="exercise"><span class="exercise-name">Seated forward fold</span><span class="exercise-reps"></span></div>
+        <div class="exercise"><span class="exercise-name">Supine twist</span><span class="exercise-reps">ea side</span></div>
+        <div class="exercise"><span class="exercise-name">Happy baby</span><span class="exercise-reps"></span></div>
+      </div>
+      <div class="duration">20-25 min</div>
+    </div>
+
+    <div class="day">
+      <div class="day-header">Wednesday</div>
+      <div class="day-type">KB Strength: Pull/Hinge</div>
+      <div class="section">
+        <div class="section-label">Circuit x3</div>
+        <div class="exercise"><span class="exercise-name"><span class="kb">KB</span> Swings</span><span class="exercise-reps">15</span></div>
+        <div class="exercise"><span class="exercise-name"><span class="kb">KB</span> Single-arm row</span><span class="exercise-reps">10 ea</span></div>
+        <div class="exercise"><span class="exercise-name"><span class="kb">KB</span> Deadlift</span><span class="exercise-reps">12</span></div>
+        <div class="exercise"><span class="exercise-name"><span class="kb">KB</span> High pull</span><span class="exercise-reps">8 ea</span></div>
+        <div class="exercise"><span class="exercise-name">Single-leg RDL (KB)</span><span class="exercise-reps">8 ea</span></div>
+        <div class="exercise"><span class="exercise-name"><span class="kb">KB</span> Bent-over row</span><span class="exercise-reps">12</span></div>
+      </div>
+      <div class="section">
+        <div class="section-label">Finisher</div>
+        <div class="exercise"><span class="exercise-name"><span class="kb">KB</span> Swings</span><span class="exercise-reps">25</span></div>
+        <div class="exercise"><span class="exercise-name">Dead bug</span><span class="exercise-reps">10 ea</span></div>
+      </div>
+      <div class="duration">25-30 min</div>
+    </div>
+
+    <div class="day">
+      <div class="day-header">Thursday</div>
+      <div class="day-type">Deep Stretch</div>
+      <div class="section">
+        <div class="section-label">Lower - 2-3 min each</div>
+        <div class="exercise"><span class="exercise-name">Deep squat hang</span><span class="exercise-reps"></span></div>
+        <div class="exercise"><span class="exercise-name">Hip flexor stretch</span><span class="exercise-reps">ea side</span></div>
+        <div class="exercise"><span class="exercise-name">Frog pose</span><span class="exercise-reps"></span></div>
+        <div class="exercise"><span class="exercise-name">Seated straddle</span><span class="exercise-reps"></span></div>
+      </div>
+      <div class="section">
+        <div class="section-label">Upper + Spine</div>
+        <div class="exercise"><span class="exercise-name">Chest opener (doorway)</span><span class="exercise-reps"></span></div>
+        <div class="exercise"><span class="exercise-name">Thread the needle</span><span class="exercise-reps">ea side</span></div>
+        <div class="exercise"><span class="exercise-name">Child's pose</span><span class="exercise-reps">2 min</span></div>
+        <div class="exercise"><span class="exercise-name">Supine twist</span><span class="exercise-reps">ea side</span></div>
+      </div>
+      <div class="duration">20-25 min</div>
+    </div>
+
+    <div class="day">
+      <div class="day-header">Friday</div>
+      <div class="day-type">KB Strength: Full Body</div>
+      <div class="section">
+        <div class="section-label">Circuit x3</div>
+        <div class="exercise"><span class="exercise-name"><span class="kb">KB</span> Swings</span><span class="exercise-reps">15</span></div>
+        <div class="exercise"><span class="exercise-name"><span class="kb">KB</span> Clean + Press</span><span class="exercise-reps">5 ea</span></div>
+        <div class="exercise"><span class="exercise-name"><span class="kb">KB</span> Goblet squat</span><span class="exercise-reps">10</span></div>
+        <div class="exercise"><span class="exercise-name"><span class="kb">KB</span> Row (each arm)</span><span class="exercise-reps">8 ea</span></div>
+        <div class="exercise"><span class="exercise-name"><span class="kb">KB</span> Reverse lunge</span><span class="exercise-reps">8 ea</span></div>
+        <div class="exercise"><span class="exercise-name">Push-ups</span><span class="exercise-reps">12</span></div>
+      </div>
+      <div class="section">
+        <div class="section-label">Finisher</div>
+        <div class="exercise"><span class="exercise-name">Turkish Get-Up</span><span class="exercise-reps">2 ea</span></div>
+        <div class="exercise"><span class="exercise-name"><span class="kb">KB</span> Swings</span><span class="exercise-reps">20</span></div>
+      </div>
+      <div class="duration">25-30 min</div>
+    </div>
+
+    <div class="day">
+      <div class="day-header">Saturday</div>
+      <div class="day-type">Active Recovery</div>
+      <div class="section">
+        <div class="section-label">Gentle Flow</div>
+        <div class="exercise"><span class="exercise-name">Sun Salutation B</span><span class="exercise-reps">3 rounds</span></div>
+        <div class="exercise"><span class="exercise-name">Warrior 1 &rarr; 2 &rarr; Triangle</span><span class="exercise-reps">ea side</span></div>
+        <div class="exercise"><span class="exercise-name">Tree pose</span><span class="exercise-reps">60s ea</span></div>
+      </div>
+      <div class="section">
+        <div class="section-label">Cool Down</div>
+        <div class="exercise"><span class="exercise-name">Seated forward fold</span><span class="exercise-reps">2 min</span></div>
+        <div class="exercise"><span class="exercise-name">Lying twist</span><span class="exercise-reps">2 min ea</span></div>
+        <div class="exercise"><span class="exercise-name">Savasana</span><span class="exercise-reps">5 min</span></div>
+      </div>
+      <div class="duration">20-25 min</div>
+    </div>
+
+    <div class="day">
+      <div class="day-header">Sunday</div>
+      <div class="day-type">Rest</div>
+      <div class="section">
+        <div class="section-label">Options</div>
+        <div class="exercise"><span class="exercise-name">Light walk</span><span class="exercise-reps">20-30 min</span></div>
+        <div class="exercise"><span class="exercise-name">Gentle stretching</span><span class="exercise-reps">10 min</span></div>
+        <div class="exercise"><span class="exercise-name">Or complete rest</span><span class="exercise-reps"></span></div>
+      </div>
+      <div class="section">
+        <div class="section-label">Recovery Focus</div>
+        <div class="exercise"><span class="exercise-name">Sleep priority</span><span class="exercise-reps"></span></div>
+        <div class="exercise"><span class="exercise-name">Hydration</span><span class="exercise-reps"></span></div>
+        <div class="exercise"><span class="exercise-name">Prep for Monday</span><span class="exercise-reps"></span></div>
+      </div>
+      <div class="duration">Rest Day</div>
+    </div>
+  </div>
+
+  <div class="info-section">
+    <div class="info-card start-ritual">
+      <h3>Morning Start Ritual</h3>
+      <ol>
+        <li>Tall glass of water (+ pinch salt)</li>
+        <li>2-3 min light movement</li>
+        <li>Shake out, roll neck/shoulders</li>
+        <li>Begin workout</li>
+      </ol>
+      <p style="margin-top: 8px; font-style: italic;">No coffee until after workout. Water first, move second, caffeine third.</p>
+    </div>
+
+    <div class="info-card">
+      <h3>Key KB Movements</h3>
+      <ul>
+        <li><strong>Swing:</strong> Hip hinge, snap hips, float bell</li>
+        <li><strong>Goblet squat:</strong> Bell at chest, elbows inside knees</li>
+        <li><strong>Clean:</strong> Swing to rack position, elbow tucked</li>
+        <li><strong>Press:</strong> From rack, press overhead</li>
+        <li><strong>Turkish Get-Up:</strong> Floor to standing, bell overhead</li>
+      </ul>
+      <p style="margin-top: 6px;"><strong>Rest:</strong> 60-90 sec between rounds</p>
+    </div>
+
+    <div class="info-card">
+      <h3>KB Selection</h3>
+      <div class="kb-guide">
+        <div><span>Starting</span><span>16 kg (35 lb)</span></div>
+        <div><span>Intermediate</span><span>20 kg (44 lb)</span></div>
+        <div><span>Advanced</span><span>24 kg (53 lb)</span></div>
+        <div><span>Swings</span><span>Go heavier</span></div>
+        <div><span>Presses</span><span>Go lighter</span></div>
+        <div><span>Get-ups</span><span>Go lighter</span></div>
+      </div>
+      <p style="margin-top: 6px;"><strong>Brands:</strong> Rogue, Rep Fitness, Kettlebell Kings</p>
+    </div>
+
+    <div class="info-card">
+      <h3>Track It</h3>
+      <ul>
+        <li>Did the workout (yes/no)</li>
+        <li>How you felt (1-5)</li>
+        <li>KB weight used</li>
+        <li>Any modifications made</li>
+      </ul>
+      <p style="margin-top: 8px;"><strong>Goal:</strong> Consistency over intensity. Show up every day.</p>
+      <p style="margin-top: 4px;"><strong>Reassess:</strong> After 4 weeks</p>
+    </div>
+  </div>
+</body>
+</html>
