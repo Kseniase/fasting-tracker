@@ -410,7 +410,7 @@
             grid.innerHTML = data.weekly_menu.days.map(day => {
                 const meal1Recipe = getRecipeMacros(day.meal1.name, day.meal1.type);
                 const meal2Recipe = getRecipeMacros(day.meal2.name, day.meal2.type);
-                const snackRecipe = getRecipeMacros(day.snacks[0], 'snacks');
+                const snackRecipe = day.him_snacks ? getRecipeMacros(day.him_snacks[0], 'snacks') : null;
 
                 return `
                 <div class="menu-day">
@@ -433,12 +433,18 @@
                         ${meal2Recipe ? `<div style="font-size: 12px; color: var(--text-dim);">Him: ${meal2Recipe.him.cal} cal / ${meal2Recipe.him.protein}g P</div>` : ''}
                     </div>
                     <div class="menu-meal" style="background: transparent; padding: 0;">
-                        <div class="menu-meal-label">Snacks</div>
-                        <div style="font-size: 14px;">${day.snacks.map(s => {
+                        <div class="menu-meal-label">Him Snacks</div>
+                        <div style="font-size: 14px;">${(day.him_snacks || []).map(s => {
                             const snackName = s.replace(/\s*\([^)]*\)$/, '');
                             return '<span class="menu-meal-name" onclick="openRecipeByName(\'' + snackName + '\', \'snacks\')">' + s + '</span>';
                         }).join(', ')}</div>
                     </div>
+                    ${day.her_supplements ? `
+                    <div class="menu-meal" style="background: transparent; padding: 0;">
+                        <div class="menu-meal-label">Her Supplements</div>
+                        <div style="font-size: 13px; color: var(--text-dim);">${day.her_supplements.join(' · ')}</div>
+                    </div>
+                    ` : ''}
                     <div class="menu-totals">
                         <div>
                             <div style="font-size: 11px; color: var(--text-dim);">Him</div>

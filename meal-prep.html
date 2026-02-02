@@ -365,88 +365,342 @@
     <div id="tab-portioning" class="tab-content">
         <div class="card">
             <h2>2x Portion System</h2>
-            <p style="color: var(--text-dim); margin-bottom: 16px;"><strong>Rule: Him grabs 2 containers, She grabs 1.</strong> She supplements with eggs, yogurt, and cottage cheese.</p>
+            <p style="color: var(--text-dim); margin-bottom: 16px;"><strong>Rule: Him grabs 2 containers, She grabs 1.</strong> She supplements with eggs and protein yogurt.</p>
             <div id="portioning-targets" style="display: flex; gap: 16px; margin-bottom: 24px;">
                 <!-- Populated by JS -->
+            </div>
+
+            <!-- Weekly Meal Counts -->
+            <h3 style="margin-top: 24px; margin-bottom: 16px; color: var(--text);">Weekly Meal Counts</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+                <div style="background: var(--surface-2); padding: 16px; border-radius: 8px; border-left: 3px solid var(--blue);">
+                    <div style="font-size: 13px; text-transform: uppercase; font-weight: 600; color: var(--blue); margin-bottom: 12px;">Him - 14 Meals/Week</div>
+                    <table style="width: 100%; font-size: 14px;">
+                        <tr><td style="padding: 4px 0;">12pm Meal 1</td><td style="text-align: right; color: var(--green); font-weight: 600;">7 meals</td></tr>
+                        <tr><td style="padding: 4px 0;">6pm Meal 2</td><td style="text-align: right; color: var(--green); font-weight: 600;">7 meals</td></tr>
+                        <tr style="border-top: 1px solid var(--border);"><td style="padding: 8px 0 4px 0;">Snacks (deviled eggs, cheese)</td><td style="text-align: right; color: var(--text-dim);">7 days</td></tr>
+                    </table>
+                    <div style="margin-top: 12px; font-size: 12px; color: var(--text-dim);">Each meal = 2 containers (2x portions)</div>
+                </div>
+                <div style="background: var(--surface-2); padding: 16px; border-radius: 8px; border-left: 3px solid var(--purple);">
+                    <div style="font-size: 13px; text-transform: uppercase; font-weight: 600; color: var(--purple); margin-bottom: 12px;">Her - 14 Meals/Week + Supplements</div>
+                    <table style="width: 100%; font-size: 14px;">
+                        <tr><td style="padding: 4px 0;">12pm Meal 1</td><td style="text-align: right; color: var(--green); font-weight: 600;">7 meals</td></tr>
+                        <tr><td style="padding: 4px 0;">6pm Meal 2</td><td style="text-align: right; color: var(--green); font-weight: 600;">7 meals</td></tr>
+                        <tr style="border-top: 1px solid var(--border);"><td style="padding: 8px 0 4px 0;">9am Breakfast (3 eggs)</td><td style="text-align: right; color: var(--text-dim);">6 days</td></tr>
+                        <tr><td style="padding: 4px 0;">11am Protein yogurt 100g</td><td style="text-align: right; color: var(--text-dim);">7 days</td></tr>
+                    </table>
+                    <div style="margin-top: 12px; font-size: 12px; color: var(--text-dim);">Each meal = 1 container (1x portions)</div>
+                </div>
             </div>
         </div>
 
         <!-- Container Counts Card -->
         <div class="card">
-            <h2>Sunday Prep: Container Counts</h2>
-            <p style="color: var(--text-dim); margin-bottom: 16px;">Prep these standard portions. Him grabs 2, She grabs 1.</p>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
-                <div>
-                    <h3 style="color: var(--blue); margin-bottom: 12px;">Proteins</h3>
-                    <table style="width: 100%; font-size: 14px; border-collapse: collapse;">
-                        <tr style="border-bottom: 1px solid var(--border);">
-                            <th style="text-align: left; padding: 8px 0;">Item</th>
-                            <th style="text-align: center; padding: 8px;">Size</th>
-                            <th style="text-align: center; padding: 8px;">Count</th>
-                            <th style="text-align: right; padding: 8px;">Total</th>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--border);">
-                            <td>Pork</td><td style="text-align: center;">125g</td><td style="text-align: center; color: var(--green); font-weight: bold;">9</td><td style="text-align: right;">1,125g</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--border);">
-                            <td>Chicken</td><td style="text-align: center;">175g</td><td style="text-align: center; color: var(--green); font-weight: bold;">12</td><td style="text-align: right;">2,100g</td>
-                        </tr>
-                        <tr>
-                            <td>Stew</td><td style="text-align: center;">300g</td><td style="text-align: center; color: var(--green); font-weight: bold;">9</td><td style="text-align: right;">2,700g</td>
-                        </tr>
+            <h2>Sunday Prep: What to Make</h2>
+            <p style="color: var(--text-dim); margin-bottom: 20px;">Complete meal containers + extra protein portions for salads</p>
+
+            <!-- CHICKEN -->
+            <div style="background: var(--surface-2); padding: 16px; border-radius: 8px; margin-bottom: 16px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <h3 style="color: var(--blue); margin: 0;">Chicken (1,680g cooked)</h3>
+                    <span style="font-size: 13px; color: var(--text-dim);">~2.5 kg raw / 5.5 lbs bone-in</span>
+                </div>
+                <table style="width: 100%; font-size: 14px; border-collapse: collapse;">
+                    <tr style="border-bottom: 1px solid var(--border);">
+                        <th style="text-align: left; padding: 8px 0;">Container</th>
+                        <th style="text-align: center; padding: 8px; color: var(--blue);">Him</th>
+                        <th style="text-align: center; padding: 8px; color: var(--purple);">Her</th>
+                        <th style="text-align: right; padding: 8px;">Used For</th>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--border);">
+                        <td style="padding: 8px 0;"><strong>Chicken Plates</strong><br><span style="font-size: 12px; color: var(--text-dim);">chicken + mash + broccoli</span></td>
+                        <td style="text-align: center; color: var(--blue); font-weight: bold;">2<br><span style="font-size: 11px; font-weight: normal;">280g ea</span></td>
+                        <td style="text-align: center; color: var(--purple); font-weight: bold;">2<br><span style="font-size: 11px; font-weight: normal;">140g ea</span></td>
+                        <td style="text-align: right; font-size: 12px; color: var(--text-dim);">Mon, Fri 4pm</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--border);">
+                        <td style="padding: 8px 0;"><strong>Chicken only</strong><br><span style="font-size: 12px; color: var(--text-dim);">for salads</span></td>
+                        <td style="text-align: center; color: var(--blue); font-weight: bold;">2<br><span style="font-size: 11px; font-weight: normal;">280g ea</span></td>
+                        <td style="text-align: center; color: var(--purple); font-weight: bold;">2<br><span style="font-size: 11px; font-weight: normal;">140g ea</span></td>
+                        <td style="text-align: right; font-size: 12px; color: var(--text-dim);">Cobb, Med salad</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px 0;"><strong>Bacon Chicken (raw)</strong><br><span style="font-size: 12px; color: var(--text-dim);">cook fresh Sunday</span></td>
+                        <td style="text-align: center; color: var(--blue); font-weight: bold;">1<br><span style="font-size: 11px; font-weight: normal;">280g</span></td>
+                        <td style="text-align: center; color: var(--purple); font-weight: bold;">1<br><span style="font-size: 11px; font-weight: normal;">140g</span></td>
+                        <td style="text-align: right; font-size: 12px; color: var(--text-dim);">Sun 4pm</td>
+                    </tr>
+                </table>
+                <div style="font-size: 12px; color: var(--text-dim); margin-top: 8px;">Total: Him 4×280g + Her 4×140g = 1,680g cooked</div>
+            </div>
+
+            <!-- PULLED PORK -->
+            <div style="background: var(--surface-2); padding: 16px; border-radius: 8px; margin-bottom: 16px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <h3 style="color: var(--blue); margin: 0;">Pulled Pork (1,260g cooked)</h3>
+                    <span style="font-size: 13px; color: var(--text-dim);">~3 lb raw shoulder</span>
+                </div>
+                <table style="width: 100%; font-size: 14px; border-collapse: collapse;">
+                    <tr style="border-bottom: 1px solid var(--border);">
+                        <th style="text-align: left; padding: 8px 0;">Container</th>
+                        <th style="text-align: center; padding: 8px; color: var(--blue);">Him</th>
+                        <th style="text-align: center; padding: 8px; color: var(--purple);">Her</th>
+                        <th style="text-align: right; padding: 8px;">Used For</th>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--border);">
+                        <td style="padding: 8px 0;"><strong>Pork Plates</strong><br><span style="font-size: 12px; color: var(--text-dim);">pork + slaw + peppers</span></td>
+                        <td style="text-align: center; color: var(--blue); font-weight: bold;">1<br><span style="font-size: 11px; font-weight: normal;">280g</span></td>
+                        <td style="text-align: center; color: var(--purple); font-weight: bold;">1<br><span style="font-size: 11px; font-weight: normal;">140g</span></td>
+                        <td style="text-align: right; font-size: 12px; color: var(--text-dim);">Wed 2pm</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px 0;"><strong>Power Bowls</strong><br><span style="font-size: 12px; color: var(--text-dim);">pork + zucchini + brussels</span></td>
+                        <td style="text-align: center; color: var(--blue); font-weight: bold;">2<br><span style="font-size: 11px; font-weight: normal;">280g ea</span></td>
+                        <td style="text-align: center; color: var(--purple); font-weight: bold;">2<br><span style="font-size: 11px; font-weight: normal;">140g ea</span></td>
+                        <td style="text-align: right; font-size: 12px; color: var(--text-dim);">Mon, Fri 2pm</td>
+                    </tr>
+                </table>
+                <div style="font-size: 12px; color: var(--text-dim); margin-top: 8px;">Total: Him 3×280g + Her 3×140g = 1,260g cooked</div>
+            </div>
+
+            <!-- BEEF STEW -->
+            <div style="background: var(--surface-2); padding: 16px; border-radius: 8px; margin-bottom: 16px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <h3 style="color: var(--blue); margin: 0;">Beef Stew (2,700g total)</h3>
+                    <span style="font-size: 13px; color: var(--text-dim);">~2 lb chuck + veg</span>
+                </div>
+                <table style="width: 100%; font-size: 14px; border-collapse: collapse;">
+                    <tr style="border-bottom: 1px solid var(--border);">
+                        <th style="text-align: left; padding: 8px 0;">Container</th>
+                        <th style="text-align: center; padding: 8px; color: var(--blue);">Him</th>
+                        <th style="text-align: center; padding: 8px; color: var(--purple);">Her</th>
+                        <th style="text-align: right; padding: 8px;">Used For</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px 0;"><strong>Stew containers</strong><br><span style="font-size: 12px; color: var(--text-dim);">complete meal - just reheat</span></td>
+                        <td style="text-align: center; color: var(--blue); font-weight: bold;">3<br><span style="font-size: 11px; font-weight: normal;">600g ea</span></td>
+                        <td style="text-align: center; color: var(--purple); font-weight: bold;">3<br><span style="font-size: 11px; font-weight: normal;">300g ea</span></td>
+                        <td style="text-align: right; font-size: 12px; color: var(--text-dim);">Tue, Thu, Sat 2pm</td>
+                    </tr>
+                </table>
+                <div style="font-size: 12px; color: var(--text-dim); margin-top: 8px;">Total: Him 3×600g + Her 3×300g = 2,700g</div>
+            </div>
+
+            <!-- VEGETABLES -->
+            <div style="background: var(--surface-2); padding: 16px; border-radius: 8px; margin-bottom: 16px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <h3 style="color: var(--green); margin: 0;">Roasted Vegetables</h3>
+                    <span style="font-size: 13px; color: var(--text-dim);">Prep with plates & bowls</span>
+                </div>
+                <table style="width: 100%; font-size: 14px; border-collapse: collapse;">
+                    <tr style="border-bottom: 1px solid var(--border);">
+                        <th style="text-align: left; padding: 8px 0;">Veggie</th>
+                        <th style="text-align: center; padding: 8px; color: var(--blue);">Him portions</th>
+                        <th style="text-align: center; padding: 8px; color: var(--purple);">Her portions</th>
+                        <th style="text-align: right; padding: 8px;">Total</th>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--border);">
+                        <td style="padding: 6px 0;">Broccoli<br><span style="font-size: 11px; color: var(--text-dim);">Chicken plates + Salmon + Steak + Bacon chicken</span></td>
+                        <td style="text-align: center;">5 × 150g</td>
+                        <td style="text-align: center;">5 × 75g</td>
+                        <td style="text-align: right; color: var(--text-dim);">1,125g</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--border);">
+                        <td style="padding: 6px 0;">Brussels<br><span style="font-size: 11px; color: var(--text-dim);">Power bowls</span></td>
+                        <td style="text-align: center;">2 × 150g</td>
+                        <td style="text-align: center;">2 × 75g</td>
+                        <td style="text-align: right; color: var(--text-dim);">450g</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--border);">
+                        <td style="padding: 6px 0;">Zucchini<br><span style="font-size: 11px; color: var(--text-dim);">Power bowls</span></td>
+                        <td style="text-align: center;">2 × 150g</td>
+                        <td style="text-align: center;">2 × 75g</td>
+                        <td style="text-align: right; color: var(--text-dim);">450g</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--border);">
+                        <td style="padding: 6px 0;">Peppers<br><span style="font-size: 11px; color: var(--text-dim);">Pork plates</span></td>
+                        <td style="text-align: center;">1 × 150g</td>
+                        <td style="text-align: center;">1 × 75g</td>
+                        <td style="text-align: right; color: var(--text-dim);">225g</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 6px 0;">Cauliflower Mash<br><span style="font-size: 11px; color: var(--text-dim);">Chicken plates</span></td>
+                        <td style="text-align: center;">2 × 150g</td>
+                        <td style="text-align: center;">2 × 75g</td>
+                        <td style="text-align: right; color: var(--text-dim);">450g</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- SALAD & EXTRAS -->
+            <div style="background: var(--surface-2); padding: 16px; border-radius: 8px; margin-bottom: 16px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <h3 style="color: var(--yellow); margin: 0;">Salad Bases & Extras</h3>
+                    <span style="font-size: 13px; color: var(--text-dim);">For add-fresh meals</span>
+                </div>
+                <table style="width: 100%; font-size: 14px; border-collapse: collapse;">
+                    <tr style="border-bottom: 1px solid var(--border);">
+                        <th style="text-align: left; padding: 8px 0;">Item</th>
+                        <th style="text-align: center; padding: 8px; color: var(--blue);">Him</th>
+                        <th style="text-align: center; padding: 8px; color: var(--purple);">Her</th>
+                        <th style="text-align: right; padding: 8px;">Used For</th>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--border);">
+                        <td style="padding: 6px 0;">Salad greens</td>
+                        <td style="text-align: center;">4 × 150g</td>
+                        <td style="text-align: center;">4 × 75g</td>
+                        <td style="text-align: right; font-size: 12px; color: var(--text-dim);">Cobb, Med, Breakfast, Stew+Salad</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--border);">
+                        <td style="padding: 6px 0;">Coleslaw</td>
+                        <td style="text-align: center;">1 × 150g</td>
+                        <td style="text-align: center;">1 × 75g</td>
+                        <td style="text-align: right; font-size: 12px; color: var(--text-dim);">Pork Plate</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--border);">
+                        <td style="padding: 6px 0;">Hard-boiled eggs</td>
+                        <td style="text-align: center;" colspan="2">36 total</td>
+                        <td style="text-align: right; font-size: 12px; color: var(--text-dim);">Bowls, salads, deviled, her breakfast</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--border);">
+                        <td style="padding: 6px 0;">Pre-cooked bacon</td>
+                        <td style="text-align: center;" colspan="2">300g (12 × 25g portions)</td>
+                        <td style="text-align: right; font-size: 12px; color: var(--text-dim);">Plates, salads, snacks</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 6px 0;">Deviled eggs</td>
+                        <td style="text-align: center;" colspan="2">24 halves (from 12 eggs)</td>
+                        <td style="text-align: right; font-size: 12px; color: var(--text-dim);">Him snacks</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- FRESH (don't prep) -->
+            <div style="background: var(--surface-2); padding: 16px; border-radius: 8px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <h3 style="color: var(--yellow); margin: 0;">Add Fresh Daily (don't prep)</h3>
+                </div>
+                <div style="display: flex; flex-wrap: wrap; gap: 12px; font-size: 14px;">
+                    <span style="background: var(--surface); padding: 6px 12px; border-radius: 6px;">Avocado - slice day-of</span>
+                    <span style="background: var(--surface); padding: 6px 12px; border-radius: 6px;">Dressing - make Sunday, use all week</span>
+                    <span style="background: var(--surface); padding: 6px 12px; border-radius: 6px;">Protein yogurt + berries (her)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Her Daily Breakdown -->
+        <div class="card">
+            <h2 style="color: var(--purple);">Her Daily Breakdown</h2>
+            <p style="color: var(--text-dim); margin-bottom: 20px;">4 eating times per day: 9am, 11am, 2pm, 4pm → Target: ~1,400 cal, ~120g protein</p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px;">
+                <!-- Monday -->
+                <div style="background: var(--surface-2); padding: 16px; border-radius: 8px;">
+                    <h3 style="margin: 0 0 12px 0; padding-bottom: 8px; border-bottom: 1px solid var(--border);">Monday</h3>
+                    <table style="width: 100%; font-size: 13px;">
+                        <tr><td style="padding: 4px 0; color: var(--text-dim);">9am</td><td>3 eggs + veggies</td><td style="text-align: right;">21g</td></tr>
+                        <tr><td style="padding: 4px 0; color: var(--text-dim);">11am</td><td>Protein yogurt 100g + berries</td><td style="text-align: right;">25g</td></tr>
+                        <tr><td style="padding: 4px 0; color: var(--text-dim);">2pm</td><td><strong>Pork Power Bowl</strong></td><td style="text-align: right;">38g</td></tr>
+                        <tr><td style="padding: 4px 0; color: var(--text-dim);">4pm</td><td><strong>Chicken Plate</strong></td><td style="text-align: right;">36g</td></tr>
+                        <tr style="border-top: 1px solid var(--border);"><td colspan="2" style="padding-top: 8px;"><strong>Total</strong></td><td style="text-align: right; padding-top: 8px;"><strong style="color: var(--green);">120g</strong></td></tr>
                     </table>
                 </div>
-                <div>
-                    <h3 style="color: var(--green); margin-bottom: 12px;">Vegetables</h3>
-                    <table style="width: 100%; font-size: 14px; border-collapse: collapse;">
-                        <tr style="border-bottom: 1px solid var(--border);">
-                            <th style="text-align: left; padding: 8px 0;">Item</th>
-                            <th style="text-align: center; padding: 8px;">Size</th>
-                            <th style="text-align: center; padding: 8px;">Count</th>
-                            <th style="text-align: right; padding: 8px;">Total</th>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--border);">
-                            <td>Brussels</td><td style="text-align: center;">100g</td><td style="text-align: center; color: var(--green); font-weight: bold;">12</td><td style="text-align: right;">1,200g</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--border);">
-                            <td>Broccoli</td><td style="text-align: center;">100g</td><td style="text-align: center; color: var(--green); font-weight: bold;">14</td><td style="text-align: right;">1,400g</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--border);">
-                            <td>Zucchini</td><td style="text-align: center;">100g</td><td style="text-align: center; color: var(--green); font-weight: bold;">6</td><td style="text-align: right;">600g</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--border);">
-                            <td>Peppers</td><td style="text-align: center;">100g</td><td style="text-align: center; color: var(--green); font-weight: bold;">3</td><td style="text-align: right;">300g</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--border);">
-                            <td>Mash</td><td style="text-align: center;">100g</td><td style="text-align: center; color: var(--green); font-weight: bold;">6</td><td style="text-align: right;">600g</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--border);">
-                            <td>Slaw</td><td style="text-align: center;">75g</td><td style="text-align: center; color: var(--green); font-weight: bold;">3</td><td style="text-align: right;">225g</td>
-                        </tr>
-                        <tr>
-                            <td>Greens</td><td style="text-align: center;">75g</td><td style="text-align: center; color: var(--green); font-weight: bold;">12</td><td style="text-align: right;">900g</td>
-                        </tr>
+
+                <!-- Tuesday -->
+                <div style="background: var(--surface-2); padding: 16px; border-radius: 8px;">
+                    <h3 style="margin: 0 0 12px 0; padding-bottom: 8px; border-bottom: 1px solid var(--border);">Tuesday</h3>
+                    <table style="width: 100%; font-size: 13px;">
+                        <tr><td style="padding: 4px 0; color: var(--text-dim);">9am</td><td>3 eggs + veggies</td><td style="text-align: right;">21g</td></tr>
+                        <tr><td style="padding: 4px 0; color: var(--text-dim);">11am</td><td>Protein yogurt 100g + berries</td><td style="text-align: right;">25g</td></tr>
+                        <tr><td style="padding: 4px 0; color: var(--text-dim);">2pm</td><td><strong>Beef Stew</strong></td><td style="text-align: right;">36g</td></tr>
+                        <tr><td style="padding: 4px 0; color: var(--text-dim);">4pm</td><td><strong>Cobb Salad</strong></td><td style="text-align: right;">36g</td></tr>
+                        <tr style="border-top: 1px solid var(--border);"><td colspan="2" style="padding-top: 8px;"><strong>Total</strong></td><td style="text-align: right; padding-top: 8px;"><strong style="color: var(--green);">118g</strong></td></tr>
                     </table>
                 </div>
-                <div>
-                    <h3 style="color: var(--yellow); margin-bottom: 12px;">Extras</h3>
-                    <table style="width: 100%; font-size: 14px; border-collapse: collapse;">
-                        <tr style="border-bottom: 1px solid var(--border);">
-                            <th style="text-align: left; padding: 8px 0;">Item</th>
-                            <th style="text-align: center; padding: 8px;">Size</th>
-                            <th style="text-align: center; padding: 8px;">Count</th>
-                            <th style="text-align: right; padding: 8px;">Total</th>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--border);">
-                            <td>Bacon</td><td style="text-align: center;">25g</td><td style="text-align: center; color: var(--green); font-weight: bold;">12</td><td style="text-align: right;">300g</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--border);">
-                            <td>Avocado</td><td style="text-align: center;">50g</td><td style="text-align: center; color: var(--green); font-weight: bold;">9</td><td style="text-align: right;">450g</td>
-                        </tr>
-                        <tr>
-                            <td>Eggs</td><td style="text-align: center;">whole</td><td style="text-align: center; color: var(--green); font-weight: bold;">36+</td><td style="text-align: right;">~4 doz</td>
-                        </tr>
+
+                <!-- Wednesday -->
+                <div style="background: var(--surface-2); padding: 16px; border-radius: 8px;">
+                    <h3 style="margin: 0 0 12px 0; padding-bottom: 8px; border-bottom: 1px solid var(--border);">Wednesday</h3>
+                    <table style="width: 100%; font-size: 13px;">
+                        <tr><td style="padding: 4px 0; color: var(--text-dim);">9am</td><td>3 eggs + veggies</td><td style="text-align: right;">21g</td></tr>
+                        <tr><td style="padding: 4px 0; color: var(--text-dim);">11am</td><td>Protein yogurt 100g + berries</td><td style="text-align: right;">25g</td></tr>
+                        <tr><td style="padding: 4px 0; color: var(--text-dim);">2pm</td><td><strong>Pulled Pork Plate</strong></td><td style="text-align: right;">38g</td></tr>
+                        <tr><td style="padding: 4px 0; color: var(--text-dim);">4pm</td><td><strong>Mediterranean Salad</strong></td><td style="text-align: right;">36g</td></tr>
+                        <tr style="border-top: 1px solid var(--border);"><td colspan="2" style="padding-top: 8px;"><strong>Total</strong></td><td style="text-align: right; padding-top: 8px;"><strong style="color: var(--green);">120g</strong></td></tr>
                     </table>
+                </div>
+
+                <!-- Thursday -->
+                <div style="background: var(--surface-2); padding: 16px; border-radius: 8px;">
+                    <h3 style="margin: 0 0 12px 0; padding-bottom: 8px; border-bottom: 1px solid var(--border);">Thursday</h3>
+                    <table style="width: 100%; font-size: 13px;">
+                        <tr><td style="padding: 4px 0; color: var(--text-dim);">9am</td><td>3 eggs + veggies</td><td style="text-align: right;">21g</td></tr>
+                        <tr><td style="padding: 4px 0; color: var(--text-dim);">11am</td><td>Protein yogurt 100g + berries</td><td style="text-align: right;">25g</td></tr>
+                        <tr><td style="padding: 4px 0; color: var(--text-dim);">2pm</td><td><strong>Beef Stew</strong></td><td style="text-align: right;">36g</td></tr>
+                        <tr><td style="padding: 4px 0; color: var(--text-dim);">4pm</td><td><strong>Salmon</strong> <span style="color: var(--purple); font-size: 11px;">COOK</span></td><td style="text-align: right;">38g</td></tr>
+                        <tr style="border-top: 1px solid var(--border);"><td colspan="2" style="padding-top: 8px;"><strong>Total</strong></td><td style="text-align: right; padding-top: 8px;"><strong style="color: var(--green);">120g</strong></td></tr>
+                    </table>
+                </div>
+
+                <!-- Friday -->
+                <div style="background: var(--surface-2); padding: 16px; border-radius: 8px;">
+                    <h3 style="margin: 0 0 12px 0; padding-bottom: 8px; border-bottom: 1px solid var(--border);">Friday</h3>
+                    <table style="width: 100%; font-size: 13px;">
+                        <tr><td style="padding: 4px 0; color: var(--text-dim);">9am</td><td>3 eggs + veggies</td><td style="text-align: right;">21g</td></tr>
+                        <tr><td style="padding: 4px 0; color: var(--text-dim);">11am</td><td>Protein yogurt 100g + berries</td><td style="text-align: right;">25g</td></tr>
+                        <tr><td style="padding: 4px 0; color: var(--text-dim);">2pm</td><td><strong>Pork Power Bowl</strong></td><td style="text-align: right;">38g</td></tr>
+                        <tr><td style="padding: 4px 0; color: var(--text-dim);">4pm</td><td><strong>Chicken Plate</strong></td><td style="text-align: right;">36g</td></tr>
+                        <tr style="border-top: 1px solid var(--border);"><td colspan="2" style="padding-top: 8px;"><strong>Total</strong></td><td style="text-align: right; padding-top: 8px;"><strong style="color: var(--green);">120g</strong></td></tr>
+                    </table>
+                </div>
+
+                <!-- Saturday -->
+                <div style="background: var(--surface-2); padding: 16px; border-radius: 8px;">
+                    <h3 style="margin: 0 0 12px 0; padding-bottom: 8px; border-bottom: 1px solid var(--border);">Saturday</h3>
+                    <table style="width: 100%; font-size: 13px;">
+                        <tr><td style="padding: 4px 0; color: var(--text-dim);">9am</td><td>3 eggs + veggies</td><td style="text-align: right;">21g</td></tr>
+                        <tr><td style="padding: 4px 0; color: var(--text-dim);">11am</td><td>Protein yogurt 100g + berries</td><td style="text-align: right;">25g</td></tr>
+                        <tr><td style="padding: 4px 0; color: var(--text-dim);">2pm</td><td><strong>Beef Stew + Salad</strong></td><td style="text-align: right;">36g</td></tr>
+                        <tr><td style="padding: 4px 0; color: var(--text-dim);">4pm</td><td><strong>Steak</strong> <span style="color: var(--purple); font-size: 11px;">COOK</span></td><td style="text-align: right;">38g</td></tr>
+                        <tr style="border-top: 1px solid var(--border);"><td colspan="2" style="padding-top: 8px;"><strong>Total</strong></td><td style="text-align: right; padding-top: 8px;"><strong style="color: var(--green);">120g</strong></td></tr>
+                    </table>
+                </div>
+
+                <!-- Sunday -->
+                <div style="background: var(--surface-2); padding: 16px; border-radius: 8px;">
+                    <h3 style="margin: 0 0 12px 0; padding-bottom: 8px; border-bottom: 1px solid var(--border);">Sunday</h3>
+                    <table style="width: 100%; font-size: 13px;">
+                        <tr><td style="padding: 4px 0; color: var(--text-dim);">9am</td><td style="color: var(--text-dim);">—</td><td style="text-align: right; color: var(--text-dim);">—</td></tr>
+                        <tr><td style="padding: 4px 0; color: var(--text-dim);">11am</td><td>Protein yogurt 100g + berries</td><td style="text-align: right;">25g</td></tr>
+                        <tr><td style="padding: 4px 0; color: var(--text-dim);">2pm</td><td><strong>Breakfast Salad</strong></td><td style="text-align: right;">23g</td></tr>
+                        <tr><td style="padding: 4px 0; color: var(--text-dim);">4pm</td><td><strong>Bacon Chicken</strong> <span style="color: var(--purple); font-size: 11px;">COOK</span></td><td style="text-align: right;">36g</td></tr>
+                        <tr style="border-top: 1px solid var(--border);"><td colspan="2" style="padding-top: 8px;"><strong>Total</strong></td><td style="text-align: right; padding-top: 8px;"><strong style="color: var(--green);">84g</strong></td></tr>
+                    </table>
+                    <div style="font-size: 11px; color: var(--yellow); margin-top: 8px;">Skip breakfast eggs - breakfast salad has eggs</div>
+                </div>
+            </div>
+
+            <!-- Weekly Summary -->
+            <div style="background: var(--surface-2); padding: 16px; border-radius: 8px; margin-top: 20px;">
+                <h3 style="margin: 0 0 12px 0; color: var(--purple);">Her Weekly Summary</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; text-align: center;">
+                    <div>
+                        <div style="font-size: 24px; font-weight: 700; color: var(--green);">~114g</div>
+                        <div style="font-size: 12px; color: var(--text-dim);">Avg daily protein</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 24px; font-weight: 700; color: var(--green);">~1,400</div>
+                        <div style="font-size: 12px; color: var(--text-dim);">Avg daily calories</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 24px; font-weight: 700; color: var(--purple);">18</div>
+                        <div style="font-size: 12px; color: var(--text-dim);">Eggs for breakfast (6 days)</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 24px; font-weight: 700; color: var(--purple);">700g</div>
+                        <div style="font-size: 12px; color: var(--text-dim);">Protein yogurt (100g × 7)</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -456,37 +710,43 @@
             <h2>Standard Portions Reference</h2>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
                 <div>
-                    <h3 style="color: var(--blue); margin-bottom: 12px;">Proteins</h3>
+                    <h3 style="color: var(--blue); margin-bottom: 12px;">Proteins (cooked weight)</h3>
                     <table style="width: 100%; font-size: 14px; border-collapse: collapse;">
                         <tr style="border-bottom: 1px solid var(--border);">
                             <th style="text-align: left; padding: 8px 0;">Protein</th>
                             <th style="text-align: center; padding: 8px; color: var(--purple);">Her (1x)</th>
                             <th style="text-align: center; padding: 8px; color: var(--blue);">Him (2x)</th>
+                            <th style="text-align: center; padding: 8px; color: var(--green);">Protein</th>
                         </tr>
                         <tr style="border-bottom: 1px solid var(--border);">
                             <td style="padding: 8px 0;">Chicken thighs</td>
-                            <td style="text-align: center;">175g</td>
-                            <td style="text-align: center;">350g</td>
+                            <td style="text-align: center;">140g</td>
+                            <td style="text-align: center;">280g</td>
+                            <td style="text-align: center; color: var(--text-dim);">36g / 73g</td>
                         </tr>
                         <tr style="border-bottom: 1px solid var(--border);">
                             <td style="padding: 8px 0;">Pulled pork</td>
-                            <td style="text-align: center;">125g</td>
-                            <td style="text-align: center;">250g</td>
+                            <td style="text-align: center;">140g</td>
+                            <td style="text-align: center;">280g</td>
+                            <td style="text-align: center; color: var(--text-dim);">38g / 76g</td>
                         </tr>
                         <tr style="border-bottom: 1px solid var(--border);">
                             <td style="padding: 8px 0;">Beef stew</td>
                             <td style="text-align: center;">300g</td>
                             <td style="text-align: center;">600g</td>
+                            <td style="text-align: center; color: var(--text-dim);">36g / 72g</td>
                         </tr>
                         <tr style="border-bottom: 1px solid var(--border);">
                             <td style="padding: 8px 0;">Salmon</td>
-                            <td style="text-align: center;">125g</td>
-                            <td style="text-align: center;">250g</td>
+                            <td style="text-align: center;">150g</td>
+                            <td style="text-align: center;">300g</td>
+                            <td style="text-align: center; color: var(--text-dim);">38g / 75g</td>
                         </tr>
                         <tr>
                             <td style="padding: 8px 0;">Steak</td>
-                            <td style="text-align: center;">150g</td>
-                            <td style="text-align: center;">300g</td>
+                            <td style="text-align: center;">130g</td>
+                            <td style="text-align: center;">260g</td>
+                            <td style="text-align: center; color: var(--text-dim);">38g / 75g</td>
                         </tr>
                     </table>
                 </div>
@@ -500,28 +760,28 @@
                         </tr>
                         <tr style="border-bottom: 1px solid var(--border);">
                             <td style="padding: 8px 0;">Roasted veggies</td>
-                            <td style="text-align: center;">100g</td>
-                            <td style="text-align: center;">200g</td>
+                            <td style="text-align: center;">75g</td>
+                            <td style="text-align: center;">150g</td>
                         </tr>
                         <tr style="border-bottom: 1px solid var(--border);">
                             <td style="padding: 8px 0;">Cauliflower mash</td>
-                            <td style="text-align: center;">100g</td>
-                            <td style="text-align: center;">200g</td>
+                            <td style="text-align: center;">75g</td>
+                            <td style="text-align: center;">150g</td>
                         </tr>
                         <tr style="border-bottom: 1px solid var(--border);">
                             <td style="padding: 8px 0;">Slaw</td>
-                            <td style="text-align: center;">75g</td>
-                            <td style="text-align: center;">150g</td>
+                            <td style="text-align: center;">50g</td>
+                            <td style="text-align: center;">100g</td>
                         </tr>
                         <tr style="border-bottom: 1px solid var(--border);">
                             <td style="padding: 8px 0;">Salad greens</td>
-                            <td style="text-align: center;">75g</td>
-                            <td style="text-align: center;">150g</td>
+                            <td style="text-align: center;">50g</td>
+                            <td style="text-align: center;">100g</td>
                         </tr>
                         <tr>
                             <td style="padding: 8px 0;">Avocado</td>
+                            <td style="text-align: center;">25g</td>
                             <td style="text-align: center;">50g</td>
-                            <td style="text-align: center;">100g</td>
                         </tr>
                     </table>
                 </div>
@@ -530,23 +790,18 @@
 
         <!-- Her Supplements Card -->
         <div class="card">
-            <h2 style="color: var(--purple);">Her Daily Supplements (~60g protein)</h2>
-            <p style="color: var(--text-dim); margin-bottom: 16px;">She needs extra protein beyond meals. These provide ~60g/day.</p>
+            <h2 style="color: var(--purple);">Her Daily Supplements (~46g protein)</h2>
+            <p style="color: var(--text-dim); margin-bottom: 16px;">She needs extra protein beyond meals. These provide ~46g/day.</p>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
                 <div style="background: var(--surface-2); padding: 16px; border-radius: 8px;">
-                    <div style="font-size: 12px; color: var(--text-dim); text-transform: uppercase;">7am - Breakfast</div>
+                    <div style="font-size: 12px; color: var(--text-dim); text-transform: uppercase;">9am - Breakfast</div>
                     <div style="font-size: 16px; font-weight: 600; margin: 4px 0;">3 eggs + veggies</div>
                     <div style="color: var(--purple);">21g protein • 280 cal</div>
                 </div>
                 <div style="background: var(--surface-2); padding: 16px; border-radius: 8px;">
-                    <div style="font-size: 12px; color: var(--text-dim); text-transform: uppercase;">10am - 2nd Breakfast</div>
-                    <div style="font-size: 16px; font-weight: 600; margin: 4px 0;">Yogurt 150g + berries</div>
-                    <div style="color: var(--purple);">15g protein • 155 cal</div>
-                </div>
-                <div style="background: var(--surface-2); padding: 16px; border-radius: 8px;">
-                    <div style="font-size: 12px; color: var(--text-dim); text-transform: uppercase;">3pm - Afternoon</div>
-                    <div style="font-size: 16px; font-weight: 600; margin: 4px 0;">Cottage cheese 200g</div>
-                    <div style="color: var(--purple);">24g protein • 180 cal</div>
+                    <div style="font-size: 12px; color: var(--text-dim); text-transform: uppercase;">11am - 2nd Breakfast</div>
+                    <div style="font-size: 16px; font-weight: 600; margin: 4px 0;">Protein yogurt 100g + berries</div>
+                    <div style="color: var(--purple);">25g protein • 120 cal</div>
                 </div>
             </div>
         </div>
@@ -898,9 +1153,14 @@
 
                     if (!him && !her) continue; // Skip recipes without portion info
 
+                    const servings = recipe.weekly_servings;
                     html += `<div class="portion-card">
-                        <div class="portion-card-header">${recipe.name}</div>
+                        <div class="portion-card-header" style="display: flex; justify-content: space-between; align-items: center;">
+                            <span>${recipe.name}</span>
+                            ${servings ? `<span style="font-size: 12px; color: var(--green); font-weight: normal;">Him: ${servings.him}× · Her: ${servings.her}×</span>` : ''}
+                        </div>
                         <div class="portion-card-body">
+                            ${servings && servings.note ? `<div style="font-size: 12px; color: var(--text-dim); margin-bottom: 12px;">${servings.note}</div>` : ''}
                             <div class="portion-row">`;
 
                     if (him) {
