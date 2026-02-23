@@ -1,14 +1,33 @@
 #!/bin/bash
 # Fetch latest Oura data and update data.json for fasting tracker
 
+set -euo pipefail
+
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 TOKEN_FILE="$SCRIPT_DIR/.oura_token"
 DATA_FILE="$SCRIPT_DIR/data.json"
 
+require_cmd() {
+  if ! command -v "$1" >/dev/null 2>&1; then
+    echo "Error: Required command '$1' is not installed."
+    exit 1
+  fi
+}
+
+require_cmd curl
+require_cmd jq
+require_cmd bc
+
+if [ ! -f "$DATA_FILE" ]; then
+  echo "Error: data file not found at $DATA_FILE"
+  exit 1
+fi
+
 # Get token from 1Password if needed
-if [ ! -f "$TOKEN_FILE" ] || [ "$1" = "--refresh-token" ]; then
+if [ ! -f "$TOKEN_FILE" ] || [ "${1:-}" = "--refresh-token" ]; then
+  require_cmd op
   op item get "Oura Token" --format json | jq -r '.fields[] | select(.label=="notesPlain" or .id=="notesPlain") | .value' > "$TOKEN_FILE"
-  [ "$1" = "--refresh-token" ] && shift
+  [ "${1:-}" = "--refresh-token" ] && shift
 fi
 
 OURA_TOKEN=$(cat "$TOKEN_FILE")

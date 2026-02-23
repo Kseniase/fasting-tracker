@@ -1,3 +1,6 @@
 node_modules/
 .oura_token
 Data*
+.fasting_server.log
+.fasting_server.pid
+.fasting_server.port

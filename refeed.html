@@ -954,17 +954,42 @@
         let refeedData = null;
         let trackingData = null;
 
+        function showLoadError(error) {
+            const isFileProtocol = window.location.protocol === 'file:';
+            const existing = document.getElementById('loadErrorBanner');
+            if (existing) return;
+
+            const banner = document.createElement('div');
+            banner.id = 'loadErrorBanner';
+            banner.style.cssText = 'position:sticky;top:0;z-index:9999;background:#5a1f1f;border:1px solid #f85149;color:#f0f6fc;padding:12px 16px;border-radius:8px;margin-bottom:16px;font-family:DM Sans,sans-serif;';
+            banner.innerHTML = isFileProtocol
+                ? 'Could not load local JSON in file mode. Start with <code>./run-local.sh</code> and open <code>http://127.0.0.1:8080/refeed.html</code>.'
+                : 'Could not load <code>refeed-plan.json</code> or <code>data.json</code>. Check that the local server is running from this folder.';
+
+            const dashboard = document.querySelector('.dashboard');
+            if (dashboard) {
+                dashboard.prepend(banner);
+            } else {
+                document.body.prepend(banner);
+            }
+
+            if (error) console.error('Error loading data:', error);
+        }
+
         async function loadData() {
             try {
                 const [refeedResponse, dataResponse] = await Promise.all([
                     fetch('refeed-plan.json'),
                     fetch('data.json')
                 ]);
+                if (!refeedResponse.ok || !dataResponse.ok) {
+                    throw new Error(`HTTP ${refeedResponse.status}/${dataResponse.status}`);
+                }
                 refeedData = await refeedResponse.json();
                 trackingData = await dataResponse.json();
                 renderPage();
             } catch (error) {
-                console.error('Error loading data:', error);
+                showLoadError(error);
             }
         }
 
