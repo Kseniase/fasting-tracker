@@ -1,18 +1,6 @@
 {
-  "cycle": 2,
-  "previous_cycles": [
-    {
-      "cycle": 1,
-      "dates": "2026-01-01 to 2026-01-12",
-      "duration_days": 11,
-      "start_weight_kg": 98.3,
-      "end_weight_kg": 88.9,
-      "total_loss_kg": 9.4,
-      "visceral_fat_start_lbs": 5.18,
-      "visceral_fat_end_lbs": 3.80,
-      "archive": "archive/cycle-1-jan-2026/"
-    }
-  ],
+  "cycle": 1,
+  "previous_cycles": [],
   "fast": {
     "start": "2026-02-23T18:00:00",
     "goal_days": 11,
@@ -23,34 +11,16 @@
     "avg_total_calories": null,
     "avg_active_calories": null,
     "avg_steps": null,
-    "note": "Pre-fast baseline for Cycle 2 - populate from Oura data"
+    "note": "Pre-fast baseline for Cycle 1 - populate from Oura data"
   },
-  "body_composition": [
-    {
-      "date": "2026-01-12",
-      "cycle": 1,
-      "source": "body scan",
-      "body_score": 74,
-      "body_fat_pct": 35.0,
-      "lean_mass_lbs": 124,
-      "lean_mass_kg": 56.2,
-      "total_mass_lbs": 200,
-      "total_mass_kg": 90.7,
-      "visceral_fat_lbs": 3.80,
-      "visceral_fat_kg": 1.72,
-      "visceral_fat_target_lbs": 1.0,
-      "t_score": 0.40,
-      "image": "baseline/body-scan-2026-01-12-final.jpeg",
-      "notes": "Cycle 1 final scan. Reference point for Cycle 2. Visceral fat reduced 27% (5.18 to 3.80 lbs)."
-    }
-  ],
+  "body_composition": [],
   "measurements": [],
   "log": [
     {
       "date": "2026-02-23",
       "day": 0,
       "type": "event",
-      "message": "Cycle 2 fast begins at 6:00 PM. Refeed morning of Mar 5. Starting from 3.80 lbs visceral fat, targeting 1.0 lbs."
+      "message": "Cycle 1 fast begins at 6:00 PM. Refeed morning of Mar 5."
     }
   ],
   "day_guide": {
