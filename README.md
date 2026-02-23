@@ -33,6 +33,15 @@ You can also double-click `start.command`.
 
 ## Oura sync (`track.sh`)
 
+First-time setup (no 1Password required):
+
+```bash
+cd /Users/kseniase/Desktop/Fasting
+./setup-oura-token.sh
+```
+
+Then sync:
+
 ```bash
 cd /Users/kseniase/Desktop/Fasting
 ./track.sh
@@ -43,12 +52,15 @@ Dependencies:
 - `curl`
 - `jq`
 - `bc`
-- `op` (1Password CLI) only when creating/refreshing `.oura_token`
+- `op` (optional, only if you prefer loading token from 1Password)
 
 Examples:
 
 ```bash
-# Refresh token from 1Password item "Oura Token", then fetch defaults
+# Use token from environment (one-off)
+OURA_TOKEN=your_token_here ./track.sh
+
+# Refresh token from 1Password item "Oura Token" (optional flow)
 ./track.sh --refresh-token
 
 # Fetch a specific date range

@@ -7,6 +7,21 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 TOKEN_FILE="$SCRIPT_DIR/.oura_token"
 DATA_FILE="$SCRIPT_DIR/data.json"
 
+usage() {
+  cat <<'EOF'
+Usage:
+  ./track.sh [start_date] [end_date]
+  ./track.sh --token <oura_token> [start_date] [end_date]
+  OURA_TOKEN=<oura_token> ./track.sh [start_date] [end_date]
+  ./track.sh --refresh-token [start_date] [end_date]
+
+Notes:
+  - start_date/end_date format: YYYY-MM-DD
+  - --refresh-token pulls token from 1Password ("Oura Token" item) if op is available.
+  - Without 1Password, run ./setup-oura-token.sh once to create .oura_token.
+EOF
+}
+
 require_cmd() {
   if ! command -v "$1" >/dev/null 2>&1; then
     echo "Error: Required command '$1' is not installed."
@@ -23,24 +38,98 @@ if [ ! -f "$DATA_FILE" ]; then
   exit 1
 fi
 
-# Get token from 1Password if needed
-if [ ! -f "$TOKEN_FILE" ] || [ "${1:-}" = "--refresh-token" ]; then
-  require_cmd op
-  op item get "Oura Token" --format json | jq -r '.fields[] | select(.label=="notesPlain" or .id=="notesPlain") | .value' > "$TOKEN_FILE"
-  [ "${1:-}" = "--refresh-token" ] && shift
-fi
+refresh_token=false
+token_arg=""
+positionals=()
 
-OURA_TOKEN=$(cat "$TOKEN_FILE")
+while [ "$#" -gt 0 ]; do
+  case "$1" in
+    --refresh-token)
+      refresh_token=true
+      shift
+      ;;
+    --token)
+      shift
+      if [ -z "${1:-}" ]; then
+        echo "Error: --token requires a value."
+        exit 1
+      fi
+      token_arg="$1"
+      shift
+      ;;
+    -h|--help)
+      usage
+      exit 0
+      ;;
+    *)
+      positionals+=("$1")
+      shift
+      ;;
+  esac
+done
 
-if [ -z "$OURA_TOKEN" ]; then
-  echo "Error: Could not get Oura token. Run with --refresh-token to update."
+if [ "${#positionals[@]}" -gt 2 ]; then
+  echo "Error: Too many positional arguments."
+  usage
   exit 1
 fi
 
+if [ -n "$token_arg" ]; then
+  OURA_TOKEN="$token_arg"
+elif [ -n "${OURA_TOKEN:-}" ]; then
+  OURA_TOKEN="${OURA_TOKEN:-}"
+elif [ "$refresh_token" = true ] || [ ! -s "$TOKEN_FILE" ]; then
+  if command -v op >/dev/null 2>&1 && op whoami >/dev/null 2>&1; then
+    op item get "Oura Token" --format json \
+      | jq -r '.fields[] | select(.label=="notesPlain" or .id=="notesPlain") | .value' > "$TOKEN_FILE"
+    chmod 600 "$TOKEN_FILE" 2>/dev/null || true
+    OURA_TOKEN="$(tr -d '\r\n' < "$TOKEN_FILE")"
+  else
+    cat <<EOF
+Error: Oura token not found.
+
+Choose one:
+  1. Run ./setup-oura-token.sh to save a token locally, or
+  2. Set OURA_TOKEN in your shell and rerun, or
+  3. Sign in to 1Password CLI (op signin) and run ./track.sh --refresh-token
+EOF
+    exit 1
+  fi
+else
+  OURA_TOKEN="$(tr -d '\r\n' < "$TOKEN_FILE")"
+fi
+
+OURA_TOKEN="$(printf '%s' "$OURA_TOKEN" | tr -d '\r\n')"
+
+if [ -z "$OURA_TOKEN" ]; then
+  echo "Error: Oura token is empty."
+  echo "Run ./setup-oura-token.sh to configure it."
+  exit 1
+fi
+
+# Validate token before running the heavier data pipeline.
+AUTH_TMP="$(mktemp)"
+AUTH_HTTP=$(curl -sS -o "$AUTH_TMP" -w "%{http_code}" \
+  -H "Authorization: Bearer $OURA_TOKEN" \
+  "https://api.ouraring.com/v2/usercollection/personal_info")
+
+if [ "$AUTH_HTTP" != "200" ]; then
+  AUTH_MESSAGE="$(jq -r '.message // empty' "$AUTH_TMP" 2>/dev/null || true)"
+  rm -f "$AUTH_TMP"
+  echo "Error: Oura authentication failed (HTTP $AUTH_HTTP)."
+  if [ -n "$AUTH_MESSAGE" ]; then
+    echo "Oura API message: $AUTH_MESSAGE"
+  fi
+  echo "Set a fresh token with ./setup-oura-token.sh and try again."
+  exit 1
+fi
+
+rm -f "$AUTH_TMP"
+
 # Default: fetch entire fast period (from fast start to tomorrow for in-progress data)
 FAST_START=$(jq -r '.fast.start' "$DATA_FILE" | cut -d'T' -f1)
-START_DATE=${1:-$FAST_START}
-END_DATE=${2:-$(date -v+1d +%Y-%m-%d)}
+START_DATE=${positionals[0]:-$FAST_START}
+END_DATE=${positionals[1]:-$(date -v+1d +%Y-%m-%d)}
 
 echo "=== Fetching Oura Data: $START_DATE to $END_DATE ==="
 echo
