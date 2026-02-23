@@ -72,18 +72,31 @@ This will auto-open the browser and pick an available port. Don't specify port o
 
 ```
 fasting-tracker/
-├── index.html          # Dashboard (single-page app)
-├── data.json           # All tracking data (current cycle)
-├── track.sh            # Oura sync script
-├── .oura_token         # Oura API token (gitignored)
-├── CLAUDE.md           # This file
-├── archive/            # Previous cycle data
-│   └── cycle-1-jan-2026/  # Complete Cycle 1 with its own index.html
-└── *.png               # Infographics
-    ├── keto-mental-journey-infographic.png
-    ├── metabolic-changes-infographic.png
-    ├── fast-refeed-infographic.png
-    └── refeed-meal-plan-infographic.png
+├── index.html              # Dashboard (single-page app)
+├── refeed.html             # Refeed plan dashboard
+├── fasting-info.html       # Fasting information & infographics
+├── unplanned-meals.html    # Unplanned meal tracker
+├── data.json               # All tracking data (current cycle)
+├── refeed-plan.json        # Refeed protocol
+├── track.sh                # Oura sync script
+├── CLAUDE.md               # This file
+├── *.png                   # Static infographics (used by fasting-info.html)
+├── archive/                # Previous cycle data
+│   └── cycle-1-jan-2026/   # Complete Cycle 1 with its own index.html
+├── baseline/               # Health baseline data (bloodwork, body scans)
+├── meal-plans/             # Meal planning, recipes, prep guides
+│   ├── meal-prep.html      # Meal prep dashboard
+│   ├── menu.html           # Weekly menu
+│   ├── shopping-checklist.html
+│   ├── recipes.json        # Week 1 recipes
+│   ├── recipes-week2-fish.json
+│   ├── portions.json       # Portion guide data
+│   ├── meal-plan-*.html/pdf/md  # Printable calendars (his/hers)
+│   └── sourdough-*.png     # Sourdough guides
+├── workouts/               # Exercise programs
+│   ├── workout-bodyweight.html/pdf
+│   └── workout-kettlebell.html/pdf
+└── reports/                # Research reports
 ```
 
 ## data.json Structure
@@ -275,7 +288,7 @@ This will open the browser automatically. If already running, just refresh the p
 
 ### "Order groceries" or "Add to Instacart"
 
-Automate Instacart shopping using the chrome-driver plugin. Shopping list is in `recipes.json`.
+Automate Instacart shopping using the chrome-driver plugin. Shopping list is in `meal-plans/recipes.json`.
 
 **Setup:**
 ```bash
@@ -324,7 +337,7 @@ The cart dialog shows:
 
 #### Step 2: Compare Cart with Shopping List
 
-Read `recipes.json` to get the shopping list, then compare with cart contents.
+Read `meal-plans/recipes.json` to get the shopping list, then compare with cart contents.
 Create a table showing: Item | Needed | In Cart | Action
 
 #### Step 3: Add/Adjust Items
@@ -402,24 +415,24 @@ match ? 'Cart: ' + match[1] + ' items' : 'Could not find count';
 
 Generate one-page landscape PDF calendars with weekly meal plans and prep instructions.
 
-**Files:**
+**Files (all in `meal-plans/`):**
 - `meal-plan-her-calendar.html` / `.pdf` - Her plan (4 meals/day: breakfast, 2nd breakfast, meal 1, meal 2)
 - `meal-plan-him-calendar.html` / `.pdf` - His plan (3 meals/day: meal 1, meal 2, snack)
 - `meal-plan-her.md` / `meal-plan-him.md` - Markdown versions for email
 
 **To regenerate PDFs:**
 ```bash
-/Users/wschenk/.claude/plugins/cache/focus-marketplace/chrome-driver/0.1.0/bin/pdf "file:///Users/wschenk/The-Focus-AI/fasting-tracker/meal-plan-her-calendar.html" "/Users/wschenk/The-Focus-AI/fasting-tracker/meal-plan-her-calendar.pdf" --landscape
+/Users/wschenk/.claude/plugins/cache/focus-marketplace/chrome-driver/0.1.0/bin/pdf "file:///Users/wschenk/The-Focus-AI/fasting-tracker/meal-plans/meal-plan-her-calendar.html" "/Users/wschenk/The-Focus-AI/fasting-tracker/meal-plans/meal-plan-her-calendar.pdf" --landscape
 
-/Users/wschenk/.claude/plugins/cache/focus-marketplace/chrome-driver/0.1.0/bin/pdf "file:///Users/wschenk/The-Focus-AI/fasting-tracker/meal-plan-him-calendar.html" "/Users/wschenk/The-Focus-AI/fasting-tracker/meal-plan-him-calendar.pdf" --landscape
+/Users/wschenk/.claude/plugins/cache/focus-marketplace/chrome-driver/0.1.0/bin/pdf "file:///Users/wschenk/The-Focus-AI/fasting-tracker/meal-plans/meal-plan-him-calendar.html" "/Users/wschenk/The-Focus-AI/fasting-tracker/meal-plans/meal-plan-him-calendar.pdf" --landscape
 ```
 
 **To email meal plans:**
 ```bash
 # Send markdown versions as styled emails
-npx tsx /Users/wschenk/.claude/plugins/cache/focus-marketplace/google-skill/0.8.0/scripts/gmail.ts send-md --to="email@example.com" --file="meal-plan-him.md" --style=client
+npx tsx /Users/wschenk/.claude/plugins/cache/focus-marketplace/google-skill/0.8.0/scripts/gmail.ts send-md --to="email@example.com" --file="meal-plans/meal-plan-him.md" --style=client
 
-npx tsx /Users/wschenk/.claude/plugins/cache/focus-marketplace/google-skill/0.8.0/scripts/gmail.ts send-md --to="email@example.com" --file="meal-plan-her.md" --style=client
+npx tsx /Users/wschenk/.claude/plugins/cache/focus-marketplace/google-skill/0.8.0/scripts/gmail.ts send-md --to="email@example.com" --file="meal-plans/meal-plan-her.md" --style=client
 ```
 
 **2x Portion System:**

@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Prep</title>
+    <style>
+        :root {
+            --bg: #0d1117;
+            --surface: #161b22;
+            --surface-2: #21262d;
+            --border: #30363d;
+            --text: #e6edf3;
+            --text-dim: #8b949e;
+            --green: #3fb950;
+            --red: #f85149;
+            --yellow: #d29922;
+            --blue: #58a6ff;
+            --purple: #a371f7;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 24px;
+            min-height: 100vh;
+        }
+
+        .dashboard {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-left h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .header-left p {
+            color: var(--text-dim);
+            font-size: 14px;
+        }
+
+        nav { display: flex; gap: 8px; margin-bottom: 24px; }
+        nav a {
+            padding: 8px 16px;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        nav a:hover { background: var(--surface); color: var(--text); }
+        nav a.active { background: var(--blue); color: var(--bg); border-color: var(--blue); }
+
+        .week-selector { display: flex; gap: 8px; }
+        .week-btn {
+            padding: 8px 16px;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-dim);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .week-btn:hover { background: var(--surface); color: var(--text); }
+        .week-btn.active { background: var(--green); color: var(--bg); border-color: var(--green); }
+
+        .tabs { display: flex; gap: 0; margin-bottom: 24px; border-bottom: 1px solid var(--border); }
+        .tab {
+            padding: 12px 24px;
+            background: transparent;
+            border: none;
+            color: var(--text-dim);
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+            transition: all 0.2s;
+        }
+        .tab:hover { color: var(--text); }
+        .tab.active { color: var(--blue); border-bottom-color: var(--blue); }
+
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .card h2 { font-size: 18px; margin-bottom: 16px; color: var(--blue); }
+        .card h3 { font-size: 15px; margin: 16px 0 12px 0; color: var(--text); }
+
+        /* Shopping List */
+        .shopping-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .shopping-category h3 {
+            font-size: 14px;
+            color: var(--yellow);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+        .shopping-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .shopping-item input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--green); }
+        .shopping-item.checked label { text-decoration: line-through; color: var(--text-dim); }
+
+        /* Cooking Timeline */
+        .timeline { position: relative; padding-left: 24px; }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
+        .timeline-item { position: relative; margin-bottom: 24px; }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -24px;
+            top: 4px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--surface);
+            border: 2px solid var(--blue);
+        }
+        .timeline-time { font-size: 12px; color: var(--blue); font-weight: 600; text-transform: uppercase; margin-bottom: 4px; }
+        .timeline-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+        .timeline-tasks { background: var(--surface-2); border-radius: 6px; padding: 12px 16px; }
+        .timeline-tasks ul { margin: 0; padding-left: 20px; }
+        .timeline-tasks li { margin-bottom: 6px; font-size: 14px; }
+        .timeline-tasks li:last-child { margin-bottom: 0; }
+
+        .results-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+        .results-grid h3 { margin-bottom: 8px; }
+        .results-grid ul { padding-left: 20px; font-size: 14px; }
+
+        /* Gantt Timeline */
+        .gantt-container { overflow-x: auto; margin-bottom: 16px; }
+        .gantt-chart { min-width: 700px; }
+        .gantt-header {
+            display: flex;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 8px;
+            margin-bottom: 8px;
+        }
+        .gantt-label-col { width: 110px; flex-shrink: 0; font-size: 11px; color: var(--text-dim); text-transform: uppercase; }
+        .gantt-timeline-col { flex: 1; display: flex; }
+        .gantt-hour {
+            flex: 1;
+            text-align: center;
+            font-size: 10px;
+            color: var(--text-dim);
+            border-left: 1px solid var(--border);
+            padding: 4px 0;
+        }
+        .gantt-hour:first-child { border-left: none; }
+        .gantt-row { display: flex; align-items: center; height: 32px; margin-bottom: 2px; }
+        .gantt-row-label { width: 110px; flex-shrink: 0; font-size: 12px; font-weight: 500; padding-right: 8px; }
+        .gantt-row-bars { flex: 1; position: relative; height: 24px; }
+        .gantt-bar {
+            position: absolute;
+            height: 20px;
+            border-radius: 3px;
+            font-size: 9px;
+            color: var(--bg);
+            display: flex;
+            align-items: center;
+            padding: 0 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            cursor: default;
+            font-weight: 500;
+        }
+        .gantt-bar.oven1 { background: var(--red); }
+        .gantt-bar.oven2 { background: #f97316; }
+        .gantt-bar.stovetop { background: var(--yellow); }
+        .gantt-bar.slow_cooker { background: var(--purple); }
+        .gantt-bar.air_fryer { background: var(--blue); }
+        .gantt-bar.prep { background: var(--green); }
+        .gantt-bar.assembly { background: #14b8a6; }
+        .gantt-legend { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
+        .gantt-legend-item { display: flex; align-items: center; gap: 4px; font-size: 11px; }
+        .gantt-legend-color { width: 12px; height: 12px; border-radius: 2px; }
+
+        /* Portioning */
+        .portion-section { margin-bottom: 24px; }
+        .portion-section h3 { font-size: 14px; color: var(--yellow); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px; }
+        .portion-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; }
+        .portion-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .portion-card-header {
+            background: var(--surface-2);
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            font-weight: 600;
+            font-size: 15px;
+        }
+        .portion-card-body { padding: 16px; }
+        .portion-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+        .portion-row:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+        .portion-person {
+            flex: 1;
+            background: var(--surface-2);
+            border-radius: 6px;
+            padding: 10px 12px;
+        }
+        .portion-person-name {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+        .portion-person-name.him { color: var(--blue); }
+        .portion-person-name.her { color: var(--purple); }
+        .portion-macros { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+        .portion-detail { font-size: 12px; color: var(--text-dim); line-height: 1.5; }
+        .target-card {
+            background: var(--surface-2);
+            padding: 16px;
+            border-radius: 8px;
+            flex: 1;
+            text-align: center;
+        }
+        .target-card .name { font-size: 13px; text-transform: uppercase; font-weight: 600; margin-bottom: 8px; }
+        .target-card .name.him { color: var(--blue); }
+        .target-card .name.her { color: var(--purple); }
+        .target-card .values { font-size: 14px; }
+
+        @media (max-width: 600px) {
+            .shopping-grid { grid-template-columns: 1fr; }
+            .tabs { overflow-x: auto; }
+            .tab { padding: 12px 16px; white-space: nowrap; }
+            .portion-grid { grid-template-columns: 1fr; }
+            .portion-row { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <header class="header">
+            <div class="header-left">
+                <h1>Meal Prep</h1>
+                <p id="week-subtitle">Sunday batch cooking and shopping list</p>
+            </div>
+            <div class="week-selector">
+                <button class="week-btn active" data-week="recipes.json" onclick="switchWeek(this)">Week 1: Meat</button>
+                <button class="week-btn" data-week="recipes-week2-fish.json" onclick="switchWeek(this)">Week 2: Seafood</button>
+            </div>
+        </header>
+
+        <nav>
+        <a href="../index.html">Fasting Tracker</a>
+        <a href="../fasting-info.html">Fasting Information</a>
+        <a href="../refeed.html">Refeed Plan</a>
+        <a href="meal-prep.html" class="active">Meal Prep</a>
+        <a href="menu.html">Menu</a>
+        <a href="../unplanned-meals.html">Unplanned Meals</a>
+    </nav>
+
+    <div class="tabs">
+        <button class="tab active" onclick="showTab('cooking')">Cooking Guide</button>
+        <button class="tab" onclick="showTab('shopping')">Shopping List</button>
+        <button class="tab" onclick="showTab('portioning')">Portioning</button>
+    </div>
+
+    <!-- SUNDAY COOKING TAB -->
+    <div id="tab-cooking" class="tab-content active">
+        <div class="card">
+            <h2>Sunday Batch Prep</h2>
+            <div id="cooking-overview" style="margin-bottom: 24px;">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Equipment Timeline</h2>
+            <p style="color: var(--text-dim); margin-bottom: 12px; font-size: 13px;">What's running when - hover for details</p>
+            <div id="gantt-chart" class="gantt-container">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Step-by-Step Instructions</h2>
+            <div id="cooking-timeline" class="timeline">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Quick Timeline Summary</h2>
+            <ul id="cooking-notes" style="padding-left: 20px; font-size: 14px; line-height: 1.8;">
+                <!-- Populated by JS -->
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>What You'll Have Ready</h2>
+            <div id="cooking-results" class="results-grid">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- SHOPPING LIST TAB -->
+    <div id="tab-shopping" class="tab-content">
+        <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h2 style="margin: 0;">Weekly Shopping List</h2>
+                <button onclick="resetShopping()" style="background: var(--surface-2); border: 1px solid var(--border); color: var(--text-dim); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 12px;">Reset All</button>
+            </div>
+            <div id="shopping-grid" class="shopping-grid">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- PORTIONING TAB -->
+    <div id="tab-portioning" class="tab-content">
+        <div class="card">
+            <h2>2x Portion System</h2>
+            <p style="color: var(--text-dim); margin-bottom: 16px;"><strong>Rule: Him grabs 2 containers, She grabs 1.</strong> She supplements with eggs and protein yogurt.</p>
+            <div id="portioning-targets" style="display: flex; gap: 16px; margin-bottom: 24px;">
+                <!-- Populated by JS -->
+            </div>
+
+        </div>
+
+        <div id="portioning-dynamic">
+            <!-- Populated by JS from weekly_menu data -->
+        </div>
+
+        <div id="portioning-content">
+            <!-- Populated by JS -->
+        </div>
+    </div>
+
+    <script>
+        let data = null;
+        let currentWeek = 'recipes.json';
+
+        // Load data from JSON
+        async function loadData(jsonFile = 'recipes.json') {
+            try {
+                currentWeek = jsonFile;
+                const response = await fetch(jsonFile);
+                data = await response.json();
+
+                // Update subtitle if week info available
+                const subtitle = document.getElementById('week-subtitle');
+                if (data.week) {
+                    subtitle.textContent = data.week + ' - Sunday batch cooking';
+                } else {
+                    subtitle.textContent = 'Week 1: Meat Focus - Sunday batch cooking';
+                }
+
+                renderShopping();
+                renderCooking();
+                renderPortioning();
+                loadShoppingState();
+            } catch (error) {
+                console.error('Error loading ' + jsonFile + ':', error);
+            }
+        }
+
+        // Switch between weeks
+        function switchWeek(btn) {
+            document.querySelectorAll('.week-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            loadData(btn.dataset.week);
+        }
+
+        // Tab switching
+        function showTab(tabName) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById('tab-' + tabName).classList.add('active');
+        }
+
+        // ============================================
+        // SHOPPING LIST
+        // ============================================
+        function renderShopping() {
+            const grid = document.getElementById('shopping-grid');
+            const categories = {
+                proteins: 'Proteins',
+                vegetables: 'Vegetables',
+                fresh: 'Fresh / Snacking',
+                dairy: 'Dairy & Fats',
+                pantry: 'Pantry Items',
+                fresh_additions: 'Fresh (buy day-of)'
+            };
+
+            grid.innerHTML = Object.entries(categories)
+                .filter(([key]) => data.shopping[key] && data.shopping[key].length > 0)
+                .map(([key, label]) => `
+                <div class="shopping-category">
+                    <h3>${label}</h3>
+                    ${data.shopping[key].map((item, i) => `
+                        <div class="shopping-item" data-key="${currentWeek}-${key}-${i}" onclick="toggleItem(this)">
+                            <input type="checkbox"><label>${item}</label>
+                        </div>
+                    `).join('')}
+                </div>
+            `).join('');
+        }
+
+        function toggleItem(el) {
+            const checkbox = el.querySelector('input');
+            checkbox.checked = !checkbox.checked;
+            el.classList.toggle('checked', checkbox.checked);
+            saveShoppingState();
+        }
+
+        function saveShoppingState() {
+            const state = {};
+            document.querySelectorAll('.shopping-item').forEach(item => {
+                state[item.dataset.key] = item.classList.contains('checked');
+            });
+            localStorage.setItem('shoppingList', JSON.stringify(state));
+        }
+
+        function loadShoppingState() {
+            const state = JSON.parse(localStorage.getItem('shoppingList') || '{}');
+            document.querySelectorAll('.shopping-item').forEach(item => {
+                if (state[item.dataset.key]) {
+                    item.classList.add('checked');
+                    item.querySelector('input').checked = true;
+                }
+            });
+        }
+
+        function resetShopping() {
+            document.querySelectorAll('.shopping-item').forEach(item => {
+                item.classList.remove('checked');
+                item.querySelector('input').checked = false;
+            });
+            localStorage.removeItem('shoppingList');
+        }
+
+        // ============================================
+        // COOKING TIMELINE
+        // ============================================
+        function renderCooking() {
+            // Overview
+            const overview = document.getElementById('cooking-overview');
+            const o = data.cooking.overview;
+            const equipList = Object.entries(o.equipment).map(([k, v]) => `<strong>${k}:</strong> ${v}`).join('<br>');
+            overview.innerHTML = `
+                <div style="display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 16px;">
+                    <div style="background: var(--surface-2); padding: 12px 16px; border-radius: 8px; flex: 1; min-width: 200px;">
+                        <div style="color: var(--text-dim); font-size: 12px; text-transform: uppercase;">Total Time</div>
+                        <div style="font-size: 16px; font-weight: 600;">${o.total_time}</div>
+                    </div>
+                    <div style="background: var(--surface-2); padding: 12px 16px; border-radius: 8px; flex: 1; min-width: 200px;">
+                        <div style="color: var(--text-dim); font-size: 12px; text-transform: uppercase;">Concept</div>
+                        <div style="font-size: 16px; font-weight: 600;">${o.concept}</div>
+                    </div>
+                </div>
+                <div style="background: var(--surface-2); padding: 12px 16px; border-radius: 8px; font-size: 13px; line-height: 1.8;">
+                    <div style="color: var(--text-dim); font-size: 12px; text-transform: uppercase; margin-bottom: 8px;">Equipment Assignment</div>
+                    ${equipList}
+                </div>
+            `;
+
+            // Timeline (using steps array now)
+            const timeline = document.getElementById('cooking-timeline');
+            timeline.innerHTML = data.cooking.steps.map(step => `
+                <div class="timeline-item">
+                    <div class="timeline-time">${step.time} - Step ${step.step}</div>
+                    <div class="timeline-title">
+                        ${step.title}
+                        <span style="font-weight: normal; font-size: 12px; color: var(--green); margin-left: 8px;">${step.duration}</span>
+                    </div>
+                    <div class="timeline-tasks">
+                        <ul>
+                            ${step.do.map(task => `<li>${task}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div style="font-size: 12px; color: var(--text-dim); margin-top: 8px; font-style: italic;">
+                        &rarr; ${step.status_after}
+                    </div>
+                </div>
+            `).join('');
+
+            // Timeline summary (replaces timing notes)
+            const notes = document.getElementById('cooking-notes');
+            notes.innerHTML = data.cooking.timeline_summary.map(note => `<li>${note}</li>`).join('');
+
+            // Results
+            const results = document.getElementById('cooking-results');
+            const resultLabels = {
+                grab_and_go: { label: 'Grab & Go Meals', color: 'var(--green)' },
+                fresh_containers: { label: 'Fresh Add-On Containers', color: 'var(--yellow)' },
+                no_cook_proteins: { label: 'No-Cook Proteins', color: 'var(--purple)' },
+                fresh_cook: { label: 'Cook Fresh (Mid-Week)', color: 'var(--purple)' },
+                extras: { label: 'Extras', color: 'var(--blue)' }
+            };
+
+            results.innerHTML = Object.entries(resultLabels)
+                .filter(([key]) => data.cooking.results[key] && data.cooking.results[key].length > 0)
+                .map(([key, config]) => `
+                <div>
+                    <h3 style="color: ${config.color};">${config.label}</h3>
+                    <ul>
+                        ${data.cooking.results[key].map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                </div>
+            `).join('');
+
+            // Render Gantt chart
+            renderGanttChart();
+        }
+
+        // ============================================
+        // GANTT CHART
+        // ============================================
+        function renderGanttChart() {
+            const container = document.getElementById('gantt-chart');
+
+            // Fish week has shorter prep (12-2pm), meat week is longer (12-5pm)
+            const isFishWeek = currentWeek.includes('fish');
+            const startHour = 12;
+            const endHour = isFishWeek ? 14 : 17;  // 2pm for fish (2 hrs), 5pm for meat (4.75 hrs)
+            const totalMinutes = (endHour - startHour) * 60;
+
+            function timeToMinutes(t) {
+                const [h, m] = t.split(':').map(Number);
+                return (h - startHour) * 60 + m;
+            }
+            function getLeft(t) { return (timeToMinutes(t) / totalMinutes) * 100; }
+            function getWidth(d) { return (d / totalMinutes) * 100; }
+
+            // Different task layouts for each week
+            const tasks = isFishWeek ? {
+                'Oven #1 (400°F)': [
+                    { start: '12:15', duration: 18, label: 'Salmon+Cod', type: 'oven1' },
+                    { start: '12:33', duration: 22, label: 'Broc/Brus', type: 'oven1' }
+                ],
+                'Oven #2 (400°F)': [
+                    { start: '12:33', duration: 22, label: 'Zuc/Pep', type: 'oven2' }
+                ],
+                'Stovetop': [
+                    { start: '12:00', duration: 27, label: 'Eggs', type: 'stovetop' },
+                    { start: '12:45', duration: 10, label: 'Shrimp', type: 'stovetop' },
+                    { start: '12:45', duration: 15, label: 'Mash', type: 'stovetop' }
+                ],
+                'Slow Cooker 1': [
+                    { start: '12:45', duration: 25, label: 'Fish Stew', type: 'slow_cooker' }
+                ],
+                'Slow Cooker 2': [
+                    { start: '12:15', duration: 65, label: 'Cauli Rice', type: 'slow_cooker' }
+                ],
+                'Air Fryer': [
+                    { start: '12:15', duration: 12, label: 'Bacon', type: 'air_fryer' }
+                ],
+                'Prep/Assembly': [
+                    { start: '12:00', duration: 15, label: 'Prep fish', type: 'prep' },
+                    { start: '12:27', duration: 6, label: 'Cut veg', type: 'prep' },
+                    { start: '13:05', duration: 15, label: 'Fresh prep', type: 'prep' },
+                    { start: '13:20', duration: 40, label: 'Pack + Clean', type: 'assembly' }
+                ]
+            } : {
+                'Oven #1 (300°F)': [
+                    { start: '12:00', duration: 180, label: 'Pork Braise', type: 'oven1' }
+                ],
+                'Oven #2 (400°F)': [
+                    { start: '12:15', duration: 45, label: 'Chicken', type: 'oven2' },
+                    { start: '13:00', duration: 30, label: 'Broccoli/Brussels', type: 'oven2' },
+                    { start: '13:30', duration: 25, label: 'Zucchini/Peppers', type: 'oven2' }
+                ],
+                'Stovetop': [
+                    { start: '12:15', duration: 10, label: 'Boil Eggs', type: 'stovetop' },
+                    { start: '13:15', duration: 15, label: 'Cauliflower', type: 'stovetop' },
+                    { start: '13:30', duration: 10, label: 'Mash', type: 'stovetop' }
+                ],
+                'Slow Cooker': [
+                    { start: '12:00', duration: 180, label: 'Beef Stew', type: 'slow_cooker' }
+                ],
+                'Air Fryer': [
+                    { start: '12:25', duration: 12, label: 'Bacon', type: 'air_fryer' }
+                ],
+                'Prep (cutting)': [
+                    { start: '12:00', duration: 15, label: 'Season meats', type: 'prep' },
+                    { start: '12:35', duration: 5, label: 'Stew veg', type: 'prep' },
+                    { start: '12:40', duration: 20, label: 'Cut veggies', type: 'prep' },
+                    { start: '13:55', duration: 25, label: 'Fresh prep', type: 'prep' }
+                ],
+                'Assembly': [
+                    { start: '15:00', duration: 30, label: 'Shred', type: 'assembly' },
+                    { start: '15:30', duration: 30, label: 'Pack meals', type: 'assembly' },
+                    { start: '16:00', duration: 20, label: 'Containers', type: 'assembly' },
+                    { start: '16:20', duration: 25, label: 'Clean up', type: 'assembly' }
+                ]
+            };
+
+            const hours = [];
+            for (let h = startHour; h <= endHour; h++) {
+                hours.push(`${h > 12 ? h - 12 : h}${h >= 12 ? 'PM' : 'AM'}`);
+            }
+
+            let html = `<div class="gantt-chart">
+                <div class="gantt-header">
+                    <div class="gantt-label-col"></div>
+                    <div class="gantt-timeline-col">${hours.map(h => `<div class="gantt-hour">${h}</div>`).join('')}</div>
+                </div>`;
+
+            for (const [equip, items] of Object.entries(tasks)) {
+                html += `<div class="gantt-row">
+                    <div class="gantt-row-label">${equip}</div>
+                    <div class="gantt-row-bars">`;
+                for (const t of items) {
+                    html += `<div class="gantt-bar ${t.type}" style="left:${getLeft(t.start)}%;width:${getWidth(t.duration)}%;" title="${t.label} (${t.duration} min)">${t.label}</div>`;
+                }
+                html += `</div></div>`;
+            }
+
+            html += `<div class="gantt-legend">
+                <div class="gantt-legend-item"><div class="gantt-legend-color" style="background:var(--red)"></div>Oven 1</div>
+                <div class="gantt-legend-item"><div class="gantt-legend-color" style="background:#f97316"></div>Oven 2</div>
+                <div class="gantt-legend-item"><div class="gantt-legend-color" style="background:var(--yellow)"></div>Stovetop</div>
+                <div class="gantt-legend-item"><div class="gantt-legend-color" style="background:var(--purple)"></div>Slow Cooker</div>
+                <div class="gantt-legend-item"><div class="gantt-legend-color" style="background:var(--blue)"></div>Air Fryer</div>
+                <div class="gantt-legend-item"><div class="gantt-legend-color" style="background:var(--green)"></div>Prep</div>
+                <div class="gantt-legend-item"><div class="gantt-legend-color" style="background:#14b8a6"></div>Assembly</div>
+            </div></div>`;
+
+            container.innerHTML = html;
+        }
+
+        // ============================================
+        // PORTIONING
+        // ============================================
+        function renderPortioning() {
+            const targets = document.getElementById('portioning-targets');
+            const dynamic = document.getElementById('portioning-dynamic');
+            const content = document.getElementById('portioning-content');
+
+            // Render daily targets
+            if (data.daily_targets) {
+                const p1 = data.daily_targets.person1;
+                const p2 = data.daily_targets.person2;
+                targets.innerHTML = `
+                    <div class="target-card">
+                        <div class="name him">${p1.name}</div>
+                        <div class="values">${p1.calories} cal / ${p1.protein}g protein</div>
+                    </div>
+                    <div class="target-card">
+                        <div class="name her">${p2.name}</div>
+                        <div class="values">${p2.calories} cal / ${p2.protein}g protein</div>
+                    </div>
+                `;
+            } else {
+                targets.innerHTML = '<p style="color: var(--text-dim);">No daily targets defined</p>';
+            }
+
+            // Build dynamic middle section (weekly menu, daily breakdown, portions, supplements)
+            let dhtml = '';
+            const menu = data.weekly_menu;
+
+            if (menu && menu.days) {
+                // --- Weekly Meal Counts ---
+                dhtml += `<div class="card">
+                <h3 style="margin-bottom: 16px; color: var(--text);">Weekly Meal Counts</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+                    <div style="background: var(--surface-2); padding: 16px; border-radius: 8px; border-left: 3px solid var(--blue);">
+                        <div style="font-size: 13px; text-transform: uppercase; font-weight: 600; color: var(--blue); margin-bottom: 12px;">Him - ${menu.days.length * 2} Meals/Week</div>
+                        <table style="width: 100%; font-size: 14px;">
+                            <tr><td style="padding: 4px 0;">Meal 1</td><td style="text-align: right; color: var(--green); font-weight: 600;">${menu.days.length} meals</td></tr>
+                            <tr><td style="padding: 4px 0;">Meal 2</td><td style="text-align: right; color: var(--green); font-weight: 600;">${menu.days.length} meals</td></tr>
+                            <tr style="border-top: 1px solid var(--border);"><td style="padding: 8px 0 4px 0;">Snacks</td><td style="text-align: right; color: var(--text-dim);">${menu.days.length} days</td></tr>
+                        </table>
+                        <div style="margin-top: 12px; font-size: 12px; color: var(--text-dim);">Each meal = 2 containers (2x portions)</div>
+                    </div>
+                    <div style="background: var(--surface-2); padding: 16px; border-radius: 8px; border-left: 3px solid var(--purple);">
+                        <div style="font-size: 13px; text-transform: uppercase; font-weight: 600; color: var(--purple); margin-bottom: 12px;">Her - ${menu.days.length * 2} Meals/Week + Supplements</div>
+                        <table style="width: 100%; font-size: 14px;">
+                            <tr><td style="padding: 4px 0;">Meal 1</td><td style="text-align: right; color: var(--green); font-weight: 600;">${menu.days.length} meals</td></tr>
+                            <tr><td style="padding: 4px 0;">Meal 2</td><td style="text-align: right; color: var(--green); font-weight: 600;">${menu.days.length} meals</td></tr>`;
+                if (menu.overview && menu.overview.her_daily_supplements) {
+                    const suppsCount = menu.overview.her_daily_supplements;
+                    if (suppsCount.breakfast) dhtml += `<tr style="border-top: 1px solid var(--border);"><td style="padding: 8px 0 4px 0;">Breakfast (eggs)</td><td style="text-align: right; color: var(--text-dim);">6 days</td></tr>`;
+                    if (suppsCount.second_breakfast) dhtml += `<tr><td style="padding: 4px 0;">Protein yogurt</td><td style="text-align: right; color: var(--text-dim);">${menu.days.length} days</td></tr>`;
+                }
+                dhtml += `</table>
+                        <div style="margin-top: 12px; font-size: 12px; color: var(--text-dim);">Each meal = 1 container (1x portions)</div>
+                    </div>
+                </div>
+                </div>`;
+
+                // --- Grab & Go Container Summary ---
+                const grabAndGo = data.recipes?.grab_and_go || [];
+                if (grabAndGo.length > 0) {
+                    dhtml += `<div class="card"><h2>Sunday Prep: What to Make</h2>
+                    <p style="color: var(--text-dim); margin-bottom: 20px;">Complete meal containers + extra protein portions</p>`;
+                    for (const recipe of grabAndGo) {
+                        const servings = recipe.weekly_servings;
+                        const himCount = servings ? servings.him : '?';
+                        const herCount = servings ? servings.her : '?';
+                        dhtml += `<div style="background: var(--surface-2); padding: 16px; border-radius: 8px; margin-bottom: 16px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                <h3 style="color: var(--blue); margin: 0;">${recipe.name}</h3>
+                                ${recipe.container ? `<span style="font-size: 13px; color: var(--text-dim);">${recipe.container}</span>` : ''}
+                            </div>
+                            <table style="width: 100%; font-size: 14px; border-collapse: collapse;">
+                                <tr style="border-bottom: 1px solid var(--border);">
+                                    <th style="text-align: left; padding: 8px 0;">Portion</th>
+                                    <th style="text-align: center; padding: 8px; color: var(--blue);">Him (${himCount}×)</th>
+                                    <th style="text-align: center; padding: 8px; color: var(--purple);">Her (${herCount}×)</th>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px 0;">${recipe.him?.portion || ''}</td>
+                                    <td style="text-align: center; color: var(--blue); font-weight: bold;">${recipe.him?.protein || '?'}g protein<br><span style="font-size: 11px; font-weight: normal;">${recipe.him?.cal || '?'} cal</span></td>
+                                    <td style="text-align: center; color: var(--purple); font-weight: bold;">${recipe.her?.protein || '?'}g protein<br><span style="font-size: 11px; font-weight: normal;">${recipe.her?.cal || '?'} cal</span></td>
+                                </tr>
+                            </table>
+                            ${servings && servings.note ? `<div style="font-size: 12px; color: var(--text-dim); margin-top: 8px;">${servings.note}</div>` : ''}
+                        </div>`;
+                    }
+                    dhtml += `</div>`;
+                }
+
+                // --- Standard Portions Reference ---
+                if (data.standard_portions) {
+                    const sp = data.standard_portions;
+                    dhtml += `<div class="card"><h2>Standard Portions Reference</h2>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">`;
+
+                    if (sp.proteins) {
+                        dhtml += `<div><h3 style="color: var(--blue); margin-bottom: 12px;">Proteins (cooked weight)</h3>
+                        <table style="width: 100%; font-size: 14px; border-collapse: collapse;">
+                            <tr style="border-bottom: 1px solid var(--border);">
+                                <th style="text-align: left; padding: 8px 0;">Protein</th>
+                                <th style="text-align: center; padding: 8px; color: var(--purple);">Her (1x)</th>
+                                <th style="text-align: center; padding: 8px; color: var(--blue);">Him (2x)</th>
+                                <th style="text-align: center; padding: 8px; color: var(--green);">Protein</th>
+                            </tr>`;
+                        for (const [key, p] of Object.entries(sp.proteins)) {
+                            const name = key.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+                            const herP = Math.round(p.base * (p.protein_per_100g || 25) / 100);
+                            const himP = Math.round(p.double * (p.protein_per_100g || 25) / 100);
+                            dhtml += `<tr style="border-bottom: 1px solid var(--border);">
+                                <td style="padding: 8px 0;">${name}</td>
+                                <td style="text-align: center;">${p.base}${p.unit}</td>
+                                <td style="text-align: center;">${p.double}${p.unit}</td>
+                                <td style="text-align: center; color: var(--text-dim);">${herP}g / ${himP}g</td>
+                            </tr>`;
+                        }
+                        dhtml += `</table></div>`;
+                    }
+
+                    if (sp.vegetables) {
+                        dhtml += `<div><h3 style="color: var(--green); margin-bottom: 12px;">Vegetables</h3>
+                        <table style="width: 100%; font-size: 14px; border-collapse: collapse;">
+                            <tr style="border-bottom: 1px solid var(--border);">
+                                <th style="text-align: left; padding: 8px 0;">Veggie</th>
+                                <th style="text-align: center; padding: 8px; color: var(--purple);">Her (1x)</th>
+                                <th style="text-align: center; padding: 8px; color: var(--blue);">Him (2x)</th>
+                            </tr>`;
+                        for (const [key, v] of Object.entries(sp.vegetables)) {
+                            const name = key.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+                            dhtml += `<tr style="border-bottom: 1px solid var(--border);">
+                                <td style="padding: 8px 0;">${name}</td>
+                                <td style="text-align: center;">${v.base}${v.unit}</td>
+                                <td style="text-align: center;">${v.double}${v.unit}</td>
+                            </tr>`;
+                        }
+                        dhtml += `</table></div>`;
+                    }
+                    dhtml += `</div></div>`;
+                }
+
+                // --- Her Daily Breakdown ---
+                const overview = menu.overview || {};
+                const herTarget = overview.her || {};
+                dhtml += `<div class="card">
+                <h2 style="color: var(--purple);">Her Daily Breakdown</h2>
+                <p style="color: var(--text-dim); margin-bottom: 20px;">Target: ~${herTarget.target_calories || '1,400'} cal, ~${herTarget.target_protein || 120}g protein (${herTarget.from_meals || '~60g'} from meals + ${herTarget.from_supplements || '~60g'} supplements)</p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px;">`;
+
+                const supps = overview.her_daily_supplements || {};
+                const allRecipes = [...(data.recipes?.grab_and_go || []), ...(data.recipes?.add_fresh || []), ...(data.recipes?.cook_fresh || [])];
+                for (const day of menu.days) {
+                    const m1recipe = allRecipes.find(r => r.name === day.meal1?.name);
+                    const m2recipe = allRecipes.find(r => r.name === day.meal2?.name);
+                    const m1protein = m1recipe?.her?.protein || '?';
+                    const m2protein = m2recipe?.her?.protein || '?';
+
+                    const herNote = day.her_note || '';
+                    const skipBreakfastEggs = herNote.toLowerCase().includes('skip') && herNote.toLowerCase().includes('egg');
+
+                    let rows = '';
+
+                    // Breakfast eggs
+                    if (skipBreakfastEggs) {
+                        rows += `<tr><td style="padding: 4px 0; color: var(--text-dim);">9am</td><td style="color: var(--text-dim);">—</td><td style="text-align: right; color: var(--text-dim);">—</td></tr>`;
+                    } else {
+                        rows += `<tr><td style="padding: 4px 0; color: var(--text-dim);">9am</td><td>3 eggs + veggies</td><td style="text-align: right;">21g</td></tr>`;
+                    }
+
+                    // Yogurt
+                    rows += `<tr><td style="padding: 4px 0; color: var(--text-dim);">11am</td><td>Protein yogurt + berries</td><td style="text-align: right;">15g</td></tr>`;
+
+                    // Meal 1
+                    const m1type = day.meal1?.type === 'cook_fresh' ? ' <span style="color: var(--purple); font-size: 11px;">COOK</span>' : '';
+                    rows += `<tr><td style="padding: 4px 0; color: var(--text-dim);">Meal 1</td><td><strong>${day.meal1?.name || '—'}</strong>${m1type}</td><td style="text-align: right;">${m1protein}g</td></tr>`;
+
+                    // Meal 2
+                    const m2type = day.meal2?.type === 'cook_fresh' ? ' <span style="color: var(--purple); font-size: 11px;">COOK</span>' : '';
+                    rows += `<tr><td style="padding: 4px 0; color: var(--text-dim);">Meal 2</td><td><strong>${day.meal2?.name || '—'}</strong>${m2type}</td><td style="text-align: right;">${m2protein}g</td></tr>`;
+
+                    // Use JSON totals
+                    const displayProtein = day.her?.protein || '?';
+
+                    dhtml += `<div style="background: var(--surface-2); padding: 16px; border-radius: 8px;">
+                        <h3 style="margin: 0 0 12px 0; padding-bottom: 8px; border-bottom: 1px solid var(--border);">${day.day}</h3>
+                        <table style="width: 100%; font-size: 13px;">
+                            ${rows}
+                            <tr style="border-top: 1px solid var(--border);"><td colspan="2" style="padding-top: 8px;"><strong>Total</strong></td><td style="text-align: right; padding-top: 8px;"><strong style="color: var(--green);">${displayProtein}g</strong></td></tr>
+                        </table>
+                        ${herNote ? `<div style="font-size: 11px; color: var(--yellow); margin-top: 8px;">${herNote}</div>` : ''}
+                    </div>`;
+                }
+
+                // Weekly summary
+                const avgProtein = Math.round(menu.days.reduce((sum, d) => sum + (d.her?.protein || 0), 0) / menu.days.length);
+                const avgCal = Math.round(menu.days.reduce((sum, d) => sum + (d.her?.cal || 0), 0) / menu.days.length);
+
+                dhtml += `</div>
+                <div style="background: var(--surface-2); padding: 16px; border-radius: 8px; margin-top: 20px;">
+                    <h3 style="margin: 0 0 12px 0; color: var(--purple);">Her Weekly Summary</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; text-align: center;">
+                        <div>
+                            <div style="font-size: 24px; font-weight: 700; color: var(--green);">~${avgProtein}g</div>
+                            <div style="font-size: 12px; color: var(--text-dim);">Avg daily protein</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 24px; font-weight: 700; color: var(--green);">~${avgCal.toLocaleString()}</div>
+                            <div style="font-size: 12px; color: var(--text-dim);">Avg daily calories</div>
+                        </div>
+                    </div>
+                </div>
+                </div>`;
+
+                // --- Her Supplements ---
+                if (supps.breakfast || supps.second_breakfast || supps.afternoon_snack) {
+                    dhtml += `<div class="card">
+                    <h2 style="color: var(--purple);">Her Daily Supplements (${supps.total || '~60g protein'})</h2>
+                    <p style="color: var(--text-dim); margin-bottom: 16px;">She needs extra protein beyond meals.</p>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">`;
+                    if (supps.breakfast) dhtml += `<div style="background: var(--surface-2); padding: 16px; border-radius: 8px;">
+                        <div style="font-size: 12px; color: var(--text-dim); text-transform: uppercase;">Breakfast</div>
+                        <div style="font-size: 16px; font-weight: 600; margin: 4px 0;">${supps.breakfast}</div>
+                    </div>`;
+                    if (supps.second_breakfast) dhtml += `<div style="background: var(--surface-2); padding: 16px; border-radius: 8px;">
+                        <div style="font-size: 12px; color: var(--text-dim); text-transform: uppercase;">2nd Breakfast</div>
+                        <div style="font-size: 16px; font-weight: 600; margin: 4px 0;">${supps.second_breakfast}</div>
+                    </div>`;
+                    if (supps.afternoon_snack) dhtml += `<div style="background: var(--surface-2); padding: 16px; border-radius: 8px;">
+                        <div style="font-size: 12px; color: var(--text-dim); text-transform: uppercase;">Afternoon Snack</div>
+                        <div style="font-size: 16px; font-weight: 600; margin: 4px 0;">${supps.afternoon_snack}</div>
+                    </div>`;
+                    dhtml += `</div></div>`;
+                }
+            }
+
+            dynamic.innerHTML = dhtml;
+
+            // Render recipe portions (Grab & Go, Add Fresh, Cook Fresh, Snacks detail cards)
+            const categories = [
+                { key: 'grab_and_go', label: 'Grab & Go Meals' },
+                { key: 'add_fresh', label: 'Add Fresh Meals' },
+                { key: 'cook_fresh', label: 'Cook Fresh Meals' },
+                { key: 'snacks', label: 'Snacks' }
+            ];
+
+            let html = '';
+            for (const cat of categories) {
+                const recipes = data.recipes[cat.key];
+                if (!recipes || recipes.length === 0) continue;
+
+                html += `<div class="card portion-section">
+                    <h3>${cat.label}</h3>
+                    <div class="portion-grid">`;
+
+                for (const recipe of recipes) {
+                    const him = recipe.him;
+                    const her = recipe.her;
+
+                    if (!him && !her) continue;
+
+                    const servings = recipe.weekly_servings;
+                    html += `<div class="portion-card">
+                        <div class="portion-card-header" style="display: flex; justify-content: space-between; align-items: center;">
+                            <span>${recipe.name}</span>
+                            ${servings ? `<span style="font-size: 12px; color: var(--green); font-weight: normal;">Him: ${servings.him}× · Her: ${servings.her}×</span>` : ''}
+                        </div>
+                        <div class="portion-card-body">
+                            ${servings && servings.note ? `<div style="font-size: 12px; color: var(--text-dim); margin-bottom: 12px;">${servings.note}</div>` : ''}
+                            <div class="portion-row">`;
+
+                    if (him) {
+                        html += `<div class="portion-person">
+                            <div class="portion-person-name him">Him</div>
+                            <div class="portion-macros">${him.cal} cal • ${him.protein}g protein</div>
+                            <div class="portion-detail">${him.portion}</div>
+                        </div>`;
+                    }
+
+                    if (her) {
+                        html += `<div class="portion-person">
+                            <div class="portion-person-name her">Her</div>
+                            <div class="portion-macros">${her.cal} cal • ${her.protein}g protein</div>
+                            <div class="portion-detail">${her.portion}</div>
+                        </div>`;
+                    }
+
+                    html += `</div></div></div>`;
+                }
+
+                html += `</div></div>`;
+            }
+
+            content.innerHTML = html || '<div class="card"><p style="color: var(--text-dim);">No portion data available</p></div>';
+        }
+
+        // Init
+        loadData();
+    </script>
+    </div>
+</body>
+</html>
