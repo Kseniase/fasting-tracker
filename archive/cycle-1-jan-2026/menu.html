@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <style>
+        :root {
+            --bg: #0d1117;
+            --surface: #161b22;
+            --surface-2: #21262d;
+            --border: #30363d;
+            --text: #e6edf3;
+            --text-dim: #8b949e;
+            --green: #3fb950;
+            --red: #f85149;
+            --yellow: #d29922;
+            --blue: #58a6ff;
+            --purple: #a371f7;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 24px;
+            min-height: 100vh;
+        }
+
+        .dashboard {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-left h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .header-left p {
+            color: var(--text-dim);
+            font-size: 14px;
+        }
+
+        nav { display: flex; gap: 8px; margin-bottom: 24px; }
+        nav a {
+            padding: 8px 16px;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        nav a:hover { background: var(--surface); color: var(--text); }
+        nav a.active { background: var(--blue); color: var(--bg); border-color: var(--blue); }
+
+        .tabs { display: flex; gap: 0; margin-bottom: 24px; border-bottom: 1px solid var(--border); }
+        .tab {
+            padding: 12px 24px;
+            background: transparent;
+            border: none;
+            color: var(--text-dim);
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+            transition: all 0.2s;
+        }
+        .tab:hover { color: var(--text); }
+        .tab.active { color: var(--blue); border-bottom-color: var(--blue); }
+
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .card h2 { font-size: 18px; margin-bottom: 16px; color: var(--blue); }
+        .card h3 { font-size: 15px; margin: 16px 0 12px 0; color: var(--text); }
+
+        /* Menu Grid */
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+        .menu-day {
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+        }
+        .menu-day h3 {
+            font-size: 16px;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+        .menu-meal {
+            margin-bottom: 12px;
+            padding: 10px;
+            background: var(--surface);
+            border-radius: 6px;
+        }
+        .menu-meal-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-bottom: 4px;
+        }
+        .menu-meal-name { font-size: 14px; font-weight: 500; cursor: pointer; }
+        .menu-meal-name:hover { color: var(--blue); }
+        .menu-meal-type {
+            display: inline-block;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 6px;
+        }
+        .menu-meal-type.grab_and_go { background: var(--green); color: var(--bg); }
+        .menu-meal-type.add_fresh { background: var(--yellow); color: var(--bg); }
+        .menu-meal-type.cook_fresh { background: var(--purple); color: var(--bg); }
+        .menu-totals {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .menu-note {
+            font-size: 12px;
+            color: var(--yellow);
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        /* Recipe Grid */
+        .recipe-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+        .recipe-card {
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .recipe-card:hover { border-color: var(--blue); }
+        .recipe-card h4 { font-size: 16px; margin-bottom: 8px; }
+        .recipe-macros { display: flex; flex-direction: column; gap: 4px; font-size: 12px; margin-bottom: 12px; }
+        .recipe-macros .protein { color: var(--blue); }
+        .recipe-macros .carbs { color: var(--yellow); }
+        .recipe-macros .fat { color: var(--purple); }
+        .recipe-macros .cal { color: var(--green); }
+        .recipe-components { font-size: 13px; color: var(--text-dim); }
+
+        .recipe-tabs { display: flex; gap: 8px; margin-bottom: 20px; }
+        .recipe-tab {
+            padding: 8px 16px;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-dim);
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+        .recipe-tab:hover { background: var(--surface); color: var(--text); }
+        .recipe-tab.active { background: var(--green); color: var(--bg); border-color: var(--green); }
+
+        .prep-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            background: var(--surface-2);
+            border-radius: 12px;
+            font-size: 11px;
+            color: var(--green);
+            margin-right: 6px;
+            margin-bottom: 6px;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            width: 100%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        .modal-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+        .modal-header h3 { font-size: 20px; margin: 0; }
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--text-dim);
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0;
+            line-height: 1;
+        }
+        .modal-close:hover { color: var(--text); }
+        .modal h4 { font-size: 14px; color: var(--blue); margin: 16px 0 8px 0; }
+        .modal ul { padding-left: 20px; margin: 0; }
+        .modal li { margin-bottom: 6px; font-size: 14px; }
+        .modal-instructions { white-space: pre-line; font-size: 14px; line-height: 1.8; }
+
+        .week-btn {
+            padding: 10px 20px;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-dim);
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .week-btn:hover { background: var(--surface); color: var(--text); }
+        .week-btn.active { background: var(--blue); color: var(--bg); border-color: var(--blue); }
+
+        @media (max-width: 600px) {
+            .menu-grid, .recipe-grid { grid-template-columns: 1fr; }
+            .tabs { overflow-x: auto; }
+            .tab { padding: 12px 16px; white-space: nowrap; }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <header class="header">
+            <div class="header-left">
+                <h1>Menu</h1>
+                <p>2x Portion System: Him (150g protein, 1900 cal) | Her (120g protein, 1400 cal + supplements)</p>
+            </div>
+        </header>
+
+        <nav>
+        <a href="index.html">Fasting Tracker</a>
+        <a href="fasting-info.html">Fasting Information</a>
+        <a href="refeed.html">Refeed Plan</a>
+        <a href="meal-prep.html">Meal Prep</a>
+        <a href="menu.html" class="active">Menu</a>
+        <a href="unplanned-meals.html">Unplanned Meals</a>
+    </nav>
+
+    <div class="tabs">
+        <button class="tab active" onclick="showTab('menu')">Weekly Menu</button>
+        <button class="tab" onclick="showTab('recipes')">Recipes</button>
+    </div>
+
+    <!-- Week Selector -->
+    <div id="week-selector" style="display: flex; gap: 8px; margin-bottom: 20px;"></div>
+
+    <!-- WEEKLY MENU TAB -->
+    <div id="tab-menu" class="tab-content active">
+        <div class="card">
+            <h2>Weekly Menu Plan</h2>
+            <p style="color: var(--text-dim); margin-bottom: 12px;"><strong>Him:</strong> 2x portions (~150g protein). <strong>Her:</strong> 1x portions + daily supplements (~120g protein). Click any meal to see the recipe.</p>
+            <div style="display: flex; gap: 16px; margin-bottom: 16px; flex-wrap: wrap;">
+                <div style="display: flex; align-items: center; gap: 6px; font-size: 12px;">
+                    <span class="menu-meal-type grab_and_go" style="margin: 0;">Reheat</span>
+                    <span style="color: var(--text-dim);">Ready from Sunday prep</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 6px; font-size: 12px;">
+                    <span class="menu-meal-type add_fresh" style="margin: 0;">+ Fresh</span>
+                    <span style="color: var(--text-dim);">Add fresh ingredients</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 6px; font-size: 12px;">
+                    <span class="menu-meal-type cook_fresh" style="margin: 0;">Cook</span>
+                    <span style="color: var(--text-dim);">Cook fresh (15-20 min)</span>
+                </div>
+            </div>
+            <div id="menu-grid" class="menu-grid">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- RECIPES TAB -->
+    <div id="tab-recipes" class="tab-content">
+        <div class="card">
+            <h2>Recipes</h2>
+            <p style="color: var(--text-dim); margin-bottom: 16px;">All recipes use your Sunday prep components. Assembly takes 5-10 minutes.</p>
+
+            <div class="recipe-tabs">
+                <button class="recipe-tab active" onclick="showRecipeCategory('grab_and_go')">Grab & Go</button>
+                <button class="recipe-tab" onclick="showRecipeCategory('add_fresh')">+ Fresh</button>
+                <button class="recipe-tab" onclick="showRecipeCategory('cook_fresh')">Cook Fresh</button>
+                <button class="recipe-tab" onclick="showRecipeCategory('snacks')">Snacks</button>
+            </div>
+
+            <div id="recipe-grid" class="recipe-grid">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Recipe Modal -->
+    <div class="modal-overlay" id="recipeModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modal-title"></h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div id="modal-macros" class="recipe-macros" style="margin-bottom: 16px;"></div>
+            <div id="modal-content"></div>
+        </div>
+    </div>
+
+    <script>
+        let data = null;
+        let currentCategory = 'grab_and_go';
+        let allWeeks = {};
+        let currentWeek = 'week1';
+
+        // Load data from both JSON files
+        async function loadData() {
+            try {
+                const [week1Response, week2Response] = await Promise.all([
+                    fetch('recipes.json'),
+                    fetch('recipes-week2-fish.json')
+                ]);
+                allWeeks.week1 = await week1Response.json();
+                allWeeks.week2 = await week2Response.json();
+                data = allWeeks[currentWeek];
+                renderWeekSelector();
+                renderMenu();
+                renderRecipes();
+            } catch (error) {
+                console.error('Error loading recipe data:', error);
+            }
+        }
+
+        function renderWeekSelector() {
+            const container = document.getElementById('week-selector');
+            container.innerHTML = `
+                <button class="week-btn ${currentWeek === 'week1' ? 'active' : ''}" onclick="switchWeek('week1')">
+                    ${allWeeks.week1.week}
+                </button>
+                <button class="week-btn ${currentWeek === 'week2' ? 'active' : ''}" onclick="switchWeek('week2')">
+                    ${allWeeks.week2.week}
+                </button>
+            `;
+        }
+
+        function switchWeek(week) {
+            currentWeek = week;
+            data = allWeeks[week];
+            renderWeekSelector();
+            renderMenu();
+            renderRecipes();
+        }
+
+        // Tab switching
+        function showTab(tabName) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById('tab-' + tabName).classList.add('active');
+        }
+
+        // ============================================
+        // WEEKLY MENU
+        // ============================================
+        function renderMenu() {
+            const grid = document.getElementById('menu-grid');
+            const typeLabels = {
+                'grab_and_go': 'Reheat',
+                'add_fresh': '+ Fresh',
+                'cook_fresh': 'Cook'
+            };
+
+            // Helper to find recipe macros by name and type
+            function getRecipeMacros(name, type) {
+                const recipes = data.recipes[type];
+                if (!recipes) return null;
+                return recipes.find(r => r.name === name);
+            }
+
+            grid.innerHTML = data.weekly_menu.days.map(day => {
+                const meal1Recipe = getRecipeMacros(day.meal1.name, day.meal1.type);
+                const meal2Recipe = getRecipeMacros(day.meal2.name, day.meal2.type);
+                const snackRecipe = day.him_snacks ? getRecipeMacros(day.him_snacks[0], 'snacks') : null;
+
+                return `
+                <div class="menu-day">
+                    <h3>${day.day}</h3>
+                    ${day.morning_prep ? `<div style="font-size: 11px; color: var(--yellow); margin-bottom: 8px;">${day.morning_prep}</div>` : ''}
+                    <div class="menu-meal">
+                        <div class="menu-meal-label">Meal 1</div>
+                        <div class="menu-meal-name" onclick="openRecipeByName('${day.meal1.name}', '${day.meal1.type}')">
+                            ${day.meal1.name}
+                            <span class="menu-meal-type ${day.meal1.type}">${typeLabels[day.meal1.type]}</span>
+                        </div>
+                        ${meal1Recipe ? `<div style="font-size: 12px; color: var(--text-dim);">Him: ${meal1Recipe.him.cal} cal / ${meal1Recipe.him.protein}g P</div>` : ''}
+                    </div>
+                    <div class="menu-meal">
+                        <div class="menu-meal-label">Meal 2</div>
+                        <div class="menu-meal-name" onclick="openRecipeByName('${day.meal2.name}', '${day.meal2.type}')">
+                            ${day.meal2.name}
+                            <span class="menu-meal-type ${day.meal2.type}">${typeLabels[day.meal2.type]}</span>
+                        </div>
+                        ${meal2Recipe ? `<div style="font-size: 12px; color: var(--text-dim);">Him: ${meal2Recipe.him.cal} cal / ${meal2Recipe.him.protein}g P</div>` : ''}
+                    </div>
+                    <div class="menu-meal" style="background: transparent; padding: 0;">
+                        <div class="menu-meal-label">Him Snacks</div>
+                        <div style="font-size: 14px;">${(day.him_snacks || []).map(s => {
+                            const snackName = s.replace(/\s*\([^)]*\)$/, '');
+                            return '<span class="menu-meal-name" onclick="openRecipeByName(\'' + snackName + '\', \'snacks\')">' + s + '</span>';
+                        }).join(', ')}</div>
+                    </div>
+                    ${day.her_supplements ? `
+                    <div class="menu-meal" style="background: transparent; padding: 0;">
+                        <div class="menu-meal-label">Her Supplements</div>
+                        <div style="font-size: 13px; color: var(--text-dim);">${day.her_supplements.join(' · ')}</div>
+                    </div>
+                    ` : ''}
+                    <div class="menu-totals">
+                        <div>
+                            <div style="font-size: 11px; color: var(--text-dim);">Him</div>
+                            <span style="color: var(--green);">${day.him.cal} cal</span> ·
+                            <span style="color: var(--blue);">${day.him.protein}g P</span>
+                        </div>
+                        <div>
+                            <div style="font-size: 11px; color: var(--text-dim);">Her</div>
+                            <span style="color: var(--green);">${day.her.cal} cal</span> ·
+                            <span style="color: var(--blue);">${day.her.protein}g P</span>
+                        </div>
+                    </div>
+                    ${day.note ? `<div class="menu-note">${day.note}</div>` : ''}
+                </div>
+            `}).join('');
+        }
+
+        // ============================================
+        // RECIPES
+        // ============================================
+        function showRecipeCategory(category) {
+            currentCategory = category;
+            document.querySelectorAll('.recipe-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            renderRecipes();
+        }
+
+        function renderRecipes() {
+            const grid = document.getElementById('recipe-grid');
+            const recipes = data.recipes[currentCategory];
+
+            grid.innerHTML = recipes.map((r, i) => {
+                // Different display based on category
+                let details = '';
+                if (currentCategory === 'grab_and_go') {
+                    details = `<div class="recipe-components"><span class="prep-badge" style="background: var(--green); color: var(--bg);">Just reheat</span></div>
+                               <div style="font-size: 13px; color: var(--text-dim); margin-top: 8px;">${r.container}</div>`;
+                } else if (currentCategory === 'add_fresh') {
+                    details = `<div class="recipe-components"><span class="prep-badge" style="background: var(--yellow); color: var(--bg);">Grab + Add</span></div>
+                               <div style="font-size: 13px; color: var(--text-dim); margin-top: 8px;"><strong>Grab:</strong> ${r.grab}</div>
+                               ${r.add_fresh && r.add_fresh.length > 0 ? `<div style="font-size: 13px; color: var(--text-dim);"><strong>Add:</strong> ${r.add_fresh.join(', ')}</div>` : ''}`;
+                } else if (currentCategory === 'cook_fresh') {
+                    details = `<div class="recipe-components"><span class="prep-badge" style="background: var(--purple); color: var(--bg);">${r.cook_time}</span></div>
+                               <div style="font-size: 13px; color: var(--text-dim); margin-top: 8px;">${r.ingredients.slice(0, 3).join(', ')}...</div>`;
+                } else {
+                    // snacks
+                    details = `<div style="font-size: 13px; color: var(--text-dim); margin-top: 8px;">${r.ingredients.slice(0, 2).join(', ')}</div>`;
+                }
+
+                return `
+                <div class="recipe-card" onclick="showRecipe('${currentCategory}', ${i})">
+                    <h4>${r.name}</h4>
+                    <div class="recipe-macros">
+                        <div style="margin-bottom: 4px;">
+                            <span style="color: var(--text-dim); font-size: 10px;">Him:</span>
+                            <span class="protein">${r.him.protein}g P</span> ·
+                            <span class="cal">${r.him.cal} cal</span>
+                        </div>
+                        <div>
+                            <span style="color: var(--text-dim); font-size: 10px;">Her:</span>
+                            <span class="protein">${r.her.protein}g P</span> ·
+                            <span class="cal">${r.her.cal} cal</span>
+                        </div>
+                    </div>
+                    ${details}
+                </div>
+            `}).join('');
+        }
+
+        function showRecipe(category, index) {
+            const recipe = data.recipes[category][index];
+
+            document.getElementById('modal-title').textContent = recipe.name;
+            document.getElementById('modal-macros').innerHTML = `
+                <div style="display: flex; gap: 24px;">
+                    <div>
+                        <div style="font-size: 11px; color: var(--text-dim); margin-bottom: 4px;">Him (${recipe.him.portion})</div>
+                        <span class="protein">${recipe.him.protein}g P</span> ·
+                        <span class="cal">${recipe.him.cal} cal</span>
+                    </div>
+                    <div>
+                        <div style="font-size: 11px; color: var(--text-dim); margin-bottom: 4px;">Her (${recipe.her.portion})</div>
+                        <span class="protein">${recipe.her.protein}g P</span> ·
+                        <span class="cal">${recipe.her.cal} cal</span>
+                    </div>
+                </div>
+            `;
+
+            let content = '';
+
+            if (category === 'grab_and_go') {
+                content = `
+                    <h4>Container Contents</h4>
+                    <p style="font-size: 15px; margin-bottom: 16px;">${recipe.container}</p>
+                    <h4>To Serve</h4>
+                    <p class="modal-instructions">${recipe.instructions}</p>
+                `;
+            } else if (category === 'add_fresh') {
+                content = `
+                    <h4>Grab from Fridge</h4>
+                    <p style="font-size: 15px; margin-bottom: 16px;">${recipe.grab}</p>
+                    ${recipe.add_fresh && recipe.add_fresh.length > 0 ? `
+                        <h4>Add Fresh</h4>
+                        <ul>${recipe.add_fresh.map(i => `<li>${i}</li>`).join('')}</ul>
+                    ` : ''}
+                    <h4>Assembly</h4>
+                    <p class="modal-instructions">${recipe.instructions}</p>
+                `;
+            } else if (category === 'cook_fresh') {
+                content = `
+                    <div style="margin-bottom: 16px;"><span class="prep-badge" style="background: var(--purple); color: var(--bg);">Cook time: ${recipe.cook_time}</span></div>
+                    <h4>Ingredients</h4>
+                    <ul>${recipe.ingredients.map(i => `<li>${i}</li>`).join('')}</ul>
+                    <h4>Instructions</h4>
+                    <p class="modal-instructions">${recipe.instructions}</p>
+                `;
+            } else {
+                // snacks
+                content = `
+                    ${recipe.makes ? `<p style="font-size: 13px; color: var(--text-dim); margin-bottom: 12px;">${recipe.makes}</p>` : ''}
+                    <h4>Ingredients</h4>
+                    <ul>${recipe.ingredients.map(i => `<li>${i}</li>`).join('')}</ul>
+                    <h4>Instructions</h4>
+                    <p class="modal-instructions">${recipe.instructions}</p>
+                `;
+            }
+
+            document.getElementById('modal-content').innerHTML = content;
+            document.getElementById('recipeModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('recipeModal').classList.remove('active');
+        }
+
+        // Open recipe by name (for clicking from weekly menu)
+        function openRecipeByName(name, type) {
+            const recipes = data.recipes[type];
+            if (!recipes) return;
+            const index = recipes.findIndex(r => r.name === name);
+            if (index >= 0) {
+                showRecipe(type, index);
+            }
+        }
+
+        // Close modal on escape or background click
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        document.getElementById('recipeModal').addEventListener('click', e => {
+            if (e.target.id === 'recipeModal') closeModal();
+        });
+
+        // Init
+        loadData();
+    </script>
+    </div>
+</body>
+</html>

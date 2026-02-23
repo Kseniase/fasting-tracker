@@ -1,20 +1,19 @@
 {
   "refeed_plan": {
-    "start_date": "2026-03-05",
+    "start_date": "2026-01-12",
     "context": {
       "fast_duration_days": 11,
-      "final_weight_kg": null,
-      "final_weight_lbs": null,
-      "lean_mass_lost_lbs": null,
-      "visceral_fat_lost_lbs": null,
+      "final_weight_kg": 88.9,
+      "final_weight_lbs": 196,
+      "lean_mass_lost_lbs": 4.4,
+      "visceral_fat_lost_lbs": 1.38,
       "primary_goals": [
         "Prevent refeeding syndrome",
         "Restore gut function",
         "Rebuild lean mass (lost 4.4 lbs)",
         "Continue visceral fat reduction",
         "Maximize insulin sensitivity benefits"
-      ],
-      "note": "Context values will be populated when Cycle 2 fast ends"
+      ]
     },
     "supplements_daily": {
       "thiamine": "200mg - take 30 min before first meal",
@@ -26,9 +25,9 @@
     "days": [
       {
         "day": 1,
-        "date": "2026-03-05",
+        "date": "2026-01-12",
         "phase": "Initial Refeeding",
-        "start_time": "8:00 AM",
+        "start_time": "6:00 PM",
         "target_calories": "200-300",
         "target_protein_g": 20,
         "target_carbs_g": "<5",
@@ -41,55 +40,36 @@
         ],
         "meals": [
           {
-            "time": "7:30 AM",
+            "time": "5:30 PM",
             "meal": "Pre-meal",
-            "items": [
-              "Thiamine 200mg supplement"
-            ],
+            "items": ["Thiamine 200mg supplement"],
             "calories": 0,
             "protein_g": 0,
             "notes": "Take 30 min before first food."
           },
           {
-            "time": "8:00 AM",
+            "time": "6:00 PM",
             "meal": "First Break",
-            "items": [
-              "1 cup bone broth (warm, sipped slowly)"
-            ],
+            "items": ["1 cup bone broth (warm, sipped slowly)"],
             "calories": 40,
             "protein_g": 6,
             "notes": "This is your first calories in 11 days - go very slow. Sip over 20-30 minutes."
           },
           {
-            "time": "10:30 AM",
-            "meal": "Mid-Morning",
-            "items": [
-              "2 soft-boiled eggs (6-7 min)",
-              "1/2 cup bone broth"
-            ],
+            "time": "8:00 PM",
+            "meal": "Evening",
+            "items": ["2 soft-boiled eggs (6-7 min)", "1/2 cup bone broth"],
             "calories": 160,
             "protein_g": 14,
             "notes": "First solid food. Chew thoroughly. The yolk should be slightly runny."
           },
           {
-            "time": "1:00 PM",
-            "meal": "Afternoon",
-            "items": [
-              "1 cup bone broth"
-            ],
-            "calories": 40,
-            "protein_g": 6,
-            "notes": "Continue sipping broth through the day."
-          },
-          {
             "time": "Before bed",
             "meal": "Night",
-            "items": [
-              "Magnesium 400mg"
-            ],
-            "calories": 0,
-            "protein_g": 0,
-            "notes": "Take magnesium for sleep."
+            "items": ["1 cup bone broth (optional)", "Magnesium 400mg"],
+            "calories": 40,
+            "protein_g": 6,
+            "notes": "Only if hungry. Take magnesium for sleep."
           }
         ],
         "day_total": {
@@ -107,7 +87,7 @@
       },
       {
         "day": 2,
-        "date": "2026-03-06",
+        "date": "2026-01-13",
         "phase": "Gentle Expansion",
         "target_calories": "700-800",
         "target_protein_g": 50,
@@ -122,10 +102,7 @@
           {
             "time": "8:00 AM",
             "meal": "Breakfast",
-            "items": [
-              "2 soft scrambled eggs (cooked in butter)",
-              "1/2 cup bone broth"
-            ],
+            "items": ["2 soft scrambled eggs (cooked in butter)", "1/2 cup bone broth"],
             "calories": 180,
             "protein_g": 14,
             "notes": "Scramble eggs very gently over low heat. Should be soft and custardy."
@@ -133,10 +110,7 @@
           {
             "time": "11:00 AM",
             "meal": "Mid-Morning",
-            "items": [
-              "1 cup bone broth",
-              "1/4 avocado"
-            ],
+            "items": ["1 cup bone broth", "1/4 avocado"],
             "calories": 100,
             "protein_g": 7,
             "notes": "Continue broth for gut healing."
@@ -144,11 +118,7 @@
           {
             "time": "1:30 PM",
             "meal": "Lunch",
-            "items": [
-              "3 oz steamed salmon",
-              "1 cup bone broth",
-              "1 tbsp butter on salmon"
-            ],
+            "items": ["3 oz steamed salmon", "1 cup bone broth", "1 tbsp butter on salmon"],
             "calories": 250,
             "protein_g": 22,
             "notes": "First fish. Steam or poach - don't fry. Omega-3s support recovery."
@@ -156,10 +126,7 @@
           {
             "time": "4:30 PM",
             "meal": "Afternoon",
-            "items": [
-              "1 cup bone broth",
-              "2 oz sliced cucumber (peeled, no skin)"
-            ],
+            "items": ["1 cup bone broth", "2 oz sliced cucumber (peeled, no skin)"],
             "calories": 50,
             "protein_g": 6,
             "notes": "Cucumber is gentle. Peel to reduce fiber."
@@ -167,11 +134,7 @@
           {
             "time": "7:30 PM",
             "meal": "Dinner",
-            "items": [
-              "2 eggs (any style)",
-              "1 cup steamed spinach",
-              "1 tbsp butter"
-            ],
+            "items": ["2 eggs (any style)", "1 cup steamed spinach", "1 tbsp butter"],
             "calories": 230,
             "protein_g": 16,
             "notes": "Spinach is well-tolerated. Cook until very soft."
@@ -185,7 +148,7 @@
       },
       {
         "day": 3,
-        "date": "2026-03-07",
+        "date": "2026-01-14",
         "phase": "Protein Focus Begins (Modified)",
         "target_calories": "900-1100",
         "target_protein_g": 80,
@@ -197,15 +160,12 @@
           "Stick with eggs and chicken as main proteins",
           "Begin probiotic supplement"
         ],
+        "adjustment_note": "Modified after Day 2 GI distress from salmon. Pushing fatty fish to Day 4.",
         "meals": [
           {
             "time": "8:00 AM",
             "meal": "Breakfast",
-            "items": [
-              "2 soft boiled eggs",
-              "1/2 cup Greek yogurt (full fat)",
-              "1/2 cup bone broth"
-            ],
+            "items": ["2 soft boiled eggs", "1/2 cup Greek yogurt (full fat)", "1/2 cup bone broth"],
             "calories": 250,
             "protein_g": 22,
             "notes": "First dairy test - start with smaller yogurt portion. Greek yogurt has natural probiotics."
@@ -213,10 +173,7 @@
           {
             "time": "11:00 AM",
             "meal": "Snack",
-            "items": [
-              "1 cup bone broth",
-              "1 hard boiled egg"
-            ],
+            "items": ["1 cup bone broth", "1 hard boiled egg"],
             "calories": 110,
             "protein_g": 12,
             "notes": "Keep broth in rotation for gut support."
@@ -224,11 +181,7 @@
           {
             "time": "1:30 PM",
             "meal": "Lunch",
-            "items": [
-              "3 oz chicken breast (poached or baked)",
-              "1 cup steamed spinach",
-              "1 tbsp butter"
-            ],
+            "items": ["3 oz chicken breast (poached or baked)", "1 cup steamed spinach", "1 tbsp butter"],
             "calories": 220,
             "protein_g": 28,
             "notes": "First chicken. Cook until very tender. Spinach is gentle on gut."
@@ -236,10 +189,7 @@
           {
             "time": "4:30 PM",
             "meal": "Snack",
-            "items": [
-              "1/4 avocado",
-              "1 hard boiled egg"
-            ],
+            "items": ["1/4 avocado", "1 hard boiled egg"],
             "calories": 130,
             "protein_g": 8,
             "notes": "Skip cottage cheese for now - test one dairy at a time. Avocado is gentler fat."
@@ -247,11 +197,7 @@
           {
             "time": "7:30 PM",
             "meal": "Dinner",
-            "items": [
-              "3 eggs scrambled",
-              "1 cup steamed broccoli (very soft)",
-              "1 tbsp butter"
-            ],
+            "items": ["3 eggs scrambled", "1 cup steamed broccoli (very soft)", "1 tbsp butter"],
             "calories": 320,
             "protein_g": 22,
             "notes": "Eggs instead of salmon. If yogurt went well today, can try salmon tomorrow."
@@ -265,7 +211,7 @@
       },
       {
         "day": 4,
-        "date": "2026-03-08",
+        "date": "2026-01-15",
         "phase": "Protein Priority",
         "target_calories": "1200-1400",
         "target_protein_g": 110,
@@ -280,10 +226,7 @@
           {
             "time": "8:00 AM",
             "meal": "Breakfast",
-            "items": [
-              "3 egg omelet with spinach and cheese",
-              "1/2 cup Greek yogurt"
-            ],
+            "items": ["3 egg omelet with spinach and cheese", "1/2 cup Greek yogurt"],
             "calories": 380,
             "protein_g": 32,
             "notes": "More substantial breakfast. Add 1 oz cheese to omelet."
@@ -291,10 +234,7 @@
           {
             "time": "11:00 AM",
             "meal": "Snack",
-            "items": [
-              "1/2 cup cottage cheese",
-              "Small handful almonds (10-12)"
-            ],
+            "items": ["1/2 cup cottage cheese", "Small handful almonds (10-12)"],
             "calories": 180,
             "protein_g": 18,
             "notes": "First nuts. Chew very thoroughly."
@@ -302,11 +242,7 @@
           {
             "time": "1:30 PM",
             "meal": "Lunch",
-            "items": [
-              "5 oz chicken thigh",
-              "1 cup roasted zucchini",
-              "Mixed greens with olive oil"
-            ],
+            "items": ["5 oz chicken thigh", "1 cup roasted zucchini", "Mixed greens with olive oil"],
             "calories": 380,
             "protein_g": 35,
             "notes": "Chicken thighs are more flavorful than breast. Keep skin for fat."
@@ -314,11 +250,7 @@
           {
             "time": "4:30 PM",
             "meal": "Snack",
-            "items": [
-              "2 hard boiled eggs",
-              "1/4 avocado",
-              "Everything bagel seasoning"
-            ],
+            "items": ["2 hard boiled eggs", "1/4 avocado", "Everything bagel seasoning"],
             "calories": 220,
             "protein_g": 14,
             "notes": "Deviled egg variation - mash yolk with avocado."
@@ -326,12 +258,7 @@
           {
             "time": "7:30 PM",
             "meal": "Dinner",
-            "items": [
-              "5 oz white fish (cod, tilapia)",
-              "1 cup steamed broccoli",
-              "2 tbsp butter",
-              "Lemon"
-            ],
+            "items": ["5 oz white fish (cod, tilapia)", "1 cup steamed broccoli", "2 tbsp butter", "Lemon"],
             "calories": 320,
             "protein_g": 32,
             "notes": "White fish is very lean and easy to digest."
@@ -345,7 +272,7 @@
       },
       {
         "day": 5,
-        "date": "2026-03-09",
+        "date": "2026-01-16",
         "phase": "Protein Peak + First Starch",
         "target_calories": "1400-1500",
         "target_protein_g": 120,
@@ -360,11 +287,7 @@
           {
             "time": "8:00 AM",
             "meal": "Breakfast",
-            "items": [
-              "3 eggs scrambled",
-              "2 strips bacon",
-              "1/2 cup sauteed spinach"
-            ],
+            "items": ["3 eggs scrambled", "2 strips bacon", "1/2 cup sauteed spinach"],
             "calories": 380,
             "protein_g": 28,
             "notes": "First bacon. Cook until crispy but not burnt."
@@ -372,10 +295,7 @@
           {
             "time": "11:00 AM",
             "meal": "Snack",
-            "items": [
-              "Protein shake (25g whey protein)",
-              "1/2 cup berries"
-            ],
+            "items": ["Protein shake (25g whey protein)", "1/2 cup berries"],
             "calories": 180,
             "protein_g": 26,
             "notes": "Whey provides rapid leucine for muscle protein synthesis."
@@ -383,11 +303,7 @@
           {
             "time": "1:30 PM",
             "meal": "Lunch",
-            "items": [
-              "5 oz lean beef (sirloin or flank)",
-              "1 cup roasted brussels sprouts",
-              "2 tbsp olive oil"
-            ],
+            "items": ["5 oz lean beef (sirloin or flank)", "1 cup roasted brussels sprouts", "2 tbsp olive oil"],
             "calories": 420,
             "protein_g": 38,
             "notes": "First red meat! Rich in zinc, B12, iron, creatine. Cook medium to preserve nutrients."
@@ -395,10 +311,7 @@
           {
             "time": "4:30 PM",
             "meal": "Snack",
-            "items": [
-              "1/2 cup Greek yogurt",
-              "1/4 cup almonds"
-            ],
+            "items": ["1/2 cup Greek yogurt", "1/4 cup almonds"],
             "calories": 220,
             "protein_g": 18,
             "notes": "Protein + healthy fats."
@@ -406,12 +319,7 @@
           {
             "time": "7:30 PM",
             "meal": "Dinner",
-            "items": [
-              "5 oz salmon",
-              "1/2 cup sweet potato (mashed)",
-              "1 cup steamed green beans",
-              "Butter"
-            ],
+            "items": ["5 oz salmon", "1/2 cup sweet potato (mashed)", "1 cup steamed green beans", "Butter"],
             "calories": 450,
             "protein_g": 35,
             "notes": "FIRST STARCH. Sweet potato is low-glycemic. Watch for any blood sugar symptoms."
@@ -425,7 +333,7 @@
       },
       {
         "day": 6,
-        "date": "2026-03-10",
+        "date": "2026-01-17",
         "phase": "Carb Introduction",
         "target_calories": "1600-1800",
         "target_protein_g": 130,
@@ -440,12 +348,7 @@
           {
             "time": "8:00 AM",
             "meal": "Breakfast",
-            "items": [
-              "1/2 cup oatmeal (cooked)",
-              "3 eggs (any style)",
-              "2 tbsp butter",
-              "Cinnamon"
-            ],
+            "items": ["1/2 cup oatmeal (cooked)", "3 eggs (any style)", "2 tbsp butter", "Cinnamon"],
             "calories": 450,
             "protein_g": 24,
             "notes": "First grain! Oatmeal is gentle on gut. Add butter for fat to slow glucose absorption."
@@ -453,11 +356,7 @@
           {
             "time": "11:00 AM",
             "meal": "Snack",
-            "items": [
-              "Greek yogurt (1 cup)",
-              "1/2 cup berries",
-              "1 tbsp almond butter"
-            ],
+            "items": ["Greek yogurt (1 cup)", "1/2 cup berries", "1 tbsp almond butter"],
             "calories": 280,
             "protein_g": 22,
             "notes": "Substantial snack."
@@ -465,10 +364,7 @@
           {
             "time": "1:30 PM",
             "meal": "Lunch",
-            "items": [
-              "Beef Stew from recipes.json",
-              "Side salad with olive oil dressing"
-            ],
+            "items": ["Beef Stew from recipes.json", "Side salad with olive oil dressing"],
             "calories": 600,
             "protein_g": 48,
             "notes": "First grab-and-go meal! Stew is gentle on digestion."
@@ -476,11 +372,7 @@
           {
             "time": "4:30 PM",
             "meal": "Snack",
-            "items": [
-              "1/2 avocado",
-              "2 hard boiled eggs",
-              "Everything seasoning"
-            ],
+            "items": ["1/2 avocado", "2 hard boiled eggs", "Everything seasoning"],
             "calories": 280,
             "protein_g": 14,
             "notes": "Keep protein high."
@@ -488,11 +380,7 @@
           {
             "time": "7:30 PM",
             "meal": "Dinner",
-            "items": [
-              "6 oz steak",
-              "1 cup roasted broccoli",
-              "1/2 cup mashed sweet potato"
-            ],
+            "items": ["6 oz steak", "1 cup roasted broccoli", "1/2 cup mashed sweet potato"],
             "calories": 550,
             "protein_g": 45,
             "notes": "Hearty dinner. You've earned it!"
@@ -506,7 +394,7 @@
       },
       {
         "day": 7,
-        "date": "2026-03-11",
+        "date": "2026-01-18",
         "phase": "Transition to Normal",
         "target_calories": "1800-2000",
         "target_protein_g": 140,
@@ -521,12 +409,7 @@
           {
             "time": "8:00 AM",
             "meal": "Breakfast",
-            "items": [
-              "3 eggs",
-              "2 strips bacon",
-              "1 slice whole grain toast",
-              "1/2 avocado"
-            ],
+            "items": ["3 eggs", "2 strips bacon", "1 slice whole grain toast", "1/2 avocado"],
             "calories": 520,
             "protein_g": 28,
             "notes": "First bread! Choose whole grain, toasted."
@@ -534,10 +417,7 @@
           {
             "time": "12:00 PM",
             "meal": "Lunch",
-            "items": [
-              "Chicken Thigh Plate (from recipes.json)",
-              "Side of sauerkraut (2 tbsp)"
-            ],
+            "items": ["Chicken Thigh Plate (from recipes.json)", "Side of sauerkraut (2 tbsp)"],
             "calories": 850,
             "protein_g": 85,
             "notes": "Full grab-and-go meal. Sauerkraut adds probiotics."
@@ -545,9 +425,7 @@
           {
             "time": "3:30 PM",
             "meal": "Snack",
-            "items": [
-              "Greek Yogurt + Berries (from recipes.json snacks)"
-            ],
+            "items": ["Greek Yogurt + Berries (from recipes.json snacks)"],
             "calories": 210,
             "protein_g": 18,
             "notes": "Recipe snack."
@@ -555,10 +433,7 @@
           {
             "time": "7:00 PM",
             "meal": "Dinner",
-            "items": [
-              "Pan-Seared Salmon (from recipes.json)",
-              "1/2 cup quinoa"
-            ],
+            "items": ["Pan-Seared Salmon (from recipes.json)", "1/2 cup quinoa"],
             "calories": 650,
             "protein_g": 52,
             "notes": "First quinoa - complete plant protein."
@@ -572,7 +447,7 @@
       },
       {
         "day": 8,
-        "date": "2026-03-12",
+        "date": "2026-01-19",
         "phase": "Full Meal Plan",
         "target_calories": "1800-2000",
         "target_protein_g": 150,
@@ -587,9 +462,7 @@
           {
             "time": "8:00 AM",
             "meal": "Breakfast",
-            "items": [
-              "Pork Power Bowl (from recipes.json)"
-            ],
+            "items": ["Pork Power Bowl (from recipes.json)"],
             "calories": 700,
             "protein_g": 52,
             "notes": "Starting the weekly menu pattern."
@@ -597,10 +470,7 @@
           {
             "time": "12:30 PM",
             "meal": "Lunch",
-            "items": [
-              "Cobb Salad (from recipes.json)",
-              "Add extra chicken"
-            ],
+            "items": ["Cobb Salad (from recipes.json)", "Add extra chicken"],
             "calories": 750,
             "protein_g": 65,
             "notes": "Hearty salad with all the toppings."
@@ -608,10 +478,7 @@
           {
             "time": "4:00 PM",
             "meal": "Snack",
-            "items": [
-              "Deviled Eggs (from recipes.json)",
-              "Raw veggies"
-            ],
+            "items": ["Deviled Eggs (from recipes.json)", "Raw veggies"],
             "calories": 250,
             "protein_g": 20,
             "notes": "High protein snack."
@@ -619,9 +486,7 @@
           {
             "time": "7:30 PM",
             "meal": "Dinner",
-            "items": [
-              "Pulled Pork Plate (from recipes.json)"
-            ],
+            "items": ["Pulled Pork Plate (from recipes.json)"],
             "calories": 820,
             "protein_g": 75,
             "notes": "Satisfying end to the day."
@@ -636,7 +501,7 @@
       },
       {
         "day": 9,
-        "date": "2026-03-13",
+        "date": "2026-01-20",
         "phase": "Normalization",
         "target_calories": "1800-2000",
         "target_protein_g": 150,
@@ -651,10 +516,7 @@
           {
             "time": "8:00 AM",
             "meal": "Breakfast",
-            "items": [
-              "3 egg omelet with cheese and veggies",
-              "1/2 cup oatmeal"
-            ],
+            "items": ["3 egg omelet with cheese and veggies", "1/2 cup oatmeal"],
             "calories": 480,
             "protein_g": 30,
             "notes": "Balanced breakfast."
@@ -662,10 +524,7 @@
           {
             "time": "12:30 PM",
             "meal": "Lunch",
-            "items": [
-              "Mediterranean Chicken Salad (from recipes.json)",
-              "Small portion rice (1/3 cup)"
-            ],
+            "items": ["Mediterranean Chicken Salad (from recipes.json)", "Small portion rice (1/3 cup)"],
             "calories": 750,
             "protein_g": 58,
             "notes": "First rice. White rice is actually easier to digest than brown initially."
@@ -673,9 +532,7 @@
           {
             "time": "4:00 PM",
             "meal": "Snack",
-            "items": [
-              "Cheese & Veggie Plate (from recipes.json)"
-            ],
+            "items": ["Cheese & Veggie Plate (from recipes.json)"],
             "calories": 240,
             "protein_g": 14,
             "notes": "Satisfying snack."
@@ -683,9 +540,7 @@
           {
             "time": "7:30 PM",
             "meal": "Dinner",
-            "items": [
-              "Steak Dinner (from recipes.json)"
-            ],
+            "items": ["Steak Dinner (from recipes.json)"],
             "calories": 840,
             "protein_g": 75,
             "notes": "Cook fresh - 20 minutes."
@@ -699,7 +554,7 @@
       },
       {
         "day": 10,
-        "date": "2026-03-14",
+        "date": "2026-01-21",
         "phase": "Refeeding Complete",
         "target_calories": "1800-2200",
         "target_protein_g": 150,
@@ -714,9 +569,7 @@
           {
             "time": "8:00 AM",
             "meal": "Breakfast",
-            "items": [
-              "Breakfast Salad (from recipes.json)"
-            ],
+            "items": ["Breakfast Salad (from recipes.json)"],
             "calories": 700,
             "protein_g": 48,
             "notes": "Warm bacon-dressed greens with eggs."
@@ -724,10 +577,7 @@
           {
             "time": "12:30 PM",
             "meal": "Lunch",
-            "items": [
-              "Beef Stew + Salad (from recipes.json)",
-              "Slice of crusty bread"
-            ],
+            "items": ["Beef Stew + Salad (from recipes.json)", "Slice of crusty bread"],
             "calories": 700,
             "protein_g": 52,
             "notes": "Hearty and satisfying."
@@ -735,10 +585,7 @@
           {
             "time": "4:00 PM",
             "meal": "Snack",
-            "items": [
-              "Greek Yogurt + Berries",
-              "Handful mixed nuts"
-            ],
+            "items": ["Greek Yogurt + Berries", "Handful mixed nuts"],
             "calories": 280,
             "protein_g": 20,
             "notes": "Protein-rich snack."
@@ -746,10 +593,7 @@
           {
             "time": "7:30 PM",
             "meal": "Dinner",
-            "items": [
-              "Bacon-Wrapped Chicken (from recipes.json)",
-              "Full portion roasted vegetables"
-            ],
+            "items": ["Bacon-Wrapped Chicken (from recipes.json)", "Full portion roasted vegetables"],
             "calories": 900,
             "protein_g": 85,
             "notes": "Celebratory dinner - you've completed the refeed!"
@@ -806,7 +650,7 @@
       ]
     },
     "weekly_prep_day_6": {
-      "note": "On Day 6, do the full recipes.json meal prep",
+      "note": "On Day 6 (Sunday Jan 17), do the full recipes.json meal prep",
       "reference": "See recipes.json cooking section for 4.75-hour prep protocol",
       "makes": [
         "6 Beef Stew containers",
@@ -818,36 +662,18 @@
       ]
     },
     "key_milestones": [
-      {
-        "day": 1,
-        "milestone": "First calories in 11 days - bone broth and eggs only"
-      },
-      {
-        "day": 3,
-        "milestone": "Protein priority begins - introduce Greek yogurt and chicken"
-      },
-      {
-        "day": 5,
-        "milestone": "First starch (sweet potato) and red meat"
-      },
-      {
-        "day": 6,
-        "milestone": "First grain (oatmeal) - do weekly meal prep"
-      },
-      {
-        "day": 7,
-        "milestone": "First bread - transition to normal eating"
-      },
-      {
-        "day": 10,
-        "milestone": "Refeeding complete - full dietary flexibility"
-      }
+      {"day": 1, "milestone": "First calories in 11 days - bone broth and eggs only"},
+      {"day": 3, "milestone": "Protein priority begins - introduce Greek yogurt and chicken"},
+      {"day": 5, "milestone": "First starch (sweet potato) and red meat"},
+      {"day": 6, "milestone": "First grain (oatmeal) - do weekly meal prep"},
+      {"day": 7, "milestone": "First bread - transition to normal eating"},
+      {"day": 10, "milestone": "Refeeding complete - full dietary flexibility"}
     ],
     "protein_targets_rationale": {
-      "goal": "Rebuild lean mass lost during fast",
+      "goal": "Rebuild 4.4 lbs lost lean mass",
       "strategy": "High protein (130-150g/day) for weeks 1-3",
       "science": "1.6-2.2g protein per kg body weight optimizes muscle protein synthesis during recomposition",
-      "your_target": "Aim for 140-195g protein daily during rebuilding phase"
+      "your_target": "At 88.9 kg, aim for 140-195g protein daily during rebuilding phase"
     }
   }
 }

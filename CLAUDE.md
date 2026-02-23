@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This is a 10-day water fast tracker (Jan 1-11, 2026) with Oura Ring integration. The goal is to reduce visceral fat from 5.18 lbs to target of 1.0 lb through fasting cycles.
+This is a multi-cycle water fast tracker with Oura Ring integration. Currently on **Cycle 2** (Feb 23 - Mar 5, 2026, 11 days). The goal is to reduce visceral fat from 3.80 lbs (post-Cycle 1) to target of 1.0 lb. Cycle 1 (Jan 1-12, 2026) is archived in `archive/cycle-1-jan-2026/`.
 
 ## Daily Update Workflow
 
@@ -73,10 +73,12 @@ This will auto-open the browser and pick an available port. Don't specify port o
 ```
 fasting-tracker/
 ├── index.html          # Dashboard (single-page app)
-├── data.json           # All tracking data
+├── data.json           # All tracking data (current cycle)
 ├── track.sh            # Oura sync script
 ├── .oura_token         # Oura API token (gitignored)
 ├── CLAUDE.md           # This file
+├── archive/            # Previous cycle data
+│   └── cycle-1-jan-2026/  # Complete Cycle 1 with its own index.html
 └── *.png               # Infographics
     ├── keto-mental-journey-infographic.png
     ├── metabolic-changes-infographic.png
@@ -88,16 +90,18 @@ fasting-tracker/
 
 ```json
 {
+  "cycle": 2,                    // Current cycle number
+  "previous_cycles": [ ... ],   // Links to archived cycle data
   "fast": {
-    "start": "2026-01-01T18:00:00",
-    "goal_days": 10,
-    "end": "2026-01-11T18:00:00"
+    "start": "2026-02-23T18:00:00",
+    "goal_days": 11,
+    "end": "2026-03-05T18:00:00"
   },
   "baseline": { ... },           // Pre-fast averages for comparison
-  "body_composition": [ ... ],   // Body scan results (Jan 3 baseline, Jan 11 final)
+  "body_composition": [ ... ],   // Body scan results (includes Cycle 1 final as reference)
   "measurements": [ ... ],       // Daily entries with weight + Oura data
   "log": [ ... ],                // Activity log entries
-  "day_guide": { ... }           // Day 1-10 phase guides
+  "day_guide": { ... }           // Day 1-11 phase guides
 }
 ```
 
@@ -127,15 +131,17 @@ fasting-tracker/
 | 7 | Fat Adapted | Running smoothly on ketones |
 | 8 | Deep Autophagy | Maximum cellular repair |
 | 9 | Final Stretch | Plan refeed |
-| 10 | Completion | Body scan, break fast with bone broth |
+| 10 | Extended Autophagy | Bonus day, body running smoothly |
+| 11 | Completion | Prepare for gentle refeed |
 
 ## Visceral Fat Estimation
 
 Based on data patterns:
 - Visceral fat burns 2-3x faster than subcutaneous during fasting
 - Estimate ~40-50% of true fat loss comes from visceral stores
-- Starting: 5.18 lbs (Jan 3 scan)
-- Formula: `current_estimate = 5.18 - (total_fat_lost * 0.45)`
+- Cycle 1 result: 5.18 → 3.80 lbs (confirmed by body scan Jan 12)
+- Cycle 2 starting: 3.80 lbs (Jan 12 scan)
+- Formula: `current_estimate = 3.80 - (total_fat_lost * 0.45)`
 
 To estimate current visceral fat:
 1. Calculate total weight lost since scan

@@ -1278,7 +1278,7 @@
         <header class="header">
             <div class="header-left">
                 <h1>Fast Tracker</h1>
-                <p id="headerSubtitle">11-Day Protocol</p>
+                <p>11-Day Protocol • Jan 1–12, 2026</p>
             </div>
             <div class="header-right">
                 <div class="day-badge" id="dayBadge">Day 2 of 10</div>
@@ -1300,9 +1300,9 @@
                 <div class="progress-fill" id="progressFill" style="width: 20%"></div>
             </div>
             <div class="progress-labels">
-                <span id="progressStart">Start</span>
-                <span id="elapsedTime">--</span>
-                <span id="progressEnd">End</span>
+                <span>Jan 1</span>
+                <span id="elapsedTime">36 hours elapsed</span>
+                <span>Jan 12</span>
             </div>
         </div>
 
@@ -1409,49 +1409,30 @@
         }
 
         function getCurrentDay() {
-            if (!data || !data.measurements.length) return 0;
+            if (!data || !data.measurements.length) return 1;
             return data.measurements[data.measurements.length - 1].day;
-        }
-
-        function formatDateLabel(dateStr) {
-            const d = new Date(dateStr);
-            return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
         }
 
         function renderDashboard() {
             const currentDay = getCurrentDay();
-            const latestMeasurement = data.measurements.length > 0 ? data.measurements[data.measurements.length - 1] : null;
-            const firstMeasurement = data.measurements.length > 0 ? data.measurements[0] : null;
-            const guide = data.day_guide[currentDay.toString()] || data.day_guide["1"];
+            const latestMeasurement = data.measurements[data.measurements.length - 1];
+            const firstMeasurement = data.measurements[0];
+            const guide = data.day_guide[currentDay.toString()];
 
-            // Update header with dynamic dates
-            const startDate = new Date(data.fast.start);
-            const endDate = new Date(data.fast.end);
-            const dateRange = `${formatDateLabel(data.fast.start)}–${formatDateLabel(data.fast.end)}, ${startDate.getFullYear()}`;
-            const cycleLabel = data.cycle ? `Cycle ${data.cycle} • ` : '';
-            document.getElementById('headerSubtitle').textContent = `${cycleLabel}${data.fast.goal_days}-Day Protocol • ${dateRange}`;
-
+            // Update header
             document.getElementById('dayBadge').textContent = `Day ${currentDay} of ${data.fast.goal_days}`;
-            document.getElementById('phaseBadge').textContent = `PHASE: ${guide?.phase?.toUpperCase() || 'NOT STARTED'}`;
+            document.getElementById('phaseBadge').textContent = `PHASE: ${guide?.phase?.toUpperCase() || 'FASTING'}`;
             document.getElementById('progressFill').style.width = `${(currentDay / data.fast.goal_days) * 100}%`;
             document.getElementById('guideDayBadge').textContent = `DAY ${currentDay}`;
 
-            // Dynamic progress labels
-            document.getElementById('progressStart').textContent = formatDateLabel(data.fast.start);
-            document.getElementById('progressEnd').textContent = formatDateLabel(data.fast.end);
-
             // Calculate elapsed time
             const start = new Date(data.fast.start);
-            const now = latestMeasurement ? new Date(latestMeasurement.date + 'T12:00:00') : new Date();
+            const now = new Date(latestMeasurement.date + 'T12:00:00');
             const hours = Math.floor((now - start) / (1000 * 60 * 60));
-            if (hours < 0) {
-                document.getElementById('elapsedTime').textContent = `Starts ${formatDateLabel(data.fast.start)}`;
-            } else {
-                document.getElementById('elapsedTime').textContent = `~${hours} hours elapsed`;
-            }
+            document.getElementById('elapsedTime').textContent = `~${hours} hours elapsed`;
 
             // Stats row
-            renderStats(latestMeasurement || {}, firstMeasurement || {});
+            renderStats(latestMeasurement, firstMeasurement);
 
             // Weight chart
             renderWeightChart();
@@ -1476,8 +1457,8 @@
         }
 
         function renderStats(latest, first) {
-            // Find first and last measurements with weight data during the fast
-            const fastMeasurements = data.measurements.filter(m => m.day >= 0 && m.day <= data.fast.goal_days);
+            // Find first and last measurements with weight data during the fast (days 0-11)
+            const fastMeasurements = data.measurements.filter(m => m.day >= 0 && m.day <= 11);
             const firstWithWeight = fastMeasurements.find(m => m.weight_kg !== null);
             const lastWithWeight = [...fastMeasurements].reverse().find(m => m.weight_kg !== null);
             const totalChange = firstWithWeight && lastWithWeight ? lastWithWeight.weight_kg - firstWithWeight.weight_kg : 0;
@@ -1485,44 +1466,38 @@
             // Check if fast is complete
             const fastComplete = new Date() > new Date(data.fast.end);
             const weightLabel = fastComplete ? 'Final Weight' : 'Current Weight';
-            const displayWeight = lastWithWeight ? lastWithWeight.weight_kg : (latest.weight_kg || '--');
-
-            const totalCals = getTotalCaloriesBurned();
-            const baselineCals = data.baseline.avg_total_calories || 2450;
-            const avgBurn = data.fast.goal_days > 0 ? Math.round(totalCals / data.fast.goal_days) : 0;
-            const baselinePct = baselineCals > 0 ? Math.round((avgBurn / baselineCals - 1) * 100) : 0;
-            const fatBurned = ((totalCals - (baselineCals * 2)) / 7700);
+            const displayWeight = lastWithWeight ? lastWithWeight.weight_kg : latest.weight_kg;
 
             const html = `
                 <div class="stat-card">
                     <div class="stat-label">${weightLabel}</div>
-                    <div class="stat-value">${displayWeight}${displayWeight !== '--' ? '<span class="stat-unit"> kg</span>' : ''}</div>
-                    <div class="stat-change positive">${totalChange !== 0 ? '↓ ' + Math.abs(totalChange).toFixed(1) + ' kg total' : 'Awaiting first weigh-in'}</div>
+                    <div class="stat-value">${displayWeight}<span class="stat-unit"> kg</span></div>
+                    <div class="stat-change positive">↓ ${Math.abs(totalChange).toFixed(1)} kg total</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-label">Total Calories Burned</div>
-                    <div class="stat-value">${totalCals > 0 ? totalCals.toLocaleString() : '--'}</div>
+                    <div class="stat-value">${getTotalCaloriesBurned().toLocaleString()}</div>
                     <div class="stat-change positive">Entire fast (${data.fast.goal_days} days)</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-label">Avg Daily Burn</div>
-                    <div class="stat-value">${avgBurn > 0 ? avgBurn.toLocaleString() : '--'}</div>
-                    <div class="stat-change positive">${avgBurn > 0 ? '↑ ' + baselinePct + '% vs baseline' : 'Awaiting data'}</div>
+                    <div class="stat-value">${Math.round(getTotalCaloriesBurned() / data.fast.goal_days).toLocaleString()}</div>
+                    <div class="stat-change positive">↑ ${Math.round((getTotalCaloriesBurned() / data.fast.goal_days / data.baseline.avg_total_calories - 1) * 100)}% vs baseline</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-label">Est. Fat Burned</div>
-                    <div class="stat-value">${fatBurned > 0 ? fatBurned.toFixed(1) : '--'}${fatBurned > 0 ? '<span class="stat-unit"> kg</span>' : ''}</div>
-                    <div class="stat-change positive">${fatBurned > 0 ? '~' + (fatBurned * 2.2).toFixed(1) + ' lbs' : 'Awaiting data'}</div>
+                    <div class="stat-value">${((getTotalCaloriesBurned() - (data.baseline.avg_total_calories * 2)) / 7700).toFixed(1)}<span class="stat-unit"> kg</span></div>
+                    <div class="stat-change positive">~${((getTotalCaloriesBurned() - (data.baseline.avg_total_calories * 2)) / 7700 * 2.2).toFixed(1)} lbs</div>
                 </div>
             `;
             document.getElementById('statsRow').innerHTML = html;
         }
 
         function getTotalCaloriesBurned() {
-            // Sum calories only for fast days
+            // Sum calories only for fast days (0-11)
             return data.measurements
-                .filter(m => m.day >= 0 && m.day <= data.fast.goal_days)
-                .reduce((sum, m) => sum + (m.oura?.total_calories || 0), 0);
+                .filter(m => m.day >= 0 && m.day <= 11)
+                .reduce((sum, m) => sum + (m.oura.total_calories || 0), 0);
         }
 
         function getScoreClass(score) {
@@ -1543,9 +1518,9 @@
         function renderWeightChart() {
             const currentDay = getCurrentDay();
 
-            // Filter to only fast days with weight data
+            // Filter to only fast days (0-11) with weight data
             const validMeasurements = data.measurements.filter(m =>
-                m.day >= 0 && m.day <= data.fast.goal_days &&
+                m.day >= 0 && m.day <= 11 &&
                 m.weight_kg !== null && m.weight_kg !== undefined
             );
 
@@ -1776,11 +1751,6 @@
 
         function renderOuraTodayStats() {
             const measurements = data.measurements;
-            if (!measurements.length) {
-                document.getElementById('ouraDateBadge').textContent = '--';
-                document.getElementById('ouraTodayStats').innerHTML = '<p style="color: var(--text-dim); text-align: center; padding: 20px;">No Oura data yet. Run ./track.sh after the fast begins.</p>';
-                return;
-            }
             const latest = measurements[measurements.length - 1];
             const previous = measurements.length > 1 ? measurements[measurements.length - 2] : null;
             const baseline = data.baseline;
@@ -1978,10 +1948,6 @@
 
         function renderOuraChart() {
             const measurements = data.measurements;
-            if (!measurements.length) {
-                document.getElementById('ouraChart').innerHTML = '<p style="color: var(--text-dim); text-align: center; padding: 40px;">No Oura data yet</p>';
-                return;
-            }
             const latest = measurements[measurements.length - 1];
 
             // Define chart series - each gets its own chart
@@ -2283,15 +2249,15 @@
                         <span class="body-stat-value">${baseline.t_score}</span>
                     </div>
                     <div style="font-size: 11px; color: var(--text-dim); margin-top: 8px;">
-                        Next scan: End of fast (${formatDateLabel(data.fast.end)})
+                        Next scan: Jan 12 (Monday)
                     </div>
                 `;
             }
         }
 
         function renderLog() {
-            // Only show fasting days, not refeed days
-            const logs = [...data.log].filter(entry => entry.day <= data.fast.goal_days).reverse();
+            // Only show fasting days (0-11), not refeed days
+            const logs = [...data.log].filter(entry => entry.day <= 11).reverse();
             let html = '';
 
             // Track which days already have infographics shown
