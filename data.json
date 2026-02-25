@@ -1,11 +1,4 @@
 {
-  "cycle": 1,
-  "previous_cycles": [],
-  "fast": {
-    "start": "2026-02-23T18:00:00",
-    "goal_days": 11,
-    "end": "2026-03-05T08:00:00"
-  },
   "baseline": {
     "period": "2026-02-10 to 2026-02-22",
     "avg_total_calories": null,
@@ -14,15 +7,7 @@
     "note": "Pre-fast baseline for Cycle 1 - populate from Oura data"
   },
   "body_composition": [],
-  "measurements": [],
-  "log": [
-    {
-      "date": "2026-02-23",
-      "day": 0,
-      "type": "event",
-      "message": "Cycle 1 fast begins at 6:00 PM. Refeed morning of Mar 5."
-    }
-  ],
+  "cycle": 1,
   "day_guide": {
     "1": {
       "phase": "Glycogen Depletion",
@@ -30,8 +15,8 @@
       "tips": "Stay hydrated. Electrolytes help. Keep busy.",
       "metabolic": "Your liver is burning through its 100g glycogen reserve (~400 calories). Each gram of glycogen binds 3-4g of water, so you'll lose 1-2kg of water weight rapidly. Insulin levels are dropping, signaling kidneys to excrete sodium (causing electrolyte flush). Ghrelin (hunger hormone) peaks as your body expects food. Blood glucose maintained around 70-80 mg/dL through gluconeogenesis. Cortisol and adrenaline slightly elevated to mobilize energy stores.",
       "electrolytes": {
-        "sodium": "½-¾ tsp salt",
-        "potassium": "¼-½ tsp NoSalt",
+        "sodium": "\u00bd-\u00be tsp salt",
+        "potassium": "\u00bc-\u00bd tsp NoSalt",
         "magnesium": "1 pill (400mg)",
         "note": "Critical day - glycogen loss pulls water and electrolytes. Salt your water."
       }
@@ -42,8 +27,8 @@
       "tips": "Rest if needed. Light activity ok. Salt helps.",
       "metabolic": "Glycogen depleted. Liver ramping up ketone production (beta-hydroxybutyrate, acetoacetate, acetone). Brain still adapting - it prefers glucose but is learning to use ketones, causing 'brain fog'. Fat cells releasing fatty acids via lipolysis, producing waste products processed by liver. Insulin now very low, glucagon elevated. Growth hormone increases to preserve muscle. Sleep disruption common as norepinephrine rises. Uric acid may temporarily increase as kidneys adjust. Breath may smell fruity (acetone excretion).",
       "electrolytes": {
-        "sodium": "¾-1 tsp salt",
-        "potassium": "½-¾ tsp NoSalt",
+        "sodium": "\u00be-1 tsp salt",
+        "potassium": "\u00bd-\u00be tsp NoSalt",
         "magnesium": "1 pill (400mg)",
         "note": "Increase sodium - kidneys dumping electrolytes as insulin drops. Magnesium glycinate at night for sleep."
       }
@@ -54,8 +39,8 @@
       "tips": "Don't overexert. Ketones rising.",
       "metabolic": "Blood ketones rising to 0.5-2.0 mmol/L. Brain now getting 25-30% of energy from ketones. Liver converting fatty acids to ketone bodies at increasing rate. Gallbladder may dump bile (no food to process it). Autophagy beginning - cells starting to recycle damaged proteins and organelles. BDNF (brain-derived neurotrophic factor) increasing, improving mental clarity. Inflammatory markers (CRP, IL-6) starting to decrease. Fat oxidation now primary fuel source, burning 150-200g fat/day.",
       "electrolytes": {
-        "sodium": "¾-1¼ tsp salt",
-        "potassium": "½-¾ tsp NoSalt",
+        "sodium": "\u00be-1\u00bc tsp salt",
+        "potassium": "\u00bd-\u00be tsp NoSalt",
         "magnesium": "1 pill (400mg)",
         "note": "Peak electrolyte need. If cramping or headaches, add more salt first."
       }
@@ -66,8 +51,8 @@
       "tips": "Autophagy ramping up. Great time for light walking.",
       "metabolic": "Blood ketones stabilizing at 1.5-3.0 mmol/L. Brain now efficiently using ketones for 60-70% of energy needs. Ghrelin (hunger hormone) suppressed - hunger largely disappears. Autophagy significantly upregulated - damaged mitochondria, misfolded proteins being recycled. mTOR pathway suppressed, promoting cellular repair over growth. HGH elevated 300-500% to preserve lean mass. Metabolic rate stable (no significant slowdown yet). Visceral fat being preferentially burned. Stem cell regeneration beginning in gut lining.",
       "electrolytes": {
-        "sodium": "¾-1 tsp salt",
-        "potassium": "½ tsp NoSalt",
+        "sodium": "\u00be-1 tsp salt",
+        "potassium": "\u00bd tsp NoSalt",
         "magnesium": "1 pill (400mg)",
         "note": "Body stabilizing. Maintain consistent electrolyte intake."
       }
@@ -78,8 +63,8 @@
       "tips": "Body efficient at burning fat now.",
       "metabolic": "Peak ketone efficiency - brain fully keto-adapted. Ketones at 2-4 mmol/L. Autophagy in full effect - senescent (zombie) cells being cleared. Immune system resetting - old white blood cells being recycled, triggering stem cell regeneration. Inflammatory markers significantly reduced. Insulin sensitivity improving dramatically. Norepinephrine keeps metabolic rate elevated. Fat cells shrinking, releasing stored toxins (may cause temporary symptoms). Protein sparing maximum - muscle breakdown minimal.",
       "electrolytes": {
-        "sodium": "¾-1 tsp salt",
-        "potassium": "½ tsp NoSalt",
+        "sodium": "\u00be-1 tsp salt",
+        "potassium": "\u00bd tsp NoSalt",
         "magnesium": "1 pill (400mg)",
         "note": "Halfway there. Body more efficient at retaining electrolytes now."
       }
@@ -90,8 +75,8 @@
       "tips": "Stay consistent with hydration.",
       "metabolic": "Deep autophagy - cells aggressively recycling damaged components. Mitochondrial biogenesis occurring - new, more efficient mitochondria being created. Gut lining regenerating - stem cells rebuilding intestinal wall. SIRT1 and SIRT3 (longevity genes) highly activated. Ketones providing neuroprotective effects. Adiponectin (anti-inflammatory hormone from fat cells) elevated. Liver efficiently processing fatty acids. Weight loss may slow as body optimizes efficiency.",
       "electrolytes": {
-        "sodium": "½-¾ tsp salt",
-        "potassium": "⅓-½ tsp NoSalt",
+        "sodium": "\u00bd-\u00be tsp salt",
+        "potassium": "\u2153-\u00bd tsp NoSalt",
         "magnesium": "1 pill (300-400mg)",
         "note": "Can slightly reduce as body adapts. Listen to your body."
       }
@@ -102,8 +87,8 @@
       "tips": "Don't break fast impulsively - you've come far.",
       "metabolic": "Full fat adaptation achieved. Muscles preferentially burning fatty acids directly, sparing ketones for brain. Metabolic flexibility maximized. Immune system regeneration continuing - new naive immune cells being produced. Skin cell turnover increasing. Neuroplasticity enhanced via BDNF. Blood pressure often normalizes. Triglycerides dropping significantly. HDL improving. Body in deep repair mode - prioritizing cellular quality over quantity.",
       "electrolytes": {
-        "sodium": "½-¾ tsp salt",
-        "potassium": "⅓-½ tsp NoSalt",
+        "sodium": "\u00bd-\u00be tsp salt",
+        "potassium": "\u2153-\u00bd tsp NoSalt",
         "magnesium": "1 pill (300-400mg)",
         "note": "Maintain steady intake. You're fat-adapted now."
       }
@@ -114,8 +99,8 @@
       "tips": "Normal - body conserving.",
       "metabolic": "Autophagy reaching maximum depth. Cellular debris being cleared efficiently. Damaged proteins, dysfunctional organelles, even intracellular pathogens being eliminated. Thyroid may downregulate slightly (T3 decreases) as body conserves energy - this is protective, not harmful. Ketones stable at 3-5 mmol/L. Fat oxidation continuing at 150-200g/day. Collagen turnover increased - skin renewal accelerating. Telomere-protective pathways activated.",
       "electrolytes": {
-        "sodium": "½-¾ tsp salt",
-        "potassium": "⅓-½ tsp NoSalt",
+        "sodium": "\u00bd-\u00be tsp salt",
+        "potassium": "\u2153-\u00bd tsp NoSalt",
         "magnesium": "1 pill (300-400mg)",
         "note": "Stay consistent. Almost there."
       }
@@ -126,8 +111,8 @@
       "tips": "Start planning refeed.",
       "metabolic": "Body maximally efficient at ketone utilization. Stem cell activation significant - preparing for refeeding phase when new cells will be built. Digestive enzymes reduced (will need gentle restart). Gut microbiome shifted - beneficial bacteria dormant, will bloom with proper refeeding. Insulin sensitivity at peak - be very careful with carbs on refeed. Growth hormone still elevated. Begin mental preparation for refeed protocol.",
       "electrolytes": {
-        "sodium": "½-¾ tsp salt",
-        "potassium": "⅓ tsp NoSalt",
+        "sodium": "\u00bd-\u00be tsp salt",
+        "potassium": "\u2153 tsp NoSalt",
         "magnesium": "1 pill (300mg)",
         "note": "Prepare for refeed. Keep electrolytes steady."
       }
@@ -138,8 +123,8 @@
       "tips": "Same protocol as Day 9. Stay consistent.",
       "metabolic": "Continued deep autophagy. Stem cells highly activated. Ketone efficiency maximized at 3-5 mmol/L. Thyroid may downregulate slightly (protective, not harmful). Fat oxidation steady at 150-200g/day. Immune regeneration ongoing. Body in maintenance mode - all systems adapted to fasting state.",
       "electrolytes": {
-        "sodium": "½-¾ tsp salt",
-        "potassium": "⅓ tsp NoSalt",
+        "sodium": "\u00bd-\u00be tsp salt",
+        "potassium": "\u2153 tsp NoSalt",
         "magnesium": "1 pill (300mg)",
         "note": "Stay consistent. One more day to go."
       }
@@ -150,12 +135,168 @@
       "tips": "Break with bone broth or light soup. No heavy foods.",
       "metabolic": "Maximum autophagy benefits achieved. Immune system primed for regeneration upon refeeding. Gut ready for stem cell-driven renewal when food returns. Key refeeding risks: refeeding syndrome (electrolyte shifts), digestive distress (low enzyme production), blood sugar spikes (extreme insulin sensitivity). Break fast with bone broth (minerals, collagen, gentle). Wait 2-3 hours, then small protein/fat meal. Avoid carbs for first 24-48 hours. Probiotics beneficial for microbiome restoration.",
       "electrolytes": {
-        "sodium": "½ tsp salt",
-        "potassium": "¼ tsp NoSalt",
+        "sodium": "\u00bd tsp salt",
+        "potassium": "\u00bc tsp NoSalt",
         "magnesium": "1 pill (300mg)",
         "note": "Bone broth for refeed provides natural electrolytes. Go slow reintroducing food."
       }
     }
+  },
+  "fast": {
+    "start": "2026-02-23T18:00:00",
+    "goal_days": 11,
+    "end": "2026-03-05T08:00:00"
+  },
+  "log": [
+    {
+      "date": "2026-02-22",
+      "day": 1,
+      "type": "sleep",
+      "message": "Bedtime: 11:34 PM"
+    },
+    {
+      "date": "2026-02-23",
+      "day": 1,
+      "type": "event",
+      "message": "Cycle 1 fast begins at 6:00 PM. Refeed morning of Mar 5."
+    },
+    {
+      "date": "2026-02-23",
+      "day": 1,
+      "type": "sleep",
+      "message": "Woke up: 5:30 AM (3.8 hrs sleep)"
+    },
+    {
+      "date": "2026-02-23",
+      "day": 1,
+      "type": "sleep",
+      "message": "Bedtime: 11:38 PM"
+    },
+    {
+      "date": "2026-02-24",
+      "day": 2,
+      "type": "sleep",
+      "message": "Woke up: 6:30 AM (6.1 hrs sleep)"
+    },
+    {
+      "date": "2026-02-24",
+      "day": 2,
+      "type": "sleep",
+      "message": "Bedtime: 10:06 PM"
+    },
+    {
+      "date": "2026-02-25",
+      "day": 3,
+      "type": "sleep",
+      "message": "Woke up: 5:45 AM (7.2 hrs sleep)"
+    }
+  ],
+  "measurements": [
+    {
+      "date": "2026-02-23",
+      "day": 1,
+      "weight_kg": 71.0,
+      "weight_change_kg": null,
+      "oura": {
+        "sleep_score": 59,
+        "readiness_score": 71,
+        "activity_score": 77,
+        "steps": 8722,
+        "total_calories": 2233,
+        "active_calories": 501,
+        "hrv_balance": 88,
+        "body_temp_deviation": -0.17,
+        "sleep": {
+          "bedtime": "2026-02-22T23:34:29.000-05:00",
+          "wake_time": "2026-02-23T08:31:29.000-05:00",
+          "total_hours": 5.7,
+          "deep_mins": 61,
+          "rem_mins": 54,
+          "light_mins": 225,
+          "efficiency": 63,
+          "lowest_hr": 53,
+          "avg_hrv": 33
+        },
+        "stress": {
+          "summary": "restored",
+          "stress_mins": 90,
+          "recovery_mins": 180
+        }
+      },
+      "notes": "",
+      "water_liters": null
+    },
+    {
+      "date": "2026-02-24",
+      "day": 2,
+      "weight_kg": 69.6,
+      "weight_change_kg": -1.4,
+      "oura": {
+        "sleep_score": 81,
+        "readiness_score": 84,
+        "activity_score": 69,
+        "steps": 4664,
+        "total_calories": 1939,
+        "active_calories": 243,
+        "hrv_balance": 92,
+        "body_temp_deviation": -0.07,
+        "sleep": {
+          "bedtime": "2026-02-23T23:38:30.000-05:00",
+          "wake_time": "2026-02-24T06:30:08.000-05:00",
+          "total_hours": 6.2,
+          "deep_mins": 84,
+          "rem_mins": 81,
+          "light_mins": 205,
+          "efficiency": 90,
+          "lowest_hr": 52,
+          "avg_hrv": 46
+        },
+        "stress": {
+          "summary": "normal",
+          "stress_mins": 60,
+          "recovery_mins": 150
+        }
+      },
+      "notes": "",
+      "water_liters": 3.1
+    },
+    {
+      "date": "2026-02-25",
+      "day": 3,
+      "weight_kg": 68.9,
+      "weight_change_kg": -0.7,
+      "oura": {
+        "activity_score": 71,
+        "steps": 271,
+        "total_calories": 1451,
+        "active_calories": 15,
+        "stress": {
+          "stress_mins": 0,
+          "recovery_mins": 0
+        },
+        "sleep_score": 87,
+        "readiness_score": 89,
+        "hrv_balance": 94,
+        "body_temp_deviation": -0.15,
+        "sleep": {
+          "bedtime": "2026-02-24T22:06:31.000-05:00",
+          "wake_time": "2026-02-25T05:45:25.000-05:00",
+          "total_hours": 7.2,
+          "deep_mins": 63,
+          "rem_mins": 98,
+          "light_mins": 268,
+          "efficiency": 94,
+          "lowest_hr": 51,
+          "avg_hrv": 54
+        }
+      },
+      "notes": "",
+      "water_liters": null
+    }
+  ],
+  "previous_cycles": [],
+  "profile": {
+    "height_cm": 174
   },
   "refeed": {
     "start": "2026-03-05T08:00:00",

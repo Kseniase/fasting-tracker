@@ -116,7 +116,7 @@
         /* Top Stats Row */
         .stats-row {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 16px;
             margin-bottom: 24px;
         }
@@ -172,6 +172,180 @@
         .stat-change.neutral {
             background: rgba(125, 133, 144, 0.15);
             color: var(--text-dim);
+        }
+
+        /* Daily Check-in */
+        .checkin-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+            align-items: end;
+        }
+
+        .checkin-field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .checkin-label {
+            font-size: 11px;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .checkin-input {
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            color: var(--text);
+            border-radius: 8px;
+            padding: 10px 12px;
+            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+        }
+
+        .checkin-input:focus {
+            outline: none;
+            border-color: var(--blue);
+        }
+
+        .checkin-btn {
+            border: 1px solid var(--border);
+            background: var(--surface-2);
+            color: var(--text);
+            border-radius: 8px;
+            padding: 10px 14px;
+            height: 42px;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .checkin-btn:hover {
+            background: var(--surface);
+        }
+
+        .checkin-btn.primary {
+            background: rgba(63, 185, 80, 0.2);
+            border-color: rgba(63, 185, 80, 0.4);
+            color: var(--green);
+        }
+
+        .checkin-status {
+            margin-top: 12px;
+            font-size: 12px;
+            color: var(--text-dim);
+            min-height: 18px;
+        }
+
+        .checkin-summary {
+            margin-top: 10px;
+            font-size: 12px;
+            color: var(--text-dim);
+        }
+
+        /* Chat */
+        .chat-card {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .chat-messages {
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            min-height: 170px;
+            max-height: 360px;
+            overflow-y: auto;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .chat-empty {
+            color: var(--text-dim);
+            font-size: 13px;
+            line-height: 1.5;
+            padding: 8px;
+        }
+
+        .chat-message {
+            max-width: 88%;
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            font-size: 13px;
+            line-height: 1.5;
+            white-space: normal;
+            word-break: break-word;
+        }
+
+        .chat-message.user {
+            align-self: flex-end;
+            border-color: rgba(88, 166, 255, 0.45);
+            background: rgba(88, 166, 255, 0.12);
+        }
+
+        .chat-message.assistant {
+            align-self: flex-start;
+            border-color: rgba(63, 185, 80, 0.4);
+            background: rgba(63, 185, 80, 0.08);
+        }
+
+        .chat-message.system {
+            align-self: center;
+            border-style: dashed;
+            color: var(--text-dim);
+        }
+
+        .chat-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            color: var(--text-dim);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+
+        .chat-input-row {
+            display: grid;
+            grid-template-columns: 1fr auto auto;
+            gap: 12px;
+            align-items: stretch;
+        }
+
+        .chat-input {
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            color: var(--text);
+            border-radius: 8px;
+            padding: 10px 12px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            resize: vertical;
+            min-height: 46px;
+            max-height: 120px;
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: var(--blue);
+        }
+
+        .chat-status {
+            font-size: 12px;
+            color: var(--text-dim);
+            min-height: 18px;
         }
 
         /* Main Content Grid */
@@ -889,6 +1063,11 @@
             color: var(--blue);
         }
 
+        .log-type.manual {
+            background: rgba(63, 185, 80, 0.15);
+            color: var(--green);
+        }
+
         .log-message {
             font-size: 13px;
             line-height: 1.4;
@@ -1254,6 +1433,12 @@
             background: var(--surface) !important;
         }
 
+        @media (max-width: 900px) {
+            .chat-input-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
         /* Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
@@ -1308,6 +1493,55 @@
 
         <div class="stats-row" id="statsRow">
             <!-- Populated by JS -->
+        </div>
+
+        <div class="card" style="margin-bottom: 24px;">
+            <div class="card-header">
+                <span class="card-title">Daily Check-In</span>
+                <span class="card-badge" id="checkinBadge">NOT SAVED</span>
+            </div>
+            <div class="checkin-grid">
+                <div class="checkin-field">
+                    <label class="checkin-label" for="entryDate">Date</label>
+                    <input class="checkin-input" id="entryDate" type="date" onchange="handleEntryDateChange()">
+                </div>
+                <div class="checkin-field">
+                    <label class="checkin-label" for="entryWeight">Weight (kg)</label>
+                    <input class="checkin-input" id="entryWeight" type="number" step="0.1" min="30" max="300" placeholder="e.g. 88.4" onfocus="isCheckinFocused=true" onblur="isCheckinFocused=false">
+                </div>
+                <div class="checkin-field">
+                    <label class="checkin-label" for="entryWater">Water (L)</label>
+                    <input class="checkin-input" id="entryWater" type="number" step="0.1" min="0" max="20" placeholder="e.g. 2.8" onfocus="isCheckinFocused=true" onblur="isCheckinFocused=false">
+                </div>
+                <div class="checkin-field">
+                    <label class="checkin-label" for="entryHeight">Height (cm)</label>
+                    <input class="checkin-input" id="entryHeight" type="number" step="1" min="120" max="230" placeholder="e.g. 174" onfocus="isCheckinFocused=true" onblur="isCheckinFocused=false">
+                </div>
+                <button class="checkin-btn primary" onclick="saveDailyEntry()">Save Entry</button>
+                <button class="checkin-btn" onclick="clearDailyEntry()">Clear</button>
+            </div>
+            <div class="checkin-summary" id="checkinSummary"></div>
+            <div class="checkin-status" id="checkinStatus"></div>
+        </div>
+
+        <div class="card chat-card" style="margin-bottom: 24px;">
+            <div class="card-header">
+                <span class="card-title">MiniMax Coach Chat</span>
+                <span class="card-badge" id="chatBadge">CONNECTING</span>
+            </div>
+            <div class="chat-messages" id="chatMessages"></div>
+            <div class="chat-status" id="chatStatus"></div>
+            <div class="chat-input-row">
+                <textarea
+                    class="chat-input"
+                    id="chatInput"
+                    placeholder="Ask anything about your fasting plan, hydration, symptoms, or daily strategy..."
+                    onfocus="isChatFocused=true"
+                    onblur="isChatFocused=false"
+                    onkeydown="handleChatInputKeydown(event)"></textarea>
+                <button class="checkin-btn primary" id="chatSendBtn" onclick="sendChatMessage()">Send</button>
+                <button class="checkin-btn" id="chatClearBtn" onclick="clearChatHistory()">Clear Chat</button>
+            </div>
         </div>
 
         <div class="card" style="margin-bottom: 24px;">
@@ -1396,7 +1630,226 @@
     </div>
 
     <script>
+        // Keep one local origin for storage consistency.
+        if (window.location.hostname === 'localhost') {
+            const target = `http://127.0.0.1${window.location.port ? `:${window.location.port}` : ''}${window.location.pathname}${window.location.search}${window.location.hash}`;
+            window.location.replace(target);
+        }
+
         let data = null;
+        let selectedEntryDate = null;
+        let checkinStatusMessage = '';
+        let checkinStatusTone = 'neutral';
+        let isCheckinFocused = false;
+        let isChatFocused = false;
+        let chatBusy = false;
+        let chatMessages = [];
+
+        const API_BASE_KEY = 'fasting_api_base_v1';
+        const DEFAULT_API_PORTS = ['8080', '8081', '8082', '8090'];
+
+        function readStoredApiBase() {
+            try {
+                const raw = localStorage.getItem(API_BASE_KEY);
+                return raw && /^https?:\/\//.test(raw) ? raw.replace(/\/+$/, '') : '';
+            } catch (_) {
+                return '';
+            }
+        }
+
+        function writeStoredApiBase(base) {
+            if (!base || !/^https?:\/\//.test(base)) return;
+            try {
+                localStorage.setItem(API_BASE_KEY, base.replace(/\/+$/, ''));
+            } catch (_) {}
+        }
+
+        function dedupe(values) {
+            const out = [];
+            const seen = new Set();
+            values.forEach((value) => {
+                const key = String(value || '');
+                if (seen.has(key)) return;
+                seen.add(key);
+                out.push(value);
+            });
+            return out;
+        }
+
+        function candidateApiBases() {
+            const bases = [];
+            const stored = readStoredApiBase();
+            if (stored) bases.push(stored);
+
+            const isHttp = window.location.protocol === 'http:' || window.location.protocol === 'https:';
+            const isFile = window.location.protocol === 'file:';
+
+            if (isHttp) {
+                bases.push('');
+                const sameOrigin = `${window.location.protocol}//${window.location.host}`;
+                bases.push(sameOrigin);
+
+                const port = window.location.port || (window.location.protocol === 'https:' ? '443' : '80');
+                if (window.location.hostname === 'localhost') {
+                    bases.push(`${window.location.protocol}//127.0.0.1:${port}`);
+                } else if (window.location.hostname === '127.0.0.1') {
+                    bases.push(`${window.location.protocol}//localhost:${port}`);
+                }
+            }
+
+            const portCandidates = [];
+            if (window.location.port) portCandidates.push(window.location.port);
+            DEFAULT_API_PORTS.forEach((port) => portCandidates.push(port));
+
+            dedupe(portCandidates).forEach((port) => {
+                bases.push(`http://127.0.0.1:${port}`);
+                bases.push(`http://localhost:${port}`);
+            });
+
+            if (isFile) {
+                bases.push('http://127.0.0.1:8080');
+                bases.push('http://localhost:8080');
+            }
+
+            return dedupe(bases.map((base) => (base || '').replace(/\/+$/, '')));
+        }
+
+        function resolveApiUrl(base, path) {
+            const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+            if (!base) return normalizedPath;
+            return `${base}${normalizedPath}`;
+        }
+
+        function isLikelyNetworkError(error) {
+            const message = String(error?.message || '');
+            return /NetworkError|Failed to fetch|Load failed|TypeError|Could not connect/i.test(message);
+        }
+
+        function formatApiFailure(error) {
+            if (isLikelyNetworkError(error)) {
+                return `Could not reach local API. ${localApiHint()}.`;
+            }
+            return String(error?.message || 'Unknown error');
+        }
+
+        async function apiFetch(path, options = {}) {
+            const bases = candidateApiBases();
+            let lastError = null;
+
+            for (const base of bases) {
+                const url = resolveApiUrl(base, path);
+                try {
+                    const response = await fetch(url, options);
+                    if (base) writeStoredApiBase(base);
+                    return response;
+                } catch (error) {
+                    lastError = error;
+                }
+            }
+
+            throw lastError || new Error(`Could not connect to local API (${path}).`);
+        }
+
+        function localApiHint() {
+            const preferred = readStoredApiBase() || 'http://127.0.0.1:8080';
+            return `Start local server with ./run-local.sh and open ${preferred}/index.html`;
+        }
+
+        async function maybeRedirectFromFileMode() {
+            if (window.location.protocol !== 'file:') return;
+            const fileName = (window.location.pathname.split('/').pop() || 'index.html').trim() || 'index.html';
+            const bases = candidateApiBases().filter(Boolean);
+            for (const base of bases) {
+                try {
+                    const response = await fetch(resolveApiUrl(base, '/api/health'), { cache: 'no-store' });
+                    if (response.ok) {
+                        writeStoredApiBase(base);
+                        window.location.replace(`${base}/${fileName}`);
+                        return;
+                    }
+                } catch (_) {}
+            }
+        }
+
+        function formatNumber(value, digits = 1) {
+            if (value === null || value === undefined || Number.isNaN(Number(value))) return '--';
+            return Number(value).toFixed(digits);
+        }
+
+        function toDateKey(d) {
+            const year = d.getFullYear();
+            const month = String(d.getMonth() + 1).padStart(2, '0');
+            const day = String(d.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        function todayDateKey() {
+            return toDateKey(new Date());
+        }
+
+        function parseDateKey(dateKey) {
+            if (typeof dateKey === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(dateKey)) {
+                const [year, month, day] = dateKey.split('-').map(Number);
+                return new Date(year, month - 1, day);
+            }
+
+            const parsed = new Date(dateKey);
+            if (!Number.isNaN(parsed.getTime())) {
+                return new Date(parsed.getFullYear(), parsed.getMonth(), parsed.getDate());
+            }
+
+            return new Date();
+        }
+
+        function normalizeDateKey(value) {
+            if (!value) return todayDateKey();
+            if (/^\d{4}-\d{2}-\d{2}$/.test(value)) return value;
+            return toDateKey(parseDateKey(value));
+        }
+
+        function ensureProfileDefaults() {
+            if (!data || typeof data !== 'object') return;
+            if (!data.profile || typeof data.profile !== 'object') {
+                data.profile = {};
+            }
+            if (!Number.isFinite(Number(data.profile.height_cm))) {
+                data.profile.height_cm = 174;
+            } else {
+                data.profile.height_cm = Math.round(Number(data.profile.height_cm));
+            }
+        }
+
+        function getFastStartDateKey() {
+            return (data?.fast?.start || '').split('T')[0] || todayDateKey();
+        }
+
+        function calculateDayForDate(dateKey) {
+            const date = parseDateKey(dateKey);
+            const start = parseDateKey(getFastStartDateKey());
+            const day = Math.floor((date - start) / (1000 * 60 * 60 * 24)) + 1;
+            return Math.max(1, day);
+        }
+
+        function getMeasurementByDate(dateKey) {
+            return data.measurements.find(m => m.date === dateKey) || null;
+        }
+
+        function showLoadWarning(message) {
+            const existing = document.getElementById('loadWarningBanner');
+            if (existing) return;
+
+            const banner = document.createElement('div');
+            banner.id = 'loadWarningBanner';
+            banner.style.cssText = 'position:sticky;top:0;z-index:9999;background:#4b3b1f;border:1px solid #d29922;color:#f0f6fc;padding:12px 16px;border-radius:8px;margin-bottom:16px;font-family:DM Sans,sans-serif;';
+            banner.innerHTML = message;
+
+            const dashboard = document.querySelector('.dashboard');
+            if (dashboard) {
+                dashboard.prepend(banner);
+            } else {
+                document.body.prepend(banner);
+            }
+        }
 
         function showLoadError(error) {
             const isFileProtocol = window.location.protocol === 'file:';
@@ -1407,8 +1860,8 @@
             banner.id = 'loadErrorBanner';
             banner.style.cssText = 'position:sticky;top:0;z-index:9999;background:#5a1f1f;border:1px solid #f85149;color:#f0f6fc;padding:12px 16px;border-radius:8px;margin-bottom:16px;font-family:DM Sans,sans-serif;';
             banner.innerHTML = isFileProtocol
-                ? 'Could not load local data in file mode. Start the app with <code>./run-local.sh</code> and open <code>http://127.0.0.1:8080/index.html</code>.'
-                : 'Could not load <code>data.json</code>. Check that the local server is running from this folder.';
+                ? `Could not load local data in file mode. ${localApiHint()}.`
+                : `Could not load live data from local API. ${localApiHint()}.`;
 
             const dashboard = document.querySelector('.dashboard');
             if (dashboard) {
@@ -1420,20 +1873,122 @@
             if (error) console.error('Error loading data:', error);
         }
 
-        async function loadData() {
+        function clearLoadBanners() {
+            document.getElementById('loadWarningBanner')?.remove();
+            document.getElementById('loadErrorBanner')?.remove();
+        }
+
+        async function persistCheckinToServer(date, weight, water) {
+            const response = await apiFetch('/api/checkin', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    date,
+                    weight_kg: weight,
+                    water_liters: water
+                })
+            });
+
+            if (!response.ok) {
+                let message = `HTTP ${response.status}`;
+                try {
+                    const err = await response.json();
+                    if (err?.error) message = err.error;
+                } catch (_) {}
+                throw new Error(message);
+            }
+        }
+
+        async function persistProfileToServer(heightCm) {
+            const response = await apiFetch('/api/profile', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    height_cm: heightCm
+                })
+            });
+
+            if (!response.ok) {
+                let message = `HTTP ${response.status}`;
+                try {
+                    const err = await response.json();
+                    if (err?.error) message = err.error;
+                } catch (_) {}
+                throw new Error(message);
+            }
+        }
+
+        async function loadData(options = {}) {
+            const { showFallbackWarning = false } = options;
             try {
-                const response = await fetch('data.json');
+                const response = await apiFetch('/api/data', { cache: 'no-store' });
                 if (!response.ok) throw new Error(`HTTP ${response.status}`);
-                data = await response.json();
+                const payload = await response.json();
+                if (!payload?.ok || !payload?.data) {
+                    throw new Error('Malformed /api/data response');
+                }
+                data = payload.data;
+                ensureProfileDefaults();
+                clearLoadBanners();
+                try {
+                    localStorage.setItem('fasting_data_cache', JSON.stringify(data));
+                } catch (_) {}
                 renderDashboard();
             } catch (error) {
+                try {
+                    const cached = localStorage.getItem('fasting_data_cache');
+                    if (cached) {
+                        data = JSON.parse(cached);
+                        ensureProfileDefaults();
+                        if (!showFallbackWarning) {
+                            clearLoadBanners();
+                        }
+                        renderDashboard();
+                        if (showFallbackWarning) {
+                            showLoadWarning('Live server data is unavailable. Showing cached data.');
+                        }
+                        return;
+                    }
+                } catch (_) {}
                 showLoadError(error);
             }
         }
 
+        function getValidFastMeasurements() {
+            if (!data || !Array.isArray(data.measurements)) return [];
+
+            const goalDays = Number(data.fast?.goal_days ?? 0);
+            const startDate = new Date(data.fast?.start || '');
+            const hasValidStart = !Number.isNaN(startDate.getTime());
+            const startMidday = hasValidStart
+                ? new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate(), 12, 0, 0)
+                : null;
+            const todayMidday = new Date();
+            todayMidday.setHours(12, 0, 0, 0);
+
+            return data.measurements
+                .filter((m) => {
+                    if (!m || typeof m !== 'object') return false;
+                    if (!Number.isFinite(m.day)) return false;
+                    if (m.day < 1) return false;
+                    if (goalDays > 0 && m.day > goalDays) return false;
+                    if (!m.date) return false;
+
+                    const measurementDate = new Date(`${m.date}T12:00:00`);
+                    if (Number.isNaN(measurementDate.getTime())) return false;
+                    if (hasValidStart && measurementDate < startMidday) return false;
+                    if (measurementDate > todayMidday) return false;
+
+                    return true;
+                })
+                .sort((a, b) => a.day - b.day);
+        }
+
         function getCurrentDay() {
-            if (!data || !data.measurements.length) return 0;
-            return data.measurements[data.measurements.length - 1].day;
+            if (!data) return 1;
+            const validMeasurements = getValidFastMeasurements();
+            if (!validMeasurements.length) return calculateDayForDate(todayDateKey());
+            return Math.max(1, validMeasurements[validMeasurements.length - 1].day || 1);
         }
 
         function formatDateLabel(dateStr) {
@@ -1441,10 +1996,347 @@
             return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
         }
 
+        function setCheckinStatus(message, tone = 'neutral') {
+            checkinStatusMessage = message;
+            checkinStatusTone = tone;
+            const statusEl = document.getElementById('checkinStatus');
+            if (!statusEl) return;
+            statusEl.textContent = message;
+            statusEl.style.color = tone === 'error' ? 'var(--red)' : tone === 'success' ? 'var(--green)' : 'var(--text-dim)';
+        }
+
+        function renderCheckinCard() {
+            const dateInput = document.getElementById('entryDate');
+            const weightInput = document.getElementById('entryWeight');
+            const waterInput = document.getElementById('entryWater');
+            const heightInput = document.getElementById('entryHeight');
+            const badge = document.getElementById('checkinBadge');
+            const summary = document.getElementById('checkinSummary');
+            if (!dateInput || !weightInput || !waterInput || !heightInput || !badge || !summary) return;
+
+            if (!selectedEntryDate) {
+                selectedEntryDate = data.measurements[data.measurements.length - 1]?.date || todayDateKey();
+            }
+
+            selectedEntryDate = normalizeDateKey(selectedEntryDate);
+            dateInput.value = selectedEntryDate;
+
+            const measurement = getMeasurementByDate(selectedEntryDate);
+            const weightValue = measurement?.weight_kg ?? '';
+            const waterValue = measurement?.water_liters ?? '';
+
+            weightInput.value = weightValue === null || weightValue === undefined ? '' : String(weightValue);
+            waterInput.value = waterValue === null || waterValue === undefined ? '' : String(waterValue);
+            const heightValue = Number.isFinite(Number(data?.profile?.height_cm)) ? Math.round(Number(data.profile.height_cm)) : '';
+            heightInput.value = heightValue === '' ? '' : String(heightValue);
+
+            const day = measurement?.day ?? calculateDayForDate(selectedEntryDate);
+            const dayLabel = Number.isFinite(day) ? `Day ${day}` : 'Day --';
+
+            const weightSummary = weightValue !== '' ? `${formatNumber(weightValue, 1)} kg` : '--';
+            const waterSummary = waterValue !== '' ? `${formatNumber(waterValue, 1)} L` : '--';
+            const heightSummary = heightValue !== '' ? `${heightValue} cm` : '--';
+            summary.textContent = `${dayLabel} • Weight: ${weightSummary} • Water: ${waterSummary} • Height: ${heightSummary}`;
+
+            const hasAnyEntry = weightValue !== '' || waterValue !== '';
+            badge.textContent = hasAnyEntry ? 'SYNCED' : 'NOT SAVED';
+            badge.style.color = hasAnyEntry ? 'var(--green)' : 'var(--blue)';
+            badge.style.background = hasAnyEntry ? 'rgba(63, 185, 80, 0.12)' : 'rgba(88, 166, 255, 0.1)';
+
+            setCheckinStatus(checkinStatusMessage, checkinStatusTone);
+        }
+
+        function handleEntryDateChange() {
+            const dateInput = document.getElementById('entryDate');
+            if (!dateInput?.value) return;
+            selectedEntryDate = normalizeDateKey(dateInput.value);
+            checkinStatusMessage = '';
+            checkinStatusTone = 'neutral';
+            renderCheckinCard();
+        }
+
+        async function saveDailyEntry() {
+            const date = normalizeDateKey(document.getElementById('entryDate')?.value || selectedEntryDate || todayDateKey());
+            const weightRaw = document.getElementById('entryWeight')?.value?.trim() || '';
+            const waterRaw = document.getElementById('entryWater')?.value?.trim() || '';
+            const heightRaw = document.getElementById('entryHeight')?.value?.trim() || '';
+            const weight = weightRaw === '' ? null : Number(weightRaw);
+            const water = waterRaw === '' ? null : Number(waterRaw);
+            const heightCm = heightRaw === '' ? null : Number(heightRaw);
+
+            if (weight !== null && (!Number.isFinite(weight) || weight < 30 || weight > 300)) {
+                setCheckinStatus('Weight must be between 30 and 300 kg.', 'error');
+                return;
+            }
+
+            if (water !== null && (!Number.isFinite(water) || water < 0 || water > 20)) {
+                setCheckinStatus('Water intake must be between 0 and 20 liters.', 'error');
+                return;
+            }
+
+            if (heightCm !== null && (!Number.isFinite(heightCm) || heightCm < 120 || heightCm > 230)) {
+                setCheckinStatus('Height must be between 120 and 230 cm.', 'error');
+                return;
+            }
+
+            if (heightCm !== null) {
+                data.profile = data.profile || {};
+                data.profile.height_cm = Math.round(heightCm);
+            }
+
+            if (weight === null && water === null) {
+                selectedEntryDate = date;
+                if (heightCm !== null) {
+                    try {
+                        await persistProfileToServer(Math.round(heightCm));
+                        await loadData({ showFallbackWarning: false });
+                        setCheckinStatus('Height saved. Use Clear to remove a day entry.', 'success');
+                        renderDashboard();
+                    } catch (e) {
+                        setCheckinStatus(`Could not save height (${formatApiFailure(e)}).`, 'error');
+                        renderCheckinCard();
+                    }
+                } else {
+                    setCheckinStatus('Enter weight or water, or use Clear to remove this day.', 'error');
+                    renderCheckinCard();
+                }
+                return;
+            }
+
+            try {
+                if (heightCm !== null) {
+                    await persistProfileToServer(Math.round(heightCm));
+                }
+                await persistCheckinToServer(
+                    date,
+                    weight === null ? null : Number(weight.toFixed(1)),
+                    water === null ? null : Number(water.toFixed(1))
+                );
+                await loadData({ showFallbackWarning: false });
+                selectedEntryDate = date;
+                setCheckinStatus(`Saved check-in for ${formatDate(date)}.`, 'success');
+                renderDashboard();
+            } catch (e) {
+                selectedEntryDate = date;
+                setCheckinStatus(`Could not save check-in (${formatApiFailure(e)}).`, 'error');
+                renderDashboard();
+            }
+        }
+
+        async function clearDailyEntry() {
+            const date = normalizeDateKey(document.getElementById('entryDate')?.value || selectedEntryDate || todayDateKey());
+            selectedEntryDate = date;
+            try {
+                await persistCheckinToServer(date, null, null);
+                await loadData({ showFallbackWarning: false });
+                setCheckinStatus(`Cleared check-in for ${formatDate(date)}.`, 'success');
+            } catch (e) {
+                await loadData({ showFallbackWarning: false });
+                setCheckinStatus(`Could not clear check-in (${formatApiFailure(e)}).`, 'error');
+            }
+        }
+
+        function escapeHtml(value) {
+            return String(value || '')
+                .replaceAll('&', '&amp;')
+                .replaceAll('<', '&lt;')
+                .replaceAll('>', '&gt;')
+                .replaceAll('"', '&quot;')
+                .replaceAll("'", '&#39;');
+        }
+
+        function formatChatTimestamp(timestamp) {
+            const date = new Date(timestamp);
+            if (Number.isNaN(date.getTime())) return '';
+            return date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+        }
+
+        function setChatBadge(configured, model) {
+            const badge = document.getElementById('chatBadge');
+            if (!badge) return;
+            if (!configured) {
+                badge.textContent = 'MINIMAX KEY NEEDED';
+                badge.style.color = 'var(--orange)';
+                badge.style.background = 'rgba(210, 153, 34, 0.14)';
+                return;
+            }
+            const modelLabel = model ? model : 'MiniMax-M2.5';
+            badge.textContent = modelLabel.toUpperCase();
+            badge.style.color = 'var(--green)';
+            badge.style.background = 'rgba(63, 185, 80, 0.14)';
+        }
+
+        function setChatStatus(message, tone = 'neutral') {
+            const el = document.getElementById('chatStatus');
+            if (!el) return;
+            el.textContent = message || '';
+            el.style.color = tone === 'error'
+                ? 'var(--red)'
+                : tone === 'success'
+                    ? 'var(--green)'
+                    : 'var(--text-dim)';
+        }
+
+        function renderChatMessages() {
+            const container = document.getElementById('chatMessages');
+            if (!container) return;
+
+            const items = chatMessages.slice(-200);
+            if (!items.length) {
+                container.innerHTML = `
+                    <div class="chat-empty">
+                        Ask MiniMax anything about your fasting journey. Chat history is saved in <code>chat_memory.json</code> and reloads automatically.
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = items.map((message) => {
+                const role = message.role === 'user' || message.role === 'assistant' ? message.role : 'system';
+                const roleLabel = role === 'user' ? 'You' : role === 'assistant' ? 'MiniMax' : 'System';
+                const content = escapeHtml(message.content || '').replace(/\n/g, '<br>');
+                const timestamp = formatChatTimestamp(message.timestamp);
+                return `
+                    <div class="chat-message ${role}">
+                        <div class="chat-meta">
+                            <span>${roleLabel}</span>
+                            <span>${timestamp}</span>
+                        </div>
+                        <div>${content}</div>
+                    </div>
+                `;
+            }).join('');
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function setChatBusy(busy) {
+            chatBusy = busy;
+            const input = document.getElementById('chatInput');
+            const sendBtn = document.getElementById('chatSendBtn');
+            const clearBtn = document.getElementById('chatClearBtn');
+            if (input) input.disabled = busy;
+            if (sendBtn) {
+                sendBtn.disabled = busy;
+                sendBtn.textContent = busy ? 'Sending...' : 'Send';
+                sendBtn.style.opacity = busy ? '0.75' : '1';
+            }
+            if (clearBtn) clearBtn.disabled = busy;
+        }
+
+        async function loadChatHistory() {
+            try {
+                const response = await apiFetch('/api/chat/history', { cache: 'no-store' });
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const payload = await response.json();
+                chatMessages = Array.isArray(payload.messages) ? payload.messages : [];
+                setChatBadge(Boolean(payload.configured), payload.model);
+                renderChatMessages();
+                if (!payload.configured) {
+                    setChatStatus('Set MINIMAX_API_KEY or create .minimax_token in this folder.', 'error');
+                } else {
+                    setChatStatus(chatMessages.length ? 'Memory active.' : 'Memory active. Start chatting.', 'success');
+                }
+            } catch (error) {
+                setChatBadge(false, null);
+                renderChatMessages();
+                if (isLikelyNetworkError(error)) {
+                    setChatStatus(`Chat API unavailable. ${localApiHint()}.`, 'error');
+                } else {
+                    setChatStatus(`Chat API unavailable: ${error.message}`, 'error');
+                }
+            }
+        }
+
+        function handleChatInputKeydown(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                sendChatMessage();
+            }
+        }
+
+        async function sendChatMessage() {
+            if (chatBusy) return;
+            const input = document.getElementById('chatInput');
+            if (!input) return;
+            const message = input.value.trim();
+            if (!message) return;
+
+            chatMessages.push({
+                role: 'user',
+                content: message,
+                timestamp: new Date().toISOString()
+            });
+            renderChatMessages();
+            input.value = '';
+            setChatStatus('Waiting for MiniMax...', 'neutral');
+            setChatBusy(true);
+
+            try {
+                const response = await apiFetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message })
+                });
+
+                let payload = {};
+                try {
+                    payload = await response.json();
+                } catch (_) {}
+
+                if (!response.ok || !payload.ok) {
+                    throw new Error(payload.error || `HTTP ${response.status}`);
+                }
+
+                if (payload.assistant?.content) {
+                    chatMessages.push(payload.assistant);
+                }
+                setChatBadge(Boolean(payload.configured), payload.model);
+                renderChatMessages();
+                setChatStatus('Saved to memory.', 'success');
+            } catch (error) {
+                const friendly = isLikelyNetworkError(error)
+                    ? `Could not reach local API. ${localApiHint()}.`
+                    : `Error: ${error.message}`;
+                chatMessages.push({
+                    role: 'system',
+                    content: friendly,
+                    timestamp: new Date().toISOString()
+                });
+                renderChatMessages();
+                if (isLikelyNetworkError(error)) {
+                    setChatStatus(`Could not reach local API. ${localApiHint()}.`, 'error');
+                } else {
+                    setChatStatus('Message saved, but MiniMax did not respond. Check API key/server.', 'error');
+                }
+            } finally {
+                setChatBusy(false);
+                input.focus();
+            }
+        }
+
+        async function clearChatHistory() {
+            if (chatBusy) return;
+            if (!window.confirm('Clear all saved MiniMax chat memory?')) return;
+            try {
+                const response = await apiFetch('/api/chat/clear', { method: 'POST' });
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                chatMessages = [];
+                renderChatMessages();
+                setChatStatus('Chat memory cleared.', 'success');
+            } catch (error) {
+                if (isLikelyNetworkError(error)) {
+                    setChatStatus(`Could not clear chat memory. ${localApiHint()}.`, 'error');
+                } else {
+                    setChatStatus(`Could not clear chat memory: ${error.message}`, 'error');
+                }
+            }
+        }
+
         function renderDashboard() {
             const currentDay = getCurrentDay();
-            const latestMeasurement = data.measurements.length > 0 ? data.measurements[data.measurements.length - 1] : null;
-            const firstMeasurement = data.measurements.length > 0 ? data.measurements[0] : null;
+            const validMeasurements = getValidFastMeasurements();
+            const latestMeasurement = validMeasurements.length > 0 ? validMeasurements[validMeasurements.length - 1] : null;
+            const firstMeasurement = validMeasurements.length > 0 ? validMeasurements[0] : null;
             const guide = data.day_guide[currentDay.toString()] || data.day_guide["1"];
 
             // Update header with dynamic dates
@@ -1476,6 +2368,9 @@
             // Stats row
             renderStats(latestMeasurement || {}, firstMeasurement || {});
 
+            // Daily check-in
+            renderCheckinCard();
+
             // Weight chart
             renderWeightChart();
 
@@ -1504,17 +2399,23 @@
             const firstWithWeight = fastMeasurements.find(m => m.weight_kg !== null);
             const lastWithWeight = [...fastMeasurements].reverse().find(m => m.weight_kg !== null);
             const totalChange = firstWithWeight && lastWithWeight ? lastWithWeight.weight_kg - firstWithWeight.weight_kg : 0;
+            const latestWater = latest.water_liters;
+            const lastWithWater = [...fastMeasurements].reverse().find(m => m.water_liters !== null && m.water_liters !== undefined);
 
             // Check if fast is complete
             const fastComplete = new Date() > new Date(data.fast.end);
             const weightLabel = fastComplete ? 'Final Weight' : 'Current Weight';
-            const displayWeight = lastWithWeight ? lastWithWeight.weight_kg : (latest.weight_kg || '--');
+            const displayWeight = lastWithWeight ? lastWithWeight.weight_kg : (latest.weight_kg ?? '--');
 
             const totalCals = getTotalCaloriesBurned();
             const baselineCals = data.baseline.avg_total_calories || 2450;
             const avgBurn = data.fast.goal_days > 0 ? Math.round(totalCals / data.fast.goal_days) : 0;
             const baselinePct = baselineCals > 0 ? Math.round((avgBurn / baselineCals - 1) * 100) : 0;
-            const fatBurned = ((totalCals - (baselineCals * 2)) / 7700);
+            const fatBurned = totalCals > 0 ? (totalCals / 7700) : 0;
+            const displayWater = latestWater ?? (lastWithWater ? lastWithWater.water_liters : null);
+            const waterBadge = latestWater !== null && latestWater !== undefined
+                ? 'Today'
+                : (lastWithWater ? `Last: ${formatDate(lastWithWater.date)}` : 'Log daily intake');
 
             const html = `
                 <div class="stat-card">
@@ -1536,6 +2437,11 @@
                     <div class="stat-label">Est. Fat Burned</div>
                     <div class="stat-value">${fatBurned > 0 ? fatBurned.toFixed(1) : '--'}${fatBurned > 0 ? '<span class="stat-unit"> kg</span>' : ''}</div>
                     <div class="stat-change positive">${fatBurned > 0 ? '~' + (fatBurned * 2.2).toFixed(1) + ' lbs' : 'Awaiting data'}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Water Intake</div>
+                    <div class="stat-value">${displayWater !== null && displayWater !== undefined ? formatNumber(displayWater, 1) + '<span class="stat-unit"> L</span>' : '--'}</div>
+                    <div class="stat-change positive">${waterBadge}</div>
                 </div>
             `;
             document.getElementById('statsRow').innerHTML = html;
@@ -1573,37 +2479,50 @@
             );
 
             if (validMeasurements.length === 0) {
-                document.getElementById('weightChart').innerHTML = '<p style="color: var(--text-dim); text-align: center; padding: 40px;">No weight data yet</p>';
+                document.getElementById('weightChart').innerHTML = '<p style="color: var(--text-dim); text-align: center; padding: 40px;">No weight data yet. Add today\'s weight to generate a personalized projection.</p>';
                 return;
             }
 
-            // Calculate projected weights for remaining days
-            // Using average daily loss rate, but expecting it to slow down as fast progresses
+            const heightCm = Number.isFinite(Number(data?.profile?.height_cm)) ? Math.round(Number(data.profile.height_cm)) : 174;
+            const heightM = heightCm / 100;
+            const minHealthyWeight = 18.5 * heightM * heightM;
+
             const weights = validMeasurements.map(m => m.weight_kg);
             const lastWeight = weights[weights.length - 1];
             const lastDay = validMeasurements[validMeasurements.length - 1].day;
 
-            // Calculate average loss rate from actual data
-            let avgDailyLoss = 0.5; // default kg/day
-            if (validMeasurements.length >= 2) {
-                const firstWeight = weights[0];
-                const daysElapsed = lastDay - validMeasurements[0].day;
-                if (daysElapsed > 0) {
-                    avgDailyLoss = (firstWeight - lastWeight) / daysElapsed;
-                }
-            }
+            const calorieSamples = data.measurements
+                .filter(m => m.day >= 1 && m.day <= data.fast.goal_days)
+                .map(m => Number(m.oura?.total_calories))
+                .filter(v => Number.isFinite(v) && v > 0);
 
-            // Project future weights with decreasing loss rate (ketosis stabilizes)
+            const fallbackBurn = Number.isFinite(Number(data.baseline?.avg_total_calories)) && Number(data.baseline.avg_total_calories) > 0
+                ? Number(data.baseline.avg_total_calories)
+                : Math.max(1500, Math.round(lastWeight * 24));
+            const recentWindow = calorieSamples.slice(-5);
+            const rollingBurn = recentWindow.length
+                ? recentWindow.reduce((sum, v) => sum + v, 0) / recentWindow.length
+                : fallbackBurn;
+
+            // Projection model:
+            // - uses expected daily burn (recent Oura average with mild metabolic adaptation)
+            // - converts deficit to mass via 7700 kcal/kg
+            // - respects a BMI-based floor using recorded height
             const projectedData = [];
+            let projectedWeightCursor = lastWeight;
             for (let day = lastDay + 1; day <= data.fast.goal_days; day++) {
-                // Loss rate decreases as fast progresses (body adapts)
                 const daysFromLast = day - lastDay;
-                const slowdownFactor = Math.max(0.3, 1 - (daysFromLast * 0.08)); // Gradual slowdown
-                const dailyLoss = avgDailyLoss * slowdownFactor;
-                const projectedWeight = projectedData.length === 0
-                    ? lastWeight - dailyLoss
-                    : projectedData[projectedData.length - 1].weight_kg - dailyLoss;
-                projectedData.push({ day, weight_kg: Math.max(85, projectedWeight), projected: true });
+                const adaptationFactor = Math.max(0.88, 1 - (daysFromLast * 0.01));
+                const expectedBurn = rollingBurn * adaptationFactor;
+                const projectedDailyLoss = Math.max(0, expectedBurn / 7700);
+                const projectedWeight = Math.max(minHealthyWeight, projectedWeightCursor - projectedDailyLoss);
+                projectedWeightCursor = projectedWeight;
+                projectedData.push({
+                    day,
+                    weight_kg: projectedWeight,
+                    projected: true,
+                    expected_burn: expectedBurn
+                });
             }
 
             // Combine actual and projected data
@@ -1736,7 +2655,7 @@
                         </span>
                     </div>
                     <div style="font-size: 11px; color: var(--text-dim); font-style: italic;">
-                        * Projections assume decreasing loss rate as ketosis stabilizes. Update daily with actual weights.
+                        * Projection uses your weight, height (${heightCm} cm), and daily Oura burn (kcal deficit / 7700).
                     </div>
                 </div>
             `;
@@ -1797,8 +2716,21 @@
             `;
         }
 
+        function hasOuraData(measurement) {
+            if (!measurement || typeof measurement !== 'object') return false;
+            const oura = measurement.oura;
+            if (!oura || typeof oura !== 'object') return false;
+            return ['sleep_score', 'readiness_score', 'total_calories', 'steps', 'activity_score']
+                .some(key => oura[key] !== null && oura[key] !== undefined);
+        }
+
+        function getMeasurementsWithOura() {
+            const measurements = Array.isArray(data?.measurements) ? data.measurements : [];
+            return measurements.filter(hasOuraData);
+        }
+
         function renderOuraTodayStats() {
-            const measurements = data.measurements;
+            const measurements = getMeasurementsWithOura();
             if (!measurements.length) {
                 document.getElementById('ouraDateBadge').textContent = '--';
                 document.getElementById('ouraTodayStats').innerHTML = '<p style="color: var(--text-dim); text-align: center; padding: 20px;">No Oura data yet. Run ./track.sh after the fast begins.</p>';
@@ -1809,7 +2741,7 @@
             const baseline = data.baseline;
 
             // Update date badge
-            const latestDate = new Date(latest.date);
+            const latestDate = parseDateKey(latest.date);
             document.getElementById('ouraDateBadge').textContent = latestDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }).toUpperCase();
 
             const stats = [
@@ -2000,7 +2932,7 @@
         }
 
         function renderOuraChart() {
-            const measurements = data.measurements;
+            const measurements = getMeasurementsWithOura();
             if (!measurements.length) {
                 document.getElementById('ouraChart').innerHTML = '<p style="color: var(--text-dim); text-align: center; padding: 40px;">No Oura data yet</p>';
                 return;
@@ -2312,9 +3244,46 @@
             }
         }
 
+        function getManualLogEntries() {
+            return (data.measurements || [])
+                .filter(m => m.day <= data.fast.goal_days)
+                .map(m => {
+                    const date = m.date;
+                    const parts = [];
+                    if (m.weight_kg !== null && m.weight_kg !== undefined) {
+                        parts.push(`Weight ${formatNumber(m.weight_kg, 1)} kg`);
+                    }
+                    if (m.water_liters !== null && m.water_liters !== undefined) {
+                        parts.push(`Water ${formatNumber(m.water_liters, 1)} L`);
+                    }
+                    if (parts.length === 0) return null;
+
+                    return {
+                        date,
+                        day: m.day ?? calculateDayForDate(date),
+                        type: 'manual',
+                        message: `Daily check-in: ${parts.join(' • ')}`,
+                        sortPriority: 3
+                    };
+                })
+                .filter(Boolean);
+        }
+
         function renderLog() {
             // Only show fasting days, not refeed days
-            const logs = [...data.log].filter(entry => entry.day <= data.fast.goal_days).reverse();
+            const fastingLogs = [...(data.log || [])]
+                .filter(entry => entry.day <= data.fast.goal_days)
+                .map(entry => ({ ...entry, sortPriority: 1 }));
+
+            const logs = [...fastingLogs, ...getManualLogEntries()]
+                .sort((a, b) => {
+                    if (a.date === b.date) {
+                        if ((a.day ?? 0) !== (b.day ?? 0)) return (b.day ?? 0) - (a.day ?? 0);
+                        return (b.sortPriority ?? 0) - (a.sortPriority ?? 0);
+                    }
+                    return b.date.localeCompare(a.date);
+                });
+
             let html = '';
 
             // Track which days already have infographics shown
@@ -2455,16 +3424,35 @@
         }
 
         function formatDate(dateStr) {
-            const [year, month, day] = dateStr.split('-').map(Number);
-            const date = new Date(year, month - 1, day);
+            const date = parseDateKey(dateStr);
             return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
         }
 
-        // Load data on page load
-        loadData();
+        async function initializeApp() {
+            await maybeRedirectFromFileMode();
 
-        // Auto-refresh every 30 seconds
-        setInterval(loadData, 30000);
+            const isLocalHost = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost';
+            if (isLocalHost && (window.location.protocol === 'http:' || window.location.protocol === 'https:')) {
+                writeStoredApiBase(`${window.location.protocol}//${window.location.host}`);
+            }
+
+            loadData({ showFallbackWarning: false });
+            loadChatHistory();
+
+            // Auto-refresh every 30 seconds, but don't interrupt check-in typing.
+            setInterval(() => {
+                if (isCheckinFocused || isChatFocused || chatBusy) return;
+                loadData({ showFallbackWarning: false });
+            }, 30000);
+
+            // Refresh chat from disk occasionally when idle.
+            setInterval(() => {
+                if (chatBusy || isChatFocused) return;
+                loadChatHistory();
+            }, 60000);
+        }
+
+        initializeApp();
 
     </script>
 </body>

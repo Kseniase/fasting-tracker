@@ -1,6 +1,17 @@
 node_modules/
 .oura_token
+.minimax_token
+.minimax_key
+.kimi_token
+.kimi_key
+.env.local
+.certs/
+chat_memory.json
 Data*
 .fasting_server.log
 .fasting_server.pid
 .fasting_server.port
+checkin_history.jsonl
+fasting.db
+backups/
+__pycache__/

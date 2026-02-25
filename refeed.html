@@ -954,6 +954,23 @@
         let refeedData = null;
         let trackingData = null;
 
+        function showLoadWarning(message) {
+            const existing = document.getElementById('loadWarningBanner');
+            if (existing) return;
+
+            const banner = document.createElement('div');
+            banner.id = 'loadWarningBanner';
+            banner.style.cssText = 'position:sticky;top:0;z-index:9999;background:#4b3b1f;border:1px solid #d29922;color:#f0f6fc;padding:12px 16px;border-radius:8px;margin-bottom:16px;font-family:DM Sans,sans-serif;';
+            banner.innerHTML = message;
+
+            const dashboard = document.querySelector('.dashboard');
+            if (dashboard) {
+                dashboard.prepend(banner);
+            } else {
+                document.body.prepend(banner);
+            }
+        }
+
         function showLoadError(error) {
             const isFileProtocol = window.location.protocol === 'file:';
             const existing = document.getElementById('loadErrorBanner');
@@ -976,7 +993,13 @@
             if (error) console.error('Error loading data:', error);
         }
 
-        async function loadData() {
+        function clearLoadBanners() {
+            document.getElementById('loadWarningBanner')?.remove();
+            document.getElementById('loadErrorBanner')?.remove();
+        }
+
+        async function loadData(options = {}) {
+            const { showFallbackWarning = false } = options;
             try {
                 const [refeedResponse, dataResponse] = await Promise.all([
                     fetch('refeed-plan.json'),
@@ -987,8 +1010,29 @@
                 }
                 refeedData = await refeedResponse.json();
                 trackingData = await dataResponse.json();
+                clearLoadBanners();
+                try {
+                    localStorage.setItem('fasting_refeed_plan_cache', JSON.stringify(refeedData));
+                    localStorage.setItem('fasting_data_cache', JSON.stringify(trackingData));
+                } catch (_) {}
                 renderPage();
             } catch (error) {
+                try {
+                    const cachedRefeed = localStorage.getItem('fasting_refeed_plan_cache');
+                    const cachedTracking = localStorage.getItem('fasting_data_cache');
+                    if (cachedRefeed && cachedTracking) {
+                        refeedData = JSON.parse(cachedRefeed);
+                        trackingData = JSON.parse(cachedTracking);
+                        if (!showFallbackWarning) {
+                            clearLoadBanners();
+                        }
+                        renderPage();
+                        if (showFallbackWarning) {
+                            showLoadWarning('Live server data is unavailable. Showing cached data.');
+                        }
+                        return;
+                    }
+                } catch (_) {}
                 showLoadError(error);
             }
         }
